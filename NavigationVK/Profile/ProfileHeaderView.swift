@@ -6,7 +6,7 @@
 //
 
 import UIKit
-//import SnapKit
+import SnapKit
 
 protocol MyClassDelegate: AnyObject {
     func didtap()
