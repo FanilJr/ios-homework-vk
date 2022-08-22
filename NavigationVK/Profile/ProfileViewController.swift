@@ -1,0 +1,295 @@
+//
+//  ProfileViewController.swift
+//  NavigationVK
+//
+//  Created by Fanil_Jr on 20.08.2022.
+//
+
+import UIKit
+
+class ProfileViewController: UIViewController {
+
+    
+    var backgroundTask: UIBackgroundTaskIdentifier = .invalid
+    
+    var lastrowdisplay = 0
+    
+    let background: UIImageView = {
+        
+        let back = UIImageView()
+        //back.image = UIImage(named: "background")
+        back.translatesAutoresizingMaskIntoConstraints = false
+        return back
+        
+    }()
+
+    
+    private lazy var tableView: UITableView = {
+       /// ВАЖНО!!! задал .insetGroup, чтобы корнер радиус применился к всем ячейкам автоматически, но при этом нельзя применить конкретно к тейбл вью корнер радиус, если поставить .grouped, тогда можно для тейбл вью поставить cornerRadius и задать конкретно к ячейкам например "if indexPath.row == 0 maskedCorner" и не забыть вернуть констрейнты с отступами лево и право тейбл вью
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .clear
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostTableViewCell")
+        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosTableViewCell")
+        return tableView
+       
+    }()
+    
+    /// Создаём свойства, которое принимает метод поста и свойство принимающее массив ячеек
+    private let post = PostStruct.massivePost()
+    private let numbersSection = [PostTableViewCell(), PhotosTableViewCell()]
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        print("Првоерка пуша на гитхаб")
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        setupTableView()
+        
+        #if DEBUG
+        background.image = UIImage(named: "background")
+        #else
+        background.image = UIImage(named: "background4")
+        #endif
+
+        print("как работает DidLoad")
+    
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.isHidden = true
+        
+        print("как работает WillAppear")
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        print("как работает DidAppear")
+
+    }
+    
+    private func animatedTableView() {
+        
+        let cells = tableView.visibleCells
+        let tableViewHeight = tableView.bounds.height
+        var delay: Double = 0
+        
+        for cell in cells {
+            cell.transform = CGAffineTransform(translationX: 0, y: tableViewHeight)
+            
+            UIView.animate(withDuration: 1.5, delay: delay * 0.20, usingSpringWithDamping: 2, initialSpringVelocity: 0, options: .curveEaseInOut, animations: { cell.transform = CGAffineTransform.identity }, completion: nil)
+            delay += 1
+            
+        }
+    }
+    
+    func registerBackgroundTask() {
+        
+      backgroundTask = UIApplication.shared.beginBackgroundTask { [weak self] in
+        self?.endBackgroundTask()
+          if self!.backgroundTask != .invalid {
+              self?.endBackgroundTask()
+              
+          }
+      }
+        
+      assert(backgroundTask != .invalid)
+        
+    }
+      
+    func endBackgroundTask() {
+        
+      print("Background task ended.")
+      UIApplication.shared.endBackgroundTask(backgroundTask)
+      backgroundTask = .invalid
+        
+    }
+   
+    func setupTableView() {
+        
+        [background, tableView].forEach({ view.addSubview($0) })
+        
+        NSLayoutConstraint.activate([
+            
+        background.topAnchor.constraint(equalTo: view.topAnchor),
+        background.leftAnchor.constraint(equalTo: view.leftAnchor),
+        background.rightAnchor.constraint(equalTo: view.rightAnchor),
+        background.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+        tableView.topAnchor.constraint(equalTo: view.topAnchor),
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        
+        ])
+        
+    }
+}
+
+//    MARK: - Расширение UITableViewDataSource
+
+extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+
+        return numbersSection.count
+        
+    }
+    
+///    В зависимости от секции возвращает необхобимое количество ячеек
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        switch section {
+            
+        case 0:
+            return 1
+            
+        case 1:
+            return post.count
+            
+        default:
+            return 0
+            
+        }
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        switch indexPath.section {
+            
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PhotosTableViewCell", for: indexPath) as! PhotosTableViewCell
+            
+            cell.tuchNew = self
+            
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
+            return cell
+            
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostTableViewCell
+            cell.setupCell(post[indexPath.row])
+            cell.backgroundColor = .white
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
+            return cell
+            
+        default:
+            return UITableViewCell()
+            
+        }
+        
+    }
+    
+    func tuchUp() {
+        
+        print("tuch по кнопке delegate из ProfileViewController")
+        
+        let photosController = PhotosViewController()
+        navigationController?.pushViewController(photosController, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // MARK: Анимация (если раскоментить, то будет красивая анимация ячеек, но у меня слабый бук и зависает проект)
+        if lastrowdisplay > indexPath.row {
+
+            cell.transform = CGAffineTransform(translationX: 0, y: -200)
+
+        } else {
+
+            cell.transform = CGAffineTransform(translationX: 0, y: 200)
+
+        }
+
+        lastrowdisplay = indexPath.row
+        UIView.animate(withDuration: 0.5, animations: {
+            cell.transform = CGAffineTransform.identity
+        })
+        
+    }
+}
+
+
+//    MARK: - Расширение UITableViewDelegate
+
+extension ProfileViewController: UITableViewDelegate, MyClassDelegate {
+    
+    
+//    Возвращаем динамическую высоту ячейки
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        UITableView.automaticDimension
+        
+    }
+    
+//    Возвращаем хедер - наш HeaderView
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let PHView = ProfileHeaderView()
+        
+        PHView.delegate = self
+        
+        switch section {
+            
+        case 0:
+            return PHView
+            
+        case 1:
+            return nil
+            
+        default:
+            return UIView()
+            
+        }
+    }
+
+   func didtap() {
+
+       let alert = UIAlertController(title: "Ты сломал аватарку", message: "Больше так не делай", preferredStyle: .alert)
+       
+       alert.addAction(UIAlertAction(title: "Восстановить", style: .default, handler: { _ in self.tableView.reloadData()
+           print("перезагрузка аватарки")
+       }))
+       alert.addAction(UIAlertAction(title: "Закрыть", style: .destructive, handler: nil))
+       
+       self.present(alert, animated: true, completion: nil)
+       
+       print("нажатие в ProfileViewController - delegate")
+
+    }
+    
+//    Возвращаем необходимую высоту хедера
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        switch section {
+            
+        case 0:
+            return UITableView.automaticDimension
+            
+        case 1:
+            return 0
+            
+        default:
+            return 0
+            
+    }
+}
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let galleryVC = PhotosViewController()
+        
+        if indexPath.section == 0 {
+            
+            navigationController?.pushViewController(galleryVC, animated: true)
+            print("переход по тапу на ячейку")
+            
+        }
+    }
+}
+
+
