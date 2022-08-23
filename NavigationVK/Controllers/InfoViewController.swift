@@ -38,7 +38,9 @@ class InfoViewController: UIViewController {
             
             let alertOk = UIAlertAction(title: "OK", style: .default, handler: nil)
             let alertCancel = UIAlertAction(title: "Закрыть", style: .destructive, handler: {_ in
-                print("проверяем алерт")})
+                print("проверяем алерт")
+                self.dismiss(animated: true)
+            })
 
             [alertOk, alertCancel].forEach { alert.addAction($0) }
             self.present(alert, animated: true, completion: nil)

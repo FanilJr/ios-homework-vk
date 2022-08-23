@@ -8,9 +8,8 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-    
-    // MARK: Создаём элементы для вью
 
+    
     let stack: UIStackView = {
         
         let stack = UIStackView()
@@ -54,6 +53,7 @@ class LoginViewController: UIViewController {
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         
         switch button.state {
+            
         case .normal:
             button.alpha = 1
         case .selected:
@@ -65,7 +65,6 @@ class LoginViewController: UIViewController {
         default:
             button.alpha = 1
         }
-        
         return button
         
     }()
@@ -127,8 +126,7 @@ class LoginViewController: UIViewController {
     @objc private func buttonAction() {
         
         let profile = ProfileViewController()
-//        profile.modalPresentationStyle = .fullScreen
-//        present(profile, animated: true)
+
         navigationController?.pushViewController(profile, animated: true)
 
     }
@@ -140,9 +138,7 @@ class LoginViewController: UIViewController {
         [vkLogo, stack, button].forEach { contentView.addSubview($0) }
         [loginTextfield, passwordTextfield].forEach { stack.addArrangedSubview($0) }
         
-        /// выставляем констрейнты
         NSLayoutConstraint.activate([
-            
         scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
         scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -169,7 +165,6 @@ class LoginViewController: UIViewController {
         button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
         button.heightAnchor.constraint(equalToConstant: 50),
         button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        
         ])
         
     }
@@ -187,6 +182,7 @@ class LoginViewController: UIViewController {
     @objc private func keyboardShow(notification: NSNotification) {
         
         if let keyboard = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            
             scrollView.contentInset.bottom = keyboard.height
             scrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboard.height, right: 0)
             

@@ -65,8 +65,6 @@ class PostTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        
-        
         constraints()
         
     }
@@ -79,14 +77,22 @@ class PostTableViewCell: UITableViewCell {
     
     func setupCell(_ model: PostStruct) {
         
+//      postImage.image = UIImage(named: model.image)
+        authorName.text = model.author
+        descriptionLabel.text = model.description
+        likes.text = "  Likes: \(String(model.likes))"
+        viewsLabel.text = "  Views: \(String(model.views))"
+        
 //      MARK: вариант одного фильтра для всех фото
         
         if let image = UIImage(named: model.image) {
             
             let filter = ColorFilter.monochrome(color: CIColor.init(red: 0/255, green: 0/255, blue: 0/255), intensity: 0.7)
             ImageProcessor().processImage(sourceImage: image, filter: filter) { postImage.image = $0 }
-            print("устанавливаем фильтры для фото")
-            
+
+        }
+//      MARK: варианты фильтров
+        
 //            let filter2 = ColorFilter.tonal
 //            let filter3 = ColorFilter.noir
 //            let filter4 = ColorFilter.posterize
@@ -96,7 +102,6 @@ class PostTableViewCell: UITableViewCell {
             
 //      MARK: рандомный вариант
             
-//            postImage.image = UIImage(named: model.image)
 //            if let image = UIImage(named: model.image) {
 //                let filter = ColorFilter.allCases[Int.random(in: 0..<ColorFilter.allCases.count)]
 //                ImageProcessor().processImage(sourceImage: image, filter: filter) {postImage.image = $0 }
@@ -126,13 +131,6 @@ class PostTableViewCell: UITableViewCell {
 //                ImageProcessor().processImage(sourceImage: image, filter: filter7) { postImage.image = $0 }
 //
 //            }
-        }
-        
-        authorName.text = model.author
-        descriptionLabel.text = model.description
-        likes.text = "  Likes: \(String(model.likes))"
-        viewsLabel.text = "  Views: \(String(model.views))"
-        
     }
     
     private func constraints() {

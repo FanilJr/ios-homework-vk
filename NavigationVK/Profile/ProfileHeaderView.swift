@@ -129,12 +129,25 @@ class ProfileHeaderView: UIView {
             button.left.equalTo(0)
             button.right.equalTo(0)
             button.bottom.equalTo(-16) }
+        
     }
         
     @objc private func tap() {
+        
+        let bounds = setStatusButton.bounds
+        let bonds = statusLabel.bounds
+               
+               /// анимация кнопки setStatus и statusLabel
+               UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 2, initialSpringVelocity: 1, options: .curveLinear) {
+                   self.setStatusButton.bounds = CGRect(x: bounds.origin.x - 30, y: bounds.origin.y, width: bounds.width + 30, height: bounds.height + 10)
+                   self.setStatusButton.titleLabel?.bounds = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: bounds.width + 100, height: bounds.height)
+                   self.statusLabel.bounds = CGRect(x: bonds.origin.x, y: bonds.origin.y, width: bonds.width + 50, height: bonds.height)
+                   
+               }
             
         statusLabel.text = statusTextField.text
         statusTextField.text = ""
+        
         print("Статус установлен")
             
     }

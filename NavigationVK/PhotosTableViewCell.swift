@@ -17,8 +17,8 @@ class PhotosTableViewCell: UITableViewCell {
     //    MARK: - Инициализатор
         
         override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-            
             super.init(style: style, reuseIdentifier: reuseIdentifier)
+            
             layout()
         }
         
@@ -50,7 +50,6 @@ class PhotosTableViewCell: UITableViewCell {
             button.layer.borderColor = UIColor.black.cgColor
             button.layer.borderWidth = 1
             button.clipsToBounds = true
-            
             button.translatesAutoresizingMaskIntoConstraints = false
             button.addTarget(self, action: #selector(tuch), for: .touchUpInside)
             return button
