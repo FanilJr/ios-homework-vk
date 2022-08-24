@@ -12,7 +12,7 @@ protocol MyClassDelegate: AnyObject {
     func didtap()
 }
 
-class ProfileHeaderView: UIView {
+final class ProfileHeaderView: UIView {
     
         weak var delegate: MyClassDelegate?
 
@@ -21,7 +21,7 @@ class ProfileHeaderView: UIView {
         lazy var avatarImageView: UIImageView = {
         
         let avatarImageView = UIImageView()
-        avatarImageView.image = UIImage(named: "1")
+//        avatarImageView.image = UIImage(named: "1")
         avatarImageView.layer.borderWidth = 3
         let tapGesture = UITapGestureRecognizer()
         tapGesture.addTarget(self, action: #selector(expandAvatar))
@@ -150,6 +150,22 @@ class ProfileHeaderView: UIView {
         
         print("Статус установлен")
             
+    }
+    
+    func setupView(user: User?) {
+        
+        guard let user = user else {
+            print("Не верный Логин")
+            avatarImageView.image = UIImage(named: "error")
+            fullNameLabel.text = "error"
+            return
+        }
+        
+        fullNameLabel.text = user.name
+        avatarImageView.image = user.avatar
+        statusLabel.text = user.status
+        print("Логин введен верно")
+
     }
         
 

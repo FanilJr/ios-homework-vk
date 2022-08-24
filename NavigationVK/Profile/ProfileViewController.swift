@@ -9,6 +9,10 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    private let userService: UserService
+    private let userName: String
+    
+//    let profileHeader = ProfileHeaderView()
     
     var backgroundTask: UIBackgroundTaskIdentifier = .invalid
     
@@ -38,6 +42,16 @@ class ProfileViewController: UIViewController {
     /// Создаём свойства, которое принимает метод поста и свойство принимающее массив ячеек
     private let post = PostStruct.massivePost()
     private let numbersSection = [PostTableViewCell(), PhotosTableViewCell()]
+    
+    init(userService: UserService, userName: String) {
+        self.userService = userService
+        self.userName = userName
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -155,15 +169,15 @@ extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
         // MARK: Анимация
         if lastRowDisplay > indexPath.row {
             
-            cell.transform = CGAffineTransform(translationX: 0, y: -200)
+            cell.transform = CGAffineTransform(translationX: 0, y: -250)
         } else {
-            cell.transform = CGAffineTransform(translationX: 0, y: 200)
+            cell.transform = CGAffineTransform(translationX: 0, y: 250)
 
         }
 
         lastRowDisplay = indexPath.row
         
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             cell.transform = CGAffineTransform.identity
         })
         
@@ -185,6 +199,7 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate {
         
         let PHView = ProfileHeaderView()
         PHView.delegate = self
+        PHView.setupView(user: userService.getUser(userName: userName))
         
         switch section {
             

@@ -77,20 +77,20 @@ class PostTableViewCell: UITableViewCell {
     
     func setupCell(_ model: PostStruct) {
         
-//      postImage.image = UIImage(named: model.image)
+        postImage.image = UIImage(named: model.image)
         authorName.text = model.author
         descriptionLabel.text = model.description
         likes.text = "  Likes: \(String(model.likes))"
         viewsLabel.text = "  Views: \(String(model.views))"
         
 //      MARK: вариант одного фильтра для всех фото
-        
-        if let image = UIImage(named: model.image) {
-            
-            let filter = ColorFilter.monochrome(color: CIColor.init(red: 0/255, green: 0/255, blue: 0/255), intensity: 0.7)
-            ImageProcessor().processImage(sourceImage: image, filter: filter) { postImage.image = $0 }
-
-        }
+//
+//        if let image = UIImage(named: model.image) {
+//
+//            let filter = ColorFilter.monochrome(color: CIColor.init(red: 0/255, green: 0/255, blue: 0/255), intensity: 0.7)
+//            ImageProcessor().processImage(sourceImage: image, filter: filter) { postImage.image = $0 }
+//
+//        }
 //      MARK: варианты фильтров
         
 //            let filter2 = ColorFilter.tonal
