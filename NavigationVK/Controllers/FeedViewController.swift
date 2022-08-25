@@ -16,7 +16,7 @@ class FeedViewController: UIViewController {
     
     var firstButton: UIButton = {
         let button = UIButton()
-        button.setTitle("first button", for: .normal)
+        button.setTitle("Первая кнопка", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 14
@@ -28,7 +28,7 @@ class FeedViewController: UIViewController {
     
     var twoButton: UIButton = {
         let button = UIButton()
-        button.setTitle("two button", for: .normal)
+        button.setTitle("Вторая кнопка", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 14
@@ -49,6 +49,7 @@ class FeedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Лента"
         
         view.backgroundColor = .lightGray
         configureStackView()

@@ -12,7 +12,7 @@ protocol MyClassDelegate: AnyObject {
     func didtap()
 }
 
-class ProfileHeaderView: UIView {
+final class ProfileHeaderView: UIView {
     
         weak var delegate: MyClassDelegate?
 
@@ -21,7 +21,7 @@ class ProfileHeaderView: UIView {
         lazy var avatarImageView: UIImageView = {
         
         let avatarImageView = UIImageView()
-        avatarImageView.image = UIImage(named: "1")
+//        avatarImageView.image = UIImage(named: "1")
         avatarImageView.layer.borderWidth = 3
         let tapGesture = UITapGestureRecognizer()
         tapGesture.addTarget(self, action: #selector(expandAvatar))
@@ -49,6 +49,7 @@ class ProfileHeaderView: UIView {
         let statusLabel = UILabel()
         statusLabel.text = "Waiting for something..."
         statusLabel.textColor = .gray
+        statusLabel.numberOfLines = 0
         statusLabel.font = .systemFont(ofSize: 14, weight: .regular)
         return statusLabel
             
@@ -129,21 +130,51 @@ class ProfileHeaderView: UIView {
             button.left.equalTo(0)
             button.right.equalTo(0)
             button.bottom.equalTo(-16) }
+        
     }
         
     @objc private func tap() {
+        
+        let bounds = setStatusButton.bounds
+        let bonds = statusLabel.bounds
+               
+               /// анимация кнопки setStatus и statusLabel
+               UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 2, initialSpringVelocity: 1, options: .curveLinear) {
+                   self.setStatusButton.bounds = CGRect(x: bounds.origin.x - 30, y: bounds.origin.y, width: bounds.width + 30, height: bounds.height + 10)
+                   self.setStatusButton.titleLabel?.bounds = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: bounds.width + 100, height: bounds.height)
+                   self.statusLabel.bounds = CGRect(x: bonds.origin.x, y: bonds.origin.y, width: bonds.width + 50, height: bonds.height)
+                   
+               }
             
         statusLabel.text = statusTextField.text
         statusTextField.text = ""
+        
         print("Статус установлен")
             
+    }
+    
+    func setupView(user: User?) {
+        
+        guard let user = user else {
+            print("Не верный Логин")
+            avatarImageView.image = UIImage(named: "error")
+            fullNameLabel.text = "error"
+            return
+        }
+        
+        fullNameLabel.text = user.name
+        avatarImageView.image = user.avatar
+        statusLabel.text = user.status
+
     }
         
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        statusTextField.delegate = self
         snp()
+        tapScreen()
             
     }
         
@@ -152,3 +183,33 @@ class ProfileHeaderView: UIView {
         
     }
 }
+
+extension ProfileHeaderView {
+    
+    func tapScreen() {
+        
+        let recognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        recognizer.cancelsTouchesInView = false
+        
+        addGestureRecognizer(recognizer)
+        
+    }
+
+    @objc func dismissKeyboard() {
+        
+        endEditing(true)
+        
+    }
+}
+
+extension ProfileHeaderView: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        endEditing(true)
+        return true
+        
+    }
+}
+
+
