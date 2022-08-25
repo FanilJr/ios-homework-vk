@@ -38,7 +38,11 @@ final class ProfileHeaderView: UIView {
         
         let fullNameLabel = UILabel()
         fullNameLabel.text = "Fanil_Jr"
+        #if DEBUG
         fullNameLabel.textColor = .black
+        #else
+        fullNameLabel.textColor = .white
+        #endif
         fullNameLabel.font = .systemFont(ofSize: 18, weight: .bold)
         return fullNameLabel
         
@@ -47,10 +51,17 @@ final class ProfileHeaderView: UIView {
     private let statusLabel: UILabel = {
         
         let statusLabel = UILabel()
-        statusLabel.text = "Waiting for something..."
-        statusLabel.textColor = .gray
+//        statusLabel.text = "Waiting for something..."
+        #if DEBUG
+        statusLabel.textColor = .black
+        statusLabel.shadowColor = .white
+        #else
+        statusLabel.textColor = .white
+        statusLabel.shadowColor = .black
+        #endif
         statusLabel.numberOfLines = 0
-        statusLabel.font = .systemFont(ofSize: 14, weight: .regular)
+        statusLabel.font = .systemFont(ofSize: 14, weight: .thin)
+        statusLabel.shadowOffset = CGSize(width: 0.5, height: 0.5)
         return statusLabel
             
     }()

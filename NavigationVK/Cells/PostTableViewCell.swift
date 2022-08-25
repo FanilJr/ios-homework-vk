@@ -95,7 +95,8 @@ class PostTableViewCell: UITableViewCell {
        if imageLike.image == UIImage(named: "heart3") {
            
            imageLike.image = UIImage(named: "heart2")
-           likes.text = "Likes: \(String(+1))"
+           likes.text = "Likes: \(String(1))"
+           
            viewsLabel.text = "Views: \(String(1))"
            
        } else {
