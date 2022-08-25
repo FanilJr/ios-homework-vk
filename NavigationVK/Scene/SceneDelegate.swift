@@ -37,43 +37,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     
     }
-    
-//    func createTabBarController() -> UITabBarController {
-//
-//
-//                let tabBarController = UITabBarController()
-//                tabBarController.viewControllers = [createFeedViewController(), createLoginViewController()]
-//
-//                return tabBarController
-//
-//    }
-//
-//    func createLoginViewController() -> UINavigationController {
-//
-//        let loginViewController = LogInViewController()
-//        loginViewController.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(systemName: "person.circle"), tag: 1)
-//        loginViewController.delegate
-//
-//        return UINavigationController(rootViewController: loginViewController)
-//    }
-//
-//    func createFeedViewController() -> UINavigationController {
-//
-//        let feedViewController = FeedViewController()
-//        feedViewController.title = "Лента"
-//        feedViewController.tabBarItem = UITabBarItem(title: "Лента", image: UIImage(systemName: "doc.richtext"), tag: 0)
-//
-//        return UINavigationController(rootViewController: feedViewController)
-//    }
-//
-//    func createProfileViewController() -> UINavigationController {
-//
-//        let profileViewController = ProfileViewController()
-//        profileViewController.title = "Профиль"
-//        profileViewController.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(systemName: "person.circle"), tag: 1)
-//
-//        return UINavigationController(rootViewController: profileViewController)
-//    }
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

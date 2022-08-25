@@ -155,52 +155,29 @@
 		84061DE828B161FE00B5AB47 /* NavigationVK */ = {
 			isa = PBXGroup;
 			children = (
+				849D70A128B6395700CE6807 /* Cells */,
+				849D70A028B6394400CE6807 /* Scene */,
+				849D709F28B6383F00CE6807 /* Users */,
 				8444AA5C28B4B69B005BB8FF /* LoginGroup */,
 				84061E0728B168AD00B5AB47 /* Controllers */,
-				84061E0428B1681300B5AB47 /* Data */,
-				84061DFD28B1663900B5AB47 /* Profile */,
-				84061DE928B161FE00B5AB47 /* AppDelegate.swift */,
-				84061DEB28B161FE00B5AB47 /* SceneDelegate.swift */,
 				84061DF228B1620600B5AB47 /* Assets.xcassets */,
 				84061DF428B1620600B5AB47 /* LaunchScreen.storyboard */,
 				84061DF728B1620600B5AB47 /* Info.plist */,
-				84061E0E28B169A200B5AB47 /* CustomCollectionViewCell.swift */,
 				84061E1028B169D700B5AB47 /* Photos.swift */,
-				84061E1228B169FE00B5AB47 /* PhotosCollectionViewCell.swift */,
 				84061E1428B16A3100B5AB47 /* PostStruct.swift */,
-				84061E1628B16A5900B5AB47 /* PhotosViewController.swift */,
-				84061E1828B16AB700B5AB47 /* PhotosTableViewCell.swift */,
-				84061E1A28B16AEA00B5AB47 /* PostTableViewCell.swift */,
-				84DC23C828B47FCF0091F0D5 /* User.swift */,
-				8444AA5828B493A4005BB8FF /* UserService.swift */,
-				8444AA5A28B495B7005BB8FF /* CurrentUserService.swift */,
-				8444AA6528B4B90A005BB8FF /* TestUserService.swift */,
 				84C5FFAF28B5010300C01CC9 /* MainTabBarController.swift */,
 				84C5FFB128B5040300C01CC9 /* CustomButton.swift */,
 			);
 			path = NavigationVK;
 			sourceTree = "<group>";
 		};
-		84061DFD28B1663900B5AB47 /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				84061DFE28B1665000B5AB47 /* ProfileViewController.swift */,
-				84061E0028B1669A00B5AB47 /* ProfileHeaderView.swift */,
-				84061E0228B167C800B5AB47 /* LoginViewController.swift */,
-			);
-			path = Profile;
-			sourceTree = "<group>";
-		};
-		84061E0428B1681300B5AB47 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
 		84061E0728B168AD00B5AB47 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				84061E0228B167C800B5AB47 /* LoginViewController.swift */,
+				84061DFE28B1665000B5AB47 /* ProfileViewController.swift */,
+				84061E0028B1669A00B5AB47 /* ProfileHeaderView.swift */,
+				84061E1628B16A5900B5AB47 /* PhotosViewController.swift */,
 				84061E0828B168CD00B5AB47 /* FeedViewController.swift */,
 				84061E0A28B1690D00B5AB47 /* InfoViewController.swift */,
 				84061E0C28B1692D00B5AB47 /* PostViewController.swift */,
@@ -227,6 +204,37 @@
 				8444AA6328B4B891005BB8FF /* MyLoginFactory.swift */,
 			);
 			path = LoginGroup;
+			sourceTree = "<group>";
+		};
+		849D709F28B6383F00CE6807 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				8444AA6528B4B90A005BB8FF /* TestUserService.swift */,
+				8444AA5A28B495B7005BB8FF /* CurrentUserService.swift */,
+				8444AA5828B493A4005BB8FF /* UserService.swift */,
+				84DC23C828B47FCF0091F0D5 /* User.swift */,
+			);
+			path = Users;
+			sourceTree = "<group>";
+		};
+		849D70A028B6394400CE6807 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				84061DE928B161FE00B5AB47 /* AppDelegate.swift */,
+				84061DEB28B161FE00B5AB47 /* SceneDelegate.swift */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		849D70A128B6395700CE6807 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				84061E0E28B169A200B5AB47 /* CustomCollectionViewCell.swift */,
+				84061E1228B169FE00B5AB47 /* PhotosCollectionViewCell.swift */,
+				84061E1828B16AB700B5AB47 /* PhotosTableViewCell.swift */,
+				84061E1A28B16AEA00B5AB47 /* PostTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		A053113DD0C59C19C26E5BED /* Frameworks */ = {
@@ -615,6 +623,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=iphoneos*]" = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

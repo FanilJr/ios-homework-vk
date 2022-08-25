@@ -12,6 +12,5 @@ class MyLoginFactory: LoginFactory {
         
         return LoginInspector()
     }
-    
-    
+
 }

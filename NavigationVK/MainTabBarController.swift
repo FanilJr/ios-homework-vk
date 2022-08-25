@@ -22,14 +22,13 @@ class MainTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        createTabBarController()
+
         setupTabBar()
     }
 
     func setupTabBar() {
 
         let feedViewController = createNavController(vc: FeedViewController(), itemName: "Лента", itemImage: "doc.richtext")
-        feedViewController.title = "Лента"
         let logInVC = LogInViewController()
         logInVC.delegate = loginFactory.makeLoginInspector()
         let profileViewController = createNavController(vc: logInVC, itemName: "Профиль", itemImage: "person.circle")
@@ -44,33 +43,5 @@ class MainTabBarController: UITabBarController {
 
         return navController
     }
-    
-//    func createTabBarController() -> UITabBarController {
-//
-//
-//        let tabBarController = UITabBarController()
-//        tabBarController.viewControllers = [createFeedViewController(), createLoginViewController()]
-//
-//        return tabBarController
-//
-//    }
-//
-//    func createLoginViewController() -> UINavigationController {
-//
-//        let loginViewController = LogInViewController()
-//        loginViewController.delegate = loginFactory.makeLoginInspector()
-//        loginViewController.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(systemName: "person.circle"), tag: 1)
-//
-//            return UINavigationController(rootViewController: loginViewController)
-//    }
-//
-//    func createFeedViewController() -> UINavigationController {
-//
-//        let feedViewController = FeedViewController()
-//        feedViewController.title = "Лента"
-//        feedViewController.tabBarItem = UITabBarItem(title: "Лента", image: UIImage(systemName: "doc.richtext"), tag: 0)
-//
-//        return UINavigationController(rootViewController: feedViewController)
-//    }
-//}
+
 }

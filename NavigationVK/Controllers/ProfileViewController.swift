@@ -11,11 +11,6 @@ class ProfileViewController: UIViewController {
 
     private let userService: UserService
     private let userName: String
-    
-//    let profileHeader = ProfileHeaderView()
-    
-    var backgroundTask: UIBackgroundTaskIdentifier = .invalid
-    
     var lastRowDisplay = 0
     
     let background: UIImageView = {

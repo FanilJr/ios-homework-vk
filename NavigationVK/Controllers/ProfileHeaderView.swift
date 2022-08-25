@@ -49,6 +49,7 @@ final class ProfileHeaderView: UIView {
         let statusLabel = UILabel()
         statusLabel.text = "Waiting for something..."
         statusLabel.textColor = .gray
+        statusLabel.numberOfLines = 0
         statusLabel.font = .systemFont(ofSize: 14, weight: .regular)
         return statusLabel
             
@@ -164,7 +165,6 @@ final class ProfileHeaderView: UIView {
         fullNameLabel.text = user.name
         avatarImageView.image = user.avatar
         statusLabel.text = user.status
-        print("Логин введен верно")
 
     }
         
@@ -172,7 +172,9 @@ final class ProfileHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        statusTextField.delegate = self
         snp()
+        tapScreen()
             
     }
         
@@ -181,3 +183,33 @@ final class ProfileHeaderView: UIView {
         
     }
 }
+
+extension ProfileHeaderView {
+    
+    func tapScreen() {
+        
+        let recognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        recognizer.cancelsTouchesInView = false
+        
+        addGestureRecognizer(recognizer)
+        
+    }
+
+    @objc func dismissKeyboard() {
+        
+        endEditing(true)
+        
+    }
+}
+
+extension ProfileHeaderView: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        endEditing(true)
+        return true
+        
+    }
+}
+
+

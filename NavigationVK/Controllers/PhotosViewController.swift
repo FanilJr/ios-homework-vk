@@ -9,6 +9,20 @@ import UIKit
 
 class PhotosViewController: UIViewController {
     
+    //    MARK: - Создание, настройка и размещение коллекции
+        private lazy var collectionView: UICollectionView = {
+            
+            let layout = UICollectionViewFlowLayout()
+            
+            let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+            collectionView.dataSource = self
+            collectionView.delegate = self
+            collectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: "PhotosCollectionViewCell")
+            collectionView.translatesAutoresizingMaskIntoConstraints = false
+            return collectionView
+            
+        }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -17,19 +31,11 @@ class PhotosViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
     }
     
-//    MARK: - Создание, настройка и размещение коллекции
-    private lazy var collectionView: UICollectionView = {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        let layout = UICollectionViewFlowLayout()
-        
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: "PhotosCollectionViewCell")
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        return collectionView
-        
-    }()
+        navigationController?.navigationBar.isHidden = false
+    }
     
     private func layout() {
         

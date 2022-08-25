@@ -12,7 +12,7 @@ class Checker {
     static let shared = Checker()
     
     private let login = "Fanil_Jr"
-    private let password = "qwerty"
+    private let password = "Netology"
     
     private init() {}
     
