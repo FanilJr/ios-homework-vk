@@ -91,22 +91,21 @@ final class ProfileHeaderView: UIView {
         return stackView
             
     }()
-        
-    private lazy var setStatusButton: UIButton = {
-            
-        let setStatusButton = UIButton()
-        setStatusButton.setTitle("Set status", for: .normal)
-        setStatusButton.setTitleColor(.white, for: .normal)
-        setStatusButton.layer.cornerRadius = 12
-        setStatusButton.backgroundColor = .systemBlue
-        setStatusButton.layer.shadowOffset = CGSize(width: 4, height: 4)
-        setStatusButton.layer.shadowRadius = 4
-        setStatusButton.layer.shadowColor = UIColor.black.cgColor
-        setStatusButton.layer.shadowOpacity = 0.7
-        setStatusButton.addTarget(self, action: #selector(tap), for: .touchUpInside)
-        return setStatusButton
-            
-    }()
+    
+    private let setStatusButton: CustomButton = {
+
+        let button = CustomButton()
+        button.setTitle("Set status", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 12
+        button.layer.shadowRadius = 4
+        button.layer.shadowOpacity = 0.7
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 4, height: 4)
+
+        return button
+        }()
     
     
     @objc func expandAvatar() {
@@ -144,24 +143,25 @@ final class ProfileHeaderView: UIView {
         
     }
         
-    @objc private func tap() {
-        
-        let bounds = setStatusButton.bounds
-        let bonds = statusLabel.bounds
-               
-               /// анимация кнопки setStatus и statusLabel
-               UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 2, initialSpringVelocity: 1, options: .curveLinear) {
-                   self.setStatusButton.bounds = CGRect(x: bounds.origin.x - 30, y: bounds.origin.y, width: bounds.width + 30, height: bounds.height + 10)
-                   self.setStatusButton.titleLabel?.bounds = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: bounds.width + 100, height: bounds.height)
-                   self.statusLabel.bounds = CGRect(x: bonds.origin.x, y: bonds.origin.y, width: bonds.width + 50, height: bonds.height)
-                   
-               }
+    private func tap() {
+        setStatusButton.tapAction =  { [weak self] in
             
-        statusLabel.text = statusTextField.text
-        statusTextField.text = ""
-        
-        print("Статус установлен")
+            let bounds = self?.setStatusButton.bounds
+            let bonds = self?.statusLabel.bounds
             
+            /// анимация кнопки setStatus и statusLabel
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 2, initialSpringVelocity: 1, options: .curveLinear) {
+                self?.setStatusButton.bounds = CGRect(x: (bounds?.origin.x)! - 30, y: (bounds?.origin.y)!, width: bounds!.width + 30, height: bounds!.height + 10)
+                self?.setStatusButton.titleLabel?.bounds = CGRect(x: bounds!.origin.x, y: bounds!.origin.y, width: bounds!.width + 100, height: bounds!.height)
+                self?.statusLabel.bounds = CGRect(x: bonds!.origin.x, y: bonds!.origin.y, width: bonds!.width + 50, height: bonds!.height)
+                
+            }
+            
+            self?.statusLabel.text = self?.statusTextField.text
+            self?.statusTextField.text = ""
+            
+            print("Статус установлен")
+        }
     }
     
     func setupView(user: User?) {
@@ -186,6 +186,7 @@ final class ProfileHeaderView: UIView {
         statusTextField.delegate = self
         snp()
         tapScreen()
+        tap()
             
     }
         

@@ -9,12 +9,10 @@ import UIKit
 import SnapKit
 
 protocol LoginViewControllerDelegate: AnyObject {
-
     func check(login: String, password: String) -> Bool
 }
 
 protocol LoginViewDelegate: AnyObject {
-    
     func didTapLogInButton()
 }
 

@@ -8,8 +8,6 @@
 import UIKit
 
 class PostViewController: UIViewController {
-    
-    var titlePost: String = "Пост"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +17,7 @@ class PostViewController: UIViewController {
         /// Создание кнопки на Navigation Bar - edit
         let myButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(tapButton))
         
-        navigationItem.title = titlePost
+        navigationItem.title = "Пост"
         navigationItem.rightBarButtonItem = myButton
 
     }

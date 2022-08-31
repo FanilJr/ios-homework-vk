@@ -4,18 +4,20 @@
 //
 //  Created by Fanil_Jr on 21.08.2022.
 //
-
+//
 import Foundation
 import UIKit
 
-var galery: [UIImage] {
+public var galery: [UIImage]  {
     
-    var galeryPhoto = [UIImage]()
-    
-    for i in 1...7 {
+    get {
+        var galeryPhoto = [UIImage]()
         
-        galeryPhoto.append(UIImage(named: "P\(i)")!)
+        for i in 1...15 {
+            
+            galeryPhoto.append(UIImage(named: "P\(i)")!)
+        }
+        return galeryPhoto
     }
-    return galeryPhoto
-    
+    set {}
 }
