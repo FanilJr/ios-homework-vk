@@ -13,7 +13,7 @@ protocol LoginViewControllerDelegate: AnyObject {
 }
 
 protocol LoginViewDelegate: AnyObject {
-    func didTapLogInButton()
+    func didTapLogInButton() -> Bool
 }
 
 class LogInViewController: UIViewController {
@@ -47,14 +47,31 @@ class LogInViewController: UIViewController {
         
     }
 
+
 }
 
 extension LogInViewController: LoginViewDelegate {
     
-    func didTapLogInButton() {
+    func didTapLogInButton() -> Bool {
         let login = loginView.getLogin()
         let password = loginView.getPassword()
-        
         viewModel.login(login: login, password: password)
+        
+        if login != "Fanil_Jr" {
+            lazy var alert = UIAlertController(title: "Введите логин и пароль", message: #"""
+       #логин: Fanil_Jr \#n #пароль: Netology
+       """#, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(alert, animated: true)
+        } else {
+            print("huina kakayato")
+        }
+        return true
     }
+    
+    
+ 
 }
+
+        
+    

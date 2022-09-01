@@ -31,7 +31,6 @@ final class LoginViewModel: UIAlertController {
             coordinator.showProfile(userName: login)
         } else {
             print("Логин: Fanil_Jr, пароль: Netology")
-            present(alert, animated: true)
         }
     }
 }

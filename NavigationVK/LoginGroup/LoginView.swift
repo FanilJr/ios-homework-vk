@@ -161,9 +161,11 @@ class LoginView: UIView {
     }
 
     private func taps() {
-        
         logInButton.tapAction = { [weak self] in
             self?.delegate?.didTapLogInButton()
+            
+            
+            
         }
     }
 

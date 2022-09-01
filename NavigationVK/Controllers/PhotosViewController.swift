@@ -12,7 +12,7 @@ class PhotosViewController: UIViewController {
     
     private var imagePublisherFacade: ImagePublisherFacade?
     private lazy var photos: [UIImage] = []
-    
+    var startTime = Date()
     
     private lazy var collectionView: UICollectionView = {
             
@@ -36,8 +36,8 @@ class PhotosViewController: UIViewController {
         layout()
         
         imagePublisherFacade = ImagePublisherFacade()
-        imagePublisherFacade?.addImagesWithTimer(time: 0.5, repeat: 15)
-
+        imagePublisherFacade?.addImagesWithTimer(time: 0.3, repeat: 40, userImages: galery)
+   
     }
     
     override func viewWillAppear(_ animated: Bool) {
