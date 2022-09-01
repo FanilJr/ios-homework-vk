@@ -7,16 +7,18 @@
 
 import UIKit
 import StorageService
-import SnapKit
 
 class FeedViewController: UIViewController {
 
     let model: FeedModel
+    var post = Postik(title: "Заголовок поста")
     lazy var feedView = FeedView(delegate: self)
+    private var coordinator: FeedFlowCoordinator?
 
-    init(model: FeedModel) {
+    init(model: FeedModel, coordinator: FeedFlowCoordinator) {
         
         self.model = model
+        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
         
     }
@@ -40,25 +42,27 @@ class FeedViewController: UIViewController {
             assertionFailure("Invalid object: \(object)")
             return
         }
-        
         feedView.setResultLabel(result: result)
     }
 
     private func layout() {
+        
         view.addSubview(feedView)
-
-        feedView.snp.makeConstraints{
-            $0.top.leading.trailing.bottom.equalToSuperview()
-        }
+        feedView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            feedView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            feedView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            feedView.topAnchor.constraint(equalTo: view.topAnchor),
+            feedView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
 }
 
-//MARK: - FeedViewDelegate
 extension FeedViewController: FeedViewDelegate {
 
    func didTapPostButton() {
-        let vc = PostViewController()
-        navigationController?.pushViewController(vc, animated: true)
+       coordinator?.showPost(title: post.title)
     }
 
     func check(word: String) {

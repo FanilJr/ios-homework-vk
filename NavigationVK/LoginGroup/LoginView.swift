@@ -1,75 +1,14 @@
 //
-//  LoginViewController.swift
+//  LoginView.swift
 //  NavigationVK
 //
-//  Created by Fanil_Jr on 21.08.2022.
+//  Created by Fanil_Jr on 01.09.2022.
 //
 
+import Foundation
 import UIKit
-import SnapKit
-
-protocol LoginViewControllerDelegate: AnyObject {
-    func check(login: String, password: String) -> Bool
-}
-
-protocol LoginViewDelegate: AnyObject {
-    func didTapLogInButton()
-}
-
-class LogInViewController: UIViewController {
-    
-    lazy var loginView = LoginView(delegate: self)
-    var delegate: LoginViewControllerDelegate?
-
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.backgroundColor = .white
-        navigationController?.navigationBar.isHidden = true
-        layout()
-    }
-
-    private func layout() {
-        view.addSubview(loginView)
-
-        loginView.snp.makeConstraints{ loginview in
-            loginview.top.leading.trailing.bottom.equalToSuperview() }
-        
-    }
-
-}
-
-extension LogInViewController: LoginViewDelegate {
-
-    func didTapLogInButton() {
-        let login = loginView.getLogin()
-        guard let authorizationSuccessful = delegate?.check(login: login, password: loginView.getPassword()) else { return }
-        
-               #if DEBUG
-                   let userService = CurrentUserService()
-               #else
-                   let userService = TestUserService()
-               #endif
-        
-               let vc = ProfileViewController(userService: userService, userName: login)
-        
-               if authorizationSuccessful {
-                   navigationController?.pushViewController(vc, animated: true)
-               } else {
-                   let alert = UIAlertController(title: "Введите логин и пароль", message: #"""
-#логин: Fanil_Jr \#n #пароль: Netology
-"""#, preferredStyle: .alert)
-                   alert.addAction(UIAlertAction(title: "OK", style: .cancel))
-                   present(alert, animated: true)
-                   
-        }
-    }
-}
-
 
 class LoginView: UIView {
-
 
     weak var delegate: LoginViewDelegate?
     private let nc = NotificationCenter.default
@@ -177,7 +116,9 @@ class LoginView: UIView {
         super.init(frame: CGRect.zero)
         
         backgroundColor = .white
+        
         self.delegate = delegate
+        
         addObserver()
         tapScreen()
         layout()
@@ -220,9 +161,10 @@ class LoginView: UIView {
     }
 
     private func taps() {
-        
         logInButton.tapAction = { [weak self] in
             self?.delegate?.didTapLogInButton()
+            
+            
             
         }
     }

@@ -10,33 +10,25 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    let loginFactory = MyLoginFactory()
+        let loginFactory = MyLoginFactory()
 
-
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
-        if #available(iOS 15, *) {
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            UINavigationBar.appearance().standardAppearance = appearance
-            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
             
-            UITabBar.appearance().backgroundColor = .white
-    
+            if #available(iOS 15, *) {
+                let appearance = UINavigationBarAppearance()
+                appearance.configureWithOpaqueBackground()
+                UINavigationBar.appearance().standardAppearance = appearance
+                UINavigationBar.appearance().scrollEdgeAppearance = appearance
+                UITabBar.appearance().backgroundColor = .white
+            }
+
+            guard let windowScene = (scene as? UIWindowScene) else { return }
+            let mainCoordinator: MainCoordinator = MainCoordinatorImp()
+            window = UIWindow(windowScene: windowScene)
+            window?.rootViewController = mainCoordinator.startApplication()
+            window?.makeKeyAndVisible()
+            window?.overrideUserInterfaceStyle = .light
         }
-
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        
-        
-        
-        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-        window?.windowScene = windowScene
-        window?.rootViewController = MainTabBarController(loginFactory: loginFactory)
-        window?.makeKeyAndVisible()
-        
-
-    
-    }
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

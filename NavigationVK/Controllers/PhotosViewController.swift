@@ -10,13 +10,9 @@ import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
-    var imagePublisher = ImagePublisherFacade()
-    var imageDelayArray = [UIImage]()
-    var imagesFilterArray = [CGImage?]()
-    
-    let qos: QualityOfService = .default
-    let startTime = Date()
-    
+    private var imagePublisherFacade: ImagePublisherFacade?
+    private lazy var photos: [UIImage] = []
+    var startTime = Date()
     
     private lazy var collectionView: UICollectionView = {
             
@@ -39,29 +35,23 @@ class PhotosViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
         layout()
         
-        imagePublisher.subscribe(self)
-        imagePublisher.addImagesWithTimer(time: 2, repeat: 30, userImages: galery)
-    
-        ImageProcessor().processImagesOnThread(sourceImages: galery, filter: .monochrome(color: CIColor.init(red: 0/255, green: 0/255, blue: 0/255), intensity: 0.5), qos: qos) {
-            self.imagesFilterArray = $0
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-            print("Изображения были обработаны в течении \(Date().timeIntervalSince(self.startTime)) секунд")
-        }
-        
+        imagePublisherFacade = ImagePublisherFacade()
+        imagePublisherFacade?.addImagesWithTimer(time: 0.3, repeat: 40, userImages: galery)
+   
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationController?.navigationBar.isHidden = false
+        imagePublisherFacade?.subscribe(self)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidDisappear(_ animated: Bool) {
+
+        imagePublisherFacade?.removeSubscription(for: self)
+        imagePublisherFacade?.rechargeImageLibrary()
         
-        imagePublisher.removeSubscription(for: self)
     }
     
     private func layout() {
@@ -82,22 +72,14 @@ extension PhotosViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotosCollectionViewCell", for: indexPath) as! PhotosCollectionViewCell
-        var image = UIImage()
-        let notAvilableImage = UIImage(systemName: "exclamationmark.icloud.fill")!
-        if let cgImage = imagesFilterArray[indexPath.row] {
-            image = UIImage(cgImage: cgImage)
-        } else {
-            image = notAvilableImage
-        }
-        //cell.pullCell(photo: galery[indexPath.row])
-        cell.pullCell(photo: image)
+        cell.image.image = photos[indexPath.item]
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        imagesFilterArray.count
+        photos.count
         
     }
 }
@@ -136,7 +118,7 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 extension PhotosViewController: ImageLibrarySubscriber {
     
     func receive(images: [UIImage]) {
-        imageDelayArray = images
+        photos = images
         collectionView.reloadData()
     }
     
