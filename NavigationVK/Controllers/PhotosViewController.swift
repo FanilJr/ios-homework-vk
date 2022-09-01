@@ -89,7 +89,6 @@ extension PhotosViewController: UICollectionViewDataSource {
         } else {
             image = notAvilableImage
         }
-        //cell.pullCell(photo: galery[indexPath.row])
         cell.pullCell(photo: image)
         
         return cell
