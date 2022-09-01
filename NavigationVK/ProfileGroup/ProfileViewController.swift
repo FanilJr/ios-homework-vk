@@ -11,6 +11,7 @@ class ProfileViewController: UIViewController {
 
     private let userService: UserService
     private let userName: String
+    private weak var coordinator: ProfileFlowCoordinator?
     var lastRowDisplay = 0
     
     let background: UIImageView = {
@@ -38,9 +39,11 @@ class ProfileViewController: UIViewController {
     private let post = PostStruct.massivePost()
     private let numbersSection = [PostTableViewCell(), PhotosTableViewCell()]
     
-    init(userService: UserService, userName: String) {
+    init(userService: UserService, userName: String, coordinator: ProfileFlowCoordinator) {
         self.userService = userService
         self.userName = userName
+        self.coordinator = coordinator
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -242,12 +245,8 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let galleryVC = PhotosViewController()
-        
         if indexPath.section == 0 {
-            
-            navigationController?.pushViewController(galleryVC, animated: true)
-            print("переход по тапу на ячейку")
+            coordinator?.showPhotos()
             
         }
     }

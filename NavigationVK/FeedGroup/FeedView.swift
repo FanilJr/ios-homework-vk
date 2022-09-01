@@ -113,7 +113,7 @@ final class FeedView: UIView {
     init(delegate: FeedViewDelegate?) {
         super.init(frame: CGRect.zero)
         self.delegate = delegate
-        backgroundColor = .gray
+        backgroundColor = .systemGray6
         layout()
         taps()
     }
@@ -122,8 +122,7 @@ final class FeedView: UIView {
     {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    //MARK: - Metods
+
     private func taps() {
         postButtonFirst.tapAction = { [weak self] in
             self?.delegate?.didTapPostButton()
@@ -150,36 +149,29 @@ final class FeedView: UIView {
     private func layout() {
         
         addSubview(scrollView)
-        [stackView, textField, resultLabel, notificationButton].forEach { scrollView.addSubview($0) }
-        
-        [postButtonFirst, postButtonSecond].forEach { stackView.addArrangedSubview($0) }
+        scrollView.addSubview(contentView)
+        contentView.addSubview(stackView)
+        [postButtonFirst, postButtonSecond, textField, resultLabel, notificationButton].forEach { stackView.addArrangedSubview($0) }
+//        contentView.addSubview(stackView)
         
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: topAnchor),
+            scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             
-            stackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-            stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor,constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor,constant: -16),
-            stackView.heightAnchor.constraint(equalToConstant: 105),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
             
-            textField.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 20),
-            textField.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor,constant: 16),
-            textField.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor,constant: -16),
-            textField.heightAnchor.constraint(equalToConstant: 30),
-
-            resultLabel.topAnchor.constraint(equalTo: textField.bottomAnchor,constant: 10),
-            resultLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor,constant: 16),
-            resultLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor,constant: -16),
-            resultLabel.heightAnchor.constraint(equalToConstant: 30),
-
-            notificationButton.topAnchor.constraint(equalTo: resultLabel.bottomAnchor,constant: 10),
-            notificationButton.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor,constant: 16),
-            notificationButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor,constant: -16),
-            notificationButton.heightAnchor.constraint(equalToConstant: 50)
+            stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            stackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
+            stackView.heightAnchor.constraint(equalToConstant: 300),
         ])
     }
 }

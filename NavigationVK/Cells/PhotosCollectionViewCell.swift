@@ -23,7 +23,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private let image: UIImageView = {
+    let image: UIImageView = {
         
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
