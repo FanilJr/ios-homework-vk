@@ -13,7 +13,7 @@ protocol LoginViewControllerDelegate: AnyObject {
 }
 
 protocol LoginViewDelegate: AnyObject {
-    func didTapLogInButton() -> Bool
+    func didTapLogInButton()
 }
 
 class LogInViewController: UIViewController {
@@ -52,25 +52,34 @@ class LogInViewController: UIViewController {
 
 extension LogInViewController: LoginViewDelegate {
     
-    func didTapLogInButton() -> Bool {
+    func didTapLogInButton()  {
         let login = loginView.getLogin()
         let password = loginView.getPassword()
         viewModel.login(login: login, password: password)
-        
+        // MARK: При таком условии if login && password != не срабатаывает если ввел правильный логин, поэтому поставил и на пароль условие отельное и н логин, прошу скорректировать меня спасибо за проверку!
         if login != "Fanil_Jr" {
             lazy var alert = UIAlertController(title: "Введите логин и пароль", message: #"""
        #логин: Fanil_Jr \#n #пароль: Netology
        """#, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel))
             present(alert, animated: true)
+            print("где-то ошибка ввода")
         } else {
-            print("huina kakayato")
+            print("спасибо Сергей Котов! Настроил вход с алертом")
         }
-        return true
+        
+        if password != "Netology" {
+            lazy var alert = UIAlertController(title: "Введите логин и пароль", message: #"""
+       #логин: Fanil_Jr \#n #пароль: Netology
+       """#, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(alert, animated: true)
+            print("Где-то ошибка ввода")
+        } else {
+            print("Правильный пароль")
+        }
     }
-    
-    
- 
+
 }
 
         
