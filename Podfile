@@ -6,7 +6,6 @@ target 'NavigationVK' do
   use_frameworks!
 
   # Pods for NavigationVK
-pod 'SnapKit'
 
 end
 

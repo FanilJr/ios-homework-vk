@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SnapKit
 
 protocol MyClassDelegate: AnyObject {
     func didtap()
@@ -30,6 +29,7 @@ final class ProfileHeaderView: UIView {
         avatarImageView.layer.cornerRadius = 60
         avatarImageView.clipsToBounds = true
         avatarImageView.isUserInteractionEnabled = true
+        avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         return avatarImageView
         
     }()
@@ -44,6 +44,7 @@ final class ProfileHeaderView: UIView {
         fullNameLabel.textColor = .white
         #endif
         fullNameLabel.font = .systemFont(ofSize: 18, weight: .bold)
+        fullNameLabel.translatesAutoresizingMaskIntoConstraints = false
         return fullNameLabel
         
     }()
@@ -62,6 +63,7 @@ final class ProfileHeaderView: UIView {
         statusLabel.numberOfLines = 0
         statusLabel.font = .systemFont(ofSize: 14, weight: .thin)
         statusLabel.shadowOffset = CGSize(width: 0.5, height: 0.5)
+        statusLabel.translatesAutoresizingMaskIntoConstraints = false
         return statusLabel
             
     }()
@@ -78,6 +80,7 @@ final class ProfileHeaderView: UIView {
         statusTextField.layer.borderColor = UIColor.black.cgColor
         statusTextField.layer.cornerRadius = 12
         statusTextField.layer.backgroundColor = UIColor.white.cgColor
+        statusTextField.translatesAutoresizingMaskIntoConstraints = false
         return statusTextField
             
     }()
@@ -88,6 +91,7 @@ final class ProfileHeaderView: UIView {
         stackView.axis = .vertical
         stackView.spacing = 10
         stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
             
     }()
@@ -103,6 +107,7 @@ final class ProfileHeaderView: UIView {
         button.layer.shadowOpacity = 0.7
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
+        button.translatesAutoresizingMaskIntoConstraints = false
 
         return button
         }()
@@ -123,24 +128,22 @@ final class ProfileHeaderView: UIView {
         [avatarImageView, stackView, setStatusButton].forEach { addSubview($0) }
         [fullNameLabel, statusLabel, statusTextField].forEach { stackView.addArrangedSubview($0) }
         
-        avatarImageView.snp.makeConstraints { avatar in
-            avatar.left.equalTo(0)
-            avatar.top.equalTo(0)
-            avatar.width.equalTo(120)
-            avatar.height.equalTo(120) }
+        NSLayoutConstraint.activate([
+            avatarImageView.topAnchor.constraint(equalTo: topAnchor),
+            avatarImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 120),
+            avatarImageView.heightAnchor.constraint(equalToConstant: 120),
         
-        stackView.snp.makeConstraints { stack in
-            stack.top.equalTo(0)
-            stack.right.equalTo(0)
-            stack.left.equalTo(avatarImageView.snp_rightMargin).inset(-30) }
-        
-        setStatusButton.snp.makeConstraints { button in
-            button.top.equalTo(stackView.snp_bottomMargin).inset(-16)
-            button.height.equalTo(50)
-            button.left.equalTo(0)
-            button.right.equalTo(0)
-            button.bottom.equalTo(-16) }
-        
+            stackView.topAnchor.constraint(equalTo: topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor,constant: 30),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
+            setStatusButton.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 16),
+            setStatusButton.leadingAnchor.constraint(equalTo: leadingAnchor),
+            setStatusButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+            setStatusButton.heightAnchor.constraint(equalToConstant: 50),
+            setStatusButton.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -16)
+        ])
     }
         
     private func tap() {

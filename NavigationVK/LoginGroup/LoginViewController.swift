@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SnapKit
 
 protocol LoginViewControllerDelegate: AnyObject {
     func check(login: String, password: String) -> Bool
