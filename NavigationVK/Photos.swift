@@ -9,8 +9,7 @@ import Foundation
 import UIKit
 
 public var galery: [UIImage]  {
-    
-    get {
+
         var galeryPhoto = [UIImage]()
         
         for i in 1...20 {
@@ -18,6 +17,4 @@ public var galery: [UIImage]  {
             galeryPhoto.append(UIImage(named: "P\(i)")!)
         }
         return galeryPhoto
-    }
-    set {}
 }

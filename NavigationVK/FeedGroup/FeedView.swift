@@ -132,6 +132,11 @@ final class FeedView: UIView {
         }
         notificationButton.tapAction = { [weak self] in
             self?.delegate?.check(word: self?.textField.text ?? "")
+            
+            UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 2, initialSpringVelocity: 1, options: .curveLinear) {
+                self?.notificationButton.bounds = CGRect(x: (self!.bounds.origin.x) - 30, y: (self!.bounds.origin.y), width: self!.bounds.width + 30, height: self!.bounds.height + 10)
+                self?.notificationButton.titleLabel?.bounds = CGRect(x: self!.bounds.origin.x, y: self!.bounds.origin.y, width: self!.bounds.width + 100, height: self!.bounds.height)
+            }
         }
     }
     
@@ -148,30 +153,30 @@ final class FeedView: UIView {
     
     private func layout() {
         
-        addSubview(scrollView)
-        scrollView.addSubview(contentView)
-        contentView.addSubview(stackView)
         [postButtonFirst, postButtonSecond, textField, resultLabel, notificationButton].forEach { stackView.addArrangedSubview($0) }
+        contentView.addSubview(stackView)
+        scrollView.addSubview(contentView)
+        addSubview(scrollView)
 //        contentView.addSubview(stackView)
         
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            scrollView.topAnchor.constraint(equalTo: topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
             
-            stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            stackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 100),
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
             stackView.heightAnchor.constraint(equalToConstant: 300),
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            
         ])
     }
 }

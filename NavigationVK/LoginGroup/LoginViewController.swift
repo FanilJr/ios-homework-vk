@@ -63,8 +63,9 @@ extension LogInViewController: LoginViewDelegate {
        """#, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel))
             present(alert, animated: true)
-            print("где-то ошибка ввода")
+            print("где-то ошибка ввода Логина")
         } else {
+            print("Правильный логин")
             print("спасибо Сергей Котов! Настроил вход с алертом")
         }
         
@@ -74,7 +75,7 @@ extension LogInViewController: LoginViewDelegate {
        """#, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel))
             present(alert, animated: true)
-            print("Где-то ошибка ввода")
+            print("Где-то ошибка ввода Пароля")
         } else {
             print("Правильный пароль")
         }

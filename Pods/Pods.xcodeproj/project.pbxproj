@@ -73,7 +73,7 @@
 		0AFDF096C3836F945945C9FFDB5090F5 /* Constraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Constraint.swift; path = Sources/Constraint.swift; sourceTree = "<group>"; };
 		0EE5F8CB92905AE76169A71226B44035 /* SnapKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SnapKit.debug.xcconfig; sourceTree = "<group>"; };
 		143498449916D71708A8AF2F96E7320A /* SnapKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SnapKit-dummy.m"; sourceTree = "<group>"; };
-		14FE66AD7513DA1D4353206DB8339C9E /* Pods-StorageService */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-StorageService"; path = Pods_StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		14FE66AD7513DA1D4353206DB8339C9E /* Pods_StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		152EE8343B4F64CFDE73F65CEF14A13F /* UILayoutSupport+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UILayoutSupport+Extensions.swift"; path = "Sources/UILayoutSupport+Extensions.swift"; sourceTree = "<group>"; };
 		26E5BB7E9F99F41E937A7E2CCEF178BE /* ConstraintItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintItem.swift; path = Sources/ConstraintItem.swift; sourceTree = "<group>"; };
 		38A6A462E0F0B040B83C8763773533FE /* LayoutConstraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutConstraint.swift; path = Sources/LayoutConstraint.swift; sourceTree = "<group>"; };
@@ -86,7 +86,7 @@
 		4CEAC33F90DAEB7D14A1DE0B2211C2DF /* Pods-StorageService-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-StorageService-dummy.m"; sourceTree = "<group>"; };
 		5032FD34D5BB9A1F925C649B43CC02DC /* ConstraintLayoutSupportDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutSupportDSL.swift; path = Sources/ConstraintLayoutSupportDSL.swift; sourceTree = "<group>"; };
 		535F927BC231DC92A299D1A0EE1274D7 /* Pods-StorageService.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-StorageService.modulemap"; sourceTree = "<group>"; };
-		548CCCF42AEE3C5E1A81C162056F49F0 /* Pods-NavigationVK */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-NavigationVK"; path = Pods_NavigationVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		548CCCF42AEE3C5E1A81C162056F49F0 /* Pods_NavigationVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NavigationVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		54A0BC61944B3E89515CACB83BB1B976 /* ConstraintDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDescription.swift; path = Sources/ConstraintDescription.swift; sourceTree = "<group>"; };
 		583BBF75085D255E27A5F9EF9EC203A5 /* ConstraintMakerRelatable+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ConstraintMakerRelatable+Extensions.swift"; path = "Sources/ConstraintMakerRelatable+Extensions.swift"; sourceTree = "<group>"; };
 		59335E1DB6A81CE910896CDA65188F15 /* Pods-StorageService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StorageService.debug.xcconfig"; sourceTree = "<group>"; };
@@ -294,8 +294,8 @@
 		F75FA4E0739C3AA7DF8B28E00FCE2603 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				548CCCF42AEE3C5E1A81C162056F49F0 /* Pods-NavigationVK */,
-				14FE66AD7513DA1D4353206DB8339C9E /* Pods-StorageService */,
+				548CCCF42AEE3C5E1A81C162056F49F0 /* Pods_NavigationVK.framework */,
+				14FE66AD7513DA1D4353206DB8339C9E /* Pods_StorageService.framework */,
 				979486118B3E90C08386079D57962701 /* SnapKit.framework */,
 			);
 			name = Products;
@@ -373,7 +373,7 @@
 			);
 			name = "Pods-NavigationVK";
 			productName = Pods_NavigationVK;
-			productReference = 548CCCF42AEE3C5E1A81C162056F49F0 /* Pods-NavigationVK */;
+			productReference = 548CCCF42AEE3C5E1A81C162056F49F0 /* Pods_NavigationVK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		70CA38CB6019B5AFED49D6B7EDE899E3 /* Pods-StorageService */ = {
@@ -391,7 +391,7 @@
 			);
 			name = "Pods-StorageService";
 			productName = Pods_StorageService;
-			productReference = 14FE66AD7513DA1D4353206DB8339C9E /* Pods-StorageService */;
+			productReference = 14FE66AD7513DA1D4353206DB8339C9E /* Pods_StorageService.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -401,7 +401,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1300;
-				LastUpgradeCheck = 1320;
+				LastUpgradeCheck = 1400;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -631,6 +631,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -805,6 +806,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
