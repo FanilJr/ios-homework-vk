@@ -47,7 +47,7 @@
 		84CA386D28C0977600EECD6D /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CA386C28C0977600EECD6D /* MainCoordinator.swift */; };
 		84CA386F28C09E0B00EECD6D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CA386E28C09E0B00EECD6D /* LoginViewModel.swift */; };
 		84CA387128C09F5500EECD6D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CA387028C09F5500EECD6D /* LoginView.swift */; };
-		84CA387728C0B3F400EECD6D /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CA387628C0B3F400EECD6D /* AlertController.swift */; };
+		84CA387928C324B400EECD6D /* ExtensionPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CA387828C324B400EECD6D /* ExtensionPassword.swift */; };
 		84CF1A3428BCBBCD000FF0D8 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CF1A3328BCBBCD000FF0D8 /* FeedView.swift */; };
 		84CF1A3628BCBC3D000FF0D8 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CF1A3528BCBC3D000FF0D8 /* CustomTextField.swift */; };
 		84CF1A3828BCBCD7000FF0D8 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CF1A3728BCBCD7000FF0D8 /* FeedModel.swift */; };
@@ -122,7 +122,7 @@
 		84CA386C28C0977600EECD6D /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		84CA386E28C09E0B00EECD6D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		84CA387028C09F5500EECD6D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		84CA387628C0B3F400EECD6D /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
+		84CA387828C324B400EECD6D /* ExtensionPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionPassword.swift; sourceTree = "<group>"; };
 		84CF1A3328BCBBCD000FF0D8 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		84CF1A3528BCBC3D000FF0D8 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		84CF1A3728BCBCD7000FF0D8 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
@@ -194,7 +194,7 @@
 				84061E1428B16A3100B5AB47 /* PostStruct.swift */,
 				84C5FFAF28B5010300C01CC9 /* MainTabBarController.swift */,
 				84CF1A3928BCBD0F000FF0D8 /* NotificationName.swift */,
-				84CA387628C0B3F400EECD6D /* AlertController.swift */,
+				84CA387828C324B400EECD6D /* ExtensionPassword.swift */,
 			);
 			path = NavigationVK;
 			sourceTree = "<group>";
@@ -523,6 +523,7 @@
 				8444AA5E28B4B6E7005BB8FF /* LoginInspector.swift in Sources */,
 				84CA386928C0965400EECD6D /* FeedFlowCoordinator.swift in Sources */,
 				84061E1928B16AB700B5AB47 /* PhotosTableViewCell.swift in Sources */,
+				84CA387928C324B400EECD6D /* ExtensionPassword.swift in Sources */,
 				84CF1A3828BCBCD7000FF0D8 /* FeedModel.swift in Sources */,
 				84CF1A3428BCBBCD000FF0D8 /* FeedView.swift in Sources */,
 				84CA386D28C0977600EECD6D /* MainCoordinator.swift in Sources */,
@@ -535,7 +536,6 @@
 				8444AA5B28B495B8005BB8FF /* CurrentUserService.swift in Sources */,
 				8444AA6628B4B90A005BB8FF /* TestUserService.swift in Sources */,
 				84061E0B28B1690D00B5AB47 /* InfoViewController.swift in Sources */,
-				84CA387728C0B3F400EECD6D /* AlertController.swift in Sources */,
 				84061DFF28B1665000B5AB47 /* ProfileViewController.swift in Sources */,
 				84061E1728B16A5900B5AB47 /* PhotosViewController.swift in Sources */,
 				84061E1528B16A3100B5AB47 /* PostStruct.swift in Sources */,

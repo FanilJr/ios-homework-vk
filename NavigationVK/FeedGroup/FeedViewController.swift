@@ -48,7 +48,6 @@ class FeedViewController: UIViewController {
     private func layout() {
         
         view.addSubview(feedView)
-        feedView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             feedView.leadingAnchor.constraint(equalTo: view.leadingAnchor),

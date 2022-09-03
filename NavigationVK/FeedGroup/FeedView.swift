@@ -15,6 +15,7 @@ protocol FeedViewDelegate: AnyObject {
 final class FeedView: UIView {
     
     weak var delegate: FeedViewDelegate?
+    private let nc = NotificationCenter.default
     
     private let scrollView: UIScrollView = {
 
@@ -112,8 +113,12 @@ final class FeedView: UIView {
     
     init(delegate: FeedViewDelegate?) {
         super.init(frame: CGRect.zero)
+        
+        translatesAutoresizingMaskIntoConstraints = false
         self.delegate = delegate
         backgroundColor = .systemGray6
+        addObserver()
+        tapScreen()
         layout()
         taps()
     }
@@ -121,6 +126,35 @@ final class FeedView: UIView {
     required init?(coder aDecoder: NSCoder)
     {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        removeObserver()
+    }
+
+    func addObserver() {
+        nc.addObserver(self, selector: #selector(kdbShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        nc.addObserver(self, selector: #selector(kdbHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    func removeObserver() {
+        nc.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        nc.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc func kdbShow(notification: NSNotification) {
+        
+        if let kdbSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            scrollView.contentInset.bottom = kdbSize.height
+            scrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: kdbSize.height, right: 0)
+        }
+    }
+
+    @objc func kdbHide() {
+        
+        scrollView.contentInset.bottom = .zero
+        scrollView.verticalScrollIndicatorInsets = .zero
+        
     }
 
     private func taps() {
@@ -157,7 +191,6 @@ final class FeedView: UIView {
         contentView.addSubview(stackView)
         scrollView.addSubview(contentView)
         addSubview(scrollView)
-//        contentView.addSubview(stackView)
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: topAnchor),
@@ -176,7 +209,19 @@ final class FeedView: UIView {
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
             stackView.heightAnchor.constraint(equalToConstant: 300),
             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-            
         ])
+    }
+}
+
+extension FeedView {
+    
+    func tapScreen() {
+        let recognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        recognizer.cancelsTouchesInView = false
+        addGestureRecognizer(recognizer)
+    }
+
+    @objc func dismissKeyboard() {
+        endEditing(true)
     }
 }

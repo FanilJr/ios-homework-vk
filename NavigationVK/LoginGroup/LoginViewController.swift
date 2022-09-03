@@ -12,10 +12,6 @@ protocol LoginViewControllerDelegate: AnyObject {
     func check(login: String, password: String) -> Bool
 }
 
-protocol LoginViewDelegate: AnyObject {
-    func didTapLogInButton()
-}
-
 class LogInViewController: UIViewController {
 
     private var viewModel: LoginViewModel
@@ -40,19 +36,34 @@ class LogInViewController: UIViewController {
     }
 
     private func layout() {
-        view.addSubview(loginView)
-
-        loginView.snp.makeConstraints{ loginview in
-            loginview.top.leading.trailing.bottom.equalToSuperview() }
         
+        view.addSubview(loginView)
+        
+        NSLayoutConstraint.activate([
+            loginView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            loginView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            loginView.topAnchor.constraint(equalTo: view.topAnchor),
+            loginView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
-
-
 }
 
 extension LogInViewController: LoginViewDelegate {
     
+    func didTapCrackPasswordButton() {
+        
+        let generatedPassword = generatePassword(length: 3)
+        DispatchQueue.global().async {
+            self.bruteForce(passwordToUnlock: generatedPassword)
+            DispatchQueue.main.async {
+                self.loginView.waitingSpinnerEnable(false)
+                self.loginView.setPassword(password: generatedPassword, isSecure: false)
+            }
+        }
+    }
+    
     func didTapLogInButton()  {
+        
         let login = loginView.getLogin()
         let password = loginView.getPassword()
         viewModel.login(login: login, password: password)
@@ -80,7 +91,30 @@ extension LogInViewController: LoginViewDelegate {
             print("Правильный пароль")
         }
     }
+}
 
+
+extension LogInViewController {
+
+    private func generatePassword(length: Int) -> String {
+        
+        let lettersAndNumbers: [String] = String().lettersAndNumbers.map { String($0) }
+        var password = ""
+
+        for _ in 1...length {
+            password += lettersAndNumbers.randomElement()!
+        }
+        return password
+    }
+
+    func bruteForce(passwordToUnlock: String) {
+        
+        let lettersAndNumbers: [String] = String().lettersAndNumbers.map { String($0) }
+        var password: String = ""
+        while password != passwordToUnlock {
+            password = generateBruteForce(password, fromArray: lettersAndNumbers)
+        }
+    }
 }
 
         
