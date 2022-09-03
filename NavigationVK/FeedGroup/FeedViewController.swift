@@ -12,6 +12,7 @@ class FeedViewController: UIViewController {
 
     let model: FeedModel
     var post = Postik(title: "Заголовок поста")
+    let splash = SplashViewController()
     lazy var feedView = FeedView(delegate: self)
     private var coordinator: FeedFlowCoordinator?
 
@@ -46,10 +47,17 @@ class FeedViewController: UIViewController {
     }
 
     private func layout() {
-        
+    
         view.addSubview(feedView)
+        view.addSubview(splash)
         
         NSLayoutConstraint.activate([
+            
+            splash.topAnchor.constraint(equalTo: view.topAnchor),
+            splash.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            splash.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            splash.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
             feedView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             feedView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             feedView.topAnchor.constraint(equalTo: view.topAnchor),

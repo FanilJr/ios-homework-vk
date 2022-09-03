@@ -38,6 +38,8 @@
 		8444AA6228B4B859005BB8FF /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444AA6128B4B859005BB8FF /* LoginFactory.swift */; };
 		8444AA6428B4B891005BB8FF /* MyLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444AA6328B4B891005BB8FF /* MyLoginFactory.swift */; };
 		8444AA6628B4B90A005BB8FF /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444AA6528B4B90A005BB8FF /* TestUserService.swift */; };
+		847409A128C36E6F00CBA34A /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847409A028C36E6F00CBA34A /* SplashViewController.swift */; };
+		847409A328C371DC00CBA34A /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847409A228C371DB00CBA34A /* SplashPresenter.swift */; };
 		849C7B4028B7B2CD008B0030 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 849C7B3F28B7B2CD008B0030 /* iOSIntPackage */; };
 		84C5FFB028B5010300C01CC9 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5FFAF28B5010300C01CC9 /* MainTabBarController.swift */; };
 		84C5FFB228B5040300C01CC9 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5FFB128B5040300C01CC9 /* CustomButton.swift */; };
@@ -114,6 +116,8 @@
 		8444AA6128B4B859005BB8FF /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		8444AA6328B4B891005BB8FF /* MyLoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLoginFactory.swift; sourceTree = "<group>"; };
 		8444AA6528B4B90A005BB8FF /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
+		847409A028C36E6F00CBA34A /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		847409A228C371DB00CBA34A /* SplashPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
 		84C5FFAF28B5010300C01CC9 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		84C5FFB128B5040300C01CC9 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		84CA386628C095E100EECD6D /* ControllersFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllersFactory.swift; sourceTree = "<group>"; };
@@ -177,24 +181,21 @@
 		84061DE828B161FE00B5AB47 /* NavigationVK */ = {
 			isa = PBXGroup;
 			children = (
-				84061E0728B168AD00B5AB47 /* Controllers */,
-				849D70A028B6394400CE6807 /* Scene */,
-				849D70A128B6395700CE6807 /* Cells */,
-				84CA387228C0A1E300EECD6D /* Coordinator */,
-				84CA387328C0A25E00EECD6D /* ProfileGroup */,
-				84CA387428C0A29800EECD6D /* FeedGroup */,
-				8444AA5C28B4B69B005BB8FF /* LoginGroup */,
-				84CA387528C0A2CA00EECD6D /* CustomElements */,
-				849D709F28B6383F00CE6807 /* Users */,
 				84061DF228B1620600B5AB47 /* Assets.xcassets */,
-				84CA386628C095E100EECD6D /* ControllersFactory.swift */,
-				84061DF428B1620600B5AB47 /* LaunchScreen.storyboard */,
+				849D70A128B6395700CE6807 /* Cells */,
+				84061E0728B168AD00B5AB47 /* Controllers */,
+				84CA387228C0A1E300EECD6D /* Coordinator */,
+				84CA387528C0A2CA00EECD6D /* CustomElements */,
+				8474099F28C361CC00CBA34A /* Extensions-Struct-Other */,
+				84CA387428C0A29800EECD6D /* FeedGroup */,
 				84061DF728B1620600B5AB47 /* Info.plist */,
-				84061E1028B169D700B5AB47 /* Photos.swift */,
-				84061E1428B16A3100B5AB47 /* PostStruct.swift */,
-				84C5FFAF28B5010300C01CC9 /* MainTabBarController.swift */,
-				84CF1A3928BCBD0F000FF0D8 /* NotificationName.swift */,
-				84CA387828C324B400EECD6D /* ExtensionPassword.swift */,
+				84061DF428B1620600B5AB47 /* LaunchScreen.storyboard */,
+				8444AA5C28B4B69B005BB8FF /* LoginGroup */,
+				84CA387328C0A25E00EECD6D /* ProfileGroup */,
+				849D70A028B6394400CE6807 /* Scene */,
+				849D709F28B6383F00CE6807 /* Users */,
+				847409A028C36E6F00CBA34A /* SplashViewController.swift */,
+				847409A228C371DB00CBA34A /* SplashPresenter.swift */,
 			);
 			path = NavigationVK;
 			sourceTree = "<group>";
@@ -225,12 +226,25 @@
 				84061E0228B167C800B5AB47 /* LoginViewController.swift */,
 				84CA387028C09F5500EECD6D /* LoginView.swift */,
 				84CA386E28C09E0B00EECD6D /* LoginViewModel.swift */,
-				8444AA5D28B4B6E7005BB8FF /* LoginInspector.swift */,
-				8444AA5F28B4B76E005BB8FF /* Checker.swift */,
-				8444AA6128B4B859005BB8FF /* LoginFactory.swift */,
-				8444AA6328B4B891005BB8FF /* MyLoginFactory.swift */,
 			);
 			path = LoginGroup;
+			sourceTree = "<group>";
+		};
+		8474099F28C361CC00CBA34A /* Extensions-Struct-Other */ = {
+			isa = PBXGroup;
+			children = (
+				8444AA5D28B4B6E7005BB8FF /* LoginInspector.swift */,
+				8444AA6328B4B891005BB8FF /* MyLoginFactory.swift */,
+				8444AA6128B4B859005BB8FF /* LoginFactory.swift */,
+				8444AA5F28B4B76E005BB8FF /* Checker.swift */,
+				84CA386628C095E100EECD6D /* ControllersFactory.swift */,
+				84061E1028B169D700B5AB47 /* Photos.swift */,
+				84061E1428B16A3100B5AB47 /* PostStruct.swift */,
+				84C5FFAF28B5010300C01CC9 /* MainTabBarController.swift */,
+				84CF1A3928BCBD0F000FF0D8 /* NotificationName.swift */,
+				84CA387828C324B400EECD6D /* ExtensionPassword.swift */,
+			);
+			path = "Extensions-Struct-Other";
 			sourceTree = "<group>";
 		};
 		849D709F28B6383F00CE6807 /* Users */ = {
@@ -493,6 +507,7 @@
 				8444AA6028B4B76E005BB8FF /* Checker.swift in Sources */,
 				84CF1A3A28BCBD0F000FF0D8 /* NotificationName.swift in Sources */,
 				84C5FFB028B5010300C01CC9 /* MainTabBarController.swift in Sources */,
+				847409A128C36E6F00CBA34A /* SplashViewController.swift in Sources */,
 				84CA386B28C096A400EECD6D /* ProfileFlowCoordinator.swift in Sources */,
 				84061E0328B167C800B5AB47 /* LoginViewController.swift in Sources */,
 				84C5FFB228B5040300C01CC9 /* CustomButton.swift in Sources */,
@@ -509,6 +524,7 @@
 				84CF1A3828BCBCD7000FF0D8 /* FeedModel.swift in Sources */,
 				84CF1A3428BCBBCD000FF0D8 /* FeedView.swift in Sources */,
 				84CA386D28C0977600EECD6D /* MainCoordinator.swift in Sources */,
+				847409A328C371DC00CBA34A /* SplashPresenter.swift in Sources */,
 				8444AA6228B4B859005BB8FF /* LoginFactory.swift in Sources */,
 				8444AA5928B493A5005BB8FF /* UserService.swift in Sources */,
 				8444AA6428B4B891005BB8FF /* MyLoginFactory.swift in Sources */,
