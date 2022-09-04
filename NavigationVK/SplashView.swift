@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SplashViewController: UIView {
+final class SplashView: UIView {
     
     let background: UIImageView = {
         
@@ -67,7 +67,7 @@ final class SplashViewController: UIView {
         }
     }
     func dismissed() {
-        UIView.animate(withDuration: 1.3, animations: {
+        UIView.animate(withDuration: 1.2, animations: {
             self.alpha = 0.0
         })
         

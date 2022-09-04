@@ -150,7 +150,7 @@ class LoginView: UIView {
     init(delegate: LoginViewDelegate?) {
         super.init(frame: CGRect.zero)
         
-        backgroundColor = .white
+        backgroundColor = .clear
         translatesAutoresizingMaskIntoConstraints = false
         self.delegate = delegate
         

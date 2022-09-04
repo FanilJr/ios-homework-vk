@@ -11,7 +11,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     
-//    private var splashPresenter: SplashPresenterDescription? = SplashPresenter()
         let loginFactory = MyLoginFactory()
 
         func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -28,7 +27,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
 
             let mainCoordinator: MainCoordinator = MainCoordinatorImp()
-            let splashViewController = SplashViewController()
             
             window = UIWindow(windowScene: windowScene)
             window?.rootViewController = mainCoordinator.startApplication()

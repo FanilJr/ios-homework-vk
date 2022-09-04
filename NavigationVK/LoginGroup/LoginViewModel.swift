@@ -8,17 +8,14 @@
 import Foundation
 import UIKit
 
-final class LoginViewModel: UIAlertController {
+final class LoginViewModel {
     private let loginInspector: LoginInspector
     private let coordinator: ProfileFlowCoordinator
-    let alert = UIAlertController(title: "hui", message: "hui", preferredStyle: .alert)
-    
-
+   
     init(loginFactory: LoginFactory, coordinator: ProfileFlowCoordinator) {
         self.loginInspector = loginFactory.makeLoginInspector()
         self.coordinator = coordinator
-        
-        super.init(nibName: nil, bundle: nil)
+    
     }
     
     required init?(coder: NSCoder) {

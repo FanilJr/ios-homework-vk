@@ -20,6 +20,7 @@ final class FeedView: UIView {
     private let scrollView: UIScrollView = {
 
         let scrollView = UIScrollView()
+        scrollView.backgroundColor = .clear
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
         
@@ -28,6 +29,7 @@ final class FeedView: UIView {
     private let contentView: UIView = {
 
         let contentView = UIView()
+        contentView.backgroundColor = .clear
         contentView.translatesAutoresizingMaskIntoConstraints = false
         return contentView
         
@@ -39,13 +41,27 @@ final class FeedView: UIView {
         let button = CustomButton()
         button.setTitle("Первая кнопка", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemBlue
+        button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         button.layer.cornerRadius = 12
         button.layer.shadowRadius = 4
         button.layer.shadowOpacity = 0.7
+        button.clipsToBounds = true
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
+        switch button.state {
+                case .normal:
+                    button.alpha = 1
+                case .selected:
+                    button.alpha = 0.8
+                case .highlighted:
+                    button.alpha = 0.8
+                case .disabled:
+                    button.alpha = 0.8
+                default:
+                    button.alpha = 1
+                }
         
         return button
     }()
@@ -55,13 +71,27 @@ final class FeedView: UIView {
         let button = CustomButton()
         button.setTitle("Вторая кнопка", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemBlue
+        button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         button.layer.cornerRadius = 12
         button.layer.shadowRadius = 4
         button.layer.shadowOpacity = 0.7
+        button.clipsToBounds = true
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
+        switch button.state {
+                case .normal:
+                    button.alpha = 1
+                case .selected:
+                    button.alpha = 0.8
+                case .highlighted:
+                    button.alpha = 0.8
+                case .disabled:
+                    button.alpha = 0.8
+                default:
+                    button.alpha = 1
+                }
         
         return button
     }()
@@ -71,13 +101,27 @@ final class FeedView: UIView {
         let button = CustomButton()
         button.setTitle("Кнопка проверки", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemBlue
+        button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
+        button.clipsToBounds = true
         button.layer.cornerRadius = 12
         button.layer.shadowRadius = 4
         button.layer.shadowOpacity = 0.7
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
+        switch button.state {
+                case .normal:
+                    button.alpha = 1
+                case .selected:
+                    button.alpha = 0.8
+                case .highlighted:
+                    button.alpha = 0.8
+                case .disabled:
+                    button.alpha = 0.8
+                default:
+                    button.alpha = 1
+                }
         
         return button
     }()
@@ -116,7 +160,7 @@ final class FeedView: UIView {
         
         translatesAutoresizingMaskIntoConstraints = false
         self.delegate = delegate
-        backgroundColor = .systemGray6
+        backgroundColor = .clear
         addObserver()
         tapScreen()
         layout()
@@ -188,14 +232,14 @@ final class FeedView: UIView {
     private func layout() {
         
         [postButtonFirst, postButtonSecond, textField, resultLabel, notificationButton].forEach { stackView.addArrangedSubview($0) }
-        contentView.addSubview(stackView)
+        [stackView].forEach { contentView.addSubview($0) }
         scrollView.addSubview(contentView)
         addSubview(scrollView)
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
@@ -204,11 +248,11 @@ final class FeedView: UIView {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
-            stackView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 100),
-            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
+            stackView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor,constant: 50),
+            stackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             stackView.heightAnchor.constraint(equalToConstant: 300),
-            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            stackView.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor,constant: -16),
+            stackView.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor,constant: -50)
         ])
     }
 }

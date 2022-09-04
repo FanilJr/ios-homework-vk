@@ -100,14 +100,27 @@ final class ProfileHeaderView: UIView {
 
         let button = CustomButton()
         button.setTitle("Set status", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemBlue
+        button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
+        button.clipsToBounds = true
         button.layer.cornerRadius = 12
         button.layer.shadowRadius = 4
         button.layer.shadowOpacity = 0.7
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
+        switch button.state {
+                case .normal:
+                    button.alpha = 1
+                case .selected:
+                    button.alpha = 0.8
+                case .highlighted:
+                    button.alpha = 0.8
+                case .disabled:
+                    button.alpha = 0.8
+                default:
+                    button.alpha = 1
+                }
 
         return button
         }()

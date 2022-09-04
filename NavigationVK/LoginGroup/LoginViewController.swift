@@ -16,6 +16,15 @@ class LogInViewController: UIViewController {
     private var viewModel: LoginViewModel
     private lazy var loginView = LoginView(delegate: self)
     
+    let background: UIImageView = {
+        
+        let back = UIImageView()
+        back.image = UIImage(named: "background")
+        back.translatesAutoresizingMaskIntoConstraints = false
+        return back
+        
+    }()
+    
     init(viewModel: LoginViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -35,10 +44,16 @@ class LogInViewController: UIViewController {
     }
 
     private func layout() {
-        
+        view.addSubview(background)
         view.addSubview(loginView)
         
         NSLayoutConstraint.activate([
+            
+            background.topAnchor.constraint(equalTo: view.topAnchor),
+            background.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            background.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            background.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
             loginView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             loginView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             loginView.topAnchor.constraint(equalTo: view.topAnchor),
