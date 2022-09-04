@@ -137,14 +137,14 @@ class LoginView: UIView {
                     button.alpha = 1
                 }
         return button
-        }()
+    }()
     
     private let spinnerView: UIActivityIndicatorView = {
-            let activityView: UIActivityIndicatorView = UIActivityIndicatorView(style: .large)
-                activityView.hidesWhenStopped = true
-                activityView.translatesAutoresizingMaskIntoConstraints = false
-                return activityView
-            }()
+        let activityView: UIActivityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
+        activityView.hidesWhenStopped = true
+        activityView.translatesAutoresizingMaskIntoConstraints = false
+        return activityView
+    }()
 
 
     init(delegate: LoginViewDelegate?) {
