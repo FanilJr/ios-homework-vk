@@ -8,6 +8,11 @@
 import Foundation
 import UIKit
 
+protocol LoginViewDelegate: AnyObject {
+    func didTapLogInButton()
+    func didTapCrackPasswordButton()
+}
+
 class LoginView: UIView {
 
     weak var delegate: LoginViewDelegate?
@@ -87,10 +92,8 @@ class LoginView: UIView {
     }()
 
     private let logInButton: CustomButton = {
-
-        let button = CustomButton()
-        button.setTitle("Log in", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        
+        let button = CustomButton(title: "Log In", titleColor: .white, backgroundColor: .blue)
         button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
@@ -110,13 +113,42 @@ class LoginView: UIView {
         return button
         
     }()
+    
+    private let crackPasswordButton: CustomButton = {
+
+        let button = CustomButton(title: "Подобрать пароль", titleColor: .white, backgroundColor: .blue)
+        button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        
+        switch button.state {
+                case .normal:
+                    button.alpha = 1
+                case .selected:
+                    button.alpha = 0.8
+                case .highlighted:
+                    button.alpha = 0.8
+                case .disabled:
+                    button.alpha = 0.8
+                default:
+                    button.alpha = 1
+                }
+        return button
+    }()
+    
+    private let spinnerView: UIActivityIndicatorView = {
+        let activityView: UIActivityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
+        activityView.hidesWhenStopped = true
+        activityView.translatesAutoresizingMaskIntoConstraints = false
+        return activityView
+    }()
 
 
     init(delegate: LoginViewDelegate?) {
         super.init(frame: CGRect.zero)
         
-        backgroundColor = .white
-        
+        backgroundColor = .clear
+        translatesAutoresizingMaskIntoConstraints = false
         self.delegate = delegate
         
         addObserver()
@@ -163,7 +195,11 @@ class LoginView: UIView {
     private func taps() {
         logInButton.tapAction = { [weak self] in
             self?.delegate?.didTapLogInButton()
-            
+        }
+        crackPasswordButton.tapAction = { [weak self] in
+                    guard let self = self else { return }
+                    self.waitingSpinnerEnable(true)
+                    self.delegate?.didTapCrackPasswordButton()
             
             
         }
@@ -180,47 +216,71 @@ class LoginView: UIView {
         passwordTextField.text!
         
     }
+    
+    func setPassword(password: String, isSecure: Bool) {
+            passwordTextField.isSecureTextEntry = isSecure
+            passwordTextField.text = password
+        }
+    
+    func waitingSpinnerEnable(_ active: Bool) {
+            if active {
+                spinnerView.startAnimating()
+            } else {
+                spinnerView.stopAnimating()
+            }
+        }
 
     private func layout() {
         
-        [logoImage, loginTextField, passwordTextField, logInButton].forEach { contentView.addSubview($0) }
-
+        [logoImage, loginTextField, passwordTextField, logInButton, crackPasswordButton, spinnerView].forEach { contentView.addSubview($0) }
         scrollView.addSubview(contentView)
         addSubview(scrollView)
-
-        logoImage.snp.makeConstraints { logo in
-            logo.top.equalTo(contentView.snp.top).offset(120)
-            logo.centerX.equalTo(contentView.snp.centerX)
-            logo.height.equalTo(100)
-            logo.width.equalTo(100) }
-
-        loginTextField.snp.makeConstraints { login in
-            login.top.equalTo(logoImage.snp.bottom).offset(120)
-            login.leading.equalTo(contentView.snp.leading).offset(16)
-            login.trailing.equalTo(contentView.snp.trailing).offset(-16)
-            login.height.equalTo(50) }
-
-        passwordTextField.snp.makeConstraints { passwrod in
-            passwrod.top.equalTo(loginTextField.snp.bottom)
-            passwrod.leading.equalTo(contentView.snp.leading).offset(16)
-            passwrod.trailing.equalTo(contentView.snp.trailing).offset(-16)
-            passwrod.height.equalTo(50) }
-
-        logInButton.snp.makeConstraints { button in
-            button.top.equalTo(passwordTextField.snp.bottom).offset(16)
-            button.leading.equalTo(contentView.snp.leading).offset(16)
-            button.trailing.equalTo(contentView.snp.trailing).offset(-16)
-            button.height.equalTo(50)
-            button.bottom.equalTo(contentView.snp.bottom) }
-
-        contentView.snp.makeConstraints { content in
-            content.edges.width.equalTo(scrollView) }
-
-        scrollView.snp.makeConstraints{ scroll in
-            scroll.edges.equalTo(safeAreaLayoutGuide) }
         
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            
+            logoImage.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 120),
+            logoImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            logoImage.heightAnchor.constraint(equalToConstant: 100),
+            logoImage.widthAnchor.constraint(equalToConstant: 100),
+            
+            loginTextField.topAnchor.constraint(equalTo: logoImage.bottomAnchor,constant: 120),
+            loginTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
+            loginTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
+            loginTextField.heightAnchor.constraint(equalToConstant: 50),
+            
+            passwordTextField.topAnchor.constraint(equalTo: loginTextField.bottomAnchor),
+            passwordTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
+            passwordTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 50),
+            
+            logInButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor,constant: 16),
+            logInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
+            logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
+            logInButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            crackPasswordButton.topAnchor.constraint(equalTo: logInButton.bottomAnchor,constant: 16),
+            crackPasswordButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
+            crackPasswordButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
+            crackPasswordButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            spinnerView.topAnchor.constraint(equalTo: crackPasswordButton.bottomAnchor,constant: 16),
+            spinnerView.centerXAnchor.constraint(equalTo: crackPasswordButton.centerXAnchor),
+            spinnerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+        ])
     }
 }
+
 
 extension LoginView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

@@ -60,9 +60,9 @@ class PostTableViewCell: UITableViewCell {
         image.isUserInteractionEnabled = true
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: "heart3")
-        
         image.clipsToBounds = true
         return image
+        
     }()
     
     private lazy var viewsLabel: UILabel = {
@@ -94,13 +94,8 @@ class PostTableViewCell: UITableViewCell {
     @objc func tapHeart() {
 
        if imageLike.image == UIImage(named: "heart3") {
-
            imageLike.image = UIImage(named: "heart2")
-
            likes.text = "Likes: \(String(1))"
-
-
-
            viewsLabel.text = "Views: \(String(1))"
 
        } else {
@@ -176,7 +171,6 @@ class PostTableViewCell: UITableViewCell {
         [postImage, authorName, descriptionLabel, likes, viewsLabel, imageLike].forEach { contentView.addSubview($0) }
         
         NSLayoutConstraint.activate([
-        
             authorName.topAnchor.constraint(equalTo: contentView.topAnchor),
             authorName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
             authorName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -194,24 +188,20 @@ class PostTableViewCell: UITableViewCell {
             //descriptionLabel.heightAnchor.constraint(equalToConstant: 25),
             
             imageLike.topAnchor.constraint(equalTo: postImage.bottomAnchor, constant: 16),
-            //imageLike.centerYAnchor.constraint(equalTo: descriptionLabel.centerYAnchor),
             imageLike.heightAnchor.constraint(equalToConstant: 20),
             imageLike.widthAnchor.constraint(equalToConstant: 20),
             imageLike.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
             
-           
             likes.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor),
             likes.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 14),
             likes.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             likes.heightAnchor.constraint(equalToConstant: 50),
             likes.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
-            
             viewsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor),
             viewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             viewsLabel.heightAnchor.constraint(equalToConstant: 50),
             viewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-            
         ])
     }
 }

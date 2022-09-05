@@ -12,8 +12,18 @@ class FeedViewController: UIViewController {
 
     let model: FeedModel
     var post = Postik(title: "Заголовок поста")
+    let splash = SplashView()
     lazy var feedView = FeedView(delegate: self)
     private var coordinator: FeedFlowCoordinator?
+    
+    let background: UIImageView = {
+        
+        let back = UIImageView()
+        back.image = UIImage(named: "background")
+        back.translatesAutoresizingMaskIntoConstraints = false
+        return back
+        
+    }()
 
     init(model: FeedModel, coordinator: FeedFlowCoordinator) {
         
@@ -47,14 +57,24 @@ class FeedViewController: UIViewController {
 
     private func layout() {
         
-        view.addSubview(feedView)
-        feedView.translatesAutoresizingMaskIntoConstraints = false
-        
+        [background,feedView,splash].forEach { view.addSubview($0) }
+
         NSLayoutConstraint.activate([
-            feedView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            feedView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            feedView.topAnchor.constraint(equalTo: view.topAnchor),
-            feedView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            
+            background.topAnchor.constraint(equalTo: view.topAnchor),
+            background.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            background.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            background.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            splash.topAnchor.constraint(equalTo: view.topAnchor),
+            splash.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            splash.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            splash.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            feedView.leadingAnchor.constraint(equalTo: background.leadingAnchor),
+            feedView.trailingAnchor.constraint(equalTo: background.trailingAnchor),
+            feedView.topAnchor.constraint(equalTo: background.topAnchor),
+            feedView.bottomAnchor.constraint(equalTo: background.bottomAnchor)
         ])
     }
 }

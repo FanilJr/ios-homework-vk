@@ -164,7 +164,6 @@ extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        // MARK: Анимация
         if lastRowDisplay > indexPath.row {
             
             cell.transform = CGAffineTransform(translationX: 0, y: -250)
