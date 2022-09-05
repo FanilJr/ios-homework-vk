@@ -61,7 +61,6 @@ class PhotosTableViewCell: UITableViewCell {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: "CustomCollectionViewCell")
         return collectionView
-            
     }()
     
     private func layout() {
@@ -69,7 +68,6 @@ class PhotosTableViewCell: UITableViewCell {
         [label, button, collectionViews].forEach { contentView.addSubview($0) }
                             
         NSLayoutConstraint.activate([
-                
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
                 
@@ -83,7 +81,6 @@ class PhotosTableViewCell: UITableViewCell {
             collectionViews.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             collectionViews.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
             collectionViews.heightAnchor.constraint(equalToConstant: 100)
-                
         ])
     }
 }

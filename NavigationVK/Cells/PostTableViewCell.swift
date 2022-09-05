@@ -13,66 +13,52 @@ class PostTableViewCell: UITableViewCell {
     
     
     private lazy var postImage: UIImageView = {
-        
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
-        
     }()
     
     private lazy var authorName: UILabel = {
-        
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 20.0, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
-        
     }()
     
     private lazy var descriptionLabel: UILabel = {
-        
         let label = UILabel()
         label.textColor = .gray
         label.font = UIFont.systemFont(ofSize: 14.0, weight: .light)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
-        
     }()
     
     private lazy var likes: UILabel = {
-        
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 16.0)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
-        
     }()
-    
-    var likesInt: Int = 5
-    
+
     lazy var imageLike: UIImageView = {
-        
         let image = UIImageView()
         image.isUserInteractionEnabled = true
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: "heart3")
         image.clipsToBounds = true
         return image
-        
     }()
     
     private lazy var viewsLabel: UILabel = {
-        
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 16.0)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
-        
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -97,15 +83,11 @@ class PostTableViewCell: UITableViewCell {
            imageLike.image = UIImage(named: "heart2")
            likes.text = "Likes: \(String(1))"
            viewsLabel.text = "Views: \(String(1))"
-
        } else {
-
            imageLike.image = UIImage(named: "heart3")
            likes.text = "Likes: \(String(0))"
-
        }
        print("tap heart ❤️")
-
     }
     
     func setupCell(_ model: PostStruct) {

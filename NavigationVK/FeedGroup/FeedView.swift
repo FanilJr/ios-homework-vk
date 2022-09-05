@@ -18,87 +18,31 @@ final class FeedView: UIView {
     private let nc = NotificationCenter.default
     
     private let scrollView: UIScrollView = {
-
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .clear
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
-        
     }()
 
     private let contentView: UIView = {
-
         let contentView = UIView()
         contentView.backgroundColor = .clear
         contentView.translatesAutoresizingMaskIntoConstraints = false
         return contentView
-        
     }()
     
-    
     private let postButtonFirst: CustomButton = {
-        
-        let button = CustomButton(title: "Первая кнопка", titleColor: .white, backgroundColor: .blue)
-        button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
-        
-        switch button.state {
-                case .normal:
-                    button.alpha = 1
-                case .selected:
-                    button.alpha = 0.8
-                case .highlighted:
-                    button.alpha = 0.8
-                case .disabled:
-                    button.alpha = 0.8
-                default:
-                    button.alpha = 1
-                }
+        let button = CustomButton(title: "Первая кнопка", titleColor: .white, backgroundColor: .blue, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
         return button
     }()
     
     private let postButtonSecond: CustomButton = {
-        
-        let button = CustomButton(title: "Вторая кнопка", titleColor: .white, backgroundColor: .blue)
-        button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
-        
-        switch button.state {
-                case .normal:
-                    button.alpha = 1
-                case .selected:
-                    button.alpha = 0.8
-                case .highlighted:
-                    button.alpha = 0.8
-                case .disabled:
-                    button.alpha = 0.8
-                default:
-                    button.alpha = 1
-                }
+        let button = CustomButton(title: "Вторая кнопка", titleColor: .white, backgroundColor: .blue, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
         return button
     }()
     
     private let notificationButton: CustomButton = {
-        
-        let button = CustomButton(title: "Кнопка проверки", titleColor: .white, backgroundColor: .blue)
-        button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
-        
-        switch button.state {
-                case .normal:
-                    button.alpha = 1
-                case .selected:
-                    button.alpha = 0.8
-                case .highlighted:
-                    button.alpha = 0.8
-                case .disabled:
-                    button.alpha = 0.8
-                default:
-                    button.alpha = 1
-                }
+        let button = CustomButton(title: "Кнопка проверки", titleColor: .white, backgroundColor: .blue, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
         return button
     }()
     
@@ -108,26 +52,22 @@ final class FeedView: UIView {
         textfield.placeholder = "пароль: junior"
         textfield.translatesAutoresizingMaskIntoConstraints = false
         return textfield
-        
     }()
+    
     private let resultLabel: UILabel = {
-        
         let label = UILabel()
         label.text = ""
         label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
-        
         return label
     }()
     
     private let stackView: UIStackView = {
-        
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
         stackView.spacing = 5
-        
         return stackView
     }()
     
@@ -171,10 +111,8 @@ final class FeedView: UIView {
     }
 
     @objc func kdbHide() {
-        
         scrollView.contentInset.bottom = .zero
         scrollView.verticalScrollIndicatorInsets = .zero
-        
     }
 
     private func taps() {

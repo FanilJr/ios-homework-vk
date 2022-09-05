@@ -15,24 +15,20 @@ class ProfileViewController: UIViewController {
     var lastRowDisplay = 0
     
     let background: UIImageView = {
-        
         let back = UIImageView()
         back.translatesAutoresizingMaskIntoConstraints = false
         return back
-        
     }()
 
     /// ВАЖНО!!! задал .insetGroup, чтобы корнер радиус применился к всем ячейкам автоматически, но при этом нельзя применить конкретно к тейбл вью корнер радиус, если поставить .grouped, тогда можно для тейбл вью поставить cornerRadius и задать конкретно к ячейкам например "if indexPath.row == 0 maskedCorner" и не забыть вернуть констрейнты с отступами лево и право тейбл вью
 
     private lazy var tableView: UITableView = {
-       
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .clear
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostTableViewCell")
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosTableViewCell")
         return tableView
-       
     }()
     
     /// Создаём свойства, которое принимает метод поста и свойство принимающее массив ячеек
@@ -54,35 +50,28 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "Профиль"
         setupTableView()
-        
         tableView.dataSource = self
         tableView.delegate = self
         
-        #if DEBUG
+    #if DEBUG
         background.image = UIImage(named: "background")
-        #else
+    #else
         background.image = UIImage(named: "background4")
-        #endif
+    #endif
 
-        print("как работает DidLoad")
-    
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationController?.navigationBar.isHidden = true
-        
-        print("как работает WillAppear")
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        print("как работает DidAppear")
-
     }
    
     func setupTableView() {
@@ -117,16 +106,12 @@ extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         switch section {
-            
         case 0:
             return 1
-            
         case 1:
             return post.count
-            
         default:
             return 0
-            
         }
     }
 
@@ -165,11 +150,9 @@ extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         if lastRowDisplay > indexPath.row {
-            
             cell.transform = CGAffineTransform(translationX: 0, y: -250)
         } else {
             cell.transform = CGAffineTransform(translationX: 0, y: 250)
-
         }
 
         lastRowDisplay = indexPath.row
@@ -199,13 +182,10 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate {
         PHView.setupView(user: userService.getUser(userName: userName))
         
         switch section {
-            
         case 0:
             return PHView
-            
         case 1:
             return nil
-            
         default:
             return UIView()
             
@@ -219,9 +199,7 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate {
            print("перезагрузка аватарки")
        }))
        alert.addAction(UIAlertAction(title: "Закрыть", style: .destructive, handler: nil))
-       
        self.present(alert, animated: true, completion: nil)
-       
        print("нажатие в ProfileViewController - delegate")
 
     }
@@ -229,16 +207,12 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         switch section {
-            
         case 0:
             return UITableView.automaticDimension
-            
         case 1:
             return 0
-            
         default:
             return 0
-            
     }
 }
     

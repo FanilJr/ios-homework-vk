@@ -19,32 +19,25 @@ class LoginView: UIView {
     private let nc = NotificationCenter.default
 
     private let scrollView: UIScrollView = {
-
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
-        
     }()
 
     private let contentView: UIView = {
-
         let contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
         return contentView
-        
     }()
 
     private let logoImage: UIImageView = {
-
         let image = UIImageView()
         image.image = UIImage(named: "vk")
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
-        
     }()
 
     private lazy var loginTextField: UITextField = {
-
         let textField = UITextField()
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
@@ -64,11 +57,9 @@ class LoginView: UIView {
         textField.rightView = UIView(frame:CGRect(x:0, y:0, width:10, height:textField.frame.height))
         textField.rightViewMode = .always
         return textField
-        
     }()
 
     private lazy var passwordTextField: UITextField = {
-
         let textField = UITextField()
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
@@ -88,51 +79,15 @@ class LoginView: UIView {
         textField.rightView = UIView(frame:CGRect(x:0, y:0, width:10, height:textField.frame.height))
         textField.rightViewMode = .always
         return textField
-        
     }()
 
     private let logInButton: CustomButton = {
-        
-        let button = CustomButton(title: "Log In", titleColor: .white, backgroundColor: .blue)
-        button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
-        
-        switch button.state {
-                case .normal:
-                    button.alpha = 1
-                case .selected:
-                    button.alpha = 0.8
-                case .highlighted:
-                    button.alpha = 0.8
-                case .disabled:
-                    button.alpha = 0.8
-                default:
-                    button.alpha = 1
-                }
+        let button = CustomButton(title: "Log In", titleColor: .white, backgroundColor: .blue,setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
         return button
-        
     }()
     
     private let crackPasswordButton: CustomButton = {
-
-        let button = CustomButton(title: "Подобрать пароль", titleColor: .white, backgroundColor: .blue)
-        button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
-        
-        switch button.state {
-                case .normal:
-                    button.alpha = 1
-                case .selected:
-                    button.alpha = 0.8
-                case .highlighted:
-                    button.alpha = 0.8
-                case .disabled:
-                    button.alpha = 0.8
-                default:
-                    button.alpha = 1
-                }
+        let button = CustomButton(title: "Подобрать пароль", titleColor: .white, backgroundColor: .blue, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
         return button
     }()
     
