@@ -18,16 +18,16 @@ class PhotosViewController: UIViewController {
     
     private lazy var collectionView: UICollectionView = {
             
-            let layout = UICollectionViewFlowLayout()
+        let layout = UICollectionViewFlowLayout()
             
-            let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-            collectionView.dataSource = self
-            collectionView.delegate = self
-            collectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: "PhotosCollectionViewCell")
-            collectionView.translatesAutoresizingMaskIntoConstraints = false
-            return collectionView
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: "PhotosCollectionViewCell")
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        return collectionView
             
-        }()
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,8 +43,8 @@ class PhotosViewController: UIViewController {
                 self.collectionView.reloadData()
             }
         print("Изображения были обработаны в течении \(Date().timeIntervalSince(self.startTime)) секунд")
+        }
     }
-}
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -113,7 +113,7 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
         UIEdgeInsets(top: interSpace, left: interSpace, bottom: interSpace, right: interSpace)
-        
+
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

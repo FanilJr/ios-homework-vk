@@ -92,10 +92,8 @@ class LoginView: UIView {
     }()
 
     private let logInButton: CustomButton = {
-
-        let button = CustomButton()
-        button.setTitle("Log in", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        
+        let button = CustomButton(title: "Log In", titleColor: .white, backgroundColor: .blue)
         button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
@@ -118,8 +116,7 @@ class LoginView: UIView {
     
     private let crackPasswordButton: CustomButton = {
 
-        let button = CustomButton()
-        button.setTitle("Подобрать пароль", for: .normal)
+        let button = CustomButton(title: "Подобрать пароль", titleColor: .white, backgroundColor: .blue)
         button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         button.layer.cornerRadius = 10
         button.clipsToBounds = true

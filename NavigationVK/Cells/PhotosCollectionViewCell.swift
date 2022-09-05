@@ -10,8 +10,6 @@ import UIKit
 
 class PhotosCollectionViewCell: UICollectionViewCell {
     
-    //    MARK: - Инициализатор
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -32,8 +30,6 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         
     }()
     
-//    MARK: - Настройка
-    
     private func setupCell() {
         
         addSubview(image)
@@ -50,9 +46,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         clipsToBounds = true
         
     }
-    
-//    MARK: - Функция наполнения
-    
+ 
     func pullCell(photo: UIImage) {
         
         image.image = photo

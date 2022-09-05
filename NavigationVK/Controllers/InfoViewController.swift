@@ -8,8 +8,7 @@
 import UIKit
 
 class InfoViewController: UIViewController {
-    
-    /// Создание кпоки алерта
+
     let alertButton: UIButton = {
         
         let button = UIButton()
@@ -31,34 +30,29 @@ class InfoViewController: UIViewController {
         alertConstr()
     }
     
-    /// Метод вызова алерта
-        @objc func buttonAlert() {
+    @objc func buttonAlert() {
             
-            let alert = UIAlertController(title: "Внимание", message: "Редактирование запрещено", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Внимание", message: "Редактирование запрещено", preferredStyle: .alert)
             
-            let alertOk = UIAlertAction(title: "OK", style: .default, handler: nil)
-            let alertCancel = UIAlertAction(title: "Закрыть", style: .destructive, handler: {_ in
-                print("проверяем алерт")
-                self.dismiss(animated: true)
-            })
+        let alertOk = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let alertCancel = UIAlertAction(title: "Закрыть", style: .destructive, handler: {_ in
+        print("проверяем алерт")
+        self.dismiss(animated: true)
+    })
 
-            [alertOk, alertCancel].forEach { alert.addAction($0) }
-            self.present(alert, animated: true, completion: nil)
-
+        [alertOk, alertCancel].forEach { alert.addAction($0) }
+        self.present(alert, animated: true, completion: nil)
     }
     
-    /// Установка констрейнтов кнопки
-        func alertConstr() {
+    func alertConstr() {
             
-            view.addSubview(alertButton)
+        view.addSubview(alertButton)
             
-            NSLayoutConstraint.activate([
-                
-                alertButton.widthAnchor.constraint(equalToConstant: 150),
-                alertButton.heightAnchor.constraint(equalToConstant: 50),
-                alertButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-                alertButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
-                
+        NSLayoutConstraint.activate([
+            alertButton.widthAnchor.constraint(equalToConstant: 150),
+            alertButton.heightAnchor.constraint(equalToConstant: 50),
+            alertButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            alertButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
         ])
     }
 }

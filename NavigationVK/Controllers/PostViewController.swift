@@ -14,18 +14,15 @@ class PostViewController: UIViewController {
         
         view.backgroundColor = .blue
         
-        /// Создание кнопки на Navigation Bar - edit
         let myButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(tapButton))
         
         navigationItem.title = "Пост"
         navigationItem.rightBarButtonItem = myButton
 
     }
-    /// Метод вызова InfoViewController
     @objc func tapButton() {
         
         let infoViewController = InfoViewController()
         present(infoViewController, animated: true, completion: nil)
-        
     }
 }

@@ -38,17 +38,10 @@ final class FeedView: UIView {
     
     private let postButtonFirst: CustomButton = {
         
-        let button = CustomButton()
-        button.setTitle("Первая кнопка", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        let button = CustomButton(title: "Первая кнопка", titleColor: .white, backgroundColor: .blue)
         button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
-        button.layer.cornerRadius = 12
-        button.layer.shadowRadius = 4
-        button.layer.shadowOpacity = 0.7
+        button.layer.cornerRadius = 10
         button.clipsToBounds = true
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.translatesAutoresizingMaskIntoConstraints = false
         
         switch button.state {
                 case .normal:
@@ -62,23 +55,15 @@ final class FeedView: UIView {
                 default:
                     button.alpha = 1
                 }
-        
         return button
     }()
     
     private let postButtonSecond: CustomButton = {
         
-        let button = CustomButton()
-        button.setTitle("Вторая кнопка", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        let button = CustomButton(title: "Вторая кнопка", titleColor: .white, backgroundColor: .blue)
         button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
-        button.layer.cornerRadius = 12
-        button.layer.shadowRadius = 4
-        button.layer.shadowOpacity = 0.7
+        button.layer.cornerRadius = 10
         button.clipsToBounds = true
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.translatesAutoresizingMaskIntoConstraints = false
         
         switch button.state {
                 case .normal:
@@ -92,23 +77,15 @@ final class FeedView: UIView {
                 default:
                     button.alpha = 1
                 }
-        
         return button
     }()
     
     private let notificationButton: CustomButton = {
         
-        let button = CustomButton()
-        button.setTitle("Кнопка проверки", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        let button = CustomButton(title: "Кнопка проверки", titleColor: .white, backgroundColor: .blue)
         button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
+        button.layer.cornerRadius = 10
         button.clipsToBounds = true
-        button.layer.cornerRadius = 12
-        button.layer.shadowRadius = 4
-        button.layer.shadowOpacity = 0.7
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.translatesAutoresizingMaskIntoConstraints = false
         
         switch button.state {
                 case .normal:
@@ -122,7 +99,6 @@ final class FeedView: UIView {
                 default:
                     button.alpha = 1
                 }
-        
         return button
     }()
     
