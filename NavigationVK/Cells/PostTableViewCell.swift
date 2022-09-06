@@ -69,14 +69,12 @@ class PostTableViewCell: UITableViewCell {
         let gesture = UITapGestureRecognizer()
         gesture.addTarget(self, action: #selector (tapHeart))
         imageLike.addGestureRecognizer(gesture)
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-        
-        
     }
+    
     @objc func tapHeart() {
 
        if imageLike.image == UIImage(named: "heart3") {

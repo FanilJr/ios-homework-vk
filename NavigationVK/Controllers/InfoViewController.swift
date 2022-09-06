@@ -10,7 +10,6 @@ import UIKit
 class InfoViewController: UIViewController {
 
     let alertButton: CustomButton = {
-        
         let button = CustomButton(title: "Перейти на алерт", titleColor: .white, backgroundColor: .blue, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
         return button
     }()
@@ -24,16 +23,15 @@ class InfoViewController: UIViewController {
     }
     
     func buttonAlert() {
+        
         alertButton.tapAction = { [weak self] in
             
             let alert = UIAlertController(title: "Внимание", message: "Редактирование запрещено", preferredStyle: .alert)
-            
             let alertOk = UIAlertAction(title: "OK", style: .default, handler: nil)
             let alertCancel = UIAlertAction(title: "Закрыть", style: .destructive, handler: {_ in
                 print("проверяем алерт")
                 self?.dismiss(animated: true)
             })
-            
             [alertOk, alertCancel].forEach { alert.addAction($0) }
             self?.present(alert, animated: true, completion: nil)
         }

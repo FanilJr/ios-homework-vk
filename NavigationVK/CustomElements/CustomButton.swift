@@ -43,11 +43,10 @@ final class CustomButton: UIButton {
                     alpha = 0.8
                 default:
                     alpha = 1
-            }
+        }
     }
 
     @objc private func buttonTapped() {
         tapAction?()
     }
-
 }

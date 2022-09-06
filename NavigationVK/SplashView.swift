@@ -10,29 +10,24 @@ import UIKit
 final class SplashView: UIView {
     
     let background: UIImageView = {
-        
         let background = UIImageView()
         background.image = UIImage(named: "background3")
         background.contentMode = .scaleAspectFill
         background.translatesAutoresizingMaskIntoConstraints = false
         return background
-        
     }()
     
     let vkLogo: UIImageView = {
-        
         let image = UIImageView()
         image.image = UIImage(named: "vk")
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
-        
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         translatesAutoresizingMaskIntoConstraints = false
-
         layout()
         animated()
         dismissed()
@@ -70,6 +65,5 @@ final class SplashView: UIView {
         UIView.animate(withDuration: 1.2, animations: {
             self.alpha = 0.0
         })
-        
     }
 }

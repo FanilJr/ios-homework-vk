@@ -4,7 +4,7 @@
 //
 //  Created by Fanil_Jr on 20.08.2022.
 //
-
+import AVFoundation
 import UIKit
 
 protocol MyClassDelegate: AnyObject {
@@ -16,6 +16,7 @@ final class ProfileHeaderView: UIView {
         weak var delegate: MyClassDelegate?
 
         private var statusText: String = ""
+        let systemSoundID: SystemSoundID = 1016
         
         lazy var avatarImageView: UIImageView = {
         let avatarImageView = UIImageView()
@@ -60,18 +61,10 @@ final class ProfileHeaderView: UIView {
         return statusLabel
     }()
         
-    private let statusTextField: UITextField = {
-        let statusTextField = UITextField()
-        statusTextField.placeholder = "Введите статус"
-        statusTextField.textColor = .black
-        statusTextField.font = .systemFont(ofSize: 15, weight: .regular)
-        statusTextField.borderStyle = .roundedRect
-        statusTextField.clipsToBounds = true
-        statusTextField.layer.borderWidth = 1
-        statusTextField.layer.borderColor = UIColor.black.cgColor
+    private let statusTextField: CustomTextField = {
+        let statusTextField = CustomTextField(placeholder: "Введите статус", textColor: .black, font: UIFont.systemFont(ofSize: 15, weight: .regular))
         statusTextField.layer.cornerRadius = 12
         statusTextField.layer.backgroundColor = UIColor.white.cgColor
-        statusTextField.translatesAutoresizingMaskIntoConstraints = false
         return statusTextField
     }()
         
@@ -122,7 +115,10 @@ final class ProfileHeaderView: UIView {
     }
         
     private func tap() {
+        
         setStatusButton.tapAction =  { [weak self] in
+            
+            AudioServicesPlaySystemSound(self!.systemSoundID)
             
             let bounds = self?.setStatusButton.bounds
             let bonds = self?.statusLabel.bounds
@@ -165,30 +161,23 @@ final class ProfileHeaderView: UIView {
         snp()
         tapScreen()
         tap()
-            
     }
         
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-        
     }
 }
 
 extension ProfileHeaderView {
     
     func tapScreen() {
-        
         let recognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         recognizer.cancelsTouchesInView = false
-        
         addGestureRecognizer(recognizer)
-        
     }
 
     @objc func dismissKeyboard() {
-        
         endEditing(true)
-        
     }
 }
 

@@ -89,11 +89,8 @@ class ProfileViewController: UIViewController {
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        
     }
 }
-
-//    MARK: - Расширение UITableViewDataSource
 
 extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
     
@@ -163,9 +160,6 @@ extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
         
     }
 }
-
-
-//    MARK: - Расширение UITableViewDelegate
 
 extension ProfileViewController: UITableViewDelegate, MyClassDelegate {
     

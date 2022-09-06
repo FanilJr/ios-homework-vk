@@ -9,13 +9,13 @@ import Foundation
 import UIKit
 
 final class LoginViewModel {
+    
     private let loginInspector: LoginInspector
     private let coordinator: ProfileFlowCoordinator
    
     init(loginFactory: LoginFactory, coordinator: ProfileFlowCoordinator) {
         self.loginInspector = loginFactory.makeLoginInspector()
         self.coordinator = coordinator
-    
     }
     
     required init?(coder: NSCoder) {

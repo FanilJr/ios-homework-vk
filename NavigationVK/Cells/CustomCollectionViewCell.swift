@@ -9,6 +9,13 @@ import UIKit
 
 class CustomCollectionViewCell: UICollectionViewCell {
     
+    private let image: UIImageView = {
+        let image = UIImageView()
+        image.contentMode = .scaleAspectFill
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -18,15 +25,6 @@ class CustomCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    private let image: UIImageView = {
-        
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFill
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-        
-    }()
 
     private func setupCell() {
         
