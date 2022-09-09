@@ -31,7 +31,7 @@ final class FeedView: UIView {
         return contentView
     }()
     
-    private let firstPost: UIImageView = {
+    let firstPost: UIImageView = {
         let post = UIImageView()
         post.image = UIImage(named: "heart2")
         post.layer.cornerRadius = 10
@@ -145,10 +145,16 @@ final class FeedView: UIView {
 
     private func taps() {
         postButtonFirst.tapAction = { [weak self] in
+            
             self?.delegate?.didTapPostButton()
+            
+            let postFirst = PostViewController()
+            postFirst.image.image = UIImage(named: "heart2")
         }
+            
         postButtonSecond.tapAction = { [weak self] in
             self?.delegate?.didTapPostButton()
+            
         }
         notificationButton.tapAction = { [weak self] in
             self?.delegate?.check(word: self?.textField.text ?? "")
