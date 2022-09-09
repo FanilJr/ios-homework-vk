@@ -34,8 +34,9 @@ final class FeedView: UIView {
     
     let firstPost: UIImageView = {
         let post = UIImageView()
-        post.image = UIImage(named: "heart2")
+        post.image = UIImage(named: "heart5")
         post.layer.cornerRadius = 10
+        post.contentMode = .scaleAspectFill
         post.layer.borderWidth = 1
         post.clipsToBounds = true
         post.layer.borderColor = UIColor.gray.cgColor

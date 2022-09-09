@@ -24,15 +24,13 @@ final class FeedFlowCoordinator {
         vc.title = title
         navCon.pushViewController(vc, animated: true)
         
-        vc.image.image = UIImage(named: "heart2")
+        vc.image.image = UIImage(named: "heart5")
     }
     
     func showSecondPost(title: String) {
         let vc = SecondPostViewController()
         vc.title = title
         navCon.pushViewController(vc, animated: true)
-        
         vc.image.image = UIImage(named: "heart4")
-        vc.image
     }
 }
