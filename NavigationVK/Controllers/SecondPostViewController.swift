@@ -1,13 +1,13 @@
 //
-//  PostViewController.swift
+//  SecondPostViewController.swift
 //  NavigationVK
 //
-//  Created by Fanil_Jr on 21.08.2022.
+//  Created by Fanil_Jr on 09.09.2022.
 //
 
 import UIKit
 
-class PostViewController: UIViewController {
+class SecondPostViewController: UIViewController {
     
     var image: UIImageView = {
         let image = UIImageView()
@@ -37,7 +37,7 @@ class PostViewController: UIViewController {
     let labelView: UILabel = {
         
         let label = UILabel()
-        label.text = "Притча о Счастье:"
+        label.text = "Притча об оскорблениях:"
         label.backgroundColor = .white
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -49,14 +49,8 @@ class PostViewController: UIViewController {
         
         let label = UILabel()
         label.text = #"""
-        Однаждый три брата увидели Счастье, сидящее в яме. Один из братьев подошел к яме и попросил у Счастья денег. \#n
-        Счастье одарило его деньгами, и он ушел счастливый. \#n
-        Другой брат попросил красивую женщину. Тут же получил и убежал вместе с ней вне себя от счастья. \#n
-        Третий брат наклонился над ямой: \#n
-        - Что тебе нужно? - спросило Счастье. \#n
-        - А тебе что нужно? - спросил брат. \#n
-        - Вытащи меня отсюда. - попросило Счастье. \#n
-        Брат протянул руку, вытащил Счастье из ямы, повернулся и пошел прочь. А Счастье пошло за ним следом
+        На востоке жил мудрец, который так учил своих учеников: 'Люди оскорбляют тремя способами: ои могут сказать что ты глуп, могут назвать тебя рабом, могут назвать тебя бездарным. Если такое случилось с вами вспомните простую истину: только дурак назовет дураком другого, только раб ищет раба в другом, только бездарь чужим безумием оправдает то, что не понимает сам. \#n
+        Мораль: чем ниже интеллект, тем громче оскорбления!
         """#
         label.numberOfLines = 0
         label.backgroundColor = .white
@@ -71,7 +65,7 @@ class PostViewController: UIViewController {
         
         view.backgroundColor = .white
         let myButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(tapButton))
-        navigationItem.title = "Притча о Счастье"
+        navigationItem.title = "Притча об оскорблениях"
         navigationItem.rightBarButtonItem = myButton
         setup()
 
@@ -121,4 +115,3 @@ class PostViewController: UIViewController {
         ])
     }
 }
-

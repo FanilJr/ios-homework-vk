@@ -85,4 +85,7 @@ extension FeedViewController: FeedViewDelegate {
     func check(word: String) {
         model.check(word: word)
     }
+    func didTapSecondPostButton() {
+        coordinator?.showSecondPost(title: post.title)
+    }
 }

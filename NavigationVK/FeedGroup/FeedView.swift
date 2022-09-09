@@ -10,6 +10,7 @@ import UIKit
 protocol FeedViewDelegate: AnyObject {
     func didTapPostButton()
     func check(word: String)
+    func didTapSecondPostButton()
 }
 
 final class FeedView: UIView {
@@ -57,14 +58,14 @@ final class FeedView: UIView {
     }()
     
     private let postButtonFirst: CustomButton = {
-        let button = CustomButton(title: "Перейти на пост FirstHeart", titleColor: .white, backgroundColor: .blue, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
+        let button = CustomButton(title: "Перейти на пост First Heart", titleColor: .white, backgroundColor: .blue, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
             button.layer.cornerRadius = 10
             button.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         return button
     }()
     
     private let postButtonSecond: CustomButton = {
-        let button = CustomButton(title: "Перейти на пост SecondHeart", titleColor: .white, backgroundColor: .blue, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
+        let button = CustomButton(title: "Перейти на пост Second Heart", titleColor: .white, backgroundColor: .blue, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
             button.layer.cornerRadius = 10
             button.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         return button
@@ -145,16 +146,11 @@ final class FeedView: UIView {
 
     private func taps() {
         postButtonFirst.tapAction = { [weak self] in
-            
             self?.delegate?.didTapPostButton()
-            
-            let postFirst = PostViewController()
-            postFirst.image.image = UIImage(named: "heart2")
         }
             
         postButtonSecond.tapAction = { [weak self] in
-            self?.delegate?.didTapPostButton()
-            
+            self?.delegate?.didTapSecondPostButton()
         }
         notificationButton.tapAction = { [weak self] in
             self?.delegate?.check(word: self?.textField.text ?? "")
