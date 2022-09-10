@@ -12,14 +12,6 @@ protocol MyClassDelegateTwo: AnyObject {
 }
 
 class PhotosTableViewCell: UITableViewCell {
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        layout()
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
             
     weak var tuchNew: MyClassDelegateTwo?
         
@@ -30,7 +22,6 @@ class PhotosTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 24, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
-        
     }()
         
     private let button: UIButton = {
@@ -45,6 +36,15 @@ class PhotosTableViewCell: UITableViewCell {
         button.addTarget(self, action: #selector(tuch), for: .touchUpInside)
         return button
     }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        layout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     @objc private func tuch() {
         print("tuch по кнопке из TableViewCell")
@@ -61,7 +61,6 @@ class PhotosTableViewCell: UITableViewCell {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: "CustomCollectionViewCell")
         return collectionView
-            
     }()
     
     private func layout() {
@@ -69,7 +68,6 @@ class PhotosTableViewCell: UITableViewCell {
         [label, button, collectionViews].forEach { contentView.addSubview($0) }
                             
         NSLayoutConstraint.activate([
-                
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
                 
@@ -83,7 +81,6 @@ class PhotosTableViewCell: UITableViewCell {
             collectionViews.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             collectionViews.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
             collectionViews.heightAnchor.constraint(equalToConstant: 100)
-                
         ])
     }
 }

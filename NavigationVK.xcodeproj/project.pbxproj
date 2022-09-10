@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		28015111DD74605673D1851E /* Pods_NavigationVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4574B7AADB0435BFE9C2B59E /* Pods_NavigationVK.framework */; };
 		745753AE25C351709747F102 /* Pods_StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D802B4B410A82F08CFC7D4F /* Pods_StorageService.framework */; };
+		8403230128C679EC009BCD8E /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403230028C679EC009BCD8E /* MainTabBarController.swift */; };
 		84061DEA28B161FE00B5AB47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84061DE928B161FE00B5AB47 /* AppDelegate.swift */; };
 		84061DEC28B161FE00B5AB47 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84061DEB28B161FE00B5AB47 /* SceneDelegate.swift */; };
 		84061DF328B1620600B5AB47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84061DF228B1620600B5AB47 /* Assets.xcassets */; };
@@ -38,9 +39,10 @@
 		8444AA6228B4B859005BB8FF /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444AA6128B4B859005BB8FF /* LoginFactory.swift */; };
 		8444AA6428B4B891005BB8FF /* MyLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444AA6328B4B891005BB8FF /* MyLoginFactory.swift */; };
 		8444AA6628B4B90A005BB8FF /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444AA6528B4B90A005BB8FF /* TestUserService.swift */; };
+		845CF25228CB955800EECCAF /* SecondPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845CF25128CB955800EECCAF /* SecondPostViewController.swift */; };
 		847409A128C36E6F00CBA34A /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847409A028C36E6F00CBA34A /* SplashView.swift */; };
+		8490560C28C923A600EC473B /* PostNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8490560B28C923A600EC473B /* PostNavigation.swift */; };
 		849C7B4028B7B2CD008B0030 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 849C7B3F28B7B2CD008B0030 /* iOSIntPackage */; };
-		84C5FFB028B5010300C01CC9 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5FFAF28B5010300C01CC9 /* MainTabBarController.swift */; };
 		84C5FFB228B5040300C01CC9 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5FFB128B5040300C01CC9 /* CustomButton.swift */; };
 		84CA386728C095E100EECD6D /* ControllersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CA386628C095E100EECD6D /* ControllersFactory.swift */; };
 		84CA386928C0965400EECD6D /* FeedFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CA386828C0965400EECD6D /* FeedFlowCoordinator.swift */; };
@@ -85,6 +87,7 @@
 		1D802B4B410A82F08CFC7D4F /* Pods_StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4574B7AADB0435BFE9C2B59E /* Pods_NavigationVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NavigationVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F39101FFDCE5E2B70EE8808 /* Pods-StorageService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorageService.debug.xcconfig"; path = "Target Support Files/Pods-StorageService/Pods-StorageService.debug.xcconfig"; sourceTree = "<group>"; };
+		8403230028C679EC009BCD8E /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		84061DE628B161FE00B5AB47 /* NavigationVK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NavigationVK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84061DE928B161FE00B5AB47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84061DEB28B161FE00B5AB47 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,8 +118,9 @@
 		8444AA6128B4B859005BB8FF /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		8444AA6328B4B891005BB8FF /* MyLoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLoginFactory.swift; sourceTree = "<group>"; };
 		8444AA6528B4B90A005BB8FF /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
+		845CF25128CB955800EECCAF /* SecondPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondPostViewController.swift; sourceTree = "<group>"; };
 		847409A028C36E6F00CBA34A /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
-		84C5FFAF28B5010300C01CC9 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		8490560B28C923A600EC473B /* PostNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostNavigation.swift; sourceTree = "<group>"; };
 		84C5FFB128B5040300C01CC9 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		84CA386628C095E100EECD6D /* ControllersFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllersFactory.swift; sourceTree = "<group>"; };
 		84CA386828C0965400EECD6D /* FeedFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -193,6 +197,7 @@
 				84CA387328C0A25E00EECD6D /* ProfileGroup */,
 				849D70A028B6394400CE6807 /* Scene */,
 				849D709F28B6383F00CE6807 /* Users */,
+				8490560B28C923A600EC473B /* PostNavigation.swift */,
 			);
 			path = NavigationVK;
 			sourceTree = "<group>";
@@ -203,6 +208,7 @@
 				84061E1628B16A5900B5AB47 /* PhotosViewController.swift */,
 				84061E0A28B1690D00B5AB47 /* InfoViewController.swift */,
 				84061E0C28B1692D00B5AB47 /* PostViewController.swift */,
+				845CF25128CB955800EECCAF /* SecondPostViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -237,9 +243,9 @@
 				84CA386628C095E100EECD6D /* ControllersFactory.swift */,
 				84061E1028B169D700B5AB47 /* Photos.swift */,
 				84061E1428B16A3100B5AB47 /* PostStruct.swift */,
-				84C5FFAF28B5010300C01CC9 /* MainTabBarController.swift */,
 				84CF1A3928BCBD0F000FF0D8 /* NotificationName.swift */,
 				84CA387828C324B400EECD6D /* ExtensionPassword.swift */,
+				8403230028C679EC009BCD8E /* MainTabBarController.swift */,
 			);
 			path = "Extensions-Struct-Other";
 			sourceTree = "<group>";
@@ -500,10 +506,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8490560C28C923A600EC473B /* PostNavigation.swift in Sources */,
 				84061E1128B169D700B5AB47 /* Photos.swift in Sources */,
 				8444AA6028B4B76E005BB8FF /* Checker.swift in Sources */,
 				84CF1A3A28BCBD0F000FF0D8 /* NotificationName.swift in Sources */,
-				84C5FFB028B5010300C01CC9 /* MainTabBarController.swift in Sources */,
 				847409A128C36E6F00CBA34A /* SplashView.swift in Sources */,
 				84CA386B28C096A400EECD6D /* ProfileFlowCoordinator.swift in Sources */,
 				84061E0328B167C800B5AB47 /* LoginViewController.swift in Sources */,
@@ -511,7 +517,9 @@
 				84061E1B28B16AEA00B5AB47 /* PostTableViewCell.swift in Sources */,
 				84CA387128C09F5500EECD6D /* LoginView.swift in Sources */,
 				84061DEA28B161FE00B5AB47 /* AppDelegate.swift in Sources */,
+				845CF25228CB955800EECCAF /* SecondPostViewController.swift in Sources */,
 				84DC23C928B47FCF0091F0D5 /* User.swift in Sources */,
+				8403230128C679EC009BCD8E /* MainTabBarController.swift in Sources */,
 				84CA386F28C09E0B00EECD6D /* LoginViewModel.swift in Sources */,
 				84CF1A3628BCBC3D000FF0D8 /* CustomTextField.swift in Sources */,
 				8444AA5E28B4B6E7005BB8FF /* LoginInspector.swift in Sources */,

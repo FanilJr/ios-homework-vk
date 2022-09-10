@@ -10,6 +10,7 @@ import UIKit
 protocol FeedViewDelegate: AnyObject {
     func didTapPostButton()
     func check(word: String)
+    func didTapSecondPostButton()
 }
 
 final class FeedView: UIView {
@@ -18,116 +19,85 @@ final class FeedView: UIView {
     private let nc = NotificationCenter.default
     
     private let scrollView: UIScrollView = {
-
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .clear
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
-        
     }()
 
     private let contentView: UIView = {
-
         let contentView = UIView()
         contentView.backgroundColor = .clear
         contentView.translatesAutoresizingMaskIntoConstraints = false
         return contentView
-        
     }()
     
+    let firstPost: UIImageView = {
+        let post = UIImageView()
+        post.image = UIImage(named: "heart5")
+        post.layer.cornerRadius = 10
+        post.contentMode = .scaleAspectFill
+        post.layer.borderWidth = 1
+        post.clipsToBounds = true
+        post.layer.borderColor = UIColor.gray.cgColor
+        post.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        post.translatesAutoresizingMaskIntoConstraints = false
+        return post
+    }()
+    
+    private let secondPost: UIImageView = {
+        let post = UIImageView()
+        post.image = UIImage(named: "heart4")
+        post.contentMode = .scaleAspectFill
+        post.layer.cornerRadius = 10
+        post.layer.borderWidth = 1
+        post.clipsToBounds = true
+        post.layer.borderColor = UIColor.gray.cgColor
+        post.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        post.translatesAutoresizingMaskIntoConstraints = false
+        return post
+    }()
     
     private let postButtonFirst: CustomButton = {
-        
-        let button = CustomButton(title: "Первая кнопка", titleColor: .white, backgroundColor: .blue)
-        button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
-        
-        switch button.state {
-                case .normal:
-                    button.alpha = 1
-                case .selected:
-                    button.alpha = 0.8
-                case .highlighted:
-                    button.alpha = 0.8
-                case .disabled:
-                    button.alpha = 0.8
-                default:
-                    button.alpha = 1
-                }
+        let button = CustomButton(title: "Перейти на пост First Heart", titleColor: .white, backgroundColor: .blue, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
+            button.layer.cornerRadius = 10
+            button.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         return button
     }()
     
     private let postButtonSecond: CustomButton = {
-        
-        let button = CustomButton(title: "Вторая кнопка", titleColor: .white, backgroundColor: .blue)
-        button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
-        
-        switch button.state {
-                case .normal:
-                    button.alpha = 1
-                case .selected:
-                    button.alpha = 0.8
-                case .highlighted:
-                    button.alpha = 0.8
-                case .disabled:
-                    button.alpha = 0.8
-                default:
-                    button.alpha = 1
-                }
+        let button = CustomButton(title: "Перейти на пост Second Heart", titleColor: .white, backgroundColor: .blue, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
+            button.layer.cornerRadius = 10
+            button.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         return button
     }()
     
     private let notificationButton: CustomButton = {
-        
-        let button = CustomButton(title: "Кнопка проверки", titleColor: .white, backgroundColor: .blue)
-        button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
-        
-        switch button.state {
-                case .normal:
-                    button.alpha = 1
-                case .selected:
-                    button.alpha = 0.8
-                case .highlighted:
-                    button.alpha = 0.8
-                case .disabled:
-                    button.alpha = 0.8
-                default:
-                    button.alpha = 1
-                }
+        let button = CustomButton(title: "Кнопка проверки", titleColor: .white, backgroundColor: .blue, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
         return button
     }()
     
     
     private let textField: CustomTextField = {
-        let textfield = CustomTextField()
-        textfield.placeholder = "пароль: junior"
+        let textfield = CustomTextField(placeholder: "пароль: junior", textColor: .black, font: UIFont.systemFont(ofSize: 20))
         textfield.translatesAutoresizingMaskIntoConstraints = false
         return textfield
-        
     }()
+    
     private let resultLabel: UILabel = {
-        
         let label = UILabel()
         label.text = ""
         label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
-        
         return label
     }()
     
     private let stackView: UIStackView = {
-        
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
         stackView.spacing = 5
-        
         return stackView
     }()
     
@@ -171,18 +141,17 @@ final class FeedView: UIView {
     }
 
     @objc func kdbHide() {
-        
         scrollView.contentInset.bottom = .zero
         scrollView.verticalScrollIndicatorInsets = .zero
-        
     }
 
     private func taps() {
         postButtonFirst.tapAction = { [weak self] in
             self?.delegate?.didTapPostButton()
         }
+            
         postButtonSecond.tapAction = { [weak self] in
-            self?.delegate?.didTapPostButton()
+            self?.delegate?.didTapSecondPostButton()
         }
         notificationButton.tapAction = { [weak self] in
             self?.delegate?.check(word: self?.textField.text ?? "")
@@ -207,8 +176,8 @@ final class FeedView: UIView {
     
     private func layout() {
         
-        [postButtonFirst, postButtonSecond, textField, resultLabel, notificationButton].forEach { stackView.addArrangedSubview($0) }
-        [stackView].forEach { contentView.addSubview($0) }
+        [textField, resultLabel, notificationButton].forEach { stackView.addArrangedSubview($0) }
+        [firstPost, postButtonFirst, secondPost, postButtonSecond, stackView].forEach { contentView.addSubview($0) }
         scrollView.addSubview(contentView)
         addSubview(scrollView)
         
@@ -224,11 +193,32 @@ final class FeedView: UIView {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
-            stackView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor,constant: 50),
-            stackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            stackView.heightAnchor.constraint(equalToConstant: 300),
-            stackView.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor,constant: -16),
-            stackView.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor,constant: -50)
+            firstPost.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor,constant: 32),
+            firstPost.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 32),
+            firstPost.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
+            firstPost.heightAnchor.constraint(equalToConstant: 300),
+            
+            postButtonFirst.topAnchor.constraint(equalTo: firstPost.bottomAnchor),
+            postButtonFirst.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 32),
+            postButtonFirst.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
+            postButtonFirst.heightAnchor.constraint(equalToConstant: 50),
+            
+            secondPost.topAnchor.constraint(equalTo: postButtonFirst.bottomAnchor,constant: 32),
+            secondPost.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 32),
+            secondPost.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
+            secondPost.heightAnchor.constraint(equalToConstant: 300),
+            
+            postButtonSecond.topAnchor.constraint(equalTo: secondPost.bottomAnchor),
+            postButtonSecond.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 32),
+            postButtonSecond.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
+            postButtonSecond.heightAnchor.constraint(equalToConstant: 50),
+            
+            stackView.topAnchor.constraint(equalTo: postButtonSecond.bottomAnchor,constant: 32),
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 32),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
+            stackView.heightAnchor.constraint(equalToConstant: 150),
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -32)
+            
         ])
     }
 }

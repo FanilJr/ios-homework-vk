@@ -17,12 +17,10 @@ class FeedViewController: UIViewController {
     private var coordinator: FeedFlowCoordinator?
     
     let background: UIImageView = {
-        
         let back = UIImageView()
         back.image = UIImage(named: "background")
         back.translatesAutoresizingMaskIntoConstraints = false
         return back
-        
     }()
 
     init(model: FeedModel, coordinator: FeedFlowCoordinator) {
@@ -60,7 +58,6 @@ class FeedViewController: UIViewController {
         [background,feedView,splash].forEach { view.addSubview($0) }
 
         NSLayoutConstraint.activate([
-            
             background.topAnchor.constraint(equalTo: view.topAnchor),
             background.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             background.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -87,5 +84,8 @@ extension FeedViewController: FeedViewDelegate {
 
     func check(word: String) {
         model.check(word: word)
+    }
+    func didTapSecondPostButton() {
+        coordinator?.showSecondPost(title: post.title)
     }
 }

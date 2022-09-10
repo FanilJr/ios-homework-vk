@@ -17,16 +17,13 @@ class PhotosViewController: UIViewController {
     var imageArray = [UIImage]()
     
     private lazy var collectionView: UICollectionView = {
-            
         let layout = UICollectionViewFlowLayout()
-            
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: "PhotosCollectionViewCell")
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
-            
     }()
     
     override func viewDidLoad() {

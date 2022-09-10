@@ -19,120 +19,52 @@ class LoginView: UIView {
     private let nc = NotificationCenter.default
 
     private let scrollView: UIScrollView = {
-
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
-        
     }()
 
     private let contentView: UIView = {
-
         let contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
         return contentView
-        
     }()
 
     private let logoImage: UIImageView = {
-
         let image = UIImageView()
         image.image = UIImage(named: "vk")
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
-        
     }()
 
-    private lazy var loginTextField: UITextField = {
-
-        let textField = UITextField()
-        textField.textColor = .black
-        textField.font = UIFont.systemFont(ofSize: 16)
+    private lazy var loginTextField: CustomTextField = {
+        let textField = CustomTextField(placeholder: "Login or email", textColor: .black, font: UIFont.systemFont(ofSize: 16))
         textField.backgroundColor = .systemGray6
-        textField.placeholder = "Login or email"
         textField.tintColor = UIColor(named: "#4885CC")
         textField.keyboardType = .emailAddress
-        textField.autocapitalizationType = .none
-        textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.layer.borderWidth = 0.5
         textField.layer.cornerRadius = 10
         textField.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.leftViewMode = UITextField.ViewMode.always
-        textField.delegate = self
-        textField.leftView = UIView(frame:CGRect(x:0, y:0, width:10, height:textField.frame.height))
-        textField.rightView = UIView(frame:CGRect(x:0, y:0, width:10, height:textField.frame.height))
-        textField.rightViewMode = .always
         return textField
-        
     }()
 
-    private lazy var passwordTextField: UITextField = {
-
-        let textField = UITextField()
-        textField.textColor = .black
-        textField.font = UIFont.systemFont(ofSize: 16)
-        textField.backgroundColor = .systemGray6
-        textField.placeholder = "Password"
+    private lazy var passwordTextField: CustomTextField = {
+        let textField = CustomTextField(placeholder: "Password", textColor: .black, font: UIFont.systemFont(ofSize: 16))
         textField.isSecureTextEntry = true
         textField.tintColor = UIColor(named: "#4885CC")
-        textField.autocapitalizationType = .none
-        textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.layer.borderWidth = 0.5
         textField.layer.cornerRadius = 10
         textField.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.leftViewMode = UITextField.ViewMode.always
-        textField.delegate = self
-        textField.leftView = UIView(frame:CGRect(x:0, y:0, width:10, height:textField.frame.height))
-        textField.rightView = UIView(frame:CGRect(x:0, y:0, width:10, height:textField.frame.height))
-        textField.rightViewMode = .always
         return textField
-        
     }()
 
     private let logInButton: CustomButton = {
-        
-        let button = CustomButton(title: "Log In", titleColor: .white, backgroundColor: .blue)
-        button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
-        
-        switch button.state {
-                case .normal:
-                    button.alpha = 1
-                case .selected:
-                    button.alpha = 0.8
-                case .highlighted:
-                    button.alpha = 0.8
-                case .disabled:
-                    button.alpha = 0.8
-                default:
-                    button.alpha = 1
-                }
+        let button = CustomButton(title: "Log In", titleColor: .white, backgroundColor: .blue,setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
         return button
-        
     }()
     
     private let crackPasswordButton: CustomButton = {
-
-        let button = CustomButton(title: "Подобрать пароль", titleColor: .white, backgroundColor: .blue)
-        button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
-        
-        switch button.state {
-                case .normal:
-                    button.alpha = 1
-                case .selected:
-                    button.alpha = 0.8
-                case .highlighted:
-                    button.alpha = 0.8
-                case .disabled:
-                    button.alpha = 0.8
-                default:
-                    button.alpha = 1
-                }
+        let button = CustomButton(title: "Подобрать пароль", titleColor: .white, backgroundColor: .blue, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
         return button
     }()
     
@@ -182,14 +114,11 @@ class LoginView: UIView {
             scrollView.contentInset.bottom = kdbSize.height
             scrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: kdbSize.height, right: 0)
         }
-        
     }
 
     @objc func kdbHide() {
-        
         scrollView.contentInset.bottom = .zero
         scrollView.verticalScrollIndicatorInsets = .zero
-        
     }
 
     private func taps() {
@@ -197,38 +126,34 @@ class LoginView: UIView {
             self?.delegate?.didTapLogInButton()
         }
         crackPasswordButton.tapAction = { [weak self] in
-                    guard let self = self else { return }
-                    self.waitingSpinnerEnable(true)
-                    self.delegate?.didTapCrackPasswordButton()
+            guard let self = self else { return }
+            self.waitingSpinnerEnable(true)
+            self.delegate?.didTapCrackPasswordButton()
             
             
         }
     }
 
     func getLogin() -> String {
-        
         loginTextField.text!
-        
     }
 
     func getPassword() -> String {
-        
         passwordTextField.text!
-        
     }
     
     func setPassword(password: String, isSecure: Bool) {
-            passwordTextField.isSecureTextEntry = isSecure
-            passwordTextField.text = password
+        passwordTextField.isSecureTextEntry = isSecure
+        passwordTextField.text = password
         }
     
     func waitingSpinnerEnable(_ active: Bool) {
-            if active {
-                spinnerView.startAnimating()
-            } else {
-                spinnerView.stopAnimating()
-            }
+        if active {
+            spinnerView.startAnimating()
+        } else {
+            spinnerView.stopAnimating()
         }
+    }
 
     private func layout() {
         
@@ -276,7 +201,6 @@ class LoginView: UIView {
             spinnerView.topAnchor.constraint(equalTo: crackPasswordButton.bottomAnchor,constant: 16),
             spinnerView.centerXAnchor.constraint(equalTo: crackPasswordButton.centerXAnchor),
             spinnerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            
         ])
     }
 }
@@ -292,17 +216,12 @@ extension LoginView: UITextFieldDelegate {
 extension LoginView {
     
     func tapScreen() {
-        
         let recognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         recognizer.cancelsTouchesInView = false
-        
         addGestureRecognizer(recognizer)
-        
     }
 
     @objc func dismissKeyboard() {
-        
         endEditing(true)
-        
     }
 }
