@@ -11,14 +11,20 @@ protocol MyClassDelegate: AnyObject {
     func didtap()
 }
 
+protocol SettingsDelegate: AnyObject {
+    func settingsMenu()
+}
+
 final class ProfileHeaderView: UIView {
     
-        weak var delegate: MyClassDelegate?
+    
+    weak var delegate: MyClassDelegate?
+    weak var settingsDelegate: SettingsDelegate?
 
-        private var statusText: String = ""
-        let systemSoundID: SystemSoundID = 1016
-        
-        lazy var avatarImageView: UIImageView = {
+    private var statusText: String = ""
+    let systemSoundID: SystemSoundID = 1016
+    
+    lazy var avatarImageView: UIImageView = {
         let avatarImageView = UIImageView()
         avatarImageView.layer.borderWidth = 3
         let tapGesture = UITapGestureRecognizer()
@@ -43,6 +49,23 @@ final class ProfileHeaderView: UIView {
         fullNameLabel.font = .systemFont(ofSize: 18, weight: .bold)
         fullNameLabel.translatesAutoresizingMaskIntoConstraints = false
         return fullNameLabel
+    }()
+    
+    lazy var settings: UIButton = {
+        let button = UIButton()
+        //button.setImage(UIImage(systemName: "ellipsis.circle"), for: .normal)
+        button.backgroundColor = .white
+        button.setBackgroundImage(UIImage(systemName: "ellipsis.circle"), for: .normal)
+//        button.image(for: .disabled)
+//        button.backgroundColor = .white
+//        button.image = UIImage(systemName: "ellipsis.circle")
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.tintColor = .black
+        button.layer.cornerRadius = 14
+        button.contentMode = .scaleAspectFit
+        button.addTarget(self, action: #selector(showSetting), for: .touchUpInside)
+        button.clipsToBounds = true
+        return button
     }()
     
     private let statusLabel: UILabel = {
@@ -90,10 +113,13 @@ final class ProfileHeaderView: UIView {
         print("нажатие в HeaderView")
         delegate?.didtap()
     }
+    @objc func showSetting() {
+        settingsDelegate?.settingsMenu()
+    }
     
     func snp() {
         
-        [avatarImageView, stackView, setStatusButton].forEach { addSubview($0) }
+        [avatarImageView, stackView, setStatusButton, settings].forEach { addSubview($0) }
         [fullNameLabel, statusLabel, statusTextField].forEach { stackView.addArrangedSubview($0) }
         
         NSLayoutConstraint.activate([
@@ -101,10 +127,18 @@ final class ProfileHeaderView: UIView {
             avatarImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             avatarImageView.widthAnchor.constraint(equalToConstant: 120),
             avatarImageView.heightAnchor.constraint(equalToConstant: 120),
-        
+            
+            settings.topAnchor.constraint(equalTo: stackView.topAnchor),
+            settings.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            settings.widthAnchor.constraint(equalToConstant: 28),
+            settings.heightAnchor.constraint(equalToConstant: 28),
+ 
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor,constant: 30),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
+//            statusTextField.heightAnchor.constraint(equalToConstant: 30),
+//            stackView.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor),
             
             setStatusButton.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 16),
             setStatusButton.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -161,6 +195,7 @@ final class ProfileHeaderView: UIView {
         snp()
         tapScreen()
         tap()
+
     }
         
     required init?(coder: NSCoder) {
@@ -188,4 +223,17 @@ extension ProfileHeaderView: UITextFieldDelegate {
     }
 }
 
-
+//extension ProfileHeaderView: UIContextMenuInteractionDelegate {
+//    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+//        return UIContextMenuConfiguration(
+//            identifier: nil,
+//            previewProvider: nil) { _ in
+//                let copy = UIAction(title: "NightTheme") { _ in
+//
+//            }
+//            return UIMenu(title: "Settings", children: [copy])
+//        }
+//    }
+//}
+//
+//

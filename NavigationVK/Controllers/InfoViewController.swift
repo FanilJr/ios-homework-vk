@@ -8,9 +8,18 @@
 import UIKit
 
 class InfoViewController: UIViewController {
+    
+    let switcherOne: UISwitch = {
+        let swit = UISwitch()
+        swit.backgroundColor = .black
+        swit.layer.cornerRadius = 16
+        swit.clipsToBounds = true
+        swit.translatesAutoresizingMaskIntoConstraints = false
+        return swit
+    }()
 
     let alertButton: CustomButton = {
-        let button = CustomButton(title: "Перейти на алерт", titleColor: .white, backgroundColor: .blue, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
+        let button = CustomButton(title: "Сохранить", titleColor: .white, backgroundColor: .blue, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
         return button
     }()
 
@@ -22,6 +31,22 @@ class InfoViewController: UIViewController {
         buttonAlert()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        reloadInputViews()
+        test()
+        reloadInputViews()
+        
+    }
+    
+    func test() {
+        if switcherOne.isOn == true {
+            print("switch ON")
+        } else {
+            print("switch OFF")
+        }
+    }
+    
     func buttonAlert() {
         
         alertButton.tapAction = { [weak self] in
@@ -29,6 +54,7 @@ class InfoViewController: UIViewController {
             let alert = UIAlertController(title: "Внимание", message: "Редактирование запрещено", preferredStyle: .alert)
             let alertOk = UIAlertAction(title: "OK", style: .default, handler: nil)
             let alertCancel = UIAlertAction(title: "Закрыть", style: .destructive, handler: {_ in
+                self?.test()
                 print("проверяем алерт")
                 self?.dismiss(animated: true)
             })
@@ -39,13 +65,16 @@ class InfoViewController: UIViewController {
     
     func alertConstr() {
             
-        view.addSubview(alertButton)
+        [switcherOne, alertButton].forEach { view.addSubview($0) }
             
         NSLayoutConstraint.activate([
-            alertButton.widthAnchor.constraint(equalToConstant: 200),
+            switcherOne.topAnchor.constraint(equalTo: view.topAnchor,constant: 20),
+            switcherOne.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 20),
+            
+            alertButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            alertButton.widthAnchor.constraint(equalToConstant: 120),
             alertButton.heightAnchor.constraint(equalToConstant: 50),
-            alertButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-            alertButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
+            alertButton.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -20)
         ])
     }
 }

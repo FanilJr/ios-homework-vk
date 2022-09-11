@@ -73,6 +73,10 @@ class ProfileViewController: UIViewController {
         super.viewDidAppear(animated)
         
     }
+    
+   @objc func opens() {
+        
+    }
    
     func setupTableView() {
         
@@ -161,7 +165,7 @@ extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
     }
 }
 
-extension ProfileViewController: UITableViewDelegate, MyClassDelegate {
+extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
@@ -171,8 +175,11 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
+        let menuIneraction = UIContextMenuInteraction(delegate: self)
         let PHView = ProfileHeaderView()
         PHView.delegate = self
+        PHView.settingsDelegate = self
+        PHView.settings.addInteraction(menuIneraction)
         PHView.setupView(user: userService.getUser(userName: userName))
         
         switch section {
@@ -184,6 +191,10 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate {
             return UIView()
             
         }
+    }
+    
+    func settingsMenu() {
+        print("Необходимо держать пальцем или мышкой")
     }
 
    func didtap() {
@@ -219,4 +230,28 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate {
     }
 }
 
+extension ProfileViewController: UIContextMenuInteractionDelegate {
+    
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            let copy = UIAction(title: "Change Theme") { _ in
+                if self.background.image == UIImage(named: "background") {
+                    self.background.image = UIImage(named: "background4")
+                    let bounds = self.background.bounds
+                    UIView.animate(withDuration: 2, delay: 0, usingSpringWithDamping: 2, initialSpringVelocity: 1, options: .curveLinear) {
+                        self.background.bounds = CGRect(x: (bounds.origin.x) - 200, y: (bounds.origin.y), width: bounds.width + 200, height: bounds.height + 300)
+                    }
+                    
+                } else {
+                    self.background.image = UIImage(named: "background")
+                    let bounds = self.background.bounds
+                    UIView.animate(withDuration: 2, delay: 0, usingSpringWithDamping: 2, initialSpringVelocity: 1, options: .curveLinear) {
+                        self.background.bounds = CGRect(x: (bounds.origin.x) - 200, y: (bounds.origin.y), width: bounds.width + 200, height: bounds.height + 300)
+                    }
+                }
+            }
+            return UIMenu(title: "Settings", children: [copy])
+        }
+    }
+}
 
