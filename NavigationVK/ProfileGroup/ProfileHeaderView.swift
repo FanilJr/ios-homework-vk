@@ -107,12 +107,12 @@ final class ProfileHeaderView: UIView {
     
     
     @objc func expandAvatar() {
-            
         UIView.animate(withDuration: 1.3, animations: {
         self.avatarImageView.alpha = 0.0 })
         print("нажатие в HeaderView")
         delegate?.didtap()
     }
+    
     @objc func showSetting() {
         settingsDelegate?.settingsMenu()
     }
