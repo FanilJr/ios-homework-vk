@@ -79,13 +79,14 @@ class PostViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-
     }
     
     @objc func tapButton() {
     
         let infoViewController = InfoViewController()
+//        infoViewController.modalPresentationStyle = .fullScreen
         present(infoViewController, animated: true, completion: nil)
+        
     }
 
     func setup() {
