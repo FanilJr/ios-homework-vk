@@ -16,7 +16,6 @@ class ProfileViewController: UIViewController {
     
     let background: UIImageView = {
         let back = UIImageView()
-        back.layer.cornerRadius = 30
         back.clipsToBounds = true
         back.translatesAutoresizingMaskIntoConstraints = false
         return back
