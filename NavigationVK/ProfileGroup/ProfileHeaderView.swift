@@ -101,7 +101,7 @@ final class ProfileHeaderView: UIView {
     }()
     
     private let setStatusButton: CustomButton = {
-        let button = CustomButton(title: "Set status", titleColor: .white, backgroundColor: .blue, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
+        let button = CustomButton(title: "Set status", titleColor: .white, backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
         return button
         }()
     

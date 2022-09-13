@@ -59,21 +59,21 @@ final class FeedView: UIView {
     }()
     
     private let postButtonFirst: CustomButton = {
-        let button = CustomButton(title: "Перейти на пост First Heart", titleColor: .white, backgroundColor: .blue, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
+        let button = CustomButton(title: "Перейти на пост First Heart", titleColor: .white, backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
             button.layer.cornerRadius = 10
             button.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         return button
     }()
     
     private let postButtonSecond: CustomButton = {
-        let button = CustomButton(title: "Перейти на пост Second Heart", titleColor: .white, backgroundColor: .blue, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
+        let button = CustomButton(title: "Перейти на пост Second Heart", titleColor: .white, backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
             button.layer.cornerRadius = 10
             button.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         return button
     }()
     
     private let notificationButton: CustomButton = {
-        let button = CustomButton(title: "Кнопка проверки", titleColor: .white, backgroundColor: .blue, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
+        let button = CustomButton(title: "Кнопка проверки", titleColor: .white, backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
         return button
     }()
     
