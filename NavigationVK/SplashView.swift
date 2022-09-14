@@ -61,6 +61,7 @@ final class SplashView: UIView {
             self.vkLogo.transform = CGAffineTransform(scaleX: 100 / 30, y: 100 / 30)
         }
     }
+    
     func dismissed() {
         UIView.animate(withDuration: 1.2, animations: {
             self.alpha = 0.0
