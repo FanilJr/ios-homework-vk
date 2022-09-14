@@ -33,9 +33,8 @@ class InfoViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        reloadInputViews()
+        
         test()
-        reloadInputViews()
         
     }
     

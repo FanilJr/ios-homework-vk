@@ -24,7 +24,6 @@ final class ProfileFlowCoordinator {
     }
     
     func showPhotos() {
-        
         let vc = PhotosViewController()
         navCon.pushViewController(vc, animated: true)
     }

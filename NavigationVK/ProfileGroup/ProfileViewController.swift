@@ -11,6 +11,7 @@ class ProfileViewController: UIViewController {
 
     private let userService: UserService
     private let userName: String
+    private let header = ProfileHeaderView()
     private weak var coordinator: ProfileFlowCoordinator?
     var lastRowDisplay = 0
     
@@ -178,15 +179,19 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let menuIneraction = UIContextMenuInteraction(delegate: self)
-        let PHView = ProfileHeaderView()
-        PHView.delegate = self
-        PHView.settingsDelegate = self
-        PHView.settings.addInteraction(menuIneraction)
-        PHView.setupView(user: userService.getUser(userName: userName))
+//        let PHView = ProfileHeaderView()
+//        PHView.delegate = self
+//        PHView.settingsDelegate = self
+//        PHView.settings.addInteraction(menuIneraction)
+//        PHView.setupView(user: userService.getUser(userName: userName))
+        header.settings.addInteraction(menuIneraction)
+        header.delegate = self
+        header.settingsDelegate = self
+        header.setupView(user: userService.getUser(userName: userName))
         
         switch section {
         case 0:
-            return PHView
+            return header
         case 1:
             return nil
         default:
@@ -200,9 +205,13 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
     }
 
    func didtap() {
+       
+       UIView.animate(withDuration: 1.3, animations: {
+           self.header.avatarImageView.alpha = 0.0 })
 
        let alert = UIAlertController(title: "Ты сломал аватарку", message: "Больше так не делай", preferredStyle: .alert)
-       alert.addAction(UIAlertAction(title: "Восстановить", style: .default, handler: { _ in self.tableView.reloadData()
+       alert.addAction(UIAlertAction(title: "Восстановить", style: .default, handler: { _ in UIView.animate(withDuration: 1, animations: {
+           self.header.avatarImageView.alpha = 1 })
            print("перезагрузка аватарки")
        }))
        alert.addAction(UIAlertAction(title: "Закрыть", style: .destructive, handler: nil))
