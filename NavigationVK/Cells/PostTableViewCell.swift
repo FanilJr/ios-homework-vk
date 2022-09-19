@@ -11,7 +11,7 @@ import UIKit
 class PostTableViewCell: UITableViewCell {
     
     
-    private lazy var postImage: UIImageView = {
+    lazy var postImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false

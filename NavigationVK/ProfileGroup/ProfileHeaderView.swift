@@ -8,19 +8,13 @@ import AVFoundation
 import UIKit
 
 protocol MyClassDelegate: AnyObject {
-    func didtap()
-}
-
-protocol SettingsDelegate: AnyObject {
-    func settingsMenu()
+    func presentMenuAvatar()
 }
 
 final class ProfileHeaderView: UIView {
     
     
     weak var delegate: MyClassDelegate?
-    weak var settingsDelegate: SettingsDelegate?
-
     private var statusText: String = ""
     let systemSoundID: SystemSoundID = 1016
     
@@ -49,23 +43,6 @@ final class ProfileHeaderView: UIView {
         fullNameLabel.font = .systemFont(ofSize: 18, weight: .bold)
         fullNameLabel.translatesAutoresizingMaskIntoConstraints = false
         return fullNameLabel
-    }()
-    
-    lazy var settings: UIButton = {
-        let button = UIButton()
-        //button.setImage(UIImage(systemName: "ellipsis.circle"), for: .normal)
-        button.backgroundColor = .white
-        button.setBackgroundImage(UIImage(systemName: "ellipsis.circle"), for: .normal)
-//        button.image(for: .disabled)
-//        button.backgroundColor = .white
-//        button.image = UIImage(systemName: "ellipsis.circle")
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.tintColor = .black
-        button.layer.cornerRadius = 14
-        button.contentMode = .scaleAspectFit
-        button.addTarget(self, action: #selector(showSetting), for: .touchUpInside)
-        button.clipsToBounds = true
-        return button
     }()
     
     private let statusLabel: UILabel = {
@@ -110,16 +87,12 @@ final class ProfileHeaderView: UIView {
 //        UIView.animate(withDuration: 1.3, animations: {
 //        self.avatarImageView.alpha = 0.0 })
         print("нажатие в HeaderView")
-        delegate?.didtap()
-    }
-    
-    @objc func showSetting() {
-        settingsDelegate?.settingsMenu()
+        delegate?.presentMenuAvatar()
     }
     
     func snp() {
         
-        [avatarImageView, stackView, setStatusButton, settings].forEach { addSubview($0) }
+        [avatarImageView, stackView, setStatusButton].forEach { addSubview($0) }
         [fullNameLabel, statusLabel, statusTextField].forEach { stackView.addArrangedSubview($0) }
         
         NSLayoutConstraint.activate([
@@ -128,11 +101,6 @@ final class ProfileHeaderView: UIView {
             avatarImageView.widthAnchor.constraint(equalToConstant: 120),
             avatarImageView.heightAnchor.constraint(equalToConstant: 120),
             
-            settings.topAnchor.constraint(equalTo: stackView.topAnchor),
-            settings.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
-            settings.widthAnchor.constraint(equalToConstant: 28),
-            settings.heightAnchor.constraint(equalToConstant: 28),
- 
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor,constant: 30),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -154,9 +122,10 @@ final class ProfileHeaderView: UIView {
             
             AudioServicesPlaySystemSound(self!.systemSoundID)
             
+            
             let bounds = self?.setStatusButton.bounds
             let bonds = self?.statusLabel.bounds
-            
+
             /// анимация кнопки setStatus и statusLabel
             UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 2, initialSpringVelocity: 1, options: .curveLinear) {
                 self?.setStatusButton.bounds = CGRect(x: (bounds?.origin.x)! - 30, y: (bounds?.origin.y)!, width: bounds!.width + 30, height: bounds!.height + 10)
@@ -222,18 +191,3 @@ extension ProfileHeaderView: UITextFieldDelegate {
         return true
     }
 }
-
-//extension ProfileHeaderView: UIContextMenuInteractionDelegate {
-//    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
-//        return UIContextMenuConfiguration(
-//            identifier: nil,
-//            previewProvider: nil) { _ in
-//                let copy = UIAction(title: "NightTheme") { _ in
-//
-//            }
-//            return UIMenu(title: "Settings", children: [copy])
-//        }
-//    }
-//}
-//
-//
