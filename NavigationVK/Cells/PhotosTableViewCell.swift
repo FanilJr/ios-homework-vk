@@ -9,11 +9,24 @@ import UIKit
 
 protocol MyClassDelegateTwo: AnyObject {
     func tuchUp()
+   // func tuchToShare()
 }
 
 class PhotosTableViewCell: UITableViewCell {
             
     weak var tuchNew: MyClassDelegateTwo?
+    
+    private lazy var collectionViews: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: "CustomCollectionViewCell")
+        return collectionView
+    }()
         
     private let label: UILabel = {
         let label = UILabel()
@@ -50,18 +63,10 @@ class PhotosTableViewCell: UITableViewCell {
         print("tuch по кнопке из TableViewCell")
         tuchNew?.tuchUp()
     }
-        
-    private lazy var collectionViews: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: "CustomCollectionViewCell")
-        return collectionView
-    }()
+    
+//    @objc private func tuchShare() {
+//        tuchNew?.tuchToShare()
+//    }
     
     private func layout() {
             
@@ -98,8 +103,10 @@ extension PhotosTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCollectionViewCell", for: indexPath) as! CustomCollectionViewCell
+//        let menuIneraction = UIContextMenuInteraction(delegate: self)
+//        cell.addInteraction(menuIneraction)
         cell.pullCell(photo: galery[indexPath.row])
-            
+        
         return cell
     }
 }
@@ -116,3 +123,16 @@ extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
             
     }
 }
+
+//extension PhotosTableViewCell: UIContextMenuInteractionDelegate {
+//
+//    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+//        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+//            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { _ in
+//                self.tuchShare()
+//                print("Проверка фото")
+//            }
+//            return UIMenu(title: "", children: [share])
+//        }
+//    }
+//}

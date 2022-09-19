@@ -12,8 +12,20 @@ class ProfileViewController: UIViewController {
     private let userService: UserService
     private let userName: String
     private let header = ProfileHeaderView()
+    private let profileImageView = ProfileImageView()
     private weak var coordinator: ProfileFlowCoordinator?
     var lastRowDisplay = 0
+    private let cell = PhotosTableViewCell()
+    
+    var blure: UIVisualEffectView = {
+        let bluereEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+        let blure = UIVisualEffectView()
+        blure.effect = bluereEffect
+        blure.translatesAutoresizingMaskIntoConstraints = false
+        blure.clipsToBounds = true
+        blure.alpha = 0
+        return blure
+    }()
     
     let background: UIImageView = {
         let back = UIImageView()
@@ -53,7 +65,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         title = "Профиль"
-        
+
         setupTableView()
         tableView.dataSource = self
         tableView.delegate = self
@@ -76,13 +88,10 @@ class ProfileViewController: UIViewController {
         super.viewDidAppear(animated)
         
     }
-    
-   @objc func opens() {
-        
-    }
    
     func setupTableView() {
         
+        profileImageView.translatesAutoresizingMaskIntoConstraints = false
         [background, tableView].forEach({ view.addSubview($0) })
         
         NSLayoutConstraint.activate([
@@ -94,7 +103,7 @@ class ProfileViewController: UIViewController {
         tableView.topAnchor.constraint(equalTo: view.topAnchor),
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
 }
@@ -143,12 +152,15 @@ extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
         
     }
     
+//    func tuchToShare() {
+//        let items:[Any] = [galery.randomElement() ?? UIImage()]
+//        let avc = UIActivityViewController(activityItems: items, applicationActivities: nil)
+//        self.present(avc, animated: true, completion: nil)
+//    }
+    
     func tuchUp() {
-        
         print("tuch по кнопке delegate из ProfileViewController")
-        
-        let photosController = PhotosViewController()
-        navigationController?.pushViewController(photosController, animated: true)
+        coordinator?.showPhotos()
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -178,47 +190,66 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let menuIneraction = UIContextMenuInteraction(delegate: self)
-//        let PHView = ProfileHeaderView()
-//        PHView.delegate = self
-//        PHView.settingsDelegate = self
-//        PHView.settings.addInteraction(menuIneraction)
-//        PHView.setupView(user: userService.getUser(userName: userName))
-        header.settings.addInteraction(menuIneraction)
         header.delegate = self
-        header.settingsDelegate = self
         header.setupView(user: userService.getUser(userName: userName))
         
         switch section {
         case 0:
             return header
         case 1:
-            return nil
+            return profileImageView
         default:
             return UIView()
             
         }
     }
     
-    func settingsMenu() {
-        print("Необходимо держать пальцем или мышкой")
-    }
-
-   func didtap() {
+   func presentMenuAvatar() {
        
-       UIView.animate(withDuration: 1.3, animations: {
-           self.header.avatarImageView.alpha = 0.0 })
+       view.addSubview(blure)
+       view.addSubview(profileImageView)
+       profileImageView.setupView(user: userService.getUser(userName: userName))
+       profileImageView.settingDelegate = self
+       
+       NSLayoutConstraint.activate([
+        blure.topAnchor.constraint(equalTo: view.topAnchor),
+        blure.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+        blure.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        blure.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
-       let alert = UIAlertController(title: "Ты сломал аватарку", message: "Больше так не делай", preferredStyle: .alert)
-       alert.addAction(UIAlertAction(title: "Восстановить", style: .default, handler: { _ in UIView.animate(withDuration: 1, animations: {
-           self.header.avatarImageView.alpha = 1 })
-           print("перезагрузка аватарки")
-       }))
-       alert.addAction(UIAlertAction(title: "Закрыть", style: .destructive, handler: nil))
-       self.present(alert, animated: true, completion: nil)
-       print("нажатие в ProfileViewController - delegate")
-
+        profileImageView.topAnchor.constraint(equalTo: view.topAnchor,constant: -245),
+        profileImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 50),
+        profileImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -50),
+        profileImageView.heightAnchor.constraint(equalToConstant: 245),
+       ])
+       
+       UIView.animate(withDuration: 0.5, animations: {
+           self.header.avatarImageView.alpha = 0.0
+           self.profileImageView.transform = CGAffineTransform(translationX: 0, y: 360)
+           self.profileImageView.alpha = 1
+           self.blure.alpha = 1
+       })
+       tabBarController?.tabBar.isHidden = true
     }
+    func openSetting() {
+        coordinator?.showSettings(title: "Настройки")
+    }
+    
+    func tapClosed() {
+
+        UIView.animate(withDuration: 0.5, animations: {
+            self.header.avatarImageView.alpha = 1
+            self.profileImageView.transform = CGAffineTransform(translationX: 0, y: -360)
+            self.blure.alpha = 0
+        })
+        tabBarController?.tabBar.isHidden = false
+            // MARK: Надо доделать этот блок кода, с помощью Dispatch, пока не выполнится ^ этот блок, то этот не приступает - ГОТОВО.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.profileImageView.removeFromSuperview()
+            self.blure.removeFromSuperview()
+        }
+    }
+    
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
@@ -236,33 +267,7 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
         
         if indexPath.section == 0 {
             coordinator?.showPhotos()
-            
-        }
-    }
-}
-
-extension ProfileViewController: UIContextMenuInteractionDelegate {
     
-    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
-        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
-            let copy = UIAction(title: "Change Theme") { _ in
-                if self.background.image == UIImage(named: "background") {
-                    self.background.image = UIImage(named: "background4")
-                    let bounds = self.background.bounds
-                    UIView.animate(withDuration: 2, delay: 0, usingSpringWithDamping: 2, initialSpringVelocity: 1, options: .curveLinear) {
-                        self.background.bounds = CGRect(x: (bounds.origin.x) - 200, y: (bounds.origin.y), width: bounds.width + 200, height: bounds.height + 300)
-                    }
-                    
-                } else {
-                    self.background.image = UIImage(named: "background")
-                    let bounds = self.background.bounds
-                    UIView.animate(withDuration: 2, delay: 0, usingSpringWithDamping: 2, initialSpringVelocity: 1, options: .curveLinear) {
-                        self.background.bounds = CGRect(x: (bounds.origin.x) - 200, y: (bounds.origin.y), width: bounds.width + 200, height: bounds.height + 300)
-                    }
-                }
-            }
-            return UIMenu(title: "Settings", children: [copy])
         }
     }
 }
-
