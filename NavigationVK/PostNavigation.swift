@@ -11,7 +11,6 @@ struct PostNavigation {
   
     var image: String
 
-    // MARK: Создаём массив с помощью функции
     static func massivePost() -> [PostNavigation] {
         
         var post = [PostNavigation]()

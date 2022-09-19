@@ -27,4 +27,11 @@ final class ProfileFlowCoordinator {
         let vc = PhotosViewController()
         navCon.pushViewController(vc, animated: true)
     }
+    
+    func showSettings(title: String) {
+        let vc = UINavigationController(rootViewController: SettingsViewController())
+        vc.title = title
+        vc.modalPresentationStyle = .fullScreen
+        navCon.present(vc, animated: true, completion: nil)
+    }
 }
