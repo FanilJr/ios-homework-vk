@@ -19,10 +19,11 @@ class ProfileImageView: UIView {
     private var background: UIImageView = {
         let background = UIImageView()
         background.layer.cornerRadius = 30
-        background.image = UIImage(named: "background3")
+        background.image = UIImage(named: "backAvatar")
         background.clipsToBounds = true
+        background.contentMode = .scaleAspectFill
         background.layer.borderColor = UIColor.white.cgColor
-        background.layer.borderWidth = 2
+        background.layer.borderWidth = 3
         background.translatesAutoresizingMaskIntoConstraints = false
         return background
     }()
@@ -40,7 +41,7 @@ class ProfileImageView: UIView {
     
     lazy var avatarImageView: UIImageView = {
         let avatarImageView = UIImageView()
-        avatarImageView.layer.borderWidth = 2
+        avatarImageView.layer.borderWidth = 3
         avatarImageView.layer.borderColor = UIColor.white.cgColor
         avatarImageView.layer.cornerRadius = 60
         avatarImageView.clipsToBounds = true
@@ -67,7 +68,7 @@ class ProfileImageView: UIView {
         settings.setImage(UIImage(systemName: "gear"), for: .normal)
         settings.setTitle("Настройки", for: .normal)
         settings.setTitleColor(.white, for: .normal)
-        settings.tintColor = .red
+        settings.tintColor = .cyan
         settings.translatesAutoresizingMaskIntoConstraints = false
         settings.clipsToBounds = true
         settings.addTarget(self, action: #selector(tapSetting), for: .touchUpInside)
@@ -79,7 +80,7 @@ class ProfileImageView: UIView {
         card.setImage(UIImage(systemName: "creditcard"), for: .normal)
         card.setTitle("Счёт: RUB", for: .normal)
         card.setTitleColor(.white, for: .normal)
-        card.tintColor = .red
+        card.tintColor = .cyan
         card.translatesAutoresizingMaskIntoConstraints = false
         card.clipsToBounds = true
         return card
