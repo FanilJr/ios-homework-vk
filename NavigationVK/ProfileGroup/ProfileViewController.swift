@@ -267,7 +267,13 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
         
         if indexPath.section == 0 {
             coordinator?.showPhotos()
-    
+        }
+        
+        if indexPath.section > 0 {
+            let vc = ProfilePostViewController()
+            vc.setupCell(post[indexPath.row])
+            navigationController?.pushViewController(vc, animated: true)
+//            coordinator?.showProfilePost()
         }
     }
 }
