@@ -34,4 +34,9 @@ final class ProfileFlowCoordinator {
         vc.modalPresentationStyle = .fullScreen
         navCon.present(vc, animated: true, completion: nil)
     }
+    
+    func showProfilePost() {
+        let vc = ProfilePostViewController()
+        navCon.pushViewController(vc, animated: true)
+    }
 }

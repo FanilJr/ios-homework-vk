@@ -84,9 +84,6 @@ final class ProfileHeaderView: UIView {
     
     
     @objc func expandAvatar() {
-//        UIView.animate(withDuration: 1.3, animations: {
-//        self.avatarImageView.alpha = 0.0 })
-        print("нажатие в HeaderView")
         delegate?.presentMenuAvatar()
     }
     
@@ -104,9 +101,6 @@ final class ProfileHeaderView: UIView {
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor,constant: 30),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            
-//            statusTextField.heightAnchor.constraint(equalToConstant: 30),
-//            stackView.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor),
             
             setStatusButton.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 16),
             setStatusButton.leadingAnchor.constraint(equalTo: leadingAnchor),
