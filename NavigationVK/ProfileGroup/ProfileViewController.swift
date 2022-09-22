@@ -236,14 +236,13 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
     }
     
     func tapClosed() {
-
         UIView.animate(withDuration: 0.5, animations: {
             self.header.avatarImageView.alpha = 1
             self.profileImageView.transform = CGAffineTransform(translationX: 0, y: -360)
             self.blure.alpha = 0
         })
         tabBarController?.tabBar.isHidden = false
-            // MARK: Надо доделать этот блок кода, с помощью Dispatch, пока не выполнится ^ этот блок, то этот не приступает - ГОТОВО.
+// MARK: Надо доделать этот блок кода, с помощью Dispatch, пока не выполнится ^ этот блок, то этот не приступает - ГОТОВО.
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.profileImageView.removeFromSuperview()
             self.blure.removeFromSuperview()

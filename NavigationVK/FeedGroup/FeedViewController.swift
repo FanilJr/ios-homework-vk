@@ -88,4 +88,8 @@ extension FeedViewController: FeedViewDelegate {
     func didTapSecondPostButton() {
         coordinator?.showSecondPost(title: post.title)
     }
+    
+    func didTapVoiceRecButton() {
+            coordinator?.showVoiceRecorder()
+        }
 }
