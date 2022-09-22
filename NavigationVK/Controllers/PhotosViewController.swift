@@ -25,6 +25,7 @@ class PhotosViewController: UIViewController {
         navigationItem.title = "Фотогалерея"
         view.backgroundColor = .white
         navigationController?.navigationBar.isHidden = false
+
         layout()
     }
     
@@ -60,7 +61,6 @@ extension PhotosViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         galery.count
         
     }

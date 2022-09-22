@@ -21,7 +21,7 @@ struct PostStruct {
         
         var post = [PostStruct]()
         post.append(PostStruct(author: "Тюменский мост влюблённых 🌉", description: "Делаем фоточки", image: "P17", likes: 0, views: 0))
-        post.append(PostStruct(author: "Вкусно поели 🥩", description: "Реклама запрещена", image: "P18", likes: 0, views: 0))
+        post.append(PostStruct(author: "Вкусно поели 🥞☕️", description: "Реклама запрещена", image: "P18", likes: 0, views: 0))
         post.append(PostStruct(author: "Красотка на сеновале 🌾", description: "Потрясающий вид", image: "P19", likes: 0, views: 0))
         post.append(PostStruct(author: "Попали в грозу 🌪", description: "P.S. еще и колесо пробили", image: "P20", likes: 0, views: 0))
         post.append(PostStruct(author: "Это моя невеста - Юля ❤️", description: "Ещё не знает, что сделаю ей предложение", image: ("P1"), likes: 0, views: 0))
