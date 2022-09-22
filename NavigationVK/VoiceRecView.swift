@@ -40,6 +40,10 @@ final class VoiceRecView: UIView {
     
     private let imageTrack: UIImageView = {
         let image = UIImageView()
+        image.layer.borderWidth = 2
+        image.layer.borderColor = UIColor.purple.cgColor
+        image.layer.cornerRadius = 30
+        image.clipsToBounds = true
         image.image = UIImage(named: "SaintJHN")
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
