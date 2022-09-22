@@ -14,7 +14,7 @@ class VoiceRecorderViewController: UIViewController {
     lazy var voiceRecView = VoiceRecView(delegate: self)
     var recordingSessions: AVAudioSession!
     var voiceRecorder: AVAudioRecorder!
-    let recordedFileUrl = URL.init(fileURLWithPath: Bundle.main.path(forResource: "Trophies", ofType: "mp3")!)
+    let recordedFileUrl = URL.init(fileURLWithPath: Bundle.main.path(forResource: "Trophies", ofType: "m4a")!)
  
     init() {
         super.init(nibName: nil, bundle: nil)

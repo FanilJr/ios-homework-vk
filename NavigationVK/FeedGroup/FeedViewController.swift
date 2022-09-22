@@ -42,6 +42,11 @@ class FeedViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(notificationAction), name: .updateIsValidWord, object: nil)
         layout()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = false
+    }
 
     @objc private func notificationAction(_ notification: Notification) {
         
