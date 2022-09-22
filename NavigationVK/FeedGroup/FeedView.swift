@@ -18,34 +18,29 @@ final class FeedView: UIView {
     
     weak var delegate: FeedViewDelegate?
     private let nc = NotificationCenter.default
-    private var updateCounter = 0 // Счётчик одновлений контента на экране по таймеру
-    private var countdownTime = 5 // Периодичность срабатывания таймера
+    private var updateCounter = 0
+    private var countdownTime = 5
     private let voiceRecButton = CustomButton(title: "JRPlayer", titleColor: .black, backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
     
     private lazy var countdownTimeLabel: UILabel = {
-
-            let label = UILabel()
-            label.text = "До обновления экрана осталось \(countdownTime) сек."
-            label.textAlignment = .center
-            label.textColor = .white
-            label.backgroundColor = .black
-            label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
-            label.translatesAutoresizingMaskIntoConstraints = false
-    //
-            return label
-        }()
+        let label = UILabel()
+        label.text = "До обновления экрана осталось \(countdownTime) сек."
+        label.textAlignment = .center
+        label.textColor = .white
+        label.backgroundColor = .black
+        label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     private lazy var updateCounterLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Данные на экране обновлены \(updateCounter) раз(а)"
+        label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
-            let label = UILabel()
-            label.text = "Данные на экране обновлены \(updateCounter) раз(а)"
-            label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
-            label.translatesAutoresizingMaskIntoConstraints = false
-
-            return label
-        }()
-
-    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .clear
@@ -270,8 +265,7 @@ final class FeedView: UIView {
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 32),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
             stackView.heightAnchor.constraint(equalToConstant: 150),
-//            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -32),
-            
+
             countdownTimeLabel.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 30),
             countdownTimeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             countdownTimeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
