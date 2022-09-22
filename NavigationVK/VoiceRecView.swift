@@ -31,9 +31,9 @@ final class VoiceRecView: UIView {
 
     private let trackNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Saint JHN - Trophies 🎸"
+        label.text = "Saint JHN - Trophies🎸"
         label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 25, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -99,16 +99,16 @@ final class VoiceRecView: UIView {
             background.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             
-            imageTrack.topAnchor.constraint(equalTo: background.safeAreaLayoutGuide.topAnchor,constant: 20),
+            imageTrack.topAnchor.constraint(equalTo: background.safeAreaLayoutGuide.topAnchor,constant: 50),
             imageTrack.leadingAnchor.constraint(equalTo: background.leadingAnchor,constant: 20),
             imageTrack.heightAnchor.constraint(equalToConstant: 400),
             imageTrack.trailingAnchor.constraint(equalTo: background.trailingAnchor,constant: -20),
             
-            trackNameLabel.topAnchor.constraint(equalTo: imageTrack.bottomAnchor,constant: 20),
+            trackNameLabel.topAnchor.constraint(equalTo: imageTrack.bottomAnchor,constant: 40),
             trackNameLabel.centerXAnchor.constraint(equalTo: background.centerXAnchor),
             
+            buttonHorizontalStackView.topAnchor.constraint(equalTo: trackNameLabel.bottomAnchor,constant: 120),
             buttonHorizontalStackView.centerXAnchor.constraint(equalTo: background.centerXAnchor),
-            buttonHorizontalStackView.topAnchor.constraint(equalTo: trackNameLabel.bottomAnchor,constant: 30),
             buttonHorizontalStackView.leadingAnchor.constraint(equalTo: background.leadingAnchor,constant: 20),
             buttonHorizontalStackView.trailingAnchor.constraint(equalTo: background.trailingAnchor,constant: -20),
             buttonHorizontalStackView.heightAnchor.constraint(equalToConstant: 60)
