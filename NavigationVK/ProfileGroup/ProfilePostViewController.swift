@@ -82,7 +82,7 @@ class ProfilePostViewController: UIViewController {
             postImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 20),
             postImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             postImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            postImage.heightAnchor.constraint(equalToConstant: 400),
+            postImage.heightAnchor.constraint(equalToConstant: 550),
         
             authorName.topAnchor.constraint(equalTo: postImage.bottomAnchor,constant: 10),
             authorName.centerXAnchor.constraint(equalTo: view.centerXAnchor),

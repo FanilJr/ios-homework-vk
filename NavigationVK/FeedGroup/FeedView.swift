@@ -11,12 +11,40 @@ protocol FeedViewDelegate: AnyObject {
     func didTapPostButton()
     func check(word: String)
     func didTapSecondPostButton()
+    func didTapVoiceRecButton()
 }
 
 final class FeedView: UIView {
     
     weak var delegate: FeedViewDelegate?
     private let nc = NotificationCenter.default
+    private var updateCounter = 0 // Счётчик одновлений контента на экране по таймеру
+    private var countdownTime = 5 // Периодичность срабатывания таймера
+    private let voiceRecButton = CustomButton(title: "JRPlayer", titleColor: .black, backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
+    
+    private lazy var countdownTimeLabel: UILabel = {
+
+            let label = UILabel()
+            label.text = "До обновления экрана осталось \(countdownTime) сек."
+            label.textAlignment = .center
+            label.textColor = .white
+            label.backgroundColor = .black
+            label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+            label.translatesAutoresizingMaskIntoConstraints = false
+    //
+            return label
+        }()
+    
+    private lazy var updateCounterLabel: UILabel = {
+
+            let label = UILabel()
+            label.text = "Данные на экране обновлены \(updateCounter) раз(а)"
+            label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+            label.translatesAutoresizingMaskIntoConstraints = false
+
+            return label
+        }()
+
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -107,6 +135,7 @@ final class FeedView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         self.delegate = delegate
         backgroundColor = .clear
+        makeTimer()
         addObserver()
         tapScreen()
         layout()
@@ -153,6 +182,9 @@ final class FeedView: UIView {
         postButtonSecond.tapAction = { [weak self] in
             self?.delegate?.didTapSecondPostButton()
         }
+        voiceRecButton.tapAction = { [weak self] in
+            self?.delegate?.didTapVoiceRecButton()
+        }
         notificationButton.tapAction = { [weak self] in
             self?.delegate?.check(word: self?.textField.text ?? "")
             
@@ -162,6 +194,22 @@ final class FeedView: UIView {
             }
         }
     }
+    
+    private func makeTimer() {
+            var countdown = countdownTime
+            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {timer in
+                countdown -= 1
+                self.countdownTimeLabel.text = "До обновления экрана осталось \(countdown) сек."
+                if countdown == 0 {
+                    countdown = self.countdownTime
+                    self.updateCounter += 1
+                    self.updateCounterLabel.text = "Данные на экране обновлены \(self.updateCounter) раз(а)"
+                }
+                if self.updateCounter == 3 {
+                    timer.invalidate()
+                }
+            }
+        }
     
     func setResultLabel(result: Bool) {
         
@@ -177,7 +225,7 @@ final class FeedView: UIView {
     private func layout() {
         
         [textField, resultLabel, notificationButton].forEach { stackView.addArrangedSubview($0) }
-        [firstPost, postButtonFirst, secondPost, postButtonSecond, stackView].forEach { contentView.addSubview($0) }
+        [firstPost, postButtonFirst, secondPost, postButtonSecond, stackView, countdownTimeLabel, updateCounterLabel, voiceRecButton].forEach { contentView.addSubview($0) }
         scrollView.addSubview(contentView)
         addSubview(scrollView)
         
@@ -193,7 +241,12 @@ final class FeedView: UIView {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
-            firstPost.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor,constant: 32),
+            voiceRecButton.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor,constant: 32),
+            voiceRecButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 32),
+            voiceRecButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
+            voiceRecButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            firstPost.topAnchor.constraint(equalTo: voiceRecButton.bottomAnchor,constant: 32),
             firstPost.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 32),
             firstPost.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
             firstPost.heightAnchor.constraint(equalToConstant: 300),
@@ -217,8 +270,16 @@ final class FeedView: UIView {
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 32),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
             stackView.heightAnchor.constraint(equalToConstant: 150),
-            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -32)
+//            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -32),
             
+            countdownTimeLabel.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 30),
+            countdownTimeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            countdownTimeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            countdownTimeLabel.heightAnchor.constraint(equalToConstant: 30),
+            
+            updateCounterLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            updateCounterLabel.topAnchor.constraint(equalTo: countdownTimeLabel.bottomAnchor,constant: 10),
+            updateCounterLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -20)
         ])
     }
 }

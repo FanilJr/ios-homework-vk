@@ -58,6 +58,9 @@
 		84CF1A3828BCBCD7000FF0D8 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CF1A3728BCBCD7000FF0D8 /* FeedModel.swift */; };
 		84CF1A3A28BCBD0F000FF0D8 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CF1A3928BCBD0F000FF0D8 /* NotificationName.swift */; };
 		84DC23C928B47FCF0091F0D5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC23C828B47FCF0091F0D5 /* User.swift */; };
+		84FFEDC828DC69CE00CC71DB /* VoiceRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFEDC728DC69CE00CC71DB /* VoiceRecorderViewController.swift */; };
+		84FFEDCA28DC6A9800CC71DB /* VoiceRecView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFEDC928DC6A9800CC71DB /* VoiceRecView.swift */; };
+		84FFEDCE28DC7BA600CC71DB /* Trophies.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 84FFEDCD28DC7BA500CC71DB /* Trophies.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +142,9 @@
 		84CF1A3728BCBCD7000FF0D8 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		84CF1A3928BCBD0F000FF0D8 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		84DC23C828B47FCF0091F0D5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		84FFEDC728DC69CE00CC71DB /* VoiceRecorderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecorderViewController.swift; sourceTree = "<group>"; };
+		84FFEDC928DC6A9800CC71DB /* VoiceRecView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecView.swift; sourceTree = "<group>"; };
+		84FFEDCD28DC7BA500CC71DB /* Trophies.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Trophies.mp3; sourceTree = "<group>"; };
 		A35A56890B1A30C753CE16F3 /* Pods-NavigationVK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NavigationVK.release.xcconfig"; path = "Target Support Files/Pods-NavigationVK/Pods-NavigationVK.release.xcconfig"; sourceTree = "<group>"; };
 		F46C1E535CF2BA17EAD0131D /* Pods-NavigationVK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NavigationVK.debug.xcconfig"; path = "Target Support Files/Pods-NavigationVK/Pods-NavigationVK.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -189,6 +195,7 @@
 			children = (
 				847409A028C36E6F00CBA34A /* SplashView.swift */,
 				84061DF428B1620600B5AB47 /* LaunchScreen.storyboard */,
+				84FFEDCD28DC7BA500CC71DB /* Trophies.mp3 */,
 				84061DF728B1620600B5AB47 /* Info.plist */,
 				84061DF228B1620600B5AB47 /* Assets.xcassets */,
 				849D70A128B6395700CE6807 /* Cells */,
@@ -202,6 +209,8 @@
 				849D70A028B6394400CE6807 /* Scene */,
 				849D709F28B6383F00CE6807 /* Users */,
 				8490560B28C923A600EC473B /* PostNavigation.swift */,
+				84FFEDC728DC69CE00CC71DB /* VoiceRecorderViewController.swift */,
+				84FFEDC928DC6A9800CC71DB /* VoiceRecView.swift */,
 			);
 			path = NavigationVK;
 			sourceTree = "<group>";
@@ -445,6 +454,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84FFEDCE28DC7BA600CC71DB /* Trophies.mp3 in Resources */,
 				84061DF628B1620600B5AB47 /* LaunchScreen.storyboard in Resources */,
 				84061DF328B1620600B5AB47 /* Assets.xcassets in Resources */,
 			);
@@ -511,6 +521,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84FFEDCA28DC6A9800CC71DB /* VoiceRecView.swift in Sources */,
 				8490560C28C923A600EC473B /* PostNavigation.swift in Sources */,
 				84061E1128B169D700B5AB47 /* Photos.swift in Sources */,
 				8444AA6028B4B76E005BB8FF /* Checker.swift in Sources */,
@@ -551,6 +562,7 @@
 				84061E1528B16A3100B5AB47 /* PostStruct.swift in Sources */,
 				84061E0928B168CD00B5AB47 /* FeedViewController.swift in Sources */,
 				84061DEC28B161FE00B5AB47 /* SceneDelegate.swift in Sources */,
+				84FFEDC828DC69CE00CC71DB /* VoiceRecorderViewController.swift in Sources */,
 				84CA386728C095E100EECD6D /* ControllersFactory.swift in Sources */,
 				84061E0F28B169A300B5AB47 /* CustomCollectionViewCell.swift in Sources */,
 			);
