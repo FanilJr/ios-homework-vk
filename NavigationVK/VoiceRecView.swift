@@ -5,12 +5,11 @@
 //  Created by Fanil_Jr on 22.09.2022.
 //
 
-/*import Foundation
+import Foundation
  import UIKit
  
  protocol VoiceRecViewDelegate: AnyObject {
  func didTapPlayButton()
- func didTapRecButton()
  func sliderAction()
  }
  
@@ -20,7 +19,6 @@
  weak var delegate: VoiceRecViewDelegate?
  
  private let playButton = CustomButton(title: "Play", titleColor: .white, backgroundColor: .clear, setBackgroundImage: UIImage(named: "buttonPlayer") ?? UIImage())
- private let recButton = CustomButton(title: "Record", titleColor: .white, backgroundColor: .clear, setBackgroundImage: UIImage(named: "buttonPlayer") ?? UIImage())
  
  private var background: UIImageView = {
  let background = UIImageView()
@@ -32,6 +30,8 @@
  
  let slider: UISlider = {
  let slider = UISlider()
+     slider.minimumValue = 0.0
+     slider.maximumValue = 1000
  slider.addTarget(self, action: #selector(changeAudiTime), for: .touchDragInside)
  slider.thumbTintColor = .systemPink
  slider.tintColor = .green
@@ -54,7 +54,7 @@
  image.layer.borderColor = UIColor.purple.cgColor
  image.layer.cornerRadius = 30
  image.clipsToBounds = true
- image.image = UIImage(named: "SaintJHN")
+ image.image = UIImage(named: "Trophies")
  image.translatesAutoresizingMaskIntoConstraints = false
  return image
  }()
@@ -86,16 +86,9 @@
  
  // MARK: - Metods
  private func taps() {
- playButton.tapAction = { [weak self] in
- self?.delegate?.didTapPlayButton()
- }
- recButton.tapAction = { [weak self] in
- self?.delegate?.didTapRecButton()
- }
- }
- 
- func setTitleRecButton(_ title: String) {
- recButton.setTitle(title, for: .normal)
+     playButton.tapAction = { [weak self] in
+         self?.delegate?.didTapPlayButton()
+     }
  }
  
  func setTitlePlayButton(_ title: String) {
@@ -108,7 +101,7 @@
  }
  
  private func layout() {
- [playButton, recButton].forEach { buttonHorizontalStackView.addArrangedSubview($0) }
+ [playButton].forEach { buttonHorizontalStackView.addArrangedSubview($0) }
  [background, imageTrack, slider, trackNameLabel, buttonHorizontalStackView].forEach { addSubview($0) }
  
  NSLayoutConstraint.activate([
@@ -129,7 +122,6 @@
  slider.leadingAnchor.constraint(equalTo: background.leadingAnchor,constant: 10),
  slider.trailingAnchor.constraint(equalTo: background.trailingAnchor,constant: -10),
  
- //            buttonHorizontalStackView.topAnchor.constraint(equalTo: trackNameLabel.bottomAnchor,constant: 120),
  buttonHorizontalStackView.centerXAnchor.constraint(equalTo: background.centerXAnchor),
  buttonHorizontalStackView.leadingAnchor.constraint(equalTo: background.leadingAnchor,constant: 20),
  buttonHorizontalStackView.trailingAnchor.constraint(equalTo: background.trailingAnchor,constant: -20),
@@ -138,4 +130,3 @@
  ])
  }
  }
- */
