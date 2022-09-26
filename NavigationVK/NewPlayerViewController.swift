@@ -7,9 +7,9 @@
 
 import UIKit
 import AVFoundation
+import MediaPlayer
 var isMix = false
 var rondomInt = 0
-import MediaPlayer
 var nowPlayingInfo = [String : Any] ()
 class ViewController: UIViewController ,AVAudioPlayerDelegate  {
     

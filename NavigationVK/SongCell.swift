@@ -11,7 +11,7 @@ class SongCell: UITableViewCell {
 
     let artistImage : UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "Trophies")
+        image.image = UIImage(named: "White")
         image.clipsToBounds = true
         image.layer.cornerRadius = 10
         image.contentMode = .scaleAspectFill
