@@ -12,7 +12,6 @@ import AVFoundation
  
      var player: AVAudioPlayer?
      lazy var voiceRecView = VoiceRecView(delegate: self)
-     var recordingSessions: AVAudioSession!
      lazy var slider = voiceRecView.slider
      let recordedFileUrl = URL.init(fileURLWithPath: Bundle.main.path(forResource: "Trophies", ofType: "mp3")!)
  
@@ -26,20 +25,18 @@ import AVFoundation
  
      override func viewDidLoad() {
          super.viewDidLoad()
-         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-             self.slider.value = Float(self.player?.currentTime ?? 0.0)
-         }
-         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-             self.slider.value = Float(self.player?.currentTime ?? 0.0)
-         }
-         
          layout()
+         DispatchQueue.main.asyncAfter(deadline: .now()) {
+             self.slider.maximumValue = Float(self.player?.duration ?? 0.0)
+             self.slider.value = Float(self.player?.currentTime ?? 0.0)
+         }
      }
  
      override func viewWillAppear(_ animated: Bool) {
  
          tabBarController?.tabBar.isHidden = true
          navigationController?.navigationBar.isHidden = true
+         voiceRecView.playButton.setImage(UIImage(named: "play"), for: .normal)
          
      }
  
@@ -48,26 +45,6 @@ import AVFoundation
      }
  
      override func viewDidAppear(_ animated: Bool) {
-     }
- 
-     private func showGoToSettingsAlert() {
-         let alertController = UIAlertController (title: "Разрешить доступ", message: "Для работы диктофона необходимо предоставить доступ к микрофону", preferredStyle: .alert)
- 
-         let settingsAction = UIAlertAction(title: "Настройки", style: .default) { (_) -> Void in
-             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
-                 return
-             }
- 
-             if UIApplication.shared.canOpenURL(settingsUrl) {
-                 UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                     print("Settings opened: \(success)")
-                 })
-            }
-         }
-         alertController.addAction(settingsAction)
-         let cancelAction = UIAlertAction(title: "Отмена", style: .default, handler: nil)
-         alertController.addAction(cancelAction)
-         present(alertController, animated: true, completion: nil)
      }
  
      private func layout() {
@@ -94,8 +71,12 @@ extension VoiceRecorderViewController: VoiceRecViewDelegate {
             let isPlayng = player?.isPlaying ?? false
             if let _ = player, isPlayng {
                 playerStop()
+                voiceRecView.playButton.setImage(UIImage(named: "play"), for: .normal)
             } else {
+                
                 playerPlay()
+                voiceRecView.playButton.setImage(UIImage(named: "pause"), for: .normal)
+
             }
         }
     }
@@ -121,22 +102,24 @@ extension VoiceRecorderViewController: VoiceRecViewDelegate {
      }
  
      private func playerStop() {
-         player?.stop()
+         player?.pause()
          player = nil
-         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-             self.slider.value = Float(self.player?.currentTime ?? 0.0)
-         }
          voiceRecView.setTitlePlayButton("Play")
+         voiceRecView.playButton.setImage(UIImage(named: "play"), for: .normal)
      }
  
      private func playerPlay() {
          prepareToPlay()
          player!.play()
-         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+         DispatchQueue.main.asyncAfter(deadline: .now()) {
              self.slider.value = Float(self.player?.currentTime ?? 0.0)
          }
-         
+         slider.maximumValue = Float(player?.duration ?? 0.0)
          voiceRecView.setTitlePlayButton("Stop")
+         
+         voiceRecView.setImagePlayButton(UIImage(named: "pause") ?? UIImage())
+         voiceRecView.playButton.setImage(UIImage(named: "pause"), for: .normal)
+
      }
  }
  
