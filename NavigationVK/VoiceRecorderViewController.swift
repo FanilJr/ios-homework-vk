@@ -36,8 +36,12 @@ import AVFoundation
  
          tabBarController?.tabBar.isHidden = true
          navigationController?.navigationBar.isHidden = true
-         voiceRecView.playButton.setImage(UIImage(named: "play"), for: .normal)
-         
+//         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+         if player?.isPlaying ?? false {
+             voiceRecView.playButton.setImage(UIImage(named: "pause"), for: .normal)
+         } else {
+             voiceRecView.playButton.setImage(UIImage(named: "play"), for: .normal)
+         }
      }
  
      override func viewWillDisappear(_ animated: Bool) {
@@ -61,7 +65,7 @@ import AVFoundation
 }
 
 extension VoiceRecorderViewController: VoiceRecViewDelegate {
- 
+    
         func sliderAction() {
             slider.maximumValue = Float(player?.duration ?? 0.0)
             player?.currentTime = TimeInterval(slider.value)

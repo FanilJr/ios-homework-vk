@@ -20,7 +20,7 @@ final class FeedView: UIView {
     private let nc = NotificationCenter.default
     private var updateCounter = 0
     private var countdownTime = 5
-    private let voiceRecButton = CustomButton(title: "JRPlayer", titleColor: .black, backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
+    private let voiceRecButton = CustomButton(title: "JRPlayer", titleColor: .white, backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
     
     private lazy var countdownTimeLabel: UILabel = {
         let label = UILabel()
@@ -179,6 +179,7 @@ final class FeedView: UIView {
         }
         voiceRecButton.tapAction = { [weak self] in
             self?.delegate?.didTapVoiceRecButton()
+            
         }
         notificationButton.tapAction = { [weak self] in
             self?.delegate?.check(word: self?.textField.text ?? "")

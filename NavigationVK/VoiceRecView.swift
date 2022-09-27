@@ -26,7 +26,7 @@ import UIKit
          name.translatesAutoresizingMaskIntoConstraints = false
          name.textColor = .black
          name.text = "Saint JHN"
-         name.font = UIFont.systemFont(ofSize: 45, weight: .semibold)
+//         name.font = UIFont.systemFont(ofSize: 45, weight: .semibold)
          name.font = UIFont(name: "Bodoni 72", size: 45)
          return name
      }()
@@ -34,7 +34,7 @@ import UIKit
          let name = UILabel()
          name.textColor = .black
          name.text = "Ghetto Lenny's Love Songs"
-         name.font = UIFont.systemFont(ofSize: 27, weight: .bold)
+//         name.font = UIFont.systemFont(ofSize: 27, weight: .bold)
          name.font = UIFont(name: "Bodoni 72", size: 27)
          name.translatesAutoresizingMaskIntoConstraints = false
          return name
@@ -47,7 +47,6 @@ import UIKit
          line.layer.cornerRadius = 2
          line.clipsToBounds = true
          return line
-         
      }()
  
      private var background: UIImageView = {
@@ -76,10 +75,7 @@ import UIKit
          let label = UILabel()
          label.text = "Trophies 🎸"
          label.textColor = .black
-         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
          label.font = UIFont(name: "Bodoni 72", size: 22)
-         
-//         label.font = UIFont.systemFont(ofSize: 25, weight: .regular)
          label.translatesAutoresizingMaskIntoConstraints = false
          return label
      }()
@@ -88,7 +84,7 @@ import UIKit
          let image = UIImageView()
          image.layer.borderWidth = 2
          image.layer.borderColor = UIColor.purple.cgColor
-         image.layer.cornerRadius = 120
+         image.layer.cornerRadius = 140
          image.clipsToBounds = true
          image.image = UIImage(named: "Trophies")
          image.translatesAutoresizingMaskIntoConstraints = false
@@ -149,8 +145,8 @@ import UIKit
             background.leadingAnchor.constraint(equalTo: leadingAnchor),
             background.trailingAnchor.constraint(equalTo: trailingAnchor),
             background.bottomAnchor.constraint(equalTo: bottomAnchor),
-            
-            nameArtist.topAnchor.constraint(equalTo: background.safeAreaLayoutGuide.topAnchor,constant: 120),
+
+            nameArtist.topAnchor.constraint(equalTo: background.safeAreaLayoutGuide.topAnchor,constant: 60),
             nameArtist.leadingAnchor.constraint(equalTo: background.leadingAnchor,constant: 32),
             
             line.topAnchor.constraint(equalTo: nameArtist.bottomAnchor),
@@ -158,13 +154,12 @@ import UIKit
             line.trailingAnchor.constraint(equalTo: background.trailingAnchor,constant: -5),
             line.heightAnchor.constraint(equalToConstant: 3),
  
-//            imageTrack.topAnchor.constraint(equalTo: line.bottomAnchor,constant: 30),
             imageTrack.centerXAnchor.constraint(equalTo: background.centerXAnchor),
             imageTrack.centerYAnchor.constraint(equalTo: background.centerYAnchor),
-            imageTrack.widthAnchor.constraint(equalToConstant: 240),
-            imageTrack.heightAnchor.constraint(equalToConstant: 240),
+            imageTrack.widthAnchor.constraint(equalToConstant: 280),
+            imageTrack.heightAnchor.constraint(equalToConstant: 280),
             
-            nameAlbum.topAnchor.constraint(equalTo: imageTrack.bottomAnchor,constant: 30),
+            nameAlbum.topAnchor.constraint(equalTo: imageTrack.bottomAnchor,constant: 15),
             nameAlbum.leadingAnchor.constraint(equalTo: background.leadingAnchor,constant: 32),
  
             trackNameLabel.topAnchor.constraint(equalTo: nameAlbum.bottomAnchor),
