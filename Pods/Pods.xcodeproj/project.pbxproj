@@ -22,14 +22,14 @@
 		2D96EFA91C35C730C43664AEF0587AF8 /* Pods-StorageService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StorageService.debug.xcconfig"; sourceTree = "<group>"; };
 		3938397A3B110EA9F4314BEB66BB3A70 /* Pods-StorageService-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-StorageService-dummy.m"; sourceTree = "<group>"; };
 		49D27A0CA9CC3D3BC745C7CB5C63A674 /* Pods-NavigationVK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-NavigationVK-dummy.m"; sourceTree = "<group>"; };
-		548CCCF42AEE3C5E1A81C162056F49F0 /* Pods_NavigationVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NavigationVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		548CCCF42AEE3C5E1A81C162056F49F0 /* Pods-NavigationVK */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-NavigationVK"; path = Pods_NavigationVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		59B9F2BE38BEE1EDF16AFDBFAE4F5D04 /* Pods-StorageService-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-StorageService-Info.plist"; sourceTree = "<group>"; };
 		59D4FD7E3D120205367BB94F25E2C54D /* Pods-NavigationVK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-NavigationVK-umbrella.h"; sourceTree = "<group>"; };
 		5A22E7754471C60103F2C3ACEA20813C /* Pods-StorageService-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-StorageService-umbrella.h"; sourceTree = "<group>"; };
 		5D8127E0A474876F869B9B8EB6F2E0DB /* Pods-NavigationVK-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NavigationVK-Info.plist"; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		814A8D1BA2F99708C95277E16EC643E1 /* Pods-NavigationVK-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NavigationVK-acknowledgements.plist"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		AC427EF7B582DBAA87FDB1920BD77FED /* Pods-NavigationVK-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-NavigationVK-acknowledgements.markdown"; sourceTree = "<group>"; };
 		B29C11F4AD15EAA21A630F92F04CC1B8 /* Pods-StorageService-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-StorageService-acknowledgements.markdown"; sourceTree = "<group>"; };
 		C2B349740205A5C995A33EB5DB94F189 /* Pods-StorageService.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-StorageService.modulemap"; sourceTree = "<group>"; };
@@ -94,7 +94,7 @@
 		78935B65D38F9D04D0488091DEF2AD81 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				548CCCF42AEE3C5E1A81C162056F49F0 /* Pods_NavigationVK.framework */,
+				548CCCF42AEE3C5E1A81C162056F49F0 /* Pods-NavigationVK */,
 				14FE66AD7513DA1D4353206DB8339C9E /* Pods-StorageService */,
 			);
 			name = Products;
@@ -171,7 +171,7 @@
 			);
 			name = "Pods-NavigationVK";
 			productName = Pods_NavigationVK;
-			productReference = 548CCCF42AEE3C5E1A81C162056F49F0 /* Pods_NavigationVK.framework */;
+			productReference = 548CCCF42AEE3C5E1A81C162056F49F0 /* Pods-NavigationVK */;
 			productType = "com.apple.product-type.framework";
 		};
 		70CA38CB6019B5AFED49D6B7EDE899E3 /* Pods-StorageService */ = {
