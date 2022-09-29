@@ -33,10 +33,8 @@ final class FeedFlowCoordinator {
         navCon.pushViewController(vc, animated: true)
         vc.image.image = UIImage(named: "heart4")
     }
-    
     func showPlayer() {
-        let vc = VoiceRecorderViewController()
-        vc.title = "Voice recording"
+        let vc = PlayerViewController()
         navCon.pushViewController(vc, animated: true)
     }
 }
