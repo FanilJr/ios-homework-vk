@@ -7,6 +7,7 @@ target 'NavigationVK' do
 
   # Pods for NavigationVK
 
+
 end
 
 target 'StorageService' do

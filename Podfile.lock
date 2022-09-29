@@ -1,3 +1,22 @@
-PODFILE CHECKSUM: 55244336fce060a8344f70c57906b310e71e8534
+PODS:
+  - AudioKit (4.0.3):
+    - AudioKit/UI (= 4.0.3)
+  - AudioKit/UI (4.0.3)
+  - PandoraPlayer (1.2):
+    - AudioKit (= 4.0.3)
+
+DEPENDENCIES:
+  - PandoraPlayer
+
+SPEC REPOS:
+  trunk:
+    - AudioKit
+    - PandoraPlayer
+
+SPEC CHECKSUMS:
+  AudioKit: 914e5e8fcbf35099ff2398775342446a2d81476d
+  PandoraPlayer: 6e2f905ad7c6e51294e6f090d304f08a724174aa
+
+PODFILE CHECKSUM: 00146cb8319bf52c1882d67d1335c982f390686f
 
 COCOAPODS: 1.11.3
