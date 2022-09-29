@@ -62,8 +62,16 @@
 		84CF1A3A28BCBD0F000FF0D8 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CF1A3928BCBD0F000FF0D8 /* NotificationName.swift */; };
 		84DC23C928B47FCF0091F0D5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC23C828B47FCF0091F0D5 /* User.swift */; };
 		84E3FDA128E2C77700B42B1D /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3FDA028E2C77700B42B1D /* Player.swift */; };
-		84FFEDC828DC69CE00CC71DB /* VoiceRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFEDC728DC69CE00CC71DB /* VoiceRecorderViewController.swift */; };
-		84FFEDCA28DC6A9800CC71DB /* VoiceRecView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFEDC928DC6A9800CC71DB /* VoiceRecView.swift */; };
+		84E3FDA328E2E1EA00B42B1D /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3FDA228E2E1EA00B42B1D /* Song.swift */; };
+		84E3FDA528E34DDA00B42B1D /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3FDA428E34DDA00B42B1D /* PlayerViewController.swift */; };
+		84E3FDA728E34E5300B42B1D /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3FDA628E34E5300B42B1D /* Album.swift */; };
+		84E3FDAC28E3516900B42B1D /* Roses.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 84E3FDA828E3516500B42B1D /* Roses.mp3 */; };
+		84E3FDAD28E3516900B42B1D /* For The Squadron.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 84E3FDA928E3516600B42B1D /* For The Squadron.mp3 */; };
+		84E3FDAE28E3516900B42B1D /* Sucks To Be You.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 84E3FDAA28E3516800B42B1D /* Sucks To Be You.mp3 */; };
+		84E3FDAF28E3516900B42B1D /* Reflex.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 84E3FDAB28E3516900B42B1D /* Reflex.mp3 */; };
+		84E3FDB128E3587400B42B1D /* AlbumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3FDB028E3587400B42B1D /* AlbumTableViewCell.swift */; };
+		84E3FDB528E362AC00B42B1D /* MediaPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3FDB428E362AC00B42B1D /* MediaPlayer.swift */; };
+		84E3FDB728E551B500B42B1D /* MediaPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3FDB628E551B500B42B1D /* MediaPlayerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,8 +157,16 @@
 		84CF1A3928BCBD0F000FF0D8 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		84DC23C828B47FCF0091F0D5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		84E3FDA028E2C77700B42B1D /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
-		84FFEDC728DC69CE00CC71DB /* VoiceRecorderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecorderViewController.swift; sourceTree = "<group>"; };
-		84FFEDC928DC6A9800CC71DB /* VoiceRecView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecView.swift; sourceTree = "<group>"; };
+		84E3FDA228E2E1EA00B42B1D /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		84E3FDA428E34DDA00B42B1D /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		84E3FDA628E34E5300B42B1D /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		84E3FDA828E3516500B42B1D /* Roses.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Roses.mp3; sourceTree = "<group>"; };
+		84E3FDA928E3516600B42B1D /* For The Squadron.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "For The Squadron.mp3"; sourceTree = "<group>"; };
+		84E3FDAA28E3516800B42B1D /* Sucks To Be You.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Sucks To Be You.mp3"; sourceTree = "<group>"; };
+		84E3FDAB28E3516900B42B1D /* Reflex.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Reflex.mp3; sourceTree = "<group>"; };
+		84E3FDB028E3587400B42B1D /* AlbumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableViewCell.swift; sourceTree = "<group>"; };
+		84E3FDB428E362AC00B42B1D /* MediaPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayer.swift; sourceTree = "<group>"; };
+		84E3FDB628E551B500B42B1D /* MediaPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayerViewController.swift; sourceTree = "<group>"; };
 		A35A56890B1A30C753CE16F3 /* Pods-NavigationVK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NavigationVK.release.xcconfig"; path = "Target Support Files/Pods-NavigationVK/Pods-NavigationVK.release.xcconfig"; sourceTree = "<group>"; };
 		F46C1E535CF2BA17EAD0131D /* Pods-NavigationVK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NavigationVK.debug.xcconfig"; path = "Target Support Files/Pods-NavigationVK/Pods-NavigationVK.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -199,12 +215,11 @@
 		84061DE828B161FE00B5AB47 /* NavigationVK */ = {
 			isa = PBXGroup;
 			children = (
+				84E3FDB328E3625A00B42B1D /* MyPlayer */,
+				84E3FDB228E3624400B42B1D /* FirstPlayer */,
 				8436764328E03D6200D3BB1B /* Resources */,
 				847409A028C36E6F00CBA34A /* SplashView.swift */,
 				8490560B28C923A600EC473B /* PostNavigation.swift */,
-				84FFEDC728DC69CE00CC71DB /* VoiceRecorderViewController.swift */,
-				84FFEDC928DC6A9800CC71DB /* VoiceRecView.swift */,
-				84E3FDA028E2C77700B42B1D /* Player.swift */,
 				84061DF428B1620600B5AB47 /* LaunchScreen.storyboard */,
 				84061DF728B1620600B5AB47 /* Info.plist */,
 				84061DF228B1620600B5AB47 /* Assets.xcassets */,
@@ -248,6 +263,10 @@
 			isa = PBXGroup;
 			children = (
 				84AB6F1928E0485C008937CC /* White.mp3 */,
+				84E3FDA928E3516600B42B1D /* For The Squadron.mp3 */,
+				84E3FDAB28E3516900B42B1D /* Reflex.mp3 */,
+				84E3FDA828E3516500B42B1D /* Roses.mp3 */,
+				84E3FDAA28E3516800B42B1D /* Sucks To Be You.mp3 */,
 				84AB6F1A28E0485D008937CC /* Brilliant.mp3 */,
 				84AB6F1728E04473008937CC /* Trophies.mp3 */,
 			);
@@ -350,6 +369,27 @@
 				84C5FFB128B5040300C01CC9 /* CustomButton.swift */,
 			);
 			path = CustomElements;
+			sourceTree = "<group>";
+		};
+		84E3FDB228E3624400B42B1D /* FirstPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				84E3FDA028E2C77700B42B1D /* Player.swift */,
+			);
+			path = FirstPlayer;
+			sourceTree = "<group>";
+		};
+		84E3FDB328E3625A00B42B1D /* MyPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				84E3FDA628E34E5300B42B1D /* Album.swift */,
+				84E3FDA428E34DDA00B42B1D /* PlayerViewController.swift */,
+				84E3FDA228E2E1EA00B42B1D /* Song.swift */,
+				84E3FDB028E3587400B42B1D /* AlbumTableViewCell.swift */,
+				84E3FDB428E362AC00B42B1D /* MediaPlayer.swift */,
+				84E3FDB628E551B500B42B1D /* MediaPlayerViewController.swift */,
+			);
+			path = MyPlayer;
 			sourceTree = "<group>";
 		};
 		A053113DD0C59C19C26E5BED /* Frameworks */ = {
@@ -469,7 +509,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				84061DF628B1620600B5AB47 /* LaunchScreen.storyboard in Resources */,
+				84E3FDAF28E3516900B42B1D /* Reflex.mp3 in Resources */,
+				84E3FDAE28E3516900B42B1D /* Sucks To Be You.mp3 in Resources */,
+				84E3FDAC28E3516900B42B1D /* Roses.mp3 in Resources */,
 				84AB6F1828E04473008937CC /* Trophies.mp3 in Resources */,
+				84E3FDAD28E3516900B42B1D /* For The Squadron.mp3 in Resources */,
 				84AB6F1C28E0485D008937CC /* Brilliant.mp3 in Resources */,
 				84AB6F1B28E0485D008937CC /* White.mp3 in Resources */,
 				84061DF328B1620600B5AB47 /* Assets.xcassets in Resources */,
@@ -537,7 +581,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84FFEDCA28DC6A9800CC71DB /* VoiceRecView.swift in Sources */,
 				8490560C28C923A600EC473B /* PostNavigation.swift in Sources */,
 				84061E1128B169D700B5AB47 /* Photos.swift in Sources */,
 				8444AA6028B4B76E005BB8FF /* Checker.swift in Sources */,
@@ -552,8 +595,10 @@
 				84CA387128C09F5500EECD6D /* LoginView.swift in Sources */,
 				84061DEA28B161FE00B5AB47 /* AppDelegate.swift in Sources */,
 				845CF25228CB955800EECCAF /* SecondPostViewController.swift in Sources */,
+				84E3FDA528E34DDA00B42B1D /* PlayerViewController.swift in Sources */,
 				84DC23C928B47FCF0091F0D5 /* User.swift in Sources */,
 				8403230128C679EC009BCD8E /* MainTabBarController.swift in Sources */,
+				84E3FDA328E2E1EA00B42B1D /* Song.swift in Sources */,
 				84CA386F28C09E0B00EECD6D /* LoginViewModel.swift in Sources */,
 				84CF1A3628BCBC3D000FF0D8 /* CustomTextField.swift in Sources */,
 				8444AA5E28B4B6E7005BB8FF /* LoginInspector.swift in Sources */,
@@ -561,24 +606,27 @@
 				84061E1928B16AB700B5AB47 /* PhotosTableViewCell.swift in Sources */,
 				84CA387928C324B400EECD6D /* ExtensionPassword.swift in Sources */,
 				84CF1A3828BCBCD7000FF0D8 /* FeedModel.swift in Sources */,
+				84E3FDB128E3587400B42B1D /* AlbumTableViewCell.swift in Sources */,
 				84CF1A3428BCBBCD000FF0D8 /* FeedView.swift in Sources */,
 				84CA386D28C0977600EECD6D /* MainCoordinator.swift in Sources */,
 				8444AA6228B4B859005BB8FF /* LoginFactory.swift in Sources */,
 				8444AA5928B493A5005BB8FF /* UserService.swift in Sources */,
+				84E3FDA728E34E5300B42B1D /* Album.swift in Sources */,
 				8444AA6428B4B891005BB8FF /* MyLoginFactory.swift in Sources */,
 				84061E1328B169FE00B5AB47 /* PhotosCollectionViewCell.swift in Sources */,
 				84061E0128B1669A00B5AB47 /* ProfileHeaderView.swift in Sources */,
 				84061E0D28B1692D00B5AB47 /* PostViewController.swift in Sources */,
 				8444AA5B28B495B8005BB8FF /* CurrentUserService.swift in Sources */,
+				84E3FDB728E551B500B42B1D /* MediaPlayerViewController.swift in Sources */,
 				8444AA6628B4B90A005BB8FF /* TestUserService.swift in Sources */,
 				84061E0B28B1690D00B5AB47 /* InfoViewController.swift in Sources */,
 				84783D2828D4D02C009E5872 /* ProfileImageView.swift in Sources */,
 				84061DFF28B1665000B5AB47 /* ProfileViewController.swift in Sources */,
 				84061E1728B16A5900B5AB47 /* PhotosViewController.swift in Sources */,
+				84E3FDB528E362AC00B42B1D /* MediaPlayer.swift in Sources */,
 				84061E1528B16A3100B5AB47 /* PostStruct.swift in Sources */,
 				84061E0928B168CD00B5AB47 /* FeedViewController.swift in Sources */,
 				84061DEC28B161FE00B5AB47 /* SceneDelegate.swift in Sources */,
-				84FFEDC828DC69CE00CC71DB /* VoiceRecorderViewController.swift in Sources */,
 				84CA386728C095E100EECD6D /* ControllersFactory.swift in Sources */,
 				84E3FDA128E2C77700B42B1D /* Player.swift in Sources */,
 				84061E0F28B169A300B5AB47 /* CustomCollectionViewCell.swift in Sources */,

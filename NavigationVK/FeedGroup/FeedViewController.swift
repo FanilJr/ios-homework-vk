@@ -60,6 +60,7 @@ class FeedViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         tabBarController?.tabBar.isHidden = false
         let gesture = UITapGestureRecognizer()
         gesture.addTarget(self, action: #selector(removeBlure))
@@ -78,7 +79,7 @@ class FeedViewController: UIViewController {
     
    @objc func removeBlure() {
 
-       UIView.animate(withDuration: 0.7, animations: {
+       UIView.animate(withDuration: 0.5, animations: {
            self.player.alpha = 1
            self.player.transform = CGAffineTransform(translationX: 0, y: 0)
            self.blure.alpha = 0
@@ -88,7 +89,7 @@ class FeedViewController: UIViewController {
            self.navigationController?.navigationBar.isHidden = false
        })
        tabBarController?.tabBar.isHidden = false
-       DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+       DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
            self.player.removeFromSuperview()
            self.blure.removeFromSuperview()
        }
@@ -130,28 +131,32 @@ extension FeedViewController: FeedViewDelegate {
         coordinator?.showSecondPost(title: post.title)
     }
     
+    
     func didTapVoiceRecButton() {
-        tabBarController?.tabBar.isHidden = true
-        navigationController?.navigationBar.isHidden = true
-        view.addSubview(blure)
-        view.addSubview(player)
-        
-        NSLayoutConstraint.activate([
-            blure.topAnchor.constraint(equalTo: view.topAnchor),
-            blure.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            blure.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            blure.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            player.topAnchor.constraint(equalTo: view.bottomAnchor),
-            player.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 30),
-            player.heightAnchor.constraint(equalToConstant: 600),
-            player.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -30),
-            ])
-        
-        UIView.animate(withDuration: 1, animations: {
-            self.player.transform = CGAffineTransform(translationX: 0, y: -670)
-            self.player.alpha = 1
-            self.blure.alpha = 1
-        })
+        coordinator?.showPlayer()
+//
+//        tabBarController?.tabBar.isHidden = true
+//        navigationController?.navigationBar.isHidden = true
+//
+//        view.addSubview(blure)
+//        view.addSubview(player)
+//
+//        NSLayoutConstraint.activate([
+//            blure.topAnchor.constraint(equalTo: view.topAnchor),
+//            blure.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            blure.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            blure.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+//
+//            player.topAnchor.constraint(equalTo: view.bottomAnchor),
+//            player.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 30),
+//            player.heightAnchor.constraint(equalToConstant: 570),
+//            player.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -30),
+//            ])
+//
+//        UIView.animate(withDuration: 0.5, animations: {
+//            self.player.transform = CGAffineTransform(translationX: 0, y: -600)
+//            self.player.alpha = 1
+//            self.blure.alpha = 1
+//        })
     }
 }

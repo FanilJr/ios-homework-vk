@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct PostNavigation {
-  
-    var image: String
-
-    static func massivePost() -> [PostNavigation] {
-        
-        var post = [PostNavigation]()
-        post.append(PostNavigation(image: "heart3"))
-        return post
-    }
-}
+//struct PostNavigation {
+//
+//    var image: String
+//
+//    static func massivePost() -> [PostNavigation] {
+//
+//        var post = [PostNavigation]()
+//        post.append(PostNavigation(image: "heart3"))
+//        return post
+//    }
+//}
