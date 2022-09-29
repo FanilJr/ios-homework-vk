@@ -25,7 +25,6 @@ class AlbumTableViewCell: UITableViewCell {
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         image.layer.cornerRadius = 25
-        image.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner]
         return image
     }()
     

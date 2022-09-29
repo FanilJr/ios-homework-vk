@@ -11,12 +11,21 @@ class PlayerViewController: UIViewController {
     
     let albums = Album.get()
     
+    private var background: UIImageView = {
+        let background = UIImageView()
+        background.image = UIImage(named: "background2")
+        background.clipsToBounds = true
+        background.contentMode = .scaleAspectFit
+        background.translatesAutoresizingMaskIntoConstraints = false
+        return background
+    }()
+
     private lazy var tableView: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
         table.delegate = self
         table.dataSource = self
-//        table.backgroundColor = .clear
+        table.backgroundColor = .clear
         table.register(AlbumTableViewCell.self, forCellReuseIdentifier: "cell")
         table.estimatedRowHeight = 132
         table.rowHeight = UITableView.automaticDimension
@@ -33,13 +42,20 @@ class PlayerViewController: UIViewController {
     }
     
     func setupView() {
-        view.addSubview(tableView)
+        
+        [background, tableView].forEach { view.addSubview($0) }
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            
+            background.topAnchor.constraint(equalTo: view.topAnchor),
+            background.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            background.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            background.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            tableView.topAnchor.constraint(equalTo: background.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: background.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: background.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: background.bottomAnchor)
         ])
     }
 }
@@ -53,7 +69,7 @@ extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? AlbumTableViewCell else {
             return UITableViewCell()
         }
-//        cell.backgroundColor = .clear
+        cell.backgroundColor = .clear
         cell.album = albums[indexPath.row]
         return cell
     }

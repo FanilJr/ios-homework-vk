@@ -12,11 +12,21 @@ import AVKit
 final class MediaPlayer: UIView {
 
     var album: Album
+    
+    private lazy var line: UIView = {
+        let line = UIView()
+        line.translatesAutoresizingMaskIntoConstraints = false
+        line.backgroundColor = .darkGray
+        line.contentMode = .scaleAspectFill
+        line.layer.cornerRadius = 2
+        line.clipsToBounds = true
+        return line
+    }()
 
     private lazy var albumName: UILabel = {
         let album = UILabel()
         album.translatesAutoresizingMaskIntoConstraints = false
-        album.textColor = .systemPink
+        album.textColor = .black
         album.textAlignment = .center
         album.font = .systemFont(ofSize: 25, weight: .bold)
         return album
@@ -33,6 +43,9 @@ final class MediaPlayer: UIView {
 
     private lazy var progressBar: UISlider = {
         let slider = UISlider()
+        slider.thumbTintColor = .white
+        slider.minimumTrackTintColor = .systemPink
+        slider.maximumTrackTintColor = .black
         slider.translatesAutoresizingMaskIntoConstraints = false
         slider.addTarget(self, action: #selector(progressScrubbed(_:)), for: .valueChanged)
         return slider
@@ -60,7 +73,7 @@ final class MediaPlayer: UIView {
     private lazy var songNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .systemPink
+        label.textColor = .black
         label.font = .systemFont(ofSize: 16, weight: .bold)
         return label
     }()
@@ -79,7 +92,7 @@ final class MediaPlayer: UIView {
         let config = UIImage.SymbolConfiguration(pointSize: 30)
         button.setImage(UIImage(systemName: "backward.end.fill", withConfiguration: config), for: .normal)
         button.addTarget(self, action: #selector(didTapPrevious(_:)), for: .touchUpInside)
-        button.tintColor = .systemPink
+        button.tintColor = .black
         return button
     }()
     
@@ -89,7 +102,7 @@ final class MediaPlayer: UIView {
         let config = UIImage.SymbolConfiguration(pointSize: 70)
         button.setImage(UIImage(systemName: "play.circle.fill", withConfiguration: config), for: .normal)
         button.addTarget(self, action: #selector(didTapPlayPause(_:)), for: .touchUpInside)
-        button.tintColor = .systemPink
+        button.tintColor = .black
         return button
     }()
     
@@ -98,7 +111,7 @@ final class MediaPlayer: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         let config = UIImage.SymbolConfiguration(pointSize: 30)
         button.setImage(UIImage(systemName: "forward.end.fill", withConfiguration: config), for: .normal)
-        button.tintColor = .systemPink
+        button.tintColor = .black
         button.addTarget(self, action: #selector(didTapNext(_:)), for: .touchUpInside)
         return button
     }()
@@ -132,10 +145,10 @@ final class MediaPlayer: UIView {
         albumCover.image = UIImage(named: album.image)
         setupPlayer(song: album.songs[playingIndex])
         
-        [albumName,songNameLabel,artistLabel,elapsedTimeLabel,remainingTimeLabel].forEach { (all) in
-            all.textColor = .white }
+//        [albumName,songNameLabel,artistLabel,elapsedTimeLabel,remainingTimeLabel].forEach { (all) in
+//            all.textColor = .white }
         
-        [albumName,albumCover,songNameLabel,artistLabel,progressBar,elapsedTimeLabel,remainingTimeLabel,controlStack].forEach { addSubview($0) }
+        [albumName,line,albumCover,songNameLabel,artistLabel,progressBar,elapsedTimeLabel,remainingTimeLabel,controlStack].forEach { addSubview($0) }
         setupConstraints()
         
     }
@@ -145,8 +158,13 @@ final class MediaPlayer: UIView {
             albumName.topAnchor.constraint(equalTo: topAnchor,constant: 16),
             albumName.leadingAnchor.constraint(equalTo: leadingAnchor),
             albumName.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
+            line.topAnchor.constraint(equalTo: albumName.bottomAnchor),
+            line.leadingAnchor.constraint(equalTo: leadingAnchor),
+            line.trailingAnchor.constraint(equalTo: trailingAnchor),
+            line.heightAnchor.constraint(equalToConstant: 3),
         
-            albumCover.topAnchor.constraint(equalTo: albumName.bottomAnchor,constant: 32),
+            albumCover.topAnchor.constraint(equalTo: line.bottomAnchor,constant: 32),
             albumCover.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 16),
             albumCover.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -16),
             albumCover.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.5),
@@ -170,8 +188,8 @@ final class MediaPlayer: UIView {
             remainingTimeLabel.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -16),
             
             controlStack.topAnchor.constraint(equalTo: remainingTimeLabel.bottomAnchor,constant: 8),
-            controlStack.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 32),
-            controlStack.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -32)
+            controlStack.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 45),
+            controlStack.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -45)
         ])
     }
     
@@ -214,7 +232,7 @@ final class MediaPlayer: UIView {
     private func setPlayPauseIcon(isPlaying: Bool) {
         let config = UIImage.SymbolConfiguration(pointSize: 70)
         playPauseButton.setImage(UIImage(systemName: isPlaying ? "pause.circle.fill" : "play.circle.fill",withConfiguration: config), for: .normal)
-        playPauseButton.tintColor = .systemPink
+        playPauseButton.tintColor = .black
     }
     
    @objc private func updateProgress() {
