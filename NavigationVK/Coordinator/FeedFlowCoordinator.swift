@@ -24,7 +24,6 @@ final class FeedFlowCoordinator {
         let vc = PostViewController()
         vc.title = title
         navCon.pushViewController(vc, animated: true)
-        
         vc.image.image = UIImage(named: "heart5")
     }
     
@@ -33,10 +32,8 @@ final class FeedFlowCoordinator {
         vc.title = title
         navCon.pushViewController(vc, animated: true)
         vc.image.image = UIImage(named: "heart4")
-        
-//        let playerVC = PandoraPlayer.configure(withMPMediaItems: mediaItems)
-//        navCon.present(playerVC, animated: true, completion: nil)
     }
+    
     func showPlayer() {
         let vc = PlayerViewController()
         navCon.pushViewController(vc, animated: true)
