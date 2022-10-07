@@ -44,6 +44,7 @@
 		84AF3AE428ED388A0014E64D /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AF3AE328ED388A0014E64D /* DetailCell.swift */; };
 		84AF3AE628ED38EB0014E64D /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AF3AE528ED38EB0014E64D /* MusicPlayer.swift */; };
 		84B259E428D8EBC80024648F /* ProfilePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B259E328D8EBC80024648F /* ProfilePostViewController.swift */; };
+		84BC755D28EFD38E00339BFE /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC755C28EFD38E00339BFE /* NetworkService.swift */; };
 		84C5FFB228B5040300C01CC9 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5FFB128B5040300C01CC9 /* CustomButton.swift */; };
 		84CA386728C095E100EECD6D /* ControllersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CA386628C095E100EECD6D /* ControllersFactory.swift */; };
 		84CA386928C0965400EECD6D /* FeedFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CA386828C0965400EECD6D /* FeedFlowCoordinator.swift */; };
@@ -149,6 +150,7 @@
 		84AF3AE328ED388A0014E64D /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		84AF3AE528ED38EB0014E64D /* MusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
 		84B259E328D8EBC80024648F /* ProfilePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePostViewController.swift; sourceTree = "<group>"; };
+		84BC755C28EFD38E00339BFE /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		84C5FFB128B5040300C01CC9 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		84CA386628C095E100EECD6D /* ControllersFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllersFactory.swift; sourceTree = "<group>"; };
 		84CA386828C0965400EECD6D /* FeedFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				84CA387328C0A25E00EECD6D /* ProfileGroup */,
 				849D70A028B6394400CE6807 /* Scene */,
 				849D709F28B6383F00CE6807 /* Users */,
+				84BC755C28EFD38E00339BFE /* NetworkService.swift */,
 			);
 			path = NavigationVK;
 			sourceTree = "<group>";
@@ -577,6 +580,7 @@
 				8444AA6428B4B891005BB8FF /* MyLoginFactory.swift in Sources */,
 				84061E1328B169FE00B5AB47 /* PhotosCollectionViewCell.swift in Sources */,
 				84061E0128B1669A00B5AB47 /* ProfileHeaderView.swift in Sources */,
+				84BC755D28EFD38E00339BFE /* NetworkService.swift in Sources */,
 				84061E0D28B1692D00B5AB47 /* PostViewController.swift in Sources */,
 				8444AA5B28B495B8005BB8FF /* CurrentUserService.swift in Sources */,
 				84E3FDB728E551B500B42B1D /* MediaPlayerViewController.swift in Sources */,
