@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+//import PandoraPlayer
 
 final class FeedFlowCoordinator {
     
@@ -23,7 +24,6 @@ final class FeedFlowCoordinator {
         let vc = PostViewController()
         vc.title = title
         navCon.pushViewController(vc, animated: true)
-        
         vc.image.image = UIImage(named: "heart5")
     }
     
@@ -33,6 +33,7 @@ final class FeedFlowCoordinator {
         navCon.pushViewController(vc, animated: true)
         vc.image.image = UIImage(named: "heart4")
     }
+    
     func showPlayer() {
         let vc = PlayerViewController()
         navCon.pushViewController(vc, animated: true)

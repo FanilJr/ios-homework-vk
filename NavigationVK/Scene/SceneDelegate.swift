@@ -33,6 +33,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window?.rootViewController = mainCoordinator.startApplication()
             window?.makeKeyAndVisible()
             window?.overrideUserInterfaceStyle = .light
+            let appConfiguration = AppConfiguration.allCases.randomElement()!
+            NetworkService.request(for: appConfiguration)
         }
 
     func sceneDidDisconnect(_ scene: UIScene) {

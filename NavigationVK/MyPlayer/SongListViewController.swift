@@ -1,24 +1,20 @@
 //
-//  PlayerViewController.swift
+//  SongListViewController.swift
 //  NavigationVK
 //
-//  Created by Fanil_Jr on 27.09.2022.
+//  Created by Fanil_Jr on 30.09.2022.
 //
 
 import UIKit
 
-class PlayerViewController: UIViewController {
-    
-    
-
-    let albums = Album.get()
+class SongListViewController: UIViewController {
 
     private lazy var tableView: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
         table.delegate = self
         table.dataSource = self
-        table.register(AlbumTableViewCell.self, forCellReuseIdentifier: "cell")
+        table.register(SongListTableViewCell.self, forCellReuseIdentifier: "cell")
         table.estimatedRowHeight = 132
         table.rowHeight = UITableView.automaticDimension
         table.tableFooterView = UIView()
@@ -27,18 +23,14 @@ class PlayerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = "My Music Player"
         setupView()
-
     }
-        
+    
     func setupView() {
         
         [tableView].forEach { view.addSubview($0) }
         
         NSLayoutConstraint.activate([
-
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -47,26 +39,16 @@ class PlayerViewController: UIViewController {
     }
 }
 
-extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
+extension SongListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return albums.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? AlbumTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? SongListTableViewCell else {
             return UITableViewCell()
         }
-        cell.album = albums[indexPath.row]
+        let playerVC = PlayerViewController()
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = MediaPlayerViewController(album: albums[indexPath.row])
-//        let vc2 = SongListViewController()
-        tableView.deselectRow(at: indexPath, animated: true)
-//        navigationController?.pushViewController(vc2, animated: true)
-        present(vc, animated: true)
-
-
     }
 }

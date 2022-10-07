@@ -36,7 +36,7 @@ final class MediaPlayerViewController: UIViewController {
         if !UIAccessibility.isReduceTransparencyEnabled {
             self.view.backgroundColor = UIColor.clear
             
-            let bluerEffect = UIBlurEffect(style: UIBlurEffect.Style.systemUltraThinMaterialDark)
+            let bluerEffect = UIBlurEffect(style: UIBlurEffect.Style.systemUltraThinMaterial)
             let bluerEffectView = UIVisualEffectView(effect: bluerEffect)
             bluerEffectView.frame = self.view.bounds
             bluerEffectView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
