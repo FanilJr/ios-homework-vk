@@ -89,5 +89,4 @@ class ProfilePostViewController: UIViewController {
             authorName.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
-    
 }
