@@ -19,7 +19,7 @@ class AlbumTableViewCell: UITableViewCell {
         }
     }
     
-    private lazy var albumCover: UIImageView = {
+    lazy var albumCover: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFill

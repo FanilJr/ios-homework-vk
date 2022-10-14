@@ -24,40 +24,6 @@ class ProfilePostViewController: UIViewController {
         return label
     }()
     
-    private lazy var descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .gray
-        label.font = UIFont.systemFont(ofSize: 14.0, weight: .light)
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private lazy var likes: UILabel = {
-        let label = UILabel()
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 16.0)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
-    lazy var imageLike: UIImageView = {
-        let image = UIImageView()
-        image.isUserInteractionEnabled = true
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "heart3")
-        image.clipsToBounds = true
-        return image
-    }()
-    
-    private lazy var viewsLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 16.0)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -89,5 +55,4 @@ class ProfilePostViewController: UIViewController {
             authorName.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
-    
 }

@@ -11,5 +11,4 @@ extension Notification.Name {
     static var updateIsValidWord: Notification.Name {
         return .init(rawValue: "updateIsValidWord")
     }
-
 }
