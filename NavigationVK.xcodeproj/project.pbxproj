@@ -32,17 +32,18 @@
 		8444AA6228B4B859005BB8FF /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444AA6128B4B859005BB8FF /* LoginFactory.swift */; };
 		8444AA6428B4B891005BB8FF /* MyLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444AA6328B4B891005BB8FF /* MyLoginFactory.swift */; };
 		8444AA6628B4B90A005BB8FF /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444AA6528B4B90A005BB8FF /* TestUserService.swift */; };
+		8453ACB428F1306400E9B6F5 /* AlbumsNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453ACB328F1306400E9B6F5 /* AlbumsNew.swift */; };
 		845CF25228CB955800EECCAF /* SecondPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845CF25128CB955800EECCAF /* SecondPostViewController.swift */; };
 		8463E5E528D7A06300D80D2B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8463E5E428D7A06300D80D2B /* SettingsViewController.swift */; };
 		847409A128C36E6F00CBA34A /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847409A028C36E6F00CBA34A /* SplashView.swift */; };
 		84783D2828D4D02C009E5872 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84783D2728D4D02B009E5872 /* ProfileImageView.swift */; };
+		849BA4F228F8C90500D3B5D2 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849BA4F128F8C90500D3B5D2 /* InfoView.swift */; };
 		84AF3ADA28ED32790014E64D /* AlbumMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AF3AD928ED32790014E64D /* AlbumMusic.swift */; };
 		84AF3ADC28ED34620014E64D /* Catalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AF3ADB28ED34620014E64D /* Catalog.swift */; };
 		84AF3ADE28ED372E0014E64D /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AF3ADD28ED372E0014E64D /* MusicViewController.swift */; };
 		84AF3AE028ED377A0014E64D /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AF3ADF28ED377A0014E64D /* AlbumCell.swift */; };
 		84AF3AE228ED38090014E64D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AF3AE128ED38090014E64D /* DetailViewController.swift */; };
 		84AF3AE428ED388A0014E64D /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AF3AE328ED388A0014E64D /* DetailCell.swift */; };
-		84AF3AE628ED38EB0014E64D /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AF3AE528ED38EB0014E64D /* MusicPlayer.swift */; };
 		84B259E428D8EBC80024648F /* ProfilePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B259E328D8EBC80024648F /* ProfilePostViewController.swift */; };
 		84BC755D28EFD38E00339BFE /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC755C28EFD38E00339BFE /* NetworkService.swift */; };
 		84C5FFB228B5040300C01CC9 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5FFB128B5040300C01CC9 /* CustomButton.swift */; };
@@ -94,6 +95,7 @@
 		84E3FDEE28E5FFAC00B42B1D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84061E0528B1683700B5AB47 /* Post.swift */; };
 		84E3FDF028E697C900B42B1D /* SongListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3FDEF28E697C900B42B1D /* SongListViewController.swift */; };
 		84E3FDF228E6981800B42B1D /* SongListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3FDF128E6981800B42B1D /* SongListTableViewCell.swift */; };
+		84FFB5E228F1A91A008AB649 /* PlayerNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFB5E128F1A91A008AB649 /* PlayerNew.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -138,17 +140,18 @@
 		8444AA6128B4B859005BB8FF /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		8444AA6328B4B891005BB8FF /* MyLoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLoginFactory.swift; sourceTree = "<group>"; };
 		8444AA6528B4B90A005BB8FF /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
+		8453ACB328F1306400E9B6F5 /* AlbumsNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsNew.swift; sourceTree = "<group>"; };
 		845CF25128CB955800EECCAF /* SecondPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondPostViewController.swift; sourceTree = "<group>"; };
 		8463E5E428D7A06300D80D2B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		847409A028C36E6F00CBA34A /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		84783D2728D4D02B009E5872 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
+		849BA4F128F8C90500D3B5D2 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		84AF3AD928ED32790014E64D /* AlbumMusic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumMusic.swift; sourceTree = "<group>"; };
 		84AF3ADB28ED34620014E64D /* Catalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Catalog.swift; sourceTree = "<group>"; };
 		84AF3ADD28ED372E0014E64D /* MusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
 		84AF3ADF28ED377A0014E64D /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
 		84AF3AE128ED38090014E64D /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		84AF3AE328ED388A0014E64D /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
-		84AF3AE528ED38EB0014E64D /* MusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
 		84B259E328D8EBC80024648F /* ProfilePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePostViewController.swift; sourceTree = "<group>"; };
 		84BC755C28EFD38E00339BFE /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		84C5FFB128B5040300C01CC9 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -199,6 +202,7 @@
 		84E3FDE028E5BBC600B42B1D /* Monica Lewinsky Election Year.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Monica Lewinsky Election Year.mp3"; sourceTree = "<group>"; };
 		84E3FDEF28E697C900B42B1D /* SongListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongListViewController.swift; sourceTree = "<group>"; };
 		84E3FDF128E6981800B42B1D /* SongListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongListTableViewCell.swift; sourceTree = "<group>"; };
+		84FFB5E128F1A91A008AB649 /* PlayerNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNew.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,6 +266,7 @@
 				84061E0C28B1692D00B5AB47 /* PostViewController.swift */,
 				845CF25128CB955800EECCAF /* SecondPostViewController.swift */,
 				8463E5E428D7A06300D80D2B /* SettingsViewController.swift */,
+				849BA4F128F8C90500D3B5D2 /* InfoView.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -335,7 +340,7 @@
 				84AF3ADF28ED377A0014E64D /* AlbumCell.swift */,
 				84AF3AE128ED38090014E64D /* DetailViewController.swift */,
 				84AF3AE328ED388A0014E64D /* DetailCell.swift */,
-				84AF3AE528ED38EB0014E64D /* MusicPlayer.swift */,
+				84FFB5E128F1A91A008AB649 /* PlayerNew.swift */,
 			);
 			path = "Music Not Job";
 			sourceTree = "<group>";
@@ -399,6 +404,7 @@
 				84E3FDB628E551B500B42B1D /* MediaPlayerViewController.swift */,
 				84E3FDEF28E697C900B42B1D /* SongListViewController.swift */,
 				84E3FDF128E6981800B42B1D /* SongListTableViewCell.swift */,
+				8453ACB328F1306400E9B6F5 /* AlbumsNew.swift */,
 			);
 			path = MyPlayer;
 			sourceTree = "<group>";
@@ -543,7 +549,6 @@
 			files = (
 				84061E1128B169D700B5AB47 /* Photos.swift in Sources */,
 				8444AA6028B4B76E005BB8FF /* Checker.swift in Sources */,
-				84AF3AE628ED38EB0014E64D /* MusicPlayer.swift in Sources */,
 				84CF1A3A28BCBD0F000FF0D8 /* NotificationName.swift in Sources */,
 				847409A128C36E6F00CBA34A /* SplashView.swift in Sources */,
 				84CA386B28C096A400EECD6D /* ProfileFlowCoordinator.swift in Sources */,
@@ -579,12 +584,15 @@
 				84E3FDA728E34E5300B42B1D /* Album.swift in Sources */,
 				8444AA6428B4B891005BB8FF /* MyLoginFactory.swift in Sources */,
 				84061E1328B169FE00B5AB47 /* PhotosCollectionViewCell.swift in Sources */,
+				84FFB5E228F1A91A008AB649 /* PlayerNew.swift in Sources */,
 				84061E0128B1669A00B5AB47 /* ProfileHeaderView.swift in Sources */,
+				849BA4F228F8C90500D3B5D2 /* InfoView.swift in Sources */,
 				84BC755D28EFD38E00339BFE /* NetworkService.swift in Sources */,
 				84061E0D28B1692D00B5AB47 /* PostViewController.swift in Sources */,
 				8444AA5B28B495B8005BB8FF /* CurrentUserService.swift in Sources */,
 				84E3FDB728E551B500B42B1D /* MediaPlayerViewController.swift in Sources */,
 				8444AA6628B4B90A005BB8FF /* TestUserService.swift in Sources */,
+				8453ACB428F1306400E9B6F5 /* AlbumsNew.swift in Sources */,
 				84061E0B28B1690D00B5AB47 /* InfoViewController.swift in Sources */,
 				84AF3AE028ED377A0014E64D /* AlbumCell.swift in Sources */,
 				84E3FDF228E6981800B42B1D /* SongListTableViewCell.swift in Sources */,

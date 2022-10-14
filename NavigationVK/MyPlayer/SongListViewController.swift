@@ -9,6 +9,10 @@ import UIKit
 
 class SongListViewController: UIViewController {
 
+    var songListTable = SongListTableViewCell()
+    var firstAlbum = FirstAlbum.massiveAlbum()
+    var secondAlbum = SecondAlbum.massiveAlbum()
+
     private lazy var tableView: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
@@ -20,7 +24,7 @@ class SongListViewController: UIViewController {
         table.tableFooterView = UIView()
         return table
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -41,14 +45,14 @@ class SongListViewController: UIViewController {
 
 extension SongListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return firstAlbum.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? SongListTableViewCell else {
             return UITableViewCell()
         }
-        let playerVC = PlayerViewController()
+        cell.setupFirstAlbum(firstAlbum[indexPath.row])
         return cell
     }
 }

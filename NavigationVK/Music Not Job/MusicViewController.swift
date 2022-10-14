@@ -68,6 +68,11 @@ extension MusicViewController: UITableViewDataSource {
         
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailController = DetailViewController(paused: true)
+        detailController.album = self.catalog.albums[indexPath.row]
+        navigationController?.pushViewController(detailController, animated: true)
+    }
     
     
 }
