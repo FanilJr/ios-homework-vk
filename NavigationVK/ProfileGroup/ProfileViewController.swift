@@ -147,16 +147,8 @@ extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
             
         default:
             return UITableViewCell()
-            
         }
-        
     }
-    
-//    func tuchToShare() {
-//        let items:[Any] = [galery.randomElement() ?? UIImage()]
-//        let avc = UIActivityViewController(activityItems: items, applicationActivities: nil)
-//        self.present(avc, animated: true, completion: nil)
-//    }
     
     func tuchUp() {
         print("tuch по кнопке delegate из ProfileViewController")
@@ -183,9 +175,7 @@ extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
 extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         UITableView.automaticDimension
-        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -200,7 +190,6 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
             return profileImageView
         default:
             return UIView()
-            
         }
     }
     
@@ -272,7 +261,6 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
             let vc = ProfilePostViewController()
             vc.setupCell(post[indexPath.row])
             navigationController?.pushViewController(vc, animated: true)
-//            coordinator?.showProfilePost()
         }
     }
 }

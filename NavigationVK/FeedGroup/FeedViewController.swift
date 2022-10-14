@@ -130,7 +130,6 @@ extension FeedViewController: FeedViewDelegate {
         coordinator?.showSecondPost(title: post.title)
     }
     
-    
     func didTapVoiceRecButton() {
         coordinator?.showPlayer()
 //

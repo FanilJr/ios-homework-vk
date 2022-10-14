@@ -17,7 +17,6 @@ class InfoViewController: UIViewController {
         super.viewDidLoad()
         layout()
         infoView.setTableView(dataSource: self, delegate: self)
-        view.backgroundColor = .systemOrange
         title = "Info"
 
     }
@@ -34,13 +33,16 @@ class InfoViewController: UIViewController {
     }
 }
 
-//MARK: - FeedViewDelegate
 extension InfoViewController: InfoViewDelegate {
 
     func didTapFirstTaskButton() {
         let url = URL(string: "https://jsonplaceholder.typicode.com/todos/47")
         firstTaskNetworkService.request(url: url) { title in
             self.infoView.setTextFirstTaskLabel(title)
+            DispatchQueue.main.async {
+                self.infoView.waitingSpinnerEnableFirst(false)
+                self.infoView.firstTaskButton.setTitle("Первая задача", for: .normal)
+            }
         }
     }
 
@@ -48,6 +50,10 @@ extension InfoViewController: InfoViewDelegate {
         let url = URL(string: "https://swapi.dev/api/planets/1")
         secondTaskNetworkService.request(url: url) { planet in
             self.infoView.setTextSecondTaskLabel("Период обращения планеты \(planet.name) вокруг своей звезды = \(planet.orbitalPeriod)")
+            DispatchQueue.main.async {
+                self.infoView.waitingSpinnerEnableSecond(false)
+                self.infoView.secondTaskButton.setTitle("Вторая задача", for: .normal)
+            }
         }
     }
 
@@ -55,6 +61,10 @@ extension InfoViewController: InfoViewDelegate {
         let url = URL(string: "https://swapi.dev/api/planets/1")
         secondTaskNetworkService.request(url: url) { planet in
             self.getNamesOfResidents(residentsUrl: planet.residents)
+            DispatchQueue.main.async {
+                self.infoView.waitingSpinnerEnableThree(false)
+                self.infoView.thirdTaskButton.setTitle("Третья задача", for: .normal)
+            }
         }
     }
 
@@ -66,6 +76,11 @@ extension InfoViewController: InfoViewDelegate {
                 self.infoView.reloadData()
             }
         }
+    }
+    
+    @objc private func tuchShare() {
+        let avc = UIActivityViewController(activityItems: [], applicationActivities: nil)
+        present(avc, animated: true)
     }
 }
 
@@ -83,8 +98,21 @@ extension InfoViewController: UITableViewDataSource {
             content.text = residents[indexPath.row].name
         }
         cell.contentConfiguration = content
-
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let recipe = residents[indexPath.row].name
+        let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { _ in
+            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { _ in
+                print("Share \(recipe)")
+                let avc = UIActivityViewController(activityItems: [recipe], applicationActivities: nil)
+                self.present(avc, animated: true)
+            }
+            let menu = UIMenu(title: "", children: [share])
+            return menu
+        })
+        return configuration
     }
 }
 
@@ -209,3 +237,18 @@ struct thirdTaskNetworkService {
 struct Resident: Decodable {
     let name: String
 }
+
+//extension InfoViewController: UIContextMenuInteractionDelegate {
+//
+//    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+//        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+//            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { _ in
+//                print("Проверка contextMenu")
+//                let avc = UIActivityViewController(activityItems: [], applicationActivities: nil)
+//                self.present(avc, animated: true)
+//
+//            }
+//            return UIMenu(title: "", children: [share])
+//        }
+//    }
+//}

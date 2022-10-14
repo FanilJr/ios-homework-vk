@@ -105,6 +105,13 @@ final class FeedView: UIView {
         return button
     }()
     
+    private let spinnerJoke: UIActivityIndicatorView = {
+        let activityView: UIActivityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
+        activityView.hidesWhenStopped = true
+        activityView.translatesAutoresizingMaskIntoConstraints = false
+        return activityView
+    }()
+    
     
     private let textField: CustomTextField = {
         let textfield = CustomTextField(placeholder: "пароль: junior", textColor: .black, font: UIFont.systemFont(ofSize: 20))
@@ -244,18 +251,20 @@ final class FeedView: UIView {
             }
         }
         jokeButton.tapAction = { [weak self] in
-            self?.jokeButton.isEnabled = false
             self?.getRandomJoke { joke in
                 DispatchQueue.main.async {
-                    self?.jokeButton.isEnabled = true
                     if let joke {
                         self?.jokeLabel.text = joke
-                        self?.jokeButton.isEnabled = true
+                        self?.waitingSpinner(false)
+                        self?.jokeButton.setTitle("Выдать шутку", for: .normal)
                     } else {
                         self?.jokeLabel.text = "Something went wrong"
-                        self?.jokeButton.isEnabled = false
                     }
                 }
+            }
+            DispatchQueue.main.async {
+                self?.jokeButton.setTitle("", for: .normal)
+                self?.waitingSpinner(true)
             }
         }
     }
@@ -287,10 +296,18 @@ final class FeedView: UIView {
         }
     }
     
+    func waitingSpinner(_ active: Bool) {
+        if active {
+            spinnerJoke.startAnimating()
+        } else {
+            spinnerJoke.stopAnimating()
+        }
+    }
+    
     private func layout() {
         
         [textField, resultLabel, notificationButton].forEach { stackView.addArrangedSubview($0) }
-        [firstPost, postButtonFirst, secondPost, postButtonSecond, stackView, countdownTimeLabel, updateCounterLabel, playerJR, jokeLabel, jokeButton].forEach { contentView.addSubview($0) }
+        [firstPost, postButtonFirst, secondPost, postButtonSecond, stackView, countdownTimeLabel, updateCounterLabel, playerJR, jokeLabel, jokeButton, spinnerJoke].forEach { contentView.addSubview($0) }
         scrollView.addSubview(contentView)
         addSubview(scrollView)
         
@@ -319,6 +336,9 @@ final class FeedView: UIView {
             jokeButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 32),
             jokeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
             jokeButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            spinnerJoke.centerYAnchor.constraint(equalTo: jokeButton.centerYAnchor),
+            spinnerJoke.centerXAnchor.constraint(equalTo: jokeButton.centerXAnchor),
             
             firstPost.topAnchor.constraint(equalTo: jokeButton.bottomAnchor,constant: 32),
             firstPost.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 32),

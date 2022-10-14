@@ -12,6 +12,13 @@ class PlayerViewController: UIViewController {
     let albums = Album.get()
     let firstSetup = FirstAlbum.massiveAlbum()
     let listTable = SongListTableViewCell()
+    
+    let background: UIImageView = {
+        let back = UIImageView()
+        back.image = UIImage(named: "background")
+        back.translatesAutoresizingMaskIntoConstraints = false
+        return back
+    }()
 
     private lazy var tableView: UITableView = {
         let table = UITableView()
@@ -20,6 +27,7 @@ class PlayerViewController: UIViewController {
         table.dataSource = self
         table.register(AlbumTableViewCell.self, forCellReuseIdentifier: "cell")
         table.estimatedRowHeight = 132
+        table.backgroundColor = .clear
         table.rowHeight = UITableView.automaticDimension
         table.tableFooterView = UIView()
         return table
@@ -35,14 +43,18 @@ class PlayerViewController: UIViewController {
         
     func setupView() {
         
-        [tableView].forEach { view.addSubview($0) }
+        [background, tableView].forEach { view.addSubview($0) }
         
         NSLayoutConstraint.activate([
+            background.topAnchor.constraint(equalTo: view.topAnchor),
+            background.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            background.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            background.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.topAnchor.constraint(equalTo: background.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: background.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: background.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: background.bottomAnchor)
         ])
     }
 }
@@ -57,6 +69,8 @@ extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         cell.album = albums[indexPath.row]
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        cell.backgroundColor = .clear
         return cell
     }
     

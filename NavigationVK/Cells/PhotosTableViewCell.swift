@@ -64,9 +64,9 @@ class PhotosTableViewCell: UITableViewCell {
         tuchNew?.tuchUp()
     }
     
-//    @objc private func tuchShare() {
-//        tuchNew?.tuchToShare()
-//    }
+    @objc private func tuchShare() {
+        
+    }
     
     private func layout() {
             
@@ -108,6 +108,19 @@ extension PhotosTableViewCell: UICollectionViewDataSource {
         cell.pullCell(photo: galery[indexPath.row])
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let recipe = galery[indexPath.row]
+        let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { _ in
+            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { _ in
+                print("Share \(recipe)")
+                let avc = UIActivityViewController(activityItems: [recipe], applicationActivities: nil)
+            }
+            let menu = UIMenu(title: "", children: [share])
+            return menu
+        })
+        return configuration
     }
 }
 

@@ -59,23 +59,6 @@ final class MediaPlayer: UIView {
         cover.layer.cornerRadius = 30
         return cover
     }()
-    
-    private lazy var volumeBar: UISlider = {
-        let slider = UISlider()
-        slider.thumbTintColor = .clear
-        slider.minimumTrackTintColor = #colorLiteral(red: 0.9294139743, green: 0.2863991261, blue: 0.3659052849, alpha: 1)
-        slider.maximumTrackTintColor = .gray
-        let config = UIImage.SymbolConfiguration(hierarchicalColor: UIColor.darkGray)
-        slider.minimumValueImage = UIImage(systemName: "speaker.fill", withConfiguration: config)
-        slider.maximumValueImage = UIImage(systemName: "speaker.wave.3.fill", withConfiguration: config)
-        slider.minimumValueImage?.withTintColor(UIColor.darkGray)
-        let tapGesture = UITapGestureRecognizer()
-        slider.addGestureRecognizer(tapGesture)
-        tapGesture.addTarget(self, action: #selector(bounceSlider))
-        slider.translatesAutoresizingMaskIntoConstraints = false
-        slider.addTarget(self, action: #selector(progressVolume(_:)), for: .valueChanged)
-        return slider
-    }()
 
     private lazy var progressBar: UISlider = {
         let slider = UISlider()
@@ -90,7 +73,7 @@ final class MediaPlayer: UIView {
     private lazy var elapsedTimeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .darkGray
+        label.textColor = .white
         label.font = .systemFont(ofSize: 14, weight: .light)
         label.text = "00:00"
         return label
@@ -100,7 +83,7 @@ final class MediaPlayer: UIView {
     private lazy var remainingTimeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .darkGray
+        label.textColor = .white
         label.font = .systemFont(ofSize: 14, weight: .light)
         label.text = "00:00"
         return label
@@ -117,7 +100,7 @@ final class MediaPlayer: UIView {
     private lazy var artistLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .darkGray
+        label.textColor = .white
         label.font = .systemFont(ofSize: 16, weight: .light)
         return label
     }()
@@ -135,8 +118,8 @@ final class MediaPlayer: UIView {
     private lazy var playPauseButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        let config = UIImage.SymbolConfiguration(pointSize: 70)
-        button.setImage(UIImage(systemName: "play.circle.fill", withConfiguration: config), for: .normal)
+        let config = UIImage.SymbolConfiguration(pointSize: 50)
+        button.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
         button.addTarget(self, action: #selector(didTapPlayPause(_:)), for: .touchUpInside)
         button.tintColor = .black
         return button
@@ -197,7 +180,7 @@ final class MediaPlayer: UIView {
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .horizontal
         stack.distribution = .equalSpacing
-        stack.spacing = 70
+        stack.spacing = 80
         return stack
     }()
     
@@ -226,7 +209,7 @@ final class MediaPlayer: UIView {
         albumCover.image = UIImage(named: album.image)
         setupPlayer(song: album.songs[playingIndex])
         
-        [lineUp,albumName,line,albumCover,songNameLabel,repeatButton,artistLabel,progressBar,elapsedTimeLabel,remainingTimeLabel,controlStack,volumeBar, dockStack].forEach { addSubview($0) }
+        [lineUp,albumName,line,albumCover,songNameLabel,repeatButton,artistLabel,progressBar,elapsedTimeLabel,remainingTimeLabel,controlStack, dockStack].forEach { addSubview($0) }
         setupConstraints()
         setUpRemoteTransparentControls()
     }
@@ -274,14 +257,10 @@ final class MediaPlayer: UIView {
             remainingTimeLabel.topAnchor.constraint(equalTo: progressBar.bottomAnchor,constant: 8),
             remainingTimeLabel.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -16),
             
-            controlStack.topAnchor.constraint(equalTo: remainingTimeLabel.bottomAnchor,constant: 8),
+            controlStack.topAnchor.constraint(equalTo: remainingTimeLabel.bottomAnchor,constant: 16),
             controlStack.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            volumeBar.topAnchor.constraint(equalTo: controlStack.bottomAnchor,constant: 8),
-            volumeBar.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 16),
-            volumeBar.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -6),
-            
-            dockStack.topAnchor.constraint(equalTo: volumeBar.bottomAnchor,constant: 24),
+            dockStack.topAnchor.constraint(equalTo: controlStack.bottomAnchor,constant: 70),
             dockStack.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
@@ -323,11 +302,11 @@ final class MediaPlayer: UIView {
     }
     
     private func setPlayPauseIcon(isPlaying: Bool) {
-        let config = UIImage.SymbolConfiguration(pointSize: 70)
-        playPauseButton.setImage(UIImage(systemName: isPlaying ? "pause.circle.fill" : "play.circle.fill",withConfiguration: config), for: .normal)
-        playPauseButton.tintColor = isPlaying ? #colorLiteral(red: 0.9294139743, green: 0.2863991261, blue: 0.3659052849, alpha: 1) : .black
-        playPauseButton.backgroundColor = isPlaying ? .black : .clear
-        playPauseButton.layer.cornerRadius = isPlaying ? 40 : 0
+        let config = UIImage.SymbolConfiguration(pointSize: 50)
+        playPauseButton.setImage(UIImage(systemName: isPlaying ? "pause.fill" : "play.fill",withConfiguration: config), for: .normal)
+//        playPauseButton.tintColor = isPlaying ? .white : .black
+//        playPauseButton.backgroundColor = isPlaying ? .black : .clear
+//        playPauseButton.layer.cornerRadius = isPlaying ? 40 : 0
     }
     
     @objc private func progressVolume(_ sender: UISlider) {
@@ -353,17 +332,6 @@ final class MediaPlayer: UIView {
     
     @objc func openMenuAirPlay() {
         
-    }
-    
-    @objc func bounceSlider() {
-        //MARK: ДОДЕЛАТЬ!!!!!!!!!!!!!!!!!!!!
-        if volumeBar.state == .highlighted {
-            
-            UIView.animate(withDuration: 0.5) {
-                let scale = self.volumeBar.frame
-                self.volumeBar.transform = CGAffineTransform(scaleX: 1, y: 2)
-            }
-        }
     }
     
     @objc func didTapRepeat(_ sender: UIButton) {

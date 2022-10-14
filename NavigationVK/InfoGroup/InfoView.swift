@@ -29,9 +29,9 @@ class InfoView: UIView {
         return contentView
     }()
 
-    private let firstTaskButton = CustomButton(title: "Первая Задача", titleColor: .white, backgroundColor: .systemCyan, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
-    private let secondTaskButton = CustomButton(title: "Вторая задача", titleColor: .white, backgroundColor: .systemCyan, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
-    private let thirdTaskButton = CustomButton(title: "Третья задача", titleColor: .white, backgroundColor: .systemCyan, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
+    let firstTaskButton = CustomButton(title: "Первая Задача", titleColor: .white, backgroundColor: .systemCyan, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
+    let secondTaskButton = CustomButton(title: "Вторая задача", titleColor: .white, backgroundColor: .systemCyan, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
+    let thirdTaskButton = CustomButton(title: "Третья задача", titleColor: .white, backgroundColor: .systemCyan, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
     
     
     private let firstTaskLabel: UILabel = {
@@ -63,10 +63,32 @@ class InfoView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    private let spinnerViewFirst: UIActivityIndicatorView = {
+        let activityView: UIActivityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
+        activityView.hidesWhenStopped = true
+        activityView.translatesAutoresizingMaskIntoConstraints = false
+        return activityView
+    }()
+    
+    private let spinnerViewSecond: UIActivityIndicatorView = {
+        let activityView: UIActivityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
+        activityView.hidesWhenStopped = true
+        activityView.translatesAutoresizingMaskIntoConstraints = false
+        return activityView
+    }()
+    
+    private let spinnerViewThree: UIActivityIndicatorView = {
+        let activityView: UIActivityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
+        activityView.hidesWhenStopped = true
+        activityView.translatesAutoresizingMaskIntoConstraints = false
+        return activityView
+    }()
 
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .clear
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostTableViewCell")
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosTableViewCell")
         return tableView
@@ -89,12 +111,18 @@ class InfoView: UIView {
     private func taps() {
         firstTaskButton.tapAction = { [weak self] in
             self?.delegate?.didTapFirstTaskButton()
+            self?.firstTaskButton.setTitle("", for: .normal)
+            self?.waitingSpinnerEnableFirst(true)
         }
         secondTaskButton.tapAction = { [weak self] in
             self?.delegate?.didTapSecondTaskButton()
+            self?.secondTaskButton.setTitle("", for: .normal)
+            self?.waitingSpinnerEnableSecond(true)
         }
         thirdTaskButton.tapAction = { [weak self] in
             self?.delegate?.didTapThirdTaskButton()
+            self?.thirdTaskButton.setTitle("", for: .normal)
+            self?.waitingSpinnerEnableThree(true)
         }
     }
 
@@ -116,10 +144,32 @@ class InfoView: UIView {
     func setTextThirdTaskLabel(_ text: String) {
         thirdTaskLabel.text = text
     }
+    func waitingSpinnerEnableThree(_ active: Bool) {
+        if active {
+            spinnerViewThree.startAnimating()
+        } else {
+            spinnerViewThree.stopAnimating()
+        }
+    }
+    
+    func waitingSpinnerEnableSecond(_ active: Bool) {
+        if active {
+            spinnerViewSecond.startAnimating()
+        } else {
+            spinnerViewSecond.stopAnimating()
+        }
+    }
+    func waitingSpinnerEnableFirst(_ active: Bool) {
+        if active {
+            spinnerViewFirst.startAnimating()
+        } else {
+            spinnerViewFirst.stopAnimating()
+        }
+    }
 
     private func layout() {
         
-        [firstTaskLabel, firstTaskButton, secondTaskLabel, secondTaskButton, thirdTaskLabel, thirdTaskButton, tableView].forEach { contentView.addSubview($0) }
+        [firstTaskLabel, firstTaskButton, secondTaskLabel, secondTaskButton, thirdTaskLabel, thirdTaskButton, tableView, spinnerViewFirst, spinnerViewSecond, spinnerViewThree].forEach { contentView.addSubview($0) }
         scrollView.addSubview(contentView)
         addSubview(scrollView)
         
@@ -143,6 +193,9 @@ class InfoView: UIView {
             firstTaskButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 30),
             firstTaskButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -30),
             firstTaskButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            spinnerViewFirst.centerXAnchor.constraint(equalTo: firstTaskButton.centerXAnchor),
+            spinnerViewFirst.centerYAnchor.constraint(equalTo: firstTaskButton.centerYAnchor),
         
             secondTaskLabel.topAnchor.constraint(equalTo: firstTaskButton.bottomAnchor,constant: 30),
             secondTaskLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 30),
@@ -153,6 +206,9 @@ class InfoView: UIView {
             secondTaskButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -30),
             secondTaskButton.heightAnchor.constraint(equalToConstant: 50),
             
+            spinnerViewSecond.centerYAnchor.constraint(equalTo: secondTaskButton.centerYAnchor),
+            spinnerViewSecond.centerXAnchor.constraint(equalTo: secondTaskButton.centerXAnchor),
+            
             thirdTaskLabel.topAnchor.constraint(equalTo: secondTaskButton.bottomAnchor,constant: 30),
             thirdTaskLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 30),
             thirdTaskLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -30),
@@ -161,6 +217,9 @@ class InfoView: UIView {
             thirdTaskButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 30),
             thirdTaskButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -30),
             thirdTaskButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            spinnerViewThree.centerXAnchor.constraint(equalTo: thirdTaskButton.centerXAnchor),
+            spinnerViewThree.centerYAnchor.constraint(equalTo: thirdTaskButton.centerYAnchor),
             
             tableView.topAnchor.constraint(equalTo: thirdTaskButton.bottomAnchor,constant: 30),
             tableView.leadingAnchor.constraint(equalTo: firstTaskLabel.leadingAnchor),

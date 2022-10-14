@@ -235,6 +235,7 @@
 		84061DE828B161FE00B5AB47 /* NavigationVK */ = {
 			isa = PBXGroup;
 			children = (
+				849BA4F328F9816900D3B5D2 /* InfoGroup */,
 				84E3FDB828E5B87100B42B1D /* Ghetto Lenny */,
 				84E3FDD328E5BB9E00B42B1D /* While The World Was Burning */,
 				84AF3AD828ED324D0014E64D /* Music Not Job */,
@@ -253,7 +254,6 @@
 				84CA387328C0A25E00EECD6D /* ProfileGroup */,
 				849D70A028B6394400CE6807 /* Scene */,
 				849D709F28B6383F00CE6807 /* Users */,
-				84BC755C28EFD38E00339BFE /* NetworkService.swift */,
 			);
 			path = NavigationVK;
 			sourceTree = "<group>";
@@ -262,11 +262,9 @@
 			isa = PBXGroup;
 			children = (
 				84061E1628B16A5900B5AB47 /* PhotosViewController.swift */,
-				84061E0A28B1690D00B5AB47 /* InfoViewController.swift */,
 				84061E0C28B1692D00B5AB47 /* PostViewController.swift */,
 				845CF25128CB955800EECCAF /* SecondPostViewController.swift */,
 				8463E5E428D7A06300D80D2B /* SettingsViewController.swift */,
-				849BA4F128F8C90500D3B5D2 /* InfoView.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -288,6 +286,7 @@
 				8444AA6328B4B891005BB8FF /* MyLoginFactory.swift */,
 				847409A028C36E6F00CBA34A /* SplashView.swift */,
 				8444AA6128B4B859005BB8FF /* LoginFactory.swift */,
+				84BC755C28EFD38E00339BFE /* NetworkService.swift */,
 				8444AA5F28B4B76E005BB8FF /* Checker.swift */,
 				84CA386628C095E100EECD6D /* ControllersFactory.swift */,
 				84061E0528B1683700B5AB47 /* Post.swift */,
@@ -298,6 +297,15 @@
 				8403230028C679EC009BCD8E /* MainTabBarController.swift */,
 			);
 			path = "Extensions-Struct-Other";
+			sourceTree = "<group>";
+		};
+		849BA4F328F9816900D3B5D2 /* InfoGroup */ = {
+			isa = PBXGroup;
+			children = (
+				84061E0A28B1690D00B5AB47 /* InfoViewController.swift */,
+				849BA4F128F8C90500D3B5D2 /* InfoView.swift */,
+			);
+			path = InfoGroup;
 			sourceTree = "<group>";
 		};
 		849D709F28B6383F00CE6807 /* Users */ = {
