@@ -13,10 +13,12 @@ final class CurrentUserService: UserService {
     let user = User(name: "ethic91@icloud.com", avatar: UIImage(named: "1")!, status: "Ты на один день ближе к своей мечте")
     
     func getUser(userName: String, completion: (Result<User, UserGetError>) -> Void) {
-        if user.name == userName {
-            completion(.success(user))
-        } else {
-            completion(.failure(UserGetError.notFound))
+            if user.name == userName {
+                completion(.success(user))
+            } else {
+                let debugUuser = User(name: userName, avatar: UIImage(systemName: "person.crop.circle.badge.questionmark.fill")!, status: "Проверка работы")
+                completion(.success(debugUuser))
+            }
         }
+
     }
-}
