@@ -73,8 +73,13 @@ extension LogInViewController: LoginViewDelegate {
     func didTapSignUpButton() {
         let login = loginView.getLogin()
         let password = loginView.getPassword()
+        
 
         viewModel.signUp(login: login, password: password)
+        DispatchQueue.main.async {
+            self.loginView.waitingSpinnerEnable(false)
+            self.loginView.logInButton.setTitle("Log in", for: .normal)
+        }
     }
     func didTapCrackPasswordButton() {
         DispatchQueue.main.async {
@@ -82,19 +87,15 @@ extension LogInViewController: LoginViewDelegate {
         }
         print("didTapCRACK")
     }
-    
-
-    func didTapRegisterUpButton() {
-        let login = loginView.getLogin()
-        let password = loginView.getPassword()
-
-        viewModel.signUp(login: login, password: password)
-    }
 
     func didTapLogInButton() {
         let login = loginView.getLogin()
         let password = loginView.getPassword()
 
         viewModel.login(login: login, password: password)
+        DispatchQueue.main.async {
+            self.loginView.waitingSpinnerEnable(false)
+            self.loginView.logInButton.setTitle("Log in", for: .normal)
+        }
     }
 }

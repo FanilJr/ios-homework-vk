@@ -103,7 +103,7 @@ class ProfileViewController: UIViewController {
     
     private func hundle(error: UserGetError) {
         switch error{
-        case .notFound: fatalError()
+        case .notFound: coordinator?.showAlert(title: "Ошибка", message: "ok")
         case .unowned: print("File:" + #file, "\nFunction: " + #function + "\nUserGetError.unowned\n")
         }
     }
