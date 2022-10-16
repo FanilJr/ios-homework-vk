@@ -10,7 +10,7 @@ import UIKit
 
 protocol LoginViewDelegate: AnyObject {
     func didTapLogInButton()
-    func didtapRegistrationButton()
+    func didTapSignUpButton()
     func didTapCrackPasswordButton()
 }
 
@@ -64,7 +64,7 @@ class LoginView: UIView {
         return button
     }()
     
-    let registerButton: CustomButton = {
+    let signInButton: CustomButton = {
         let button = CustomButton(title: "Registration", titleColor: .white, backgroundColor: .blue,setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
         return button
     }()
@@ -127,8 +127,9 @@ class LoginView: UIView {
             self?.delegate?.didTapLogInButton()
             self?.waitingSpinnerEnable(true)
         }
-        registerButton.tapAction = { [weak self] in
-            self?.delegate?.didtapRegistrationButton()
+        signInButton.tapAction = { [weak self] in
+            guard let self = self else { return }
+            self.delegate?.didTapSignUpButton()
         }
     }
 
@@ -155,7 +156,7 @@ class LoginView: UIView {
 
     private func layout() {
         
-        [logoImage, loginTextField, passwordTextField, logInButton,registerButton, spinnerView].forEach { contentView.addSubview($0) }
+        [logoImage, loginTextField, passwordTextField, logInButton,signInButton, spinnerView].forEach { contentView.addSubview($0) }
         scrollView.addSubview(contentView)
         addSubview(scrollView)
         
@@ -191,11 +192,11 @@ class LoginView: UIView {
             logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
             
-            registerButton.topAnchor.constraint(equalTo: logInButton.bottomAnchor,constant: 16),
-            registerButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
-            registerButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
-            registerButton.heightAnchor.constraint(equalToConstant: 50),
-            registerButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            signInButton.topAnchor.constraint(equalTo: logInButton.bottomAnchor,constant: 16),
+            signInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
+            signInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
+            signInButton.heightAnchor.constraint(equalToConstant: 50),
+            signInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
             spinnerView.centerXAnchor.constraint(equalTo: logInButton.centerXAnchor),
             spinnerView.centerYAnchor.constraint(equalTo: logInButton.centerYAnchor),

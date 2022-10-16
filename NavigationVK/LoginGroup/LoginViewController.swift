@@ -69,11 +69,13 @@ class LogInViewController: UIViewController {
 
 // MARK: - LoginViewDelegate
 extension LogInViewController: LoginViewDelegate {
-    func didtapRegistrationButton() {
-        let registrationView = RegistratonViewController()
-        present(registrationView, animated: true)
-    }
     
+    func didTapSignUpButton() {
+        let login = loginView.getLogin()
+        let password = loginView.getPassword()
+
+        viewModel.signUp(login: login, password: password)
+    }
     func didTapCrackPasswordButton() {
         DispatchQueue.main.async {
             self.loginView.waitingSpinnerEnable(false)
@@ -82,13 +84,9 @@ extension LogInViewController: LoginViewDelegate {
     }
     
 
-    func didTapSignUpButton() {
+    func didTapRegisterUpButton() {
         let login = loginView.getLogin()
         let password = loginView.getPassword()
-        DispatchQueue.main.async {
-            self.loginView.logInButton.setTitle("Log In", for: .normal)
-            self.loginView.waitingSpinnerEnable(false)
-        }
 
         viewModel.signUp(login: login, password: password)
     }
@@ -96,10 +94,6 @@ extension LogInViewController: LoginViewDelegate {
     func didTapLogInButton() {
         let login = loginView.getLogin()
         let password = loginView.getPassword()
-        DispatchQueue.main.async {
-            self.loginView.logInButton.setTitle("Log In", for: .normal)
-            self.loginView.waitingSpinnerEnable(false)
-        }
 
         viewModel.login(login: login, password: password)
     }

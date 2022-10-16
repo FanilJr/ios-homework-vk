@@ -8,22 +8,9 @@
 import Foundation
 import UIKit
 
-final class LoginViewModel: LoginViewDelegate {
-    func didtapRegistrationButton() {
-        print("hello")
-    }
-    
-    func didTapLogInButton() {
-        print("hello")
-    }
-    
-    func didTapCrackPasswordButton() {
-        print("hello")
-    }
-    
+final class LoginViewModel {
     private let loginInspector: LoginInspector
     private let coordinator: ProfileFlowCoordinator
-    private lazy var loginView = LoginView(delegate: self)
 
     init(loginFactory: LoginFactory, coordinator: ProfileFlowCoordinator) {
         self.loginInspector = loginFactory.makeLoginInspector()
@@ -67,5 +54,9 @@ final class LoginViewModel: LoginViewDelegate {
         } catch {
 
         }
+//        FirebaseAuth.Auth.auth().createUser(withEmail: login, password: password) { result, error in
+//            print(result)
+//            print(error)
+//        }
     }
 }
