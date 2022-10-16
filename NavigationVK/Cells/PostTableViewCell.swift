@@ -10,7 +10,6 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
     
-    
     lazy var postImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -146,9 +145,8 @@ class PostTableViewCell: UITableViewCell {
     }
    
     private func constraints() {
-
-        [postImage, authorName, descriptionLabel, likes, viewsLabel, imageLike].forEach { contentView.addSubview($0) }
         
+        [postImage, authorName, descriptionLabel, likes, viewsLabel, imageLike].forEach { contentView.addSubview($0) }
         NSLayoutConstraint.activate([
             authorName.topAnchor.constraint(equalTo: contentView.topAnchor),
             authorName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),

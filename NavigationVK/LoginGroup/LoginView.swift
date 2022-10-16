@@ -10,6 +10,7 @@ import UIKit
 
 protocol LoginViewDelegate: AnyObject {
     func didTapLogInButton()
+    func didtapRegistrationButton()
     func didTapCrackPasswordButton()
 }
 
@@ -58,13 +59,13 @@ class LoginView: UIView {
         return textField
     }()
 
-    private let logInButton: CustomButton = {
+    let logInButton: CustomButton = {
         let button = CustomButton(title: "Log In", titleColor: .white, backgroundColor: .blue,setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
         return button
     }()
     
-    private let crackPasswordButton: CustomButton = {
-        let button = CustomButton(title: "Подобрать пароль", titleColor: .white, backgroundColor: .blue, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
+    let registerButton: CustomButton = {
+        let button = CustomButton(title: "Registration", titleColor: .white, backgroundColor: .blue,setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
         return button
     }()
     
@@ -74,7 +75,6 @@ class LoginView: UIView {
         activityView.translatesAutoresizingMaskIntoConstraints = false
         return activityView
     }()
-
 
     init(delegate: LoginViewDelegate?) {
         super.init(frame: CGRect.zero)
@@ -123,14 +123,12 @@ class LoginView: UIView {
 
     private func taps() {
         logInButton.tapAction = { [weak self] in
+            self?.logInButton.setTitle("", for: .normal)
             self?.delegate?.didTapLogInButton()
+            self?.waitingSpinnerEnable(true)
         }
-        crackPasswordButton.tapAction = { [weak self] in
-            guard let self = self else { return }
-            self.waitingSpinnerEnable(true)
-            self.delegate?.didTapCrackPasswordButton()
-            
-            
+        registerButton.tapAction = { [weak self] in
+            self?.delegate?.didtapRegistrationButton()
         }
     }
 
@@ -157,7 +155,7 @@ class LoginView: UIView {
 
     private func layout() {
         
-        [logoImage, loginTextField, passwordTextField, logInButton, crackPasswordButton, spinnerView].forEach { contentView.addSubview($0) }
+        [logoImage, loginTextField, passwordTextField, logInButton,registerButton, spinnerView].forEach { contentView.addSubview($0) }
         scrollView.addSubview(contentView)
         addSubview(scrollView)
         
@@ -193,14 +191,14 @@ class LoginView: UIView {
             logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
             
-            crackPasswordButton.topAnchor.constraint(equalTo: logInButton.bottomAnchor,constant: 16),
-            crackPasswordButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
-            crackPasswordButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
-            crackPasswordButton.heightAnchor.constraint(equalToConstant: 50),
+            registerButton.topAnchor.constraint(equalTo: logInButton.bottomAnchor,constant: 16),
+            registerButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
+            registerButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
+            registerButton.heightAnchor.constraint(equalToConstant: 50),
+            registerButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
-            spinnerView.topAnchor.constraint(equalTo: crackPasswordButton.bottomAnchor,constant: 16),
-            spinnerView.centerXAnchor.constraint(equalTo: crackPasswordButton.centerXAnchor),
-            spinnerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            spinnerView.centerXAnchor.constraint(equalTo: logInButton.centerXAnchor),
+            spinnerView.centerYAnchor.constraint(equalTo: logInButton.centerYAnchor),
         ])
     }
 }

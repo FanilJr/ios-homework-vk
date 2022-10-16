@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ProfileViewController: UIViewController {
 
@@ -67,8 +68,10 @@ class ProfileViewController: UIViewController {
         title = "Профиль"
 
         setupTableView()
+        header.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
+        loadUser(userName: userName)
         
     #if DEBUG
         background.image = UIImage(named: "background")
@@ -80,13 +83,29 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        navigationController?.navigationBar.isHidden = true
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+    }
+    
+    private func loadUser(userName: String) {
+        userService.getUser(userName: userName) { result in
+            switch result {
+            case .success(let user):
+                header.setupView(user: user)
+            case .failure(let error):
+                hundle(error: error)
+            }
+        }
+    }
+    
+    private func hundle(error: UserGetError) {
+        switch error{
+        case .notFound: fatalError()
+        case .unowned: print("File:" + #file, "\nFunction: " + #function + "\nUserGetError.unowned\n")
+        }
     }
    
     func setupTableView() {
@@ -111,9 +130,7 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-
         return numbersSection.count
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -179,17 +196,15 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        header.delegate = self
-        header.setupView(user: userService.getUser(userName: userName))
-        
-        switch section {
-        case 0:
-            return header
-        case 1:
-            return profileImageView
-        default:
-            return UIView()
+        return header
+    }
+    
+    func didTapLogoutButton() {
+        do {
+            try FirebaseAuth.Auth.auth().signOut()
+            coordinator?.pop()
+        } catch {
+            print("Error signout")
         }
     }
     
@@ -197,7 +212,7 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
        
        view.addSubview(blure)
        view.addSubview(profileImageView)
-       profileImageView.setupView(user: userService.getUser(userName: userName))
+       profileImageView.avatarImageView.image = UIImage(named: "1")
        profileImageView.settingDelegate = self
        
        NSLayoutConstraint.activate([
@@ -264,3 +279,15 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
         }
     }
 }
+//
+//extension ProfileViewController: MyClassDelegate {
+//    func didTapLogoutButton() {
+//        do {
+//            try FirebaseAuth.Auth.auth().signOut()
+//            coordinator?.pop()
+//        } catch {
+//            print("Error signout")
+//        }
+//    }
+//}
+

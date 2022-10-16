@@ -8,7 +8,8 @@
 import UIKit
 
 protocol LoginViewControllerDelegate: AnyObject {
-    func check(login: String, password: String) -> Bool
+    func checkCredentials(login: String, password: String, success: @escaping (Bool) -> Void) throws
+    func signUp(login: String, password: String, success: @escaping (Error?) -> Void) throws
 }
 
 class LogInViewController: UIViewController {
@@ -17,12 +18,10 @@ class LogInViewController: UIViewController {
     private lazy var loginView = LoginView(delegate: self)
     
     let background: UIImageView = {
-        
         let back = UIImageView()
         back.image = UIImage(named: "background")
         back.translatesAutoresizingMaskIntoConstraints = false
         return back
-        
     }()
     
     init(viewModel: LoginViewModel) {
@@ -41,6 +40,11 @@ class LogInViewController: UIViewController {
         view.backgroundColor = .white
         navigationController?.navigationBar.isHidden = true
         layout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loginView.setPassword(password: "", isSecure: true)
     }
 
     private func layout() {
@@ -62,74 +66,41 @@ class LogInViewController: UIViewController {
     }
 }
 
+
+// MARK: - LoginViewDelegate
 extension LogInViewController: LoginViewDelegate {
+    func didtapRegistrationButton() {
+        let registrationView = RegistratonViewController()
+        present(registrationView, animated: true)
+    }
     
     func didTapCrackPasswordButton() {
-        
-        let generatedPassword = generatePassword(length: 3)
-        DispatchQueue.global().async {
-            self.bruteForce(passwordToUnlock: generatedPassword)
-            DispatchQueue.main.async {
-                self.loginView.waitingSpinnerEnable(false)
-                self.loginView.setPassword(password: generatedPassword, isSecure: false)
-            }
+        DispatchQueue.main.async {
+            self.loginView.waitingSpinnerEnable(false)
         }
+        print("didTapCRACK")
     }
     
-    func didTapLogInButton()  {
-        
+
+    func didTapSignUpButton() {
         let login = loginView.getLogin()
         let password = loginView.getPassword()
+        DispatchQueue.main.async {
+            self.loginView.logInButton.setTitle("Log In", for: .normal)
+            self.loginView.waitingSpinnerEnable(false)
+        }
+
+        viewModel.signUp(login: login, password: password)
+    }
+
+    func didTapLogInButton() {
+        let login = loginView.getLogin()
+        let password = loginView.getPassword()
+        DispatchQueue.main.async {
+            self.loginView.logInButton.setTitle("Log In", for: .normal)
+            self.loginView.waitingSpinnerEnable(false)
+        }
+
         viewModel.login(login: login, password: password)
-        // MARK: При таком условии if login && password != не срабатаывает если ввел правильный логин, поэтому поставил и на пароль условие отельное и н логин, прошу скорректировать меня спасибо за проверку!
-        if login != "Fanil_Jr" {
-            lazy var alert = UIAlertController(title: "Введите логин и пароль", message: #"""
-       #логин: Fanil_Jr \#n #пароль: Netology
-       """#, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
-            present(alert, animated: true)
-            print("где-то ошибка ввода Логина")
-        } else {
-            print("Правильный логин")
-            print("спасибо Сергей Котов! Настроил вход с алертом")
-        }
-        
-        if password != "Netology" {
-            lazy var alert = UIAlertController(title: "Введите логин и пароль", message: #"""
-       #логин: Fanil_Jr \#n #пароль: Netology
-       """#, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
-            present(alert, animated: true)
-            print("Где-то ошибка ввода Пароля")
-        } else {
-            print("Правильный пароль")
-        }
     }
 }
-
-
-extension LogInViewController {
-
-    private func generatePassword(length: Int) -> String {
-        
-        let lettersAndNumbers: [String] = String().lettersAndNumbers.map { String($0) }
-        var password = ""
-
-        for _ in 1...length {
-            password += lettersAndNumbers.randomElement()!
-        }
-        return password
-    }
-
-    func bruteForce(passwordToUnlock: String) {
-        
-        let lettersAndNumbers: [String] = String().lettersAndNumbers.map { String($0) }
-        var password: String = ""
-        while password != passwordToUnlock {
-            password = generateBruteForce(password, fromArray: lettersAndNumbers)
-        }
-    }
-}
-
-        
-    

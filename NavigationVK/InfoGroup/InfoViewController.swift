@@ -237,18 +237,3 @@ struct thirdTaskNetworkService {
 struct Resident: Decodable {
     let name: String
 }
-
-//extension InfoViewController: UIContextMenuInteractionDelegate {
-//
-//    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
-//        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
-//            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { _ in
-//                print("Проверка contextMenu")
-//                let avc = UIActivityViewController(activityItems: [], applicationActivities: nil)
-//                self.present(avc, animated: true)
-//
-//            }
-//            return UIMenu(title: "", children: [share])
-//        }
-//    }
-//}

@@ -9,6 +9,7 @@ import UIKit
 
 protocol MyClassDelegate: AnyObject {
     func presentMenuAvatar()
+    func didTapLogoutButton()
 }
 
 final class ProfileHeaderView: UIView {
@@ -80,7 +81,17 @@ final class ProfileHeaderView: UIView {
     private let setStatusButton: CustomButton = {
         let button = CustomButton(title: "Set status", titleColor: .white, backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
         return button
-        }()
+    }()
+    
+    private let logoutButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        let config = UIImage.SymbolConfiguration(pointSize: 20)
+        button.addTarget(self, action: #selector(logout), for: .touchUpInside)
+        button.setImage(UIImage(systemName: "person.fill.xmark", withConfiguration: config), for: .normal)
+        button.tintColor = .red
+        return button
+    }()
     
     
     @objc func expandAvatar() {
@@ -89,10 +100,14 @@ final class ProfileHeaderView: UIView {
     
     func snp() {
         
-        [avatarImageView, stackView, setStatusButton].forEach { addSubview($0) }
+        [avatarImageView, stackView, setStatusButton, logoutButton].forEach { addSubview($0) }
         [fullNameLabel, statusLabel, statusTextField].forEach { stackView.addArrangedSubview($0) }
         
         NSLayoutConstraint.activate([
+            
+            logoutButton.topAnchor.constraint(equalTo: topAnchor),
+            logoutButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
             avatarImageView.topAnchor.constraint(equalTo: topAnchor),
             avatarImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             avatarImageView.widthAnchor.constraint(equalToConstant: 120),
@@ -108,6 +123,9 @@ final class ProfileHeaderView: UIView {
             setStatusButton.heightAnchor.constraint(equalToConstant: 50),
             setStatusButton.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -16)
         ])
+    }
+    @objc func logout() {
+        self.delegate?.didTapLogoutButton()
     }
         
     private func tap() {
@@ -133,21 +151,17 @@ final class ProfileHeaderView: UIView {
             
             print("Статус установлен")
         }
+        
+//        logoutButton.tapAction =  { [weak self] in
+//            guard let self = self else {return}
+//            self.delegate?.didTapLogoutButton()
+//        }
     }
     
     func setupView(user: User?) {
-        
-        guard let user = user else {
-            print("Не верный Логин")
-            avatarImageView.image = UIImage(named: "error")
-            fullNameLabel.text = "error"
-            return
-        }
-        
-        fullNameLabel.text = user.name
+        guard let user = user else {print("Error: User nil in ProfileHeaderView." + #function); return}
         avatarImageView.image = user.avatar
         statusLabel.text = user.status
-
     }
         
 

@@ -7,6 +7,8 @@
 
 import UIKit
 import AVFoundation
+import FirebaseCore
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -25,16 +27,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
 
             guard let windowScene = (scene as? UIWindowScene) else { return }
-            
-
-            let mainCoordinator: MainCoordinator = MainCoordinatorImp()
-            
             window = UIWindow(windowScene: windowScene)
-            window?.rootViewController = mainCoordinator.startApplication()
+            let mainCoordinator: MainCoordinator = MainCoordinatorImp()
+            let user = FirebaseAuth.Auth.auth().currentUser
+            window?.rootViewController = mainCoordinator.startApplication(userEmail: user?.email)
             window?.makeKeyAndVisible()
-            window?.overrideUserInterfaceStyle = .light
-            let appConfiguration = AppConfiguration.allCases.randomElement()!
-            NetworkService.request(for: appConfiguration)
         }
 
     func sceneDidDisconnect(_ scene: UIScene) {
