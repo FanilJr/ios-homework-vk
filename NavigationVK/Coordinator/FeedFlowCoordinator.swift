@@ -36,7 +36,7 @@ final class FeedFlowCoordinator {
     
     func showPlayer() {
         let vc = PlayerViewController()
-        let vc2 = MusicViewController(catalog: Catalog())
+//        let vc2 = MusicViewController(catalog: Catalog())
 //        navCon.pushViewController(vc2, animated: true)
         navCon.pushViewController(vc, animated: true)
     }

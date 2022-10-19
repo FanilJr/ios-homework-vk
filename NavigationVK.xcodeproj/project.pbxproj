@@ -293,12 +293,8 @@
 		8474099F28C361CC00CBA34A /* Extensions-Struct-Other */ = {
 			isa = PBXGroup;
 			children = (
-				8444AA5D28B4B6E7005BB8FF /* LoginInspector.swift */,
-				8444AA6328B4B891005BB8FF /* MyLoginFactory.swift */,
 				847409A028C36E6F00CBA34A /* SplashView.swift */,
-				8444AA6128B4B859005BB8FF /* LoginFactory.swift */,
 				84BC755C28EFD38E00339BFE /* NetworkService.swift */,
-				8444AA5F28B4B76E005BB8FF /* Checker.swift */,
 				84CA386628C095E100EECD6D /* ControllersFactory.swift */,
 				84061E0528B1683700B5AB47 /* Post.swift */,
 				84061E1028B169D700B5AB47 /* Photos.swift */,
@@ -323,6 +319,10 @@
 			isa = PBXGroup;
 			children = (
 				8444AA6528B4B90A005BB8FF /* TestUserService.swift */,
+				8444AA6328B4B891005BB8FF /* MyLoginFactory.swift */,
+				8444AA6128B4B859005BB8FF /* LoginFactory.swift */,
+				8444AA5F28B4B76E005BB8FF /* Checker.swift */,
+				8444AA5D28B4B6E7005BB8FF /* LoginInspector.swift */,
 				8444AA5A28B495B7005BB8FF /* CurrentUserService.swift */,
 				8444AA5828B493A4005BB8FF /* UserService.swift */,
 				84DC23C828B47FCF0091F0D5 /* User.swift */,

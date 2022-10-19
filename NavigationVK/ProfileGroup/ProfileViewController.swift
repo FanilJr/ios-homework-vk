@@ -279,15 +279,4 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
         }
     }
 }
-//
-//extension ProfileViewController: MyClassDelegate {
-//    func didTapLogoutButton() {
-//        do {
-//            try FirebaseAuth.Auth.auth().signOut()
-//            coordinator?.pop()
-//        } catch {
-//            print("Error signout")
-//        }
-//    }
-//}
 

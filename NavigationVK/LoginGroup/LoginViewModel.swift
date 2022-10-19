@@ -54,9 +54,5 @@ final class LoginViewModel {
         } catch {
 
         }
-//        FirebaseAuth.Auth.auth().createUser(withEmail: login, password: password) { result, error in
-//            print(result)
-//            print(error)
-//        }
     }
 }

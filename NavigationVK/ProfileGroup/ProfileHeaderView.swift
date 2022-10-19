@@ -143,7 +143,6 @@ final class ProfileHeaderView: UIView {
                 self?.setStatusButton.bounds = CGRect(x: (bounds?.origin.x)! - 30, y: (bounds?.origin.y)!, width: bounds!.width + 30, height: bounds!.height + 10)
                 self?.setStatusButton.titleLabel?.bounds = CGRect(x: bounds!.origin.x, y: bounds!.origin.y, width: bounds!.width + 100, height: bounds!.height)
                 self?.statusLabel.bounds = CGRect(x: bonds!.origin.x, y: bonds!.origin.y, width: bonds!.width + 50, height: bonds!.height)
-                
             }
             
             self?.statusLabel.text = self?.statusTextField.text
@@ -151,17 +150,17 @@ final class ProfileHeaderView: UIView {
             
             print("Статус установлен")
         }
-        
-//        logoutButton.tapAction =  { [weak self] in
-//            guard let self = self else {return}
-//            self.delegate?.didTapLogoutButton()
-//        }
     }
     
     func setupView(user: User?) {
         guard let user = user else {print("Error: User nil in ProfileHeaderView." + #function); return}
+        fullNameLabel.text = user.name
         avatarImageView.image = user.avatar
         statusLabel.text = user.status
+        
+        if fullNameLabel.text == "ethic91@icloud.com" {
+            fullNameLabel.text = "Fanil_Jr"
+        }
     }
         
 
