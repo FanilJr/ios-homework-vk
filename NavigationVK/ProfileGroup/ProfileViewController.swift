@@ -74,7 +74,7 @@ class ProfileViewController: UIViewController {
         loadUser(userName: userName)
         
     #if DEBUG
-        background.image = UIImage(named: "background")
+        background.image = UIImage(named: "tekstura")
     #else
         background.image = UIImage(named: "background4")
     #endif

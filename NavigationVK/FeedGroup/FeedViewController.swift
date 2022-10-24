@@ -32,7 +32,7 @@ class FeedViewController: UIViewController {
     
     let background: UIImageView = {
         let back = UIImageView()
-        back.image = UIImage(named: "background")
+        back.image = UIImage(named: "tekstura")
         back.translatesAutoresizingMaskIntoConstraints = false
         return back
     }()

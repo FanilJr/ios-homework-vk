@@ -33,7 +33,7 @@ class LoginView: UIView {
 
     private let logoImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "vk")
+        image.image = UIImage(named: "vkontakte")
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()

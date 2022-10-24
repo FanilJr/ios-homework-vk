@@ -47,6 +47,7 @@ class PostTableViewCell: UITableViewCell {
         image.isUserInteractionEnabled = true
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: "heart3")
+        image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         return image
     }()

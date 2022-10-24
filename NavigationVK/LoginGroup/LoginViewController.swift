@@ -19,7 +19,7 @@ class LogInViewController: UIViewController {
     
     let background: UIImageView = {
         let back = UIImageView()
-        back.image = UIImage(named: "background")
+        back.image = UIImage(named: "tekstura")
         back.translatesAutoresizingMaskIntoConstraints = false
         return back
     }()
@@ -82,9 +82,6 @@ extension LogInViewController: LoginViewDelegate {
         }
     }
     func didTapCrackPasswordButton() {
-        DispatchQueue.main.async {
-            self.loginView.waitingSpinnerEnable(false)
-        }
         print("didTapCRACK")
     }
 

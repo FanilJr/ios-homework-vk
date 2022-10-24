@@ -11,7 +11,7 @@ final class SplashView: UIView {
     
     let background: UIImageView = {
         let background = UIImageView()
-        background.image = UIImage(named: "background3")
+        background.image = UIImage(named: "123321")
         background.contentMode = .scaleAspectFill
         background.translatesAutoresizingMaskIntoConstraints = false
         return background
@@ -19,7 +19,7 @@ final class SplashView: UIView {
     
     let vkLogo: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "vk")
+        image.image = UIImage(named: "vkontakte")
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()

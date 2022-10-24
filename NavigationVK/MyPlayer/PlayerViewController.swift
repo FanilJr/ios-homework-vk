@@ -15,7 +15,7 @@ class PlayerViewController: UIViewController {
     
     let background: UIImageView = {
         let back = UIImageView()
-        back.image = UIImage(named: "background")
+        back.image = UIImage(named: "tekstura")
         back.translatesAutoresizingMaskIntoConstraints = false
         return back
     }()
@@ -76,7 +76,7 @@ extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = MediaPlayerViewController(album: albums[indexPath.row])
-        let vc2 = SongListViewController()
+//        let vc2 = SongListViewController()
 //            navigationController?.pushViewController(vc2, animated: true)
         present(vc, animated: true)
     }

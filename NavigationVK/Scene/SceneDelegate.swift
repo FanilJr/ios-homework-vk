@@ -13,26 +13,25 @@ import FirebaseAuth
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    
-        let loginFactory = MyLoginFactory()
+    let loginFactory = MyLoginFactory()
 
-        func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
             
-            if #available(iOS 15, *) {
-                let appearance = UINavigationBarAppearance()
-                appearance.configureWithOpaqueBackground()
-                UINavigationBar.appearance().standardAppearance = appearance
-                UINavigationBar.appearance().scrollEdgeAppearance = appearance
-                UITabBar.appearance().backgroundColor = .white
-            }
-
-            guard let windowScene = (scene as? UIWindowScene) else { return }
-            window = UIWindow(windowScene: windowScene)
-            let mainCoordinator: MainCoordinator = MainCoordinatorImp()
-            let user = FirebaseAuth.Auth.auth().currentUser
-            window?.rootViewController = mainCoordinator.startApplication(userEmail: user?.email)
-            window?.makeKeyAndVisible()
+        if #available(iOS 15, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+            UITabBar.appearance().backgroundColor = .white
         }
+
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        window = UIWindow(windowScene: windowScene)
+        let mainCoordinator: MainCoordinator = MainCoordinatorImp()
+        let user = FirebaseAuth.Auth.auth().currentUser
+        window?.rootViewController = mainCoordinator.startApplication(userEmail: user?.email)
+        window?.makeKeyAndVisible()
+    }
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
