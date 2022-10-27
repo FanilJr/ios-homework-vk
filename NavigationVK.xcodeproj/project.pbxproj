@@ -25,6 +25,14 @@
 		84061E1728B16A5900B5AB47 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84061E1628B16A5900B5AB47 /* PhotosViewController.swift */; };
 		84061E1928B16AB700B5AB47 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84061E1828B16AB700B5AB47 /* PhotosTableViewCell.swift */; };
 		84061E1B28B16AEA00B5AB47 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84061E1A28B16AEA00B5AB47 /* PostTableViewCell.swift */; };
+		841194E42907BD110059106A /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841194E32907BD110059106A /* RealmModel.swift */; };
+		841194E72907C9800059106A /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 841194E62907C9800059106A /* Realm */; };
+		841194E92907C9800059106A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 841194E82907C9800059106A /* RealmSwift */; };
+		841194EB2907FA610059106A /* NewsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841194EA2907FA600059106A /* NewsListController.swift */; };
+		841194ED2907FCBF0059106A /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841194EC2907FCBF0059106A /* DownloadManager.swift */; };
+		841194EF290804210059106A /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841194EE290804200059106A /* NewsTableViewCell.swift */; };
+		841194F129080E700059106A /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841194F029080E6F0059106A /* ArticleViewController.swift */; };
+		841194F329080EA30059106A /* ArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841194F229080EA30059106A /* ArticleTableViewCell.swift */; };
 		8444AA5928B493A5005BB8FF /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444AA5828B493A4005BB8FF /* UserService.swift */; };
 		8444AA5B28B495B8005BB8FF /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444AA5A28B495B7005BB8FF /* CurrentUserService.swift */; };
 		8444AA5E28B4B6E7005BB8FF /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444AA5D28B4B6E7005BB8FF /* LoginInspector.swift */; };
@@ -57,7 +65,6 @@
 		84CA386D28C0977600EECD6D /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CA386C28C0977600EECD6D /* MainCoordinator.swift */; };
 		84CA386F28C09E0B00EECD6D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CA386E28C09E0B00EECD6D /* LoginViewModel.swift */; };
 		84CA387128C09F5500EECD6D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CA387028C09F5500EECD6D /* LoginView.swift */; };
-		84CA387928C324B400EECD6D /* ExtensionPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CA387828C324B400EECD6D /* ExtensionPassword.swift */; };
 		84CF1A3428BCBBCD000FF0D8 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CF1A3328BCBBCD000FF0D8 /* FeedView.swift */; };
 		84CF1A3628BCBC3D000FF0D8 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CF1A3528BCBC3D000FF0D8 /* CustomTextField.swift */; };
 		84CF1A3828BCBCD7000FF0D8 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CF1A3728BCBCD7000FF0D8 /* FeedModel.swift */; };
@@ -137,6 +144,12 @@
 		84061E1628B16A5900B5AB47 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		84061E1828B16AB700B5AB47 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		84061E1A28B16AEA00B5AB47 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		841194E32907BD110059106A /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
+		841194EA2907FA600059106A /* NewsListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListController.swift; sourceTree = "<group>"; };
+		841194EC2907FCBF0059106A /* DownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
+		841194EE290804200059106A /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
+		841194F029080E6F0059106A /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
+		841194F229080EA30059106A /* ArticleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTableViewCell.swift; sourceTree = "<group>"; };
 		8444AA5828B493A4005BB8FF /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		8444AA5A28B495B7005BB8FF /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
 		8444AA5D28B4B6E7005BB8FF /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
@@ -168,7 +181,6 @@
 		84CA386C28C0977600EECD6D /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		84CA386E28C09E0B00EECD6D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		84CA387028C09F5500EECD6D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		84CA387828C324B400EECD6D /* ExtensionPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionPassword.swift; sourceTree = "<group>"; };
 		84CF1A3328BCBBCD000FF0D8 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		84CF1A3528BCBC3D000FF0D8 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		84CF1A3728BCBCD7000FF0D8 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
@@ -217,6 +229,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				841194E92907C9800059106A /* RealmSwift in Frameworks */,
+				841194E72907C9800059106A /* Realm in Frameworks */,
 				849BA4F828F9F09700D3B5D2 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -263,6 +277,7 @@
 				84CA387328C0A25E00EECD6D /* ProfileGroup */,
 				849D70A028B6394400CE6807 /* Scene */,
 				849D709F28B6383F00CE6807 /* Users */,
+				841194E32907BD110059106A /* RealmModel.swift */,
 			);
 			path = NavigationVK;
 			sourceTree = "<group>";
@@ -300,7 +315,6 @@
 				84061E1028B169D700B5AB47 /* Photos.swift */,
 				84061E1428B16A3100B5AB47 /* PostStruct.swift */,
 				84CF1A3928BCBD0F000FF0D8 /* NotificationName.swift */,
-				84CA387828C324B400EECD6D /* ExtensionPassword.swift */,
 				8403230028C679EC009BCD8E /* MainTabBarController.swift */,
 			);
 			path = "Extensions-Struct-Other";
@@ -391,6 +405,11 @@
 				84CF1A3728BCBCD7000FF0D8 /* FeedModel.swift */,
 				84CF1A3328BCBBCD000FF0D8 /* FeedView.swift */,
 				84061E0828B168CD00B5AB47 /* FeedViewController.swift */,
+				841194EC2907FCBF0059106A /* DownloadManager.swift */,
+				841194EA2907FA600059106A /* NewsListController.swift */,
+				841194EE290804200059106A /* NewsTableViewCell.swift */,
+				841194F029080E6F0059106A /* ArticleViewController.swift */,
+				841194F229080EA30059106A /* ArticleTableViewCell.swift */,
 			);
 			path = FeedGroup;
 			sourceTree = "<group>";
@@ -487,6 +506,8 @@
 			name = NavigationVK;
 			packageProductDependencies = (
 				849BA4F728F9F09700D3B5D2 /* FirebaseAuth */,
+				841194E62907C9800059106A /* Realm */,
+				841194E82907C9800059106A /* RealmSwift */,
 			);
 			productName = NavigationVK;
 			productReference = 84061DE628B161FE00B5AB47 /* NavigationVK.app */;
@@ -519,6 +540,7 @@
 			mainGroup = 84061DDD28B161FE00B5AB47;
 			packageReferences = (
 				849BA4F628F9F09700D3B5D2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				841194E52907C97F0059106A /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 84061DE728B161FE00B5AB47 /* Products */;
 			projectDirPath = "";
@@ -589,20 +611,22 @@
 				84AF3ADC28ED34620014E64D /* Catalog.swift in Sources */,
 				84C5FFB228B5040300C01CC9 /* CustomButton.swift in Sources */,
 				84061E1B28B16AEA00B5AB47 /* PostTableViewCell.swift in Sources */,
+				841194EB2907FA610059106A /* NewsListController.swift in Sources */,
 				84CA387128C09F5500EECD6D /* LoginView.swift in Sources */,
 				84061DEA28B161FE00B5AB47 /* AppDelegate.swift in Sources */,
 				845CF25228CB955800EECCAF /* SecondPostViewController.swift in Sources */,
 				84AF3AE428ED388A0014E64D /* DetailCell.swift in Sources */,
 				84E3FDA528E34DDA00B42B1D /* PlayerViewController.swift in Sources */,
 				84DC23C928B47FCF0091F0D5 /* User.swift in Sources */,
+				841194E42907BD110059106A /* RealmModel.swift in Sources */,
 				8403230128C679EC009BCD8E /* MainTabBarController.swift in Sources */,
 				84E3FDA328E2E1EA00B42B1D /* Song.swift in Sources */,
 				84CA386F28C09E0B00EECD6D /* LoginViewModel.swift in Sources */,
+				841194F129080E700059106A /* ArticleViewController.swift in Sources */,
 				84CF1A3628BCBC3D000FF0D8 /* CustomTextField.swift in Sources */,
 				8444AA5E28B4B6E7005BB8FF /* LoginInspector.swift in Sources */,
 				84CA386928C0965400EECD6D /* FeedFlowCoordinator.swift in Sources */,
 				84061E1928B16AB700B5AB47 /* PhotosTableViewCell.swift in Sources */,
-				84CA387928C324B400EECD6D /* ExtensionPassword.swift in Sources */,
 				84CF1A3828BCBCD7000FF0D8 /* FeedModel.swift in Sources */,
 				84E3FDB128E3587400B42B1D /* AlbumTableViewCell.swift in Sources */,
 				84CF1A3428BCBBCD000FF0D8 /* FeedView.swift in Sources */,
@@ -613,7 +637,9 @@
 				8444AA6428B4B891005BB8FF /* MyLoginFactory.swift in Sources */,
 				84061E1328B169FE00B5AB47 /* PhotosCollectionViewCell.swift in Sources */,
 				84FFB5E228F1A91A008AB649 /* PlayerNew.swift in Sources */,
+				841194ED2907FCBF0059106A /* DownloadManager.swift in Sources */,
 				84061E0128B1669A00B5AB47 /* ProfileHeaderView.swift in Sources */,
+				841194F329080EA30059106A /* ArticleTableViewCell.swift in Sources */,
 				849BA4F228F8C90500D3B5D2 /* InfoView.swift in Sources */,
 				84BC755D28EFD38E00339BFE /* NetworkService.swift in Sources */,
 				84061E0D28B1692D00B5AB47 /* PostViewController.swift in Sources */,
@@ -627,6 +653,7 @@
 				84783D2828D4D02C009E5872 /* ProfileImageView.swift in Sources */,
 				84061DFF28B1665000B5AB47 /* ProfileViewController.swift in Sources */,
 				84061E1728B16A5900B5AB47 /* PhotosViewController.swift in Sources */,
+				841194EF290804210059106A /* NewsTableViewCell.swift in Sources */,
 				84E3FDB528E362AC00B42B1D /* MediaPlayer.swift in Sources */,
 				84061E1528B16A3100B5AB47 /* PostStruct.swift in Sources */,
 				84061E0928B168CD00B5AB47 /* FeedViewController.swift in Sources */,
@@ -657,7 +684,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -719,7 +746,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -853,6 +880,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		841194E52907C97F0059106A /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.32.0;
+			};
+		};
 		849BA4F628F9F09700D3B5D2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -864,6 +899,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		841194E62907C9800059106A /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 841194E52907C97F0059106A /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		841194E82907C9800059106A /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 841194E52907C97F0059106A /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		849BA4F728F9F09700D3B5D2 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 849BA4F628F9F09700D3B5D2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

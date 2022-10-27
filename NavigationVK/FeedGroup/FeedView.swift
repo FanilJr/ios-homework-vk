@@ -12,9 +12,31 @@ protocol FeedViewDelegate: AnyObject {
     func check(word: String)
     func didTapSecondPostButton()
     func didTapVoiceRecButton()
+    func tapNews()
 }
 
+
 final class FeedView: UIView {
+//https://newsapi.org/v2/top-headlines?country=ru&apiKey=API_KEY
+    /*
+     {
+     "status": "ok",
+     "totalResults": 30,
+     -"articles": [
+     -{
+     -"source": {
+     "id": null,
+     "name": "Kommersant.ru"
+     },
+     "author": null,
+     "title": "В работе WhatsApp произошел сбой - Коммерсантъ",
+     "description": "Подробнее на сайте",
+     "url": "https://www.kommersant.ru/doc/5633043",
+     "urlToImage": "https://im.kommersant.ru/SocialPics/5633043_26_0_473812701",
+     "publishedAt": "2022-10-25T07:40:39Z",
+     "content": "WhatsApp . Downdetector, , , , , , . . \r\n , 86% WhatsApp . 12% , 3% . , .\r\n «», WhatsApp . , WhatsApp. .\r\n «» « »."
+     }
+     */
     
     weak var delegate: FeedViewDelegate?
     private let nc = NotificationCenter.default
@@ -102,6 +124,11 @@ final class FeedView: UIView {
     
     private let jokeButton: CustomButton = {
         let button = CustomButton(title: "Выдать шутку", titleColor: .white, backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
+        return button
+    }()
+    
+    private let newsButton: CustomButton = {
+        let button = CustomButton(title: "NEWS - СЕГОДНЯ", titleColor: .white, backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
         return button
     }()
     
@@ -238,6 +265,10 @@ final class FeedView: UIView {
         postButtonSecond.tapAction = { [weak self] in
             self?.delegate?.didTapSecondPostButton()
         }
+        
+        newsButton.tapAction = { [weak self] in
+            self?.delegate?.tapNews()
+        }
         playerJR.tapAction = { [weak self] in
             self?.delegate?.didTapVoiceRecButton()
             
@@ -307,7 +338,7 @@ final class FeedView: UIView {
     private func layout() {
         
         [textField, resultLabel, notificationButton].forEach { stackView.addArrangedSubview($0) }
-        [firstPost, postButtonFirst, secondPost, postButtonSecond, stackView, countdownTimeLabel, updateCounterLabel, playerJR, jokeLabel, jokeButton, spinnerJoke].forEach { contentView.addSubview($0) }
+        [firstPost, postButtonFirst, secondPost, postButtonSecond, stackView, countdownTimeLabel, updateCounterLabel, playerJR, jokeLabel, jokeButton, spinnerJoke, newsButton].forEach { contentView.addSubview($0) }
         scrollView.addSubview(contentView)
         addSubview(scrollView)
         
@@ -337,10 +368,15 @@ final class FeedView: UIView {
             jokeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
             jokeButton.heightAnchor.constraint(equalToConstant: 50),
             
+            newsButton.topAnchor.constraint(equalTo: jokeButton.bottomAnchor,constant: 16),
+            newsButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 32),
+            newsButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
+            newsButton.heightAnchor.constraint(equalToConstant: 50),
+            
             spinnerJoke.centerYAnchor.constraint(equalTo: jokeButton.centerYAnchor),
             spinnerJoke.centerXAnchor.constraint(equalTo: jokeButton.centerXAnchor),
             
-            firstPost.topAnchor.constraint(equalTo: jokeButton.bottomAnchor,constant: 32),
+            firstPost.topAnchor.constraint(equalTo: newsButton.bottomAnchor,constant: 32),
             firstPost.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 32),
             firstPost.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
             firstPost.heightAnchor.constraint(equalToConstant: 300),

@@ -13,6 +13,7 @@ class FeedViewController: UIViewController {
     var post = Postik(title: "Заголовок поста")
     let splash = SplashView()
     let player = Player()
+    let news = NewsListController()
     lazy var feedView = FeedView(delegate: self)
     private var coordinator: FeedFlowCoordinator?
     
@@ -51,7 +52,6 @@ class FeedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         title = "Лента"
         NotificationCenter.default.addObserver(self, selector: #selector(notificationAction), name: .updateIsValidWord, object: nil)
         layout()
@@ -112,12 +112,17 @@ class FeedViewController: UIViewController {
             feedView.leadingAnchor.constraint(equalTo: background.leadingAnchor),
             feedView.trailingAnchor.constraint(equalTo: background.trailingAnchor),
             feedView.topAnchor.constraint(equalTo: background.topAnchor),
-            feedView.bottomAnchor.constraint(equalTo: background.bottomAnchor)
+            feedView.bottomAnchor.constraint(equalTo: background.bottomAnchor),
         ])
     }
 }
 
 extension FeedViewController: FeedViewDelegate {
+    func tapNews() {
+        let newsVC = NewsListController()
+        navigationController?.pushViewController(newsVC, animated: true)
+    }
+    
 
    func didTapPostButton() {
        coordinator?.showPost(title: post.title)
@@ -132,29 +137,5 @@ extension FeedViewController: FeedViewDelegate {
     
     func didTapVoiceRecButton() {
         coordinator?.showPlayer()
-//
-//        tabBarController?.tabBar.isHidden = true
-//        navigationController?.navigationBar.isHidden = true
-//
-//        view.addSubview(blure)
-//        view.addSubview(player)
-//
-//        NSLayoutConstraint.activate([
-//            blure.topAnchor.constraint(equalTo: view.topAnchor),
-//            blure.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            blure.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            blure.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-//
-//            player.topAnchor.constraint(equalTo: view.bottomAnchor),
-//            player.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 30),
-//            player.heightAnchor.constraint(equalToConstant: 570),
-//            player.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -30),
-//            ])
-//
-//        UIView.animate(withDuration: 0.5, animations: {
-//            self.player.transform = CGAffineTransform(translationX: 0, y: -600)
-//            self.player.alpha = 1
-//            self.blure.alpha = 1
-//        })
     }
 }
