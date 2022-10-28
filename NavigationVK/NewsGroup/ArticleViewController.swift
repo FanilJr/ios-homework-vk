@@ -9,6 +9,7 @@ import UIKit
 
 class ArticleViewController: UIViewController {
 
+    var webVC = WebViewController()
     var articles: Article!
     var downloadManager = DownloadManager()
 
@@ -48,7 +49,24 @@ class ArticleViewController: UIViewController {
     }
 }
 
-extension ArticleViewController: UITableViewDataSource {
+extension ArticleViewController: UITableViewDataSource, URLDelegate {
+    
+    func tapInURL() {
+        let myURL = URL(string: articles.url!)
+        let request = URLRequest(url: myURL!)
+        let navVC = UINavigationController(rootViewController: webVC)
+        webVC.title = "Browser JR"
+        webVC.web.load(request)
+        DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+            self.webVC.web.evaluateJavaScript("document.body.innerHTML") { result, error in
+                guard let html = result as? String, error == nil else {
+                    return
+                }
+            }
+        }
+        present(navVC, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -61,8 +79,19 @@ extension ArticleViewController: UITableViewDataSource {
         cell.name.text = articles.name
         cell.url.text = articles.url
         cell.date.text = articles.publishedAt
+        cell.delegate = self
+
+        /// Удаляем не нужные символы в дате и времени
+        let result = cell.date.text?.replacingOccurrences(of: "T", with: "  ")
+        cell.date.text = result
         
-        
+        for i in cell.date.text! {
+            if i == "Z" {
+                cell.date.text?.removeAll(where: { character in
+                    i == character
+                })
+            }
+        }
         
         if let urlImageString = articles.urlToImage,
            let urlimage = URL(string: urlImageString) {

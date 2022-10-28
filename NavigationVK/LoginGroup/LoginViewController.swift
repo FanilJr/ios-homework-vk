@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import RealmSwift
+//MARK: REALM  import RealmSwift
 
 protocol LoginViewControllerDelegate: AnyObject {
     func checkCredentials(login: String, password: String, success: @escaping (Bool) -> Void) throws
@@ -17,7 +17,7 @@ class LogInViewController: UIViewController {
 
     private var viewModel: LoginViewModel
     private lazy var loginView = LoginView(delegate: self)
-    var logins: Results<LoginModel>?
+//MARK: REALM    var logins: Results<LoginModel>?
     
     let background: UIImageView = {
         let back = UIImageView()
@@ -47,9 +47,9 @@ class LogInViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loginView.setPassword(password: "", isSecure: true)
-        if let newData = self.logins?[0] {
-            viewModel.signUp(login: newData.login, password: newData.password)
-        }
+//MARK: REALM         if let newData = self.logins?[0] {
+//MARK: REALM        viewModel.signUp(login: newData.login, password: newData.password)
+//MARK: REALM    }
     }
 
     private func layout() {
@@ -92,15 +92,16 @@ extension LogInViewController: LoginViewDelegate {
     func didTapLogInButton() {
         let login = loginView.getLogin()
         let password = loginView.getPassword()
-        let data = LoginModel(value: [login, password])
-        do {
-            let realm = try Realm()
-            try realm.write { realm.add(data) }
-            print("-------------Всё норм - записали-------------")
-        } catch let error {
-            print("-----------Зашли в ошибку---------------")
-            print(error.localizedDescription)
-        }
+//MARK: REALM
+//        let data = LoginModel(value: [login, password])
+//        do {
+//            let realm = try Realm()
+//            try realm.write { realm.add(data) }
+//            print("-------------Всё норм - записали-------------")
+//        } catch let error {
+//            print("-----------Зашли в ошибку---------------")
+//            print(error.localizedDescription)
+//        }
         viewModel.login(login: login, password: password)
         DispatchQueue.main.async {
             self.loginView.waitingSpinnerEnable(false)

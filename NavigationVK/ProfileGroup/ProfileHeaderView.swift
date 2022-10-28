@@ -131,10 +131,8 @@ final class ProfileHeaderView: UIView {
     private func tap() {
         
         setStatusButton.tapAction =  { [weak self] in
-            
             AudioServicesPlaySystemSound(self!.systemSoundID)
-            
-            
+
             let bounds = self?.setStatusButton.bounds
             let bonds = self?.statusLabel.bounds
 

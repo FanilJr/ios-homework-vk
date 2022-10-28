@@ -10,8 +10,6 @@ import UIKit
 class PlayerViewController: UIViewController {
     
     let albums = Album.get()
-    let firstSetup = FirstAlbum.massiveAlbum()
-    let listTable = SongListTableViewCell()
     
     let background: UIImageView = {
         let back = UIImageView()
@@ -36,7 +34,7 @@ class PlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "My Music Player"
+        title = "Music"
         setupView()
 
     }
@@ -76,8 +74,11 @@ extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = MediaPlayerViewController(album: albums[indexPath.row])
-//        let vc2 = SongListViewController()
-//            navigationController?.pushViewController(vc2, animated: true)
         present(vc, animated: true)
+//        let vc2 = SongListViewController()
+//        navigationController?.pushViewController(vc2, animated: true)
+        
+//        let album = albums[indexPath.row]
+//        SongListViewController.show(self, album: album)
     }
 }

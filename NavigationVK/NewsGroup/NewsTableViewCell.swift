@@ -9,8 +9,6 @@ import UIKit
 
 class NewsTableViewCell: UITableViewCell {
     
-    var articles: Article!
-    
     lazy var postImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit

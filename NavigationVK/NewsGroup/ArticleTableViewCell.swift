@@ -7,18 +7,14 @@
 
 import UIKit
 
+protocol URLDelegate: AnyObject {
+    func tapInURL()
+}
+
 class ArticleTableViewCell: UITableViewCell {
     
-//    var articles: Article!
-    
-    //MARK: ДОДЕЛАТЬ АКТИВИТИ - НЕ РАБОТАЕТ
-    private var activityView: UIActivityIndicatorView = {
-        let activityView: UIActivityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
-        activityView.hidesWhenStopped = true
-        activityView.translatesAutoresizingMaskIntoConstraints = false
-        return activityView
-    }()
-    
+    var delegate: URLDelegate?
+        
     lazy var progress: UIProgressView = {
         let progress = UIProgressView()
         progress.translatesAutoresizingMaskIntoConstraints = false
@@ -77,6 +73,14 @@ class ArticleTableViewCell: UITableViewCell {
         return label
     }()
     
+    lazy var buttonURL: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.addTarget(self, action: #selector(tapURL), for: .touchUpInside)
+        return button
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         constraints()
@@ -99,9 +103,18 @@ class ArticleTableViewCell: UITableViewCell {
 //            }
 //        }
 //    }
-    
+    @objc func tapURL() {
+        delegate?.tapInURL()
+//        if let url = URL(string: url.text!) {
+//            UIApplication.shared.open(url)
+//            print("open url")
+//        } else {
+//            print("nihua ne open")
+//        }
+
+    }
     private func constraints() {
-        [date, progress, postImage, titleName, descriptionName, url].forEach { contentView.addSubview($0) }
+        [date, progress, postImage, titleName, descriptionName, url, buttonURL].forEach { contentView.addSubview($0) }
         
         NSLayoutConstraint.activate([
             date.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -115,7 +128,7 @@ class ArticleTableViewCell: UITableViewCell {
             
             progress.centerYAnchor.constraint(equalTo: postImage.centerYAnchor),
             progress.centerXAnchor.constraint(equalTo: postImage.centerXAnchor),
-            progress.widthAnchor.constraint(equalToConstant: 250),
+            progress.widthAnchor.constraint(equalToConstant: 100),
             progress.heightAnchor.constraint(equalToConstant: 5),
             
             titleName.topAnchor.constraint(equalTo: postImage.bottomAnchor,constant: 5),
@@ -130,6 +143,11 @@ class ArticleTableViewCell: UITableViewCell {
             url.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 14),
             url.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -14),
             url.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -14),
+            
+            buttonURL.centerYAnchor.constraint(equalTo: url.centerYAnchor),
+            buttonURL.centerXAnchor.constraint(equalTo: url.centerXAnchor),
+            buttonURL.widthAnchor.constraint(equalTo: url.widthAnchor),
+            buttonURL.heightAnchor.constraint(equalTo: url.heightAnchor)
         ])
     }
 }

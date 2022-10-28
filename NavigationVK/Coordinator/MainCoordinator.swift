@@ -9,24 +9,55 @@ import Foundation
 import UIKit
 
 enum TabBarPage {
-    case feed
+//    case feed
+    case news
     case profile
+    case favorite
+    case player
 
     var pageTitle: String {
         switch self {
-        case .feed:
-            return "Лента"
+//        case .feed:
+//            return "Лента"
+        case .news:
+            return "Новости"
         case .profile:
             return "Профиль"
+        case .favorite:
+            return "Избранное"
+        case .player:
+            return "Music"
+
         }
     }
 
     var image: UIImage? {
         switch self {
-        case .feed:
-            return UIImage(systemName: "rectangle.badge.person.crop")
+//        case .feed:
+//            return UIImage(systemName: "rectangle.badge.person.crop")
+        case .news:
+            return UIImage(systemName: "newspaper.circle")
         case .profile:
-            return UIImage(systemName: "person.crop.square.filled.and.at.rectangle")
+            return UIImage(systemName: "person.circle")
+        case .favorite:
+            return UIImage(systemName: "heart.circle")
+        case .player:
+            return UIImage(systemName: "play.circle")
+        }
+    }
+    
+    var selectedImage: UIImage? {
+        switch self {
+//        case .feed:
+//            return UIImage(systemName: "rectangle.fill.badge.person.crop")
+        case .news:
+            return UIImage(systemName: "newspaper.circle.fill")
+        case .profile:
+            return UIImage(systemName: "person.circle.fill")
+        case .favorite:
+            return UIImage(systemName: "heart.circle.fill")
+        case .player:
+            return UIImage(systemName: "play.circle.fill")
         }
     }
 }
@@ -50,7 +81,7 @@ final class MainCoordinatorImp: MainCoordinator {
     //MARK: - Metods
     private func getTabBarController() -> UIViewController {
         let tabBarVC = MainTabBarController()
-        let pages: [TabBarPage] = [.feed, .profile]
+        let pages: [TabBarPage] = [.news, .profile, .favorite, .player]
 
         tabBarVC.setViewControllers(pages.map { getNavController(page: $0) }, animated: true)
         return tabBarVC
@@ -59,13 +90,19 @@ final class MainCoordinatorImp: MainCoordinator {
       private func getNavController(page: TabBarPage) -> UINavigationController {
           let navigationVC = UINavigationController()
           navigationVC.tabBarItem.image = page.image
+          navigationVC.tabBarItem.selectedImage = page.selectedImage
           navigationVC.tabBarItem.title = page.pageTitle
 
           switch page {
-          case .feed:
-              let feedChildCoordinator = FeedFlowCoordinator(navCon: navigationVC, controllersFactory: controllersFactory)
-              let feedVC = controllersFactory.makeFeedViewController(coordinator: feedChildCoordinator)
-              navigationVC.pushViewController(feedVC, animated: true)
+//          case .feed:
+//              let feedChildCoordinator = FeedFlowCoordinator(navCon: navigationVC, controllersFactory: controllersFactory)
+//              let feedVC = controllersFactory.makeFeedViewController(coordinator: feedChildCoordinator)
+//              navigationVC.pushViewController(feedVC, animated: true)
+          case .news:
+              let newsChildCoordinator = NewsFlowCoordinator(navCon: navigationVC, controllersFactory: controllersFactory)
+              let newsVC = controllersFactory.makeNewsViewController(coordinator: newsChildCoordinator)
+              navigationVC.pushViewController(newsVC, animated: true)
+              
           case .profile:
               let profileChildCoordinator = ProfileFlowCoordinator(navCon: navigationVC, controllersFactory: controllersFactory)
               let logInVC = controllersFactory.makeLoginViewController(coordinator: profileChildCoordinator)
@@ -78,7 +115,19 @@ final class MainCoordinatorImp: MainCoordinator {
                   )
                   navigationVC.pushViewController(profileVC, animated: true)
               }
+              
+          case .favorite:
+              let favoriteChildCoordinator = FavoriteFlowCoordinator(navCon: navigationVC, controllersFactory: controllersFactory)
+              let favoriteVC = controllersFactory.makeFavoriteViewController(coordinator: favoriteChildCoordinator)
+              navigationVC.pushViewController(favoriteVC, animated: true)
+              
+          case .player:
+              let playerChildCoordinator = PlayerFlowCoordinator(navCon: navigationVC, controllersFactory: controllersFactory)
+              let playerVC = controllersFactory.makePlayerViewController(coordinator: playerChildCoordinator)
+              navigationVC.pushViewController(playerVC, animated: true)
           }
+          
+          
 
           return navigationVC
       }
