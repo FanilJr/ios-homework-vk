@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum UserGetError: Error {
+    case notFound
+    case unowned
+}
+
 protocol UserService {
-    func getUser(userName: String) -> User?
+    func getUser(userName: String, completion: (Result<User,UserGetError>) -> Void)
 }

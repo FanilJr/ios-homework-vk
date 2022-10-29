@@ -35,7 +35,6 @@ class ProfileImageView: UIView {
         stack.distribution = .fillEqually
         stack.alignment = .leading
         stack.translatesAutoresizingMaskIntoConstraints = false
-//        stack.clipsToBounds = true
         return stack
     }()
     
@@ -144,21 +143,11 @@ class ProfileImageView: UIView {
         gradientLayer.colors = [colorTop, colorBottom]
         gradientLayer.locations = [0.0, 1.0]
         gradientLayer.frame = self.bounds
-
-        
     }
+    
     func setupView(user: User?) {
-        
-        guard let user = user else {
-            print("Не верный Логин")
-            avatarImageView.image = UIImage(named: "error")
-            fullNameLabel.text = "error"
-            return
-        }
-        
-        fullNameLabel.text = user.name
+        guard let user = user else {print("Error: User nil in ProfileHeaderView." + #function); return}
         avatarImageView.image = user.avatar
-
     }
     
     override init(frame: CGRect) {
@@ -170,7 +159,6 @@ class ProfileImageView: UIView {
         self.layer.shadowOpacity = 1
         self.layer.shadowRadius = 30
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

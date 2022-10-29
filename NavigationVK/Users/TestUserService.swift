@@ -10,9 +10,14 @@ import UIKit
 
 final class TestUserService: UserService {
     
-    let user = User(name: "Fanil_Jr", avatar: UIImage(named: "error")!, status: "Пробный статус")
+    let user = User(name: "ethic91@icloud.com", avatar: UIImage(named: "error")!, status: "Пробный статус")
     
-    func getUser(userName: String) -> User? {
-        user.name == userName ? user : nil
+    func getUser(userName: String, completion: (Result<User, UserGetError>) -> Void) {
+        if user.name == userName {
+            completion(.success(user))
+        } else {
+            let debugUuser = User(name: userName, avatar: UIImage(systemName: "person.fill.questionmark")!, status: "Проверка работы Login сервиса")
+            completion(.success(debugUuser))
+        }
     }
 }

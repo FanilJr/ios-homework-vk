@@ -32,18 +32,6 @@ class SongListTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupFirstAlbum(_ model: FirstAlbum) {
-        songName.text = model.track
-        imageSong.image = UIImage(named: model.image)
-        
-    }
-    
-    func setupSecondAlbum(_ model: SecondAlbum) {
-        songName.text = model.track
-        imageSong.image = UIImage(named: model.image)
-        
-    }
-    
     private func setupView() {
         [songName, imageSong].forEach { contentView.addSubview($0) }
         

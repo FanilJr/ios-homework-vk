@@ -34,4 +34,19 @@ final class ControllersFactory {
         return profileVC
     }
     
+    func makeFavoriteViewController(coordinator: FavoriteFlowCoordinator) -> FavoriteViewController {
+        let favoriteVC = FavoriteViewController()
+        return favoriteVC
+    }
+    
+    func makeNewsViewController(coordinator: NewsFlowCoordinator) -> NewsListController {
+        let favoriteVC = NewsListController()
+        return favoriteVC
+    }
+    
+    func makePlayerViewController(coordinator: PlayerFlowCoordinator) -> PlayerViewController {
+        let playerVC = PlayerViewController()
+        return playerVC
+    }
+    
 }

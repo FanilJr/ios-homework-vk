@@ -9,6 +9,7 @@ import UIKit
 
 protocol MyClassDelegate: AnyObject {
     func presentMenuAvatar()
+    func didTapLogoutButton()
 }
 
 final class ProfileHeaderView: UIView {
@@ -80,7 +81,17 @@ final class ProfileHeaderView: UIView {
     private let setStatusButton: CustomButton = {
         let button = CustomButton(title: "Set status", titleColor: .white, backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
         return button
-        }()
+    }()
+    
+    private let logoutButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        let config = UIImage.SymbolConfiguration(pointSize: 20)
+        button.addTarget(self, action: #selector(logout), for: .touchUpInside)
+        button.setImage(UIImage(systemName: "person.fill.xmark", withConfiguration: config), for: .normal)
+        button.tintColor = .red
+        return button
+    }()
     
     
     @objc func expandAvatar() {
@@ -89,10 +100,14 @@ final class ProfileHeaderView: UIView {
     
     func snp() {
         
-        [avatarImageView, stackView, setStatusButton].forEach { addSubview($0) }
+        [avatarImageView, stackView, setStatusButton, logoutButton].forEach { addSubview($0) }
         [fullNameLabel, statusLabel, statusTextField].forEach { stackView.addArrangedSubview($0) }
         
         NSLayoutConstraint.activate([
+            
+            logoutButton.topAnchor.constraint(equalTo: topAnchor),
+            logoutButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
             avatarImageView.topAnchor.constraint(equalTo: topAnchor),
             avatarImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             avatarImageView.widthAnchor.constraint(equalToConstant: 120),
@@ -109,14 +124,15 @@ final class ProfileHeaderView: UIView {
             setStatusButton.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -16)
         ])
     }
+    @objc func logout() {
+        self.delegate?.didTapLogoutButton()
+    }
         
     private func tap() {
         
         setStatusButton.tapAction =  { [weak self] in
-            
             AudioServicesPlaySystemSound(self!.systemSoundID)
-            
-            
+
             let bounds = self?.setStatusButton.bounds
             let bonds = self?.statusLabel.bounds
 
@@ -125,7 +141,6 @@ final class ProfileHeaderView: UIView {
                 self?.setStatusButton.bounds = CGRect(x: (bounds?.origin.x)! - 30, y: (bounds?.origin.y)!, width: bounds!.width + 30, height: bounds!.height + 10)
                 self?.setStatusButton.titleLabel?.bounds = CGRect(x: bounds!.origin.x, y: bounds!.origin.y, width: bounds!.width + 100, height: bounds!.height)
                 self?.statusLabel.bounds = CGRect(x: bonds!.origin.x, y: bonds!.origin.y, width: bonds!.width + 50, height: bonds!.height)
-                
             }
             
             self?.statusLabel.text = self?.statusTextField.text
@@ -136,18 +151,14 @@ final class ProfileHeaderView: UIView {
     }
     
     func setupView(user: User?) {
-        
-        guard let user = user else {
-            print("Не верный Логин")
-            avatarImageView.image = UIImage(named: "error")
-            fullNameLabel.text = "error"
-            return
-        }
-        
+        guard let user = user else {print("Error: User nil in ProfileHeaderView." + #function); return}
         fullNameLabel.text = user.name
         avatarImageView.image = user.avatar
         statusLabel.text = user.status
-
+        
+        if fullNameLabel.text == "ethic91@icloud.com" {
+            fullNameLabel.text = "Fanil_Jr"
+        }
     }
         
 

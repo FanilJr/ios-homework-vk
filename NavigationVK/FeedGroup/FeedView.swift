@@ -12,10 +12,12 @@ protocol FeedViewDelegate: AnyObject {
     func check(word: String)
     func didTapSecondPostButton()
     func didTapVoiceRecButton()
+    func tapNews()
 }
 
+
 final class FeedView: UIView {
-    
+
     weak var delegate: FeedViewDelegate?
     private let nc = NotificationCenter.default
     private var updateCounter = 0
@@ -103,6 +105,18 @@ final class FeedView: UIView {
     private let jokeButton: CustomButton = {
         let button = CustomButton(title: "Выдать шутку", titleColor: .white, backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
         return button
+    }()
+    
+    private let newsButton: CustomButton = {
+        let button = CustomButton(title: "NEWS - СЕГОДНЯ", titleColor: .white, backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
+        return button
+    }()
+    
+    private let spinnerJoke: UIActivityIndicatorView = {
+        let activityView: UIActivityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
+        activityView.hidesWhenStopped = true
+        activityView.translatesAutoresizingMaskIntoConstraints = false
+        return activityView
     }()
     
     
@@ -231,6 +245,10 @@ final class FeedView: UIView {
         postButtonSecond.tapAction = { [weak self] in
             self?.delegate?.didTapSecondPostButton()
         }
+        
+        newsButton.tapAction = { [weak self] in
+            self?.delegate?.tapNews()
+        }
         playerJR.tapAction = { [weak self] in
             self?.delegate?.didTapVoiceRecButton()
             
@@ -244,18 +262,20 @@ final class FeedView: UIView {
             }
         }
         jokeButton.tapAction = { [weak self] in
-            self?.jokeButton.isEnabled = false
             self?.getRandomJoke { joke in
                 DispatchQueue.main.async {
-                    self?.jokeButton.isEnabled = true
                     if let joke {
                         self?.jokeLabel.text = joke
-                        self?.jokeButton.isEnabled = true
+                        self?.waitingSpinner(false)
+                        self?.jokeButton.setTitle("Выдать шутку", for: .normal)
                     } else {
                         self?.jokeLabel.text = "Something went wrong"
-                        self?.jokeButton.isEnabled = false
                     }
                 }
+            }
+            DispatchQueue.main.async {
+                self?.jokeButton.setTitle("", for: .normal)
+                self?.waitingSpinner(true)
             }
         }
     }
@@ -287,10 +307,18 @@ final class FeedView: UIView {
         }
     }
     
+    func waitingSpinner(_ active: Bool) {
+        if active {
+            spinnerJoke.startAnimating()
+        } else {
+            spinnerJoke.stopAnimating()
+        }
+    }
+    
     private func layout() {
         
         [textField, resultLabel, notificationButton].forEach { stackView.addArrangedSubview($0) }
-        [firstPost, postButtonFirst, secondPost, postButtonSecond, stackView, countdownTimeLabel, updateCounterLabel, playerJR, jokeLabel, jokeButton].forEach { contentView.addSubview($0) }
+        [firstPost, postButtonFirst, secondPost, postButtonSecond, stackView, countdownTimeLabel, updateCounterLabel, playerJR,jokeLabel, jokeButton, spinnerJoke, newsButton].forEach { contentView.addSubview($0) }
         scrollView.addSubview(contentView)
         addSubview(scrollView)
         
@@ -320,7 +348,15 @@ final class FeedView: UIView {
             jokeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
             jokeButton.heightAnchor.constraint(equalToConstant: 50),
             
-            firstPost.topAnchor.constraint(equalTo: jokeButton.bottomAnchor,constant: 32),
+            newsButton.topAnchor.constraint(equalTo: jokeButton.bottomAnchor,constant: 16),
+            newsButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 32),
+            newsButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
+            newsButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            spinnerJoke.centerYAnchor.constraint(equalTo: jokeButton.centerYAnchor),
+            spinnerJoke.centerXAnchor.constraint(equalTo: jokeButton.centerXAnchor),
+            
+            firstPost.topAnchor.constraint(equalTo: newsButton.bottomAnchor,constant: 32),
             firstPost.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 32),
             firstPost.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
             firstPost.heightAnchor.constraint(equalToConstant: 300),
