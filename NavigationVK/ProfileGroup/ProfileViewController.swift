@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ProfileViewController: UIViewController {
 
@@ -67,11 +68,13 @@ class ProfileViewController: UIViewController {
         title = "Профиль"
 
         setupTableView()
+        header.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
+        loadUser(userName: userName)
         
     #if DEBUG
-        background.image = UIImage(named: "background")
+        background.image = UIImage(named: "tekstura")
     #else
         background.image = UIImage(named: "background4")
     #endif
@@ -81,12 +84,29 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationController?.navigationBar.isHidden = true
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+    }
+    
+    private func loadUser(userName: String) {
+        userService.getUser(userName: userName) { result in
+            switch result {
+            case .success(let user):
+                header.setupView(user: user)
+            case .failure(let error):
+                hundle(error: error)
+            }
+        }
+    }
+    
+    private func hundle(error: UserGetError) {
+        switch error{
+        case .notFound: coordinator?.showAlert(title: "Ошибка", message: "ok")
+        case .unowned: print("File:" + #file, "\nFunction: " + #function + "\nUserGetError.unowned\n")
+        }
     }
    
     func setupTableView() {
@@ -111,9 +131,7 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-
         return numbersSection.count
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -147,16 +165,8 @@ extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
             
         default:
             return UITableViewCell()
-            
         }
-        
     }
-    
-//    func tuchToShare() {
-//        let items:[Any] = [galery.randomElement() ?? UIImage()]
-//        let avc = UIActivityViewController(activityItems: items, applicationActivities: nil)
-//        self.present(avc, animated: true, completion: nil)
-//    }
     
     func tuchUp() {
         print("tuch по кнопке delegate из ProfileViewController")
@@ -183,24 +193,19 @@ extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
 extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         UITableView.automaticDimension
-        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        header.delegate = self
-        header.setupView(user: userService.getUser(userName: userName))
-        
-        switch section {
-        case 0:
-            return header
-        case 1:
-            return profileImageView
-        default:
-            return UIView()
-            
+        return header
+    }
+    
+    func didTapLogoutButton() {
+        do {
+            try FirebaseAuth.Auth.auth().signOut()
+            coordinator?.pop()
+        } catch {
+            print("Error signout")
         }
     }
     
@@ -208,7 +213,7 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
        
        view.addSubview(blure)
        view.addSubview(profileImageView)
-       profileImageView.setupView(user: userService.getUser(userName: userName))
+       profileImageView.avatarImageView.image = UIImage(named: "1")
        profileImageView.settingDelegate = self
        
        NSLayoutConstraint.activate([
@@ -272,7 +277,7 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
             let vc = ProfilePostViewController()
             vc.setupCell(post[indexPath.row])
             navigationController?.pushViewController(vc, animated: true)
-//            coordinator?.showProfilePost()
         }
     }
 }
+

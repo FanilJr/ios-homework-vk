@@ -12,15 +12,17 @@ protocol FeedViewDelegate: AnyObject {
     func check(word: String)
     func didTapSecondPostButton()
     func didTapVoiceRecButton()
+    func tapNews()
 }
 
+
 final class FeedView: UIView {
-    
+
     weak var delegate: FeedViewDelegate?
     private let nc = NotificationCenter.default
     private var updateCounter = 0
     private var countdownTime = 5
-    private let voiceRecButton = CustomButton(title: "JRPlayer", titleColor: .white, backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
+    private let playerJR = CustomButton(title: "JRPlayer", titleColor: .white, backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
     
     private lazy var countdownTimeLabel: UILabel = {
         let label = UILabel()
@@ -100,6 +102,23 @@ final class FeedView: UIView {
         return button
     }()
     
+    private let jokeButton: CustomButton = {
+        let button = CustomButton(title: "Выдать шутку", titleColor: .white, backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
+        return button
+    }()
+    
+    private let newsButton: CustomButton = {
+        let button = CustomButton(title: "NEWS - СЕГОДНЯ", titleColor: .white, backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
+        return button
+    }()
+    
+    private let spinnerJoke: UIActivityIndicatorView = {
+        let activityView: UIActivityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
+        activityView.hidesWhenStopped = true
+        activityView.translatesAutoresizingMaskIntoConstraints = false
+        return activityView
+    }()
+    
     
     private let textField: CustomTextField = {
         let textfield = CustomTextField(placeholder: "пароль: junior", textColor: .black, font: UIFont.systemFont(ofSize: 20))
@@ -114,6 +133,16 @@ final class FeedView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    private let jokeLabel: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     
     private let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -168,6 +197,45 @@ final class FeedView: UIView {
         scrollView.contentInset.bottom = .zero
         scrollView.verticalScrollIndicatorInsets = .zero
     }
+    
+    func getRandomJoke(completion: ((_ joke: String?) -> Void)?) {
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: URL(string: "https://api.chucknorris.io/jokes/random")!) {
+            data, responce, error in
+            
+            if let error {
+                print(error.localizedDescription)
+                completion?(nil)
+                return
+            }
+            
+            if (responce as! HTTPURLResponse).statusCode != 200 {
+                print("Status code != 200, statusCode = \((responce as! HTTPURLResponse).statusCode)")
+                completion?(nil)
+                return
+            }
+            
+            guard let data else {
+                print("data = nil")
+                completion?(nil)
+                return
+            }
+            
+            do {
+                let answer = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+                if let joke = answer?["value"] as? String {
+                    completion?(joke)
+                    return
+                } else {
+                    print("Error!!! Json format no valid!")
+                }
+            } catch {
+                print(error)
+            }
+            completion?(nil)
+        }
+        task.resume()
+    }
 
     private func taps() {
         postButtonFirst.tapAction = { [weak self] in
@@ -177,7 +245,11 @@ final class FeedView: UIView {
         postButtonSecond.tapAction = { [weak self] in
             self?.delegate?.didTapSecondPostButton()
         }
-        voiceRecButton.tapAction = { [weak self] in
+        
+        newsButton.tapAction = { [weak self] in
+            self?.delegate?.tapNews()
+        }
+        playerJR.tapAction = { [weak self] in
             self?.delegate?.didTapVoiceRecButton()
             
         }
@@ -187,6 +259,23 @@ final class FeedView: UIView {
             UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 2, initialSpringVelocity: 1, options: .curveLinear) {
                 self?.notificationButton.bounds = CGRect(x: (self!.bounds.origin.x) - 30, y: (self!.bounds.origin.y), width: self!.bounds.width + 30, height: self!.bounds.height + 10)
                 self?.notificationButton.titleLabel?.bounds = CGRect(x: self!.bounds.origin.x, y: self!.bounds.origin.y, width: self!.bounds.width + 100, height: self!.bounds.height)
+            }
+        }
+        jokeButton.tapAction = { [weak self] in
+            self?.getRandomJoke { joke in
+                DispatchQueue.main.async {
+                    if let joke {
+                        self?.jokeLabel.text = joke
+                        self?.waitingSpinner(false)
+                        self?.jokeButton.setTitle("Выдать шутку", for: .normal)
+                    } else {
+                        self?.jokeLabel.text = "Something went wrong"
+                    }
+                }
+            }
+            DispatchQueue.main.async {
+                self?.jokeButton.setTitle("", for: .normal)
+                self?.waitingSpinner(true)
             }
         }
     }
@@ -218,10 +307,18 @@ final class FeedView: UIView {
         }
     }
     
+    func waitingSpinner(_ active: Bool) {
+        if active {
+            spinnerJoke.startAnimating()
+        } else {
+            spinnerJoke.stopAnimating()
+        }
+    }
+    
     private func layout() {
         
         [textField, resultLabel, notificationButton].forEach { stackView.addArrangedSubview($0) }
-        [firstPost, postButtonFirst, secondPost, postButtonSecond, stackView, countdownTimeLabel, updateCounterLabel, voiceRecButton].forEach { contentView.addSubview($0) }
+        [firstPost, postButtonFirst, secondPost, postButtonSecond, stackView, countdownTimeLabel, updateCounterLabel, playerJR,jokeLabel, jokeButton, spinnerJoke, newsButton].forEach { contentView.addSubview($0) }
         scrollView.addSubview(contentView)
         addSubview(scrollView)
         
@@ -237,12 +334,29 @@ final class FeedView: UIView {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
-            voiceRecButton.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor,constant: 32),
-            voiceRecButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 32),
-            voiceRecButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
-            voiceRecButton.heightAnchor.constraint(equalToConstant: 50),
+            playerJR.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor,constant: 32),
+            playerJR.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 32),
+            playerJR.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
+            playerJR.heightAnchor.constraint(equalToConstant: 50),
             
-            firstPost.topAnchor.constraint(equalTo: voiceRecButton.bottomAnchor,constant: 32),
+            jokeLabel.topAnchor.constraint(equalTo: playerJR.bottomAnchor,constant: 16),
+            jokeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 32),
+            jokeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
+            
+            jokeButton.topAnchor.constraint(equalTo: jokeLabel.bottomAnchor,constant: 16),
+            jokeButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 32),
+            jokeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
+            jokeButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            newsButton.topAnchor.constraint(equalTo: jokeButton.bottomAnchor,constant: 16),
+            newsButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 32),
+            newsButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
+            newsButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            spinnerJoke.centerYAnchor.constraint(equalTo: jokeButton.centerYAnchor),
+            spinnerJoke.centerXAnchor.constraint(equalTo: jokeButton.centerXAnchor),
+            
+            firstPost.topAnchor.constraint(equalTo: newsButton.bottomAnchor,constant: 32),
             firstPost.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 32),
             firstPost.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
             firstPost.heightAnchor.constraint(equalToConstant: 300),

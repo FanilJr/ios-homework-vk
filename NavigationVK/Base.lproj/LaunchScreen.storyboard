@@ -17,46 +17,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background3" translatesAutoresizingMaskIntoConstraints="NO" id="Ssg-nV-Dn9">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="123321" translatesAutoresizingMaskIntoConstraints="NO" id="lfX-GR-22K">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vk" translatesAutoresizingMaskIntoConstraints="NO" id="1eJ-c5-ZX0">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vkontakte" translatesAutoresizingMaskIntoConstraints="NO" id="9mI-7h-eRb">
                                 <rect key="frame" x="157" y="398" width="100" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="hio-jR-YAc"/>
-                                    <constraint firstAttribute="height" constant="100" id="z5l-Ld-1kQ"/>
+                                    <constraint firstAttribute="width" constant="100" id="OxB-71-u6r"/>
+                                    <constraint firstAttribute="height" constant="100" id="n28-dX-L3u"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fanil_Jr" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxz-Kh-xPX">
-                                <rect key="frame" x="170" y="503" width="74" height="28"/>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="23"/>
-                                <color key="textColor" systemColor="systemPurpleColor"/>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <size key="shadowOffset" width="1" height="-1"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#edition" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lE1-J6-5hc">
-                                <rect key="frame" x="167.5" y="531" width="79" height="28"/>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="23"/>
-                                <color key="textColor" systemColor="systemPinkColor"/>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fanil_Jr" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wIN-mc-U2Q">
+                                <rect key="frame" x="174.5" y="508" width="65.5" height="25"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
+                                <color key="textColor" red="0.63861291099999995" green="0.47295261160000002" blue="0.84056988160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="highlightedColor" red="0.65997841680000002" green="0.3054199755" blue="0.84056988160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="shadowColor" systemColor="labelColor"/>
                                 <size key="shadowOffset" width="1" height="-1"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ssg-nV-Dn9" secondAttribute="trailing" id="8XF-w2-sX8"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ssg-nV-Dn9" secondAttribute="bottom" constant="-34" id="Ikd-Gc-dQk"/>
-                            <constraint firstItem="lE1-J6-5hc" firstAttribute="top" secondItem="bxz-Kh-xPX" secondAttribute="bottom" id="Jk7-cG-gUu"/>
-                            <constraint firstItem="1eJ-c5-ZX0" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Kid-Yz-IDl"/>
-                            <constraint firstItem="bxz-Kh-xPX" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Tek-j3-AnF"/>
-                            <constraint firstItem="bxz-Kh-xPX" firstAttribute="top" secondItem="1eJ-c5-ZX0" secondAttribute="bottom" constant="5" id="ajF-j9-Uku"/>
-                            <constraint firstItem="1eJ-c5-ZX0" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="hT9-36-Vrj"/>
-                            <constraint firstItem="Ssg-nV-Dn9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-48" id="qJx-mn-2fS"/>
-                            <constraint firstItem="Ssg-nV-Dn9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="th6-Cz-72f"/>
-                            <constraint firstItem="lE1-J6-5hc" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="x6D-3V-40O"/>
+                            <constraint firstItem="9mI-7h-eRb" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Kyr-dQ-6Mw"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lfX-GR-22K" secondAttribute="trailing" id="VWp-4d-yEV"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="lfX-GR-22K" secondAttribute="bottom" constant="-34" id="X50-w4-KmY"/>
+                            <constraint firstItem="wIN-mc-U2Q" firstAttribute="top" secondItem="9mI-7h-eRb" secondAttribute="bottom" constant="10" id="XWW-co-GrA"/>
+                            <constraint firstItem="lfX-GR-22K" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-48" id="Zs4-9y-VUo"/>
+                            <constraint firstItem="9mI-7h-eRb" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="aty-T3-IHA"/>
+                            <constraint firstItem="lfX-GR-22K" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="rc3-MT-gWk"/>
+                            <constraint firstItem="wIN-mc-U2Q" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="sOw-Be-6JG"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -66,16 +56,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="background3" width="1200" height="800"/>
-        <image name="vk" width="1024" height="1024"/>
+        <image name="123321" width="1125" height="2436"/>
+        <image name="vkontakte" width="1238" height="1238"/>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemPurpleColor">
-            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

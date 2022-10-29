@@ -1,6 +1,0 @@
-framework module Pods_NavigationVK {
-  umbrella header "Pods-NavigationVK-umbrella.h"
-
-  export *
-  module * { export * }
-}
