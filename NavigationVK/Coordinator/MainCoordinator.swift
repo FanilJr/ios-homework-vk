@@ -82,7 +82,6 @@ final class MainCoordinatorImp: MainCoordinator {
     private func getTabBarController() -> UIViewController {
         let tabBarVC = MainTabBarController()
         let pages: [TabBarPage] = [.news, .profile, .favorite, .player]
-
         tabBarVC.setViewControllers(pages.map { getNavController(page: $0) }, animated: true)
         return tabBarVC
     }
@@ -92,7 +91,7 @@ final class MainCoordinatorImp: MainCoordinator {
           navigationVC.tabBarItem.image = page.image
           navigationVC.tabBarItem.selectedImage = page.selectedImage
           navigationVC.tabBarItem.title = page.pageTitle
-
+          
           switch page {
 //          case .feed:
 //              let feedChildCoordinator = FeedFlowCoordinator(navCon: navigationVC, controllersFactory: controllersFactory)
