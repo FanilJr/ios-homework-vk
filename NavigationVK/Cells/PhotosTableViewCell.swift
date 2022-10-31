@@ -15,6 +15,7 @@ protocol MyClassDelegateTwo: AnyObject {
 class PhotosTableViewCell: UITableViewCell {
             
     weak var tuchNew: MyClassDelegateTwo?
+    var profileView = ProfileViewModel().postArray
     
     private lazy var collectionViews: UICollectionView = {
         let layout = UICollectionViewFlowLayout()

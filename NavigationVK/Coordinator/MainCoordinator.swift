@@ -125,9 +125,6 @@ final class MainCoordinatorImp: MainCoordinator {
               let playerVC = controllersFactory.makePlayerViewController(coordinator: playerChildCoordinator)
               navigationVC.pushViewController(playerVC, animated: true)
           }
-          
-          
-
           return navigationVC
       }
 }

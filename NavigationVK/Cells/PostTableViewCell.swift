@@ -62,39 +62,31 @@ class PostTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         constraints()
-        
-        let gesture = UITapGestureRecognizer()
-        gesture.addTarget(self, action: #selector (tapHeart))
-        imageLike.addGestureRecognizer(gesture)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func tapHeart() {
-
-       if imageLike.image == UIImage(named: "heart3") {
-           imageLike.image = UIImage(named: "heart2")
-           likes.text = "Likes: \(String(1))"
-           viewsLabel.text = "Views: \(String(1))"
-       } else {
-           imageLike.image = UIImage(named: "heart3")
-           likes.text = "Likes: \(String(0))"
-       }
-       print("tap heart ❤️")
+    weak var viewModel: PostTbaleViewCellModel? {
+        willSet(viewModel) {
+            guard let viewModel = viewModel else { return }
+            authorName.text = viewModel.author
+            descriptionLabel.text = viewModel.description
+            postImage.image = UIImage(named: viewModel.image)
+            likes.text = "Likes: \(viewModel.likes)"
+            viewsLabel.text = "Views: \(viewModel.views)"
+        }
     }
     
     func setupCell(_ model: PostStruct) {
-        
         postImage.image = UIImage(named: model.image)
         authorName.text = model.author
         descriptionLabel.text = model.description
         likes.text = "Likes: \(String(model.likes))"
         viewsLabel.text = "Views: \(String(model.views))"
-        
+    }
 //      MARK: вариант одного фильтра для всех фото
 //
 //        if let image = UIImage(named: model.image) {
@@ -143,11 +135,10 @@ class PostTableViewCell: UITableViewCell {
 //                ImageProcessor().processImage(sourceImage: image, filter: filter7) { postImage.image = $0 }
 //
 //            }
-    }
    
     private func constraints() {
         
-        [postImage, authorName, descriptionLabel, likes, viewsLabel, imageLike].forEach { contentView.addSubview($0) }
+        [postImage, authorName, descriptionLabel, likes, viewsLabel].forEach { contentView.addSubview($0) }
         NSLayoutConstraint.activate([
             authorName.topAnchor.constraint(equalTo: contentView.topAnchor),
             authorName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
@@ -161,15 +152,9 @@ class PostTableViewCell: UITableViewCell {
             
             descriptionLabel.topAnchor.constraint(equalTo: postImage.bottomAnchor,constant: 16),
             descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 14),
-            descriptionLabel.trailingAnchor.constraint(equalTo: imageLike.leadingAnchor),
             /// ошибка возникает  из-за высоты description
             //descriptionLabel.heightAnchor.constraint(equalToConstant: 25),
-            
-            imageLike.topAnchor.constraint(equalTo: postImage.bottomAnchor, constant: 16),
-            imageLike.heightAnchor.constraint(equalToConstant: 20),
-            imageLike.widthAnchor.constraint(equalToConstant: 20),
-            imageLike.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
-            
+
             likes.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor),
             likes.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 14),
             likes.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),

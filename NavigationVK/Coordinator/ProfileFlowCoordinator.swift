@@ -28,16 +28,17 @@ final class ProfileFlowCoordinator {
         navCon.pushViewController(vc, animated: true)
     }
     
+    func showPost(post: PostStruct) {
+        let vc = ProfilePostViewController()
+        vc.setupCell(post)
+        navCon.pushViewController(vc, animated: true)
+    }
+    
     func showSettings(title: String) {
         let vc = UINavigationController(rootViewController: SettingsViewController())
         vc.title = title
         vc.modalPresentationStyle = .fullScreen
         navCon.present(vc, animated: true, completion: nil)
-    }
-    
-    func showProfilePost() {
-        let vc = ProfilePostViewController()
-        navCon.pushViewController(vc, animated: true)
     }
     
     func showAlert(title: String, message: String, buttonText: String = "Ok") {

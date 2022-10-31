@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        
         // Override point for customization after application launch.
         return true
     }
@@ -32,16 +33,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     
+    func applicationWillTerminate(_ application: UIApplication) {//автосохранение в coreData при выходе из приложения
+        self.saveContext()
+    }
+    
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "PostData")
-        container.loadPersistentStores { storeDescription, error in
-            if let error {
-                print(error)
+            let container = NSPersistentContainer(name: "PostData")
+            container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+                if let error = error as NSError? {
+                    fatalError("Error \(error), \(error.userInfo)")
+                }
+            })
+            return container
+        }()
+        
+        //сохранение в базу
+        func saveContext() {
+            let context = persistentContainer.viewContext
+            if context.hasChanges {
+                do {
+                    try context.save()
+                } catch {
+                    let nserror = error as NSError
+                    fatalError("Error \(nserror), \(nserror.userInfo)")
+
+                }
             }
         }
-        return container
-    }()
-
-
-}
-
+    }

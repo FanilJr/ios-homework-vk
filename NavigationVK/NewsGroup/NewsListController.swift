@@ -12,6 +12,7 @@ class NewsListController: UIViewController {
     var downloadManager = DownloadManager()
     var articles: [Article] = []
     var article: Article!
+    private weak var coordinator: NewsFlowCoordinator?
     
     var searchController = UISearchController(searchResultsController: nil)
 
@@ -101,7 +102,6 @@ extension NewsListController: UITableViewDataSource {
         cell.setupCell(articles[indexPath.row])
         return cell
     }
-        
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let article = articles[indexPath.row]

@@ -24,6 +24,13 @@ class ArticleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let blureEffect = UIBlurEffect(style: .light)
+        let bluerView = UIVisualEffectView(effect: blureEffect)
+//        bluerView.frame = tabBar.bounds
+//        bluerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        tabBar.insertSubview(bluerView, at: 0)
+        
+        
         view.backgroundColor = .white
         title = "Пост"
         layout()
