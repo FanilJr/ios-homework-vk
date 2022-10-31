@@ -1,0 +1,106 @@
+//
+//  FavoriteTableViewCell.swift
+//  NavigationVK
+//
+//  Created by Fanil_Jr on 31.10.2022.
+//
+
+import Foundation
+import UIKit
+
+class FavoriteTableViewCell : UITableViewCell {
+    
+    //MARK: create labels
+    private var authorCells: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 20.0, weight: .bold)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private var descriptionCells: UILabel = {
+        let label = UILabel()
+        label.textColor = .gray
+        label.font = UIFont.systemFont(ofSize: 14.0, weight: .light)
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private var imageCells: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private var likesCells: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 16.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private var viewsCells: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 16.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    //MARK: Initial cells
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        layout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: Приравние структурных ячеек к созданным ячейкам
+    
+    public func myCells(_ post: PostData) {
+        self.authorCells.text = post.authorCell ?? ""
+        self.imageCells.image = UIImage(data: post.imageCell!) ?? UIImage()
+        self.descriptionCells.text = post.descriptionCell ?? ""
+        self.likesCells.text = "Likes: \(Int(post.likesCell))"
+        self.viewsCells.text = "Views: \(Int(post.viewsCell))"
+    }
+    
+    //MARK: Initial constraints
+    func layout() {
+        
+        [authorCells, descriptionCells, imageCells, likesCells, viewsCells].forEach { contentView.addSubview($0) }
+        
+        NSLayoutConstraint.activate([
+            authorCells.topAnchor.constraint(equalTo: contentView.topAnchor),
+            authorCells.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
+            authorCells.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            authorCells.heightAnchor.constraint(equalToConstant: 50),
+            
+            imageCells.topAnchor.constraint(equalTo: authorCells.bottomAnchor),
+            imageCells.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            imageCells.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            imageCells.heightAnchor.constraint(equalToConstant: 400),
+            
+            descriptionCells.topAnchor.constraint(equalTo: imageCells.bottomAnchor,constant: 16),
+            descriptionCells.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 14),
+            /// ошибка возникает  из-за высоты description
+            //descriptionLabel.heightAnchor.constraint(equalToConstant: 25),
+            likesCells.topAnchor.constraint(equalTo: descriptionCells.bottomAnchor),
+            likesCells.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 14),
+            likesCells.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            likesCells.heightAnchor.constraint(equalToConstant: 50),
+            likesCells.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+            viewsCells.topAnchor.constraint(equalTo: descriptionCells.bottomAnchor),
+            viewsCells.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            viewsCells.heightAnchor.constraint(equalToConstant: 50),
+            viewsCells.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
+    }
+}

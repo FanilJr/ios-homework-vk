@@ -63,11 +63,11 @@ func downloadNews(completion: ((_ item: [Article]?) -> Void)?) {
 }
 func downloadNewsList(searchString: String? = nil, completion: ((_ articles: [Article]?) -> Void)?) {
     
-    var urlString = "https://newsapi.org/v2/top-headlines?country=ru&category=entertainment&apiKey=2cec4a99ce694b1590c742a166b419da"
+    var urlString = "https://newsapi.org/v2/top-headlines?country=ru&category=technology&apiKey=2cec4a99ce694b1590c742a166b419da"
     
     if let searchString = searchString, searchString != "" {
         urlString =
-        "https://newsapi.org/v2/top-headlines?country=ru&category=entertainment&apiKey=2cec4a99ce694b1590c742a166b419da"
+        "https://newsapi.org/v2/top-headlines?country=ru&category=technology&apiKey=2cec4a99ce694b1590c742a166b419da"
     }
     
     downloadData(url: URL(string: urlString)!) {
@@ -77,7 +77,7 @@ func downloadNewsList(searchString: String? = nil, completion: ((_ articles: [Ar
         do {
             let answer = try JSONDecoder().decode(Answer.self, from: data)
             completion?(answer.articles)
-            print("ЭТО ANSWER--------------------------------\(answer)")
+//            print("ЭТО ANSWER--------------------------------\(answer)")
         } catch {
             print(error)
             print("сюда заходим")

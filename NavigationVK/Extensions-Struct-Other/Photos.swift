@@ -12,7 +12,7 @@ public var galery: [UIImage]  {
 
         var galeryPhoto = [UIImage]()
         
-        for i in 1...20 {
+        for i in 1...22 {
             galeryPhoto.append(UIImage(named: "P\(i)")!)
         }
         return galeryPhoto

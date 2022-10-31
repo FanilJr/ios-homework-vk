@@ -21,8 +21,7 @@ class PhotosViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationItem.title = "Фотогалерея"
+        title = "Фотогалерея"
         view.backgroundColor = .white
         navigationController?.navigationBar.isHidden = false
 

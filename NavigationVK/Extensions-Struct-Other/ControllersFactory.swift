@@ -30,12 +30,14 @@ final class ControllersFactory {
     }
 
     func makeProfileViewController(userName: String, coordinator: ProfileFlowCoordinator) -> ProfileViewController {
-        let profileVC = ProfileViewController(userService: userService, userName: userName, coordinator: coordinator)
+        let viewModel = ProfileViewModel()
+        let profileVC = ProfileViewController(userService: userService, userName: userName, viewModel: viewModel, coordinator: coordinator)
         return profileVC
     }
     
     func makeFavoriteViewController(coordinator: FavoriteFlowCoordinator) -> FavoriteViewController {
-        let favoriteVC = FavoriteViewController()
+        let viewModel = CoreDataManager()
+        let favoriteVC = FavoriteViewController(model: viewModel, coordinator: coordinator)
         return favoriteVC
     }
     
