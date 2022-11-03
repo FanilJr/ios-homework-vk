@@ -117,11 +117,11 @@ class ArticleTableViewCell: UITableViewCell {
         [date, progress, postImage, titleName, descriptionName, url, buttonURL].forEach { contentView.addSubview($0) }
         
         NSLayoutConstraint.activate([
-            date.topAnchor.constraint(equalTo: contentView.topAnchor),
+            date.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 14),
             date.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
             date.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
             
-            postImage.topAnchor.constraint(equalTo: date.bottomAnchor,constant: 5),
+            postImage.topAnchor.constraint(equalTo: date.bottomAnchor,constant: 14),
             postImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
             postImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
             postImage.heightAnchor.constraint(equalToConstant: 200),
