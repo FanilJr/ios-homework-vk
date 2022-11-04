@@ -34,6 +34,11 @@ final class ProfileFlowCoordinator {
         navCon.pushViewController(vc, animated: true)
     }
     
+    func presentShare(activity: UIActivityViewController) {
+        navCon.present(activity, animated: true)
+        print("coordinator tap")
+    }
+    
     func showSettings(title: String) {
         let vc = UINavigationController(rootViewController: SettingsViewController())
         vc.title = title

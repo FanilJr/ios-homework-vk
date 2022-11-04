@@ -9,13 +9,13 @@ import UIKit
 
 protocol MyClassDelegateTwo: AnyObject {
     func tuchUp()
-   // func tuchToShare()
 }
 
 class PhotosTableViewCell: UITableViewCell {
             
     weak var tuchNew: MyClassDelegateTwo?
     var profileView = ProfileViewModel().postArray
+
     
     private lazy var collectionViews: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -54,6 +54,10 @@ class PhotosTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         layout()
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
     }
     
     required init?(coder: NSCoder) {
@@ -104,19 +108,21 @@ extension PhotosTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCollectionViewCell", for: indexPath) as! CustomCollectionViewCell
-//        let menuIneraction = UIContextMenuInteraction(delegate: self)
-//        cell.addInteraction(menuIneraction)
         cell.pullCell(photo: galery[indexPath.row])
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+
         let recipe = galery[indexPath.row]
+
         let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { _ in
-            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { _ in
-                print("Share \(recipe)")
+            let share = UIAction(title: "Share", image: UIImage(systemName:"square.and.arrow.up.circle")) { _ in
+                print("Share")
                 let avc = UIActivityViewController(activityItems: [recipe], applicationActivities: nil)
+                print("В коллекции тап")
+//                self.coordinator?.presentShare(activity: avc)
             }
             let menu = UIMenu(title: "", children: [share])
             return menu
@@ -137,16 +143,3 @@ extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
             
     }
 }
-
-//extension PhotosTableViewCell: UIContextMenuInteractionDelegate {
-//
-//    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
-//        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
-//            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { _ in
-//                self.tuchShare()
-//                print("Проверка фото")
-//            }
-//            return UIMenu(title: "", children: [share])
-//        }
-//    }
-//}
