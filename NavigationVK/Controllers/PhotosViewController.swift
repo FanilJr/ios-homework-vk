@@ -9,11 +9,20 @@ import UIKit
 
 class PhotosViewController: UIViewController {
 
+    let background: UIImageView = {
+        let back = UIImageView()
+        back.clipsToBounds = true
+        back.image = UIImage(named: "tekstura")
+        back.translatesAutoresizingMaskIntoConstraints = false
+        return back
+    }()
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.backgroundColor = .clear
         collectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: "PhotosCollectionViewCell")
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
@@ -39,13 +48,18 @@ class PhotosViewController: UIViewController {
     
     private func layout() {
         
-        view.addSubview(collectionView)
+        [background, collectionView].forEach { view.addSubview($0) }
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            background.topAnchor.constraint(equalTo: view.topAnchor),
+            background.leftAnchor.constraint(equalTo: view.leftAnchor),
+            background.rightAnchor.constraint(equalTo: view.rightAnchor),
+            background.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 }
@@ -56,6 +70,7 @@ extension PhotosViewController: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotosCollectionViewCell", for: indexPath) as! PhotosCollectionViewCell
         cell.pullCell(photo: galery[indexPath.row])
+        cell.backgroundColor = .white
         return cell
     }
     

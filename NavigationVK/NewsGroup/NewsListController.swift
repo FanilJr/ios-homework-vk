@@ -12,15 +12,17 @@ class NewsListController: UIViewController {
     var downloadManager = DownloadManager()
     var articles: [Article] = []
     var article: Article!
+    var refreshControle = UIRefreshControl()
     private weak var coordinator: NewsFlowCoordinator?
     
     var searchController = UISearchController(searchResultsController: nil)
 
-    private var downloadLabel: UILabel = {
-        let download = UILabel()
-        download.text = "Загрузка"
-        download.translatesAutoresizingMaskIntoConstraints = false
-        return download
+    let background: UIImageView = {
+        let back = UIImageView()
+        back.clipsToBounds = true
+        back.image = UIImage(named: "tekstura")
+        back.translatesAutoresizingMaskIntoConstraints = false
+        return back
     }()
     
     private var activityView: UIActivityIndicatorView = {
@@ -34,19 +36,22 @@ class NewsListController: UIViewController {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .clear
+        tableView.refreshControl = refreshControle
         tableView.register(NewsTableViewCell.self, forCellReuseIdentifier: "NewsTableViewCell")
         return tableView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+
         title = "Новости"
+        refreshControle.attributedTitle = NSAttributedString(string: "Update")
+        refreshControle.addTarget(self, action: #selector(didTapRefresh), for: .valueChanged)
         activityView.startAnimating()
         
 //        navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(didTapRefresh))
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(didTapRefresh))
         
         layout()
         tableView.dataSource = self
@@ -70,21 +75,27 @@ class NewsListController: UIViewController {
             DispatchQueue.main.async {
                 self.articles = articles ?? []
                 self.tableView.reloadData()
+                self.refreshControle.endRefreshing()
             }
         }
     }
     
     func layout() {
-        [activityView,tableView].forEach { view.addSubview($0) }
+        [background, activityView,tableView].forEach { view.addSubview($0) }
         
         NSLayoutConstraint.activate([
-            activityView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            background.topAnchor.constraint(equalTo: view.topAnchor),
+            background.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            background.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            background.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            activityView.centerXAnchor.constraint(equalTo: background.centerXAnchor),
+            activityView.centerYAnchor.constraint(equalTo: background.centerYAnchor),
+            
+            tableView.topAnchor.constraint(equalTo: background.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: background.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: background.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: background.bottomAnchor)
         ])
     }
 }
@@ -99,6 +110,7 @@ extension NewsListController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsTableViewCell", for: indexPath) as! NewsTableViewCell
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        cell.backgroundColor = .white
         cell.setupCell(articles[indexPath.row])
         return cell
     }
@@ -117,6 +129,10 @@ extension NewsListController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        "Новости сегодня"
     }
 }
 

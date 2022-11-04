@@ -122,6 +122,7 @@ class ProfileViewController: UIViewController {
         
         if !isContains {
             CoreDataManager.shared.saveToCoreData(post: post)
+//            CoreDataManager.shared.removeFromCoreData()
         } else {
             print("error contains")
         }
@@ -222,6 +223,12 @@ extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
+        guard let post = viewModel?.postArray[self.cellIndex] else { return }
+        for i in CoreDataManager.shared.favoritePost {
+            if i.id == post.id {
+                
+            }
+        }
         if lastRowDisplay > indexPath.row {
             cell.transform = CGAffineTransform(translationX: 0, y: -250)
         } else {

@@ -43,6 +43,7 @@
 		84623756290F7DBE001052B5 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84623755290F7DBE001052B5 /* FavoriteTableViewCell.swift */; };
 		84623758290F8883001052B5 /* PostTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84623757290F8883001052B5 /* PostTableViewCellModel.swift */; };
 		8462375B290F9A04001052B5 /* LikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462375A290F9A04001052B5 /* LikeView.swift */; };
+		8462375D290FF95F001052B5 /* FavoriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462375C290FF95F001052B5 /* FavoriteCollectionViewCell.swift */; };
 		8462D816290AA3D8004EDEC1 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462D815290AA3D8004EDEC1 /* WebViewController.swift */; };
 		8463E5E528D7A06300D80D2B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8463E5E428D7A06300D80D2B /* SettingsViewController.swift */; };
 		846A9EED290A54F60084796F /* FavoriteFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846A9EEC290A54F60084796F /* FavoriteFlowCoordinator.swift */; };
@@ -169,6 +170,7 @@
 		84623755290F7DBE001052B5 /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
 		84623757290F8883001052B5 /* PostTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCellModel.swift; sourceTree = "<group>"; };
 		8462375A290F9A04001052B5 /* LikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeView.swift; sourceTree = "<group>"; };
+		8462375C290FF95F001052B5 /* FavoriteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewCell.swift; sourceTree = "<group>"; };
 		8462D815290AA3D8004EDEC1 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		8463E5E428D7A06300D80D2B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		846A9EEC290A54F60084796F /* FavoriteFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 			children = (
 				84623755290F7DBE001052B5 /* FavoriteTableViewCell.swift */,
 				846A9EEE290A560E0084796F /* FavoriteViewController.swift */,
+				8462375C290FF95F001052B5 /* FavoriteCollectionViewCell.swift */,
 			);
 			path = FavoriteGroup;
 			sourceTree = "<group>";
@@ -683,6 +686,7 @@
 				841194ED2907FCBF0059106A /* DownloadManager.swift in Sources */,
 				84061E0128B1669A00B5AB47 /* ProfileHeaderView.swift in Sources */,
 				841194F329080EA30059106A /* ArticleTableViewCell.swift in Sources */,
+				8462375D290FF95F001052B5 /* FavoriteCollectionViewCell.swift in Sources */,
 				84623754290F7939001052B5 /* PostData.xcdatamodeld in Sources */,
 				849BA4F228F8C90500D3B5D2 /* InfoView.swift in Sources */,
 				84BC755D28EFD38E00339BFE /* NetworkService.swift in Sources */,

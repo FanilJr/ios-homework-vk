@@ -66,15 +66,12 @@ class FavoriteTableViewCell : UITableViewCell {
     public func myCells(_ post: PostData) {
         self.authorCells.text = post.authorCell ?? ""
         self.imageCells.image = UIImage(data: post.imageCell!) ?? UIImage()
-        self.descriptionCells.text = post.descriptionCell ?? ""
-        self.likesCells.text = "Likes: \(Int(post.likesCell))"
-        self.viewsCells.text = "Views: \(Int(post.viewsCell))"
     }
     
     //MARK: Initial constraints
     func layout() {
         
-        [authorCells, descriptionCells, imageCells, likesCells, viewsCells].forEach { contentView.addSubview($0) }
+        [authorCells, imageCells].forEach { contentView.addSubview($0) }
         
         NSLayoutConstraint.activate([
             authorCells.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -86,21 +83,7 @@ class FavoriteTableViewCell : UITableViewCell {
             imageCells.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageCells.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             imageCells.heightAnchor.constraint(equalToConstant: 400),
-            
-            descriptionCells.topAnchor.constraint(equalTo: imageCells.bottomAnchor,constant: 16),
-            descriptionCells.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 14),
-            /// ошибка возникает  из-за высоты description
-            //descriptionLabel.heightAnchor.constraint(equalToConstant: 25),
-            likesCells.topAnchor.constraint(equalTo: descriptionCells.bottomAnchor),
-            likesCells.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 14),
-            likesCells.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            likesCells.heightAnchor.constraint(equalToConstant: 50),
-            likesCells.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            
-            viewsCells.topAnchor.constraint(equalTo: descriptionCells.bottomAnchor),
-            viewsCells.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            viewsCells.heightAnchor.constraint(equalToConstant: 50),
-            viewsCells.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            imageCells.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -28)
         ])
     }
 }

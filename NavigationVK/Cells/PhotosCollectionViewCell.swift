@@ -19,7 +19,6 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupCell()
         
     }
@@ -38,6 +37,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
             image.trailingAnchor.constraint(equalTo: trailingAnchor),
             image.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+        layer.cornerRadius = 14
         clipsToBounds = true
     }
  
