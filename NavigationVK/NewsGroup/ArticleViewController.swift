@@ -13,6 +13,14 @@ class ArticleViewController: UIViewController {
     var articles: Article!
     var downloadManager = DownloadManager()
 
+    let background: UIImageView = {
+        let back = UIImageView()
+        back.clipsToBounds = true
+        back.image = UIImage(named: "tekstura")
+        back.translatesAutoresizingMaskIntoConstraints = false
+        return back
+    }()
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -24,7 +32,14 @@ class ArticleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        let blureEffect = UIBlurEffect(style: .light)
+        let bluerView = UIVisualEffectView(effect: blureEffect)
+//        bluerView.frame = tabBar.bounds
+//        bluerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        tabBar.insertSubview(bluerView, at: 0)
+        
+        
+        
         title = "Пост"
         layout()
         tableView.dataSource = self
@@ -32,13 +47,19 @@ class ArticleViewController: UIViewController {
     }
     
     func layout() {
-        view.addSubview(tableView)
+        [background, tableView].forEach { view.addSubview($0) }
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            
+            background.topAnchor.constraint(equalTo: view.topAnchor),
+            background.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            background.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            background.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            tableView.topAnchor.constraint(equalTo: background.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: background.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: background.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: background.bottomAnchor)
         ])
     }
     
@@ -73,6 +94,7 @@ extension ArticleViewController: UITableViewDataSource, URLDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleTableViewCell", for: indexPath) as! ArticleTableViewCell
+        cell.backgroundColor = .white
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         cell.titleName.text = articles.title
         cell.descriptionName.text = articles.description

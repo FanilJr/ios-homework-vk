@@ -1,13 +1,13 @@
 //
-//  CustomCollectionViewCell.swift
+//  FavoriteCollectionViewCell.swift
 //  NavigationVK
 //
-//  Created by Fanil_Jr on 21.08.2022.
+//  Created by Fanil_Jr on 31.10.2022.
 //
 
 import UIKit
 
-class CustomCollectionViewCell: UICollectionViewCell {
+class FavoriteCollectionViewCell: UICollectionViewCell {
     
     let image: UIImageView = {
         let image = UIImageView()
@@ -18,7 +18,6 @@ class CustomCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupCell()
     }
     
@@ -40,7 +39,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    func pullCell(photo: UIImage) {
-        image.image = photo
+    public func myCells(_ post: PostData) {
+        self.image.image = UIImage(data: post.imageCell!)
     }
 }

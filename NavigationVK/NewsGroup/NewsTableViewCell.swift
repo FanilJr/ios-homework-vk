@@ -62,7 +62,7 @@ class NewsTableViewCell: UITableViewCell {
         [titleName, descriptionName].forEach { contentView.addSubview($0) }
         
         NSLayoutConstraint.activate([
-            titleName.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 5),
+            titleName.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 14),
             titleName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
             titleName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
             
