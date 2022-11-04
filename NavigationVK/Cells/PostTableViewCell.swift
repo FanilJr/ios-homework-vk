@@ -78,6 +78,15 @@ class PostTableViewCell: UITableViewCell {
             likes.text = "Likes: \(viewModel.likes)"
             viewsLabel.text = "Views: \(viewModel.views)"
         }
+        
+    
+    }
+    func setupNewCell(_ model: PostTbaleViewCellModel) {
+        postImage.image = UIImage(named: model.image)
+        authorName.text = model.author
+        descriptionLabel.text = model.description
+        likes.text = "Likes: \(String(model.likes))"
+        viewsLabel.text = "Views: \(String(model.views))"
     }
     
     func setupCell(_ model: PostStruct) {

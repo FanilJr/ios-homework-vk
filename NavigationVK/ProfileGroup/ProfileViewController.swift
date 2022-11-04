@@ -166,7 +166,7 @@ class ProfileViewController: UIViewController {
 }
 
 extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return numbersSection.count
     }
@@ -214,6 +214,29 @@ extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
         default:
             return UITableViewCell()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+  
+        let recipe = viewModel?.postArray[indexPath.row]
+        let recipeAuthor = viewModel?.postArray[indexPath.row].author
+        let recipeImage = viewModel?.postArray[indexPath.row].image
+        
+        let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { _ in
+            
+            let pushPost = UIAction(title: "Перейти на пост", image: UIImage(systemName: "chevron.right.circle")) { _ in
+                self.coordinator?.showPost(post: (self.viewModel?.postArray[indexPath.row])!)
+            }
+            
+            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { _ in
+                
+                let avc = UIActivityViewController(activityItems: [recipeAuthor as Any, UIImage(named: recipeImage ?? "1") as Any], applicationActivities: nil)
+                self.present(avc, animated: true)
+            }
+            let menu = UIMenu(title: "", children: [pushPost, share])
+            return menu
+        })
+        return configuration
     }
     
     func tuchUp() {
@@ -317,8 +340,12 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
             return 0
         default:
             return 0
+        }
     }
-}
+    
+//    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+//        <#code#>
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
