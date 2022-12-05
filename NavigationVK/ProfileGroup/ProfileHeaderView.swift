@@ -14,7 +14,6 @@ protocol MyClassDelegate: AnyObject {
 
 final class ProfileHeaderView: UIView {
     
-    
     weak var delegate: MyClassDelegate?
     private var statusText: String = ""
     let systemSoundID: SystemSoundID = 1016
@@ -117,7 +116,7 @@ final class ProfileHeaderView: UIView {
             stackView.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor,constant: 30),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            setStatusButton.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 16),
+            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor,constant: 16),
             setStatusButton.leadingAnchor.constraint(equalTo: leadingAnchor),
             setStatusButton.trailingAnchor.constraint(equalTo: trailingAnchor),
             setStatusButton.heightAnchor.constraint(equalToConstant: 50),

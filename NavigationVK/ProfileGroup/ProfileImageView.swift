@@ -15,6 +15,7 @@ protocol SettingsDelegate: AnyObject {
 class ProfileImageView: UIView {
     
     weak var settingDelegate: SettingsDelegate?
+    var mapView = MapView()
     
     private var background: UIImageView = {
         let background = UIImageView()
@@ -28,7 +29,7 @@ class ProfileImageView: UIView {
         return background
     }()
     
-    private let stack: UIStackView = {
+    let stack: UIStackView = {
         let stack = UIStackView()
         stack.spacing = 12
         stack.axis = .vertical
@@ -87,10 +88,11 @@ class ProfileImageView: UIView {
     
     private let closedButton: UIButton = {
         let closed = UIButton()
-        closed.setImage(UIImage(systemName: "clear"), for: .normal)
+//        closed.setImage(UIImage(systemName: "clear"), for: .normal)
         closed.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         closed.setTitle("Выход", for: .normal)
         closed.setTitleColor(.white, for: .normal)
+        closed.layer.cornerRadius = 14
         closed.tintColor = .red
         closed.translatesAutoresizingMaskIntoConstraints = false
         closed.addTarget(self, action: #selector(tapClosed), for: .touchUpInside)
@@ -109,7 +111,7 @@ class ProfileImageView: UIView {
     func layoutView() {
         
         [creditCard, settingsButton].forEach { stack.addArrangedSubview($0) }
-        [background, avatarImageView, fullNameLabel, stack, closedButton].forEach { addSubview($0) }
+        [background, avatarImageView, fullNameLabel, stack, mapView,closedButton].forEach { addSubview($0) }
         
         NSLayoutConstraint.activate([
             background.topAnchor.constraint(equalTo: topAnchor),
@@ -129,7 +131,12 @@ class ProfileImageView: UIView {
             stack.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor,constant: 30),
             stack.centerXAnchor.constraint(equalTo: background.centerXAnchor),
             
-            closedButton.topAnchor.constraint(equalTo: stack.bottomAnchor,constant: 30),
+            mapView.topAnchor.constraint(equalTo: stack.bottomAnchor,constant: 20),
+            mapView.leadingAnchor.constraint(equalTo: background.leadingAnchor,constant: 5),
+            mapView.trailingAnchor.constraint(equalTo: background.trailingAnchor,constant: -5),
+            mapView.heightAnchor.constraint(equalToConstant: 400),
+            
+            closedButton.topAnchor.constraint(equalTo: mapView.bottomAnchor,constant: 30),
             closedButton.centerXAnchor.constraint(equalTo: background.centerXAnchor),
             closedButton.leadingAnchor.constraint(equalTo: background.leadingAnchor),
             closedButton.trailingAnchor.constraint(equalTo: background.trailingAnchor)

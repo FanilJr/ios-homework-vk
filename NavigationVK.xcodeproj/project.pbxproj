@@ -66,6 +66,7 @@
 		84AF3AE428ED388A0014E64D /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AF3AE328ED388A0014E64D /* DetailCell.swift */; };
 		84B259E428D8EBC80024648F /* ProfilePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B259E328D8EBC80024648F /* ProfilePostViewController.swift */; };
 		84BC755D28EFD38E00339BFE /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC755C28EFD38E00339BFE /* NetworkService.swift */; };
+		84BC7B8A293D141E005E6904 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC7B89293D141E005E6904 /* MapView.swift */; };
 		84C5FFB228B5040300C01CC9 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5FFB128B5040300C01CC9 /* CustomButton.swift */; };
 		84CA386728C095E100EECD6D /* ControllersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CA386628C095E100EECD6D /* ControllersFactory.swift */; };
 		84CA386928C0965400EECD6D /* FeedFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CA386828C0965400EECD6D /* FeedFlowCoordinator.swift */; };
@@ -116,19 +117,6 @@
 		84E3FDF228E6981800B42B1D /* SongListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3FDF128E6981800B42B1D /* SongListTableViewCell.swift */; };
 		84FFB5E228F1A91A008AB649 /* PlayerNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFB5E128F1A91A008AB649 /* PlayerNew.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		84061E2E28B16D6100B5AB47 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		8403230028C679EC009BCD8E /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -192,6 +180,9 @@
 		84AF3AE328ED388A0014E64D /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		84B259E328D8EBC80024648F /* ProfilePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePostViewController.swift; sourceTree = "<group>"; };
 		84BC755C28EFD38E00339BFE /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		84BC7B84293C6785005E6904 /* libswiftMapKit.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftMapKit.tbd; path = usr/lib/swift/libswiftMapKit.tbd; sourceTree = SDKROOT; };
+		84BC7B85293C6797005E6904 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		84BC7B89293D141E005E6904 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		84C5FFB128B5040300C01CC9 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		84CA386628C095E100EECD6D /* ControllersFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllersFactory.swift; sourceTree = "<group>"; };
 		84CA386828C0965400EECD6D /* FeedFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -259,6 +250,7 @@
 			children = (
 				84061DE828B161FE00B5AB47 /* NavigationVK */,
 				84061DE728B161FE00B5AB47 /* Products */,
+				84BC7B83293C6784005E6904 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -423,6 +415,15 @@
 			path = "Music Not Job";
 			sourceTree = "<group>";
 		};
+		84BC7B83293C6784005E6904 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				84BC7B85293C6797005E6904 /* MapKit.framework */,
+				84BC7B84293C6785005E6904 /* libswiftMapKit.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		84CA387228C0A1E300EECD6D /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
@@ -443,6 +444,7 @@
 				84061DFE28B1665000B5AB47 /* ProfileViewController.swift */,
 				84783D2728D4D02B009E5872 /* ProfileImageView.swift */,
 				84B259E328D8EBC80024648F /* ProfilePostViewController.swift */,
+				84BC7B89293D141E005E6904 /* MapView.swift */,
 			);
 			path = ProfileGroup;
 			sourceTree = "<group>";
@@ -539,7 +541,6 @@
 				84061DE228B161FE00B5AB47 /* Sources */,
 				84061DE328B161FE00B5AB47 /* Frameworks */,
 				84061DE428B161FE00B5AB47 /* Resources */,
-				84061E2E28B16D6100B5AB47 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -671,6 +672,7 @@
 				84CA386928C0965400EECD6D /* FeedFlowCoordinator.swift in Sources */,
 				84061E1928B16AB700B5AB47 /* PhotosTableViewCell.swift in Sources */,
 				84CF1A3828BCBCD7000FF0D8 /* FeedModel.swift in Sources */,
+				84BC7B8A293D141E005E6904 /* MapView.swift in Sources */,
 				846A9EED290A54F60084796F /* FavoriteFlowCoordinator.swift in Sources */,
 				84E3FDB128E3587400B42B1D /* AlbumTableViewCell.swift in Sources */,
 				84CF1A3428BCBBCD000FF0D8 /* FeedView.swift in Sources */,

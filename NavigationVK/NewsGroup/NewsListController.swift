@@ -11,7 +11,7 @@ class NewsListController: UIViewController {
     
     var downloadManager = DownloadManager()
     var articles: [Article] = []
-    var article: Article!
+//    var article: Article!
     var refreshControle = UIRefreshControl()
     private weak var coordinator: NewsFlowCoordinator?
     

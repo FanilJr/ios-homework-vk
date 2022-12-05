@@ -11,6 +11,7 @@ import FirebaseAuth
 class ProfileViewController: UIViewController {
 
     private let post = PostStruct.massivePost()
+    private let mapView = MapView()
     private let like = LikeView()
     private let posts = ProfileViewModel().postArray
     private let viewModel: ProfileViewModel?
@@ -108,7 +109,7 @@ class ProfileViewController: UIViewController {
         UIView.animate(withDuration: 0.7) {
             self.like.alpha = 1
         }
-        DispatchQueue.main.asyncAfter(deadline: .now()+1.2) {
+        DispatchQueue.main.asyncAfter(deadline: .now()+1.1) {
             UIView.animate(withDuration: 1) {
                 self.like.alpha = 0
             }
@@ -122,7 +123,7 @@ class ProfileViewController: UIViewController {
         
         if !isContains {
             CoreDataManager.shared.saveToCoreData(post: post)
-//            CoreDataManager.shared.removeFromCoreData()
+
         } else {
             print("error contains")
         }
@@ -286,7 +287,7 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
         }
     }
     
-   func presentMenuAvatar() {
+    func presentMenuAvatar() {
        
        view.addSubview(blure)
        view.addSubview(profileImageView)
@@ -299,15 +300,15 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
         blure.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         blure.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
-        profileImageView.topAnchor.constraint(equalTo: view.topAnchor,constant: -245),
+        profileImageView.topAnchor.constraint(equalTo: view.topAnchor,constant: -690),
         profileImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 50),
         profileImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -50),
-        profileImageView.heightAnchor.constraint(equalToConstant: 245),
+        profileImageView.heightAnchor.constraint(equalToConstant: 690),
        ])
        
-       UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 0.8, animations: {
            self.header.avatarImageView.alpha = 0.0
-           self.profileImageView.transform = CGAffineTransform(translationX: 0, y: 360)
+           self.profileImageView.transform = CGAffineTransform(translationX: 0, y: 800)
            self.profileImageView.alpha = 1
            self.blure.alpha = 1
        })
@@ -317,14 +318,18 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
         coordinator?.showSettings(title: "Настройки")
     }
     
+    func openMaps() {
+        print("Проверка мапс")
+    }
+    
     func tapClosed() {
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 0.8, animations: {
             self.header.avatarImageView.alpha = 1
-            self.profileImageView.transform = CGAffineTransform(translationX: 0, y: -360)
+            self.profileImageView.transform = CGAffineTransform(translationX: 0, y: -800)
             self.blure.alpha = 0
         })
         tabBarController?.tabBar.isHidden = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
             self.profileImageView.removeFromSuperview()
             self.blure.removeFromSuperview()
         }
