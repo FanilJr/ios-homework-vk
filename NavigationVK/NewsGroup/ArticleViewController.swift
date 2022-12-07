@@ -40,7 +40,7 @@ class ArticleViewController: UIViewController {
         
         
         
-        title = "Пост"
+        title = "feed.post".localized
         layout()
         tableView.dataSource = self
         tableView.delegate = self
@@ -129,22 +129,6 @@ extension ArticleViewController: UITableViewDataSource, URLDelegate {
                     cell.progress.progress = percentCompleted
                 }
             }
-
-//            downloadFile(urlImage: urlimage) { imageData in
-//                guard let imageData else {
-//                    return
-//                }
-//                DispatchQueue.main.async {
-//                    cell.postImage.image = UIImage(data: imageData)
-//                }
-//            }
-            
-//            downloadImage(urlImage: urlimage) { imageData in
-//                guard let imageData else { return }
-//                DispatchQueue.main.async {
-//                    cell.postImage.image = UIImage(data: imageData)
-//                }
-//            }
         }
         return cell
     }

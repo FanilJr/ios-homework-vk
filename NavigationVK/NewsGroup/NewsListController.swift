@@ -44,8 +44,8 @@ class NewsListController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Новости"
-        refreshControle.attributedTitle = NSAttributedString(string: "Update")
+        title = "news.title".localized
+        refreshControle.attributedTitle = NSAttributedString(string: "news.update".localized)
         refreshControle.addTarget(self, action: #selector(didTapRefresh), for: .valueChanged)
         activityView.startAnimating()
         
@@ -132,7 +132,7 @@ extension NewsListController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        "Новости сегодня"
+        "news.header".localized
     }
 }
 

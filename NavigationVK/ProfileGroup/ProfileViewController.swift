@@ -69,7 +69,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Профиль"
+        title = "profile.title".localized
 
         setupTableView()
         header.delegate = self
@@ -225,11 +225,11 @@ extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
         
         let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { _ in
             
-            let pushPost = UIAction(title: "Перейти на пост", image: UIImage(systemName: "chevron.right.circle")) { _ in
+            let pushPost = UIAction(title: "profile.go.post".localized, image: UIImage(systemName: "chevron.right.circle")) { _ in
                 self.coordinator?.showPost(post: (self.viewModel?.postArray[indexPath.row])!)
             }
             
-            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { _ in
+            let share = UIAction(title: "profile.shared".localized, image: UIImage(systemName: "square.and.arrow.up")) { _ in
                 
                 let avc = UIActivityViewController(activityItems: [recipeAuthor as Any, UIImage(named: recipeImage ?? "1") as Any], applicationActivities: nil)
                 self.present(avc, animated: true)
@@ -315,11 +315,7 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
        tabBarController?.tabBar.isHidden = true
     }
     func openSetting() {
-        coordinator?.showSettings(title: "Настройки")
-    }
-    
-    func openMaps() {
-        print("Проверка мапс")
+        coordinator?.showSettings(title: "settings.title".localized)
     }
     
     func tapClosed() {
@@ -359,7 +355,6 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
         }
         
         if indexPath.section > 0 {
-            print("hello")
             self.cellIndex = indexPath.row
 //            let vc = ProfilePostViewController()
 //            vc.setupCell(post[indexPath.row])

@@ -91,7 +91,6 @@ class MapView: UIView, UIGestureRecognizerDelegate {
     func layoutViews() {
         
         [mapView, button].forEach({ addSubview($0) })
-        
         NSLayoutConstraint.activate([
             mapView.topAnchor.constraint(equalTo: topAnchor),
             mapView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -122,15 +121,16 @@ class MapView: UIView, UIGestureRecognizerDelegate {
         
         // Булавка появляется после длительного нажатия на карту
         let myLongPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer()
+        myLongPress.minimumPressDuration = 1
         myLongPress.addTarget(self, action: #selector(self.handleTap(_:)))
         mapView.addGestureRecognizer(myLongPress)
 
-        if let coor = mapView.userLocation.location?.coordinate {
-            mapView.setCenter(coor, animated: true)
-        }
+//        if let coor = mapView.userLocation.location?.coordinate {
+//            mapView.setCenter(coor, animated: true)
+//        }
         let eburgAnnotation = MKPointAnnotation()
         let uganskAnnotation = MKPointAnnotation()
-        eburgAnnotation.coordinate = CLLocationCoordinate2D(latitude: 50.83892, longitude: 60.60570)
+        eburgAnnotation.coordinate = CLLocationCoordinate2D(latitude: 56.82462, longitude: 50.54423)
         eburgAnnotation.title = "Екатеринбург"
         uganskAnnotation.coordinate = CLLocationCoordinate2D(latitude: 61.09979, longitude: 72.60349)
         uganskAnnotation.title = "Нефтеюганск"
@@ -144,6 +144,9 @@ class MapView: UIView, UIGestureRecognizerDelegate {
 
 //Местоположение пользователя
 extension MapView: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        
+        }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 //        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
         
@@ -152,11 +155,11 @@ extension MapView: CLLocationManagerDelegate {
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
         
-        //MARK: Возвращает постоянно
-//        let span = MKCoordinateSpan(latitudeDelta: 0.025, longitudeDelta: 0.025)
-//        let region = MKCoordinateRegion(center: locValue, span: span)
-//        mapView.setRegion(region, animated: true)
-        
+        //MARK: ИЗМЕНИЛ!!!!!!!!!!!
+        if let location = locations.first {
+            mapView.setCenter(location.coordinate, animated: true)
+        }
+
         let annotation = MKPointAnnotation()
         annotation.title = "Мое местоположение"
         annotation.subtitle = "Car"
