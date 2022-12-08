@@ -52,12 +52,8 @@ class ProfileImageView: UIView {
     
     private let fullNameLabel: UILabel = {
         let fullNameLabel = UILabel()
-        fullNameLabel.text = "profile.name".localized
-    #if DEBUG
+        fullNameLabel.text = "header.name".localized
         fullNameLabel.textColor = .white
-    #else
-        fullNameLabel.textColor = .black
-    #endif
         fullNameLabel.font = .systemFont(ofSize: 18, weight: .bold)
         fullNameLabel.translatesAutoresizingMaskIntoConstraints = false
         return fullNameLabel
@@ -88,7 +84,6 @@ class ProfileImageView: UIView {
     
     private let closedButton: UIButton = {
         let closed = UIButton()
-//        closed.setImage(UIImage(systemName: "clear"), for: .normal)
         closed.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         closed.setTitle("exit.button".localized, for: .normal)
         closed.setTitleColor(.white, for: .normal)

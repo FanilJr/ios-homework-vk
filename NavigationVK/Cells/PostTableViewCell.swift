@@ -19,7 +19,7 @@ class PostTableViewCell: UITableViewCell {
     
     private lazy var authorName: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .createColor(light: .black, dark: .white)
         label.font = UIFont.systemFont(ofSize: 20.0, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -36,7 +36,7 @@ class PostTableViewCell: UITableViewCell {
     
     private lazy var likes: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .createColor(light: .black, dark: .white)
         label.font = UIFont.systemFont(ofSize: 16.0)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -54,7 +54,7 @@ class PostTableViewCell: UITableViewCell {
     
     private lazy var viewsLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .createColor(light: .black, dark: .white)
         label.font = UIFont.systemFont(ofSize: 16.0)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

@@ -9,6 +9,15 @@ import UIKit
 
 class ProfilePostViewController: UIViewController {
     
+    
+    let background: UIImageView = {
+        let back = UIImageView()
+        back.image = UIImage(named: "tekstura")
+        back.clipsToBounds = true
+        back.translatesAutoresizingMaskIntoConstraints = false
+        return back
+    }()
+    
     lazy var postImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -26,7 +35,7 @@ class ProfilePostViewController: UIViewController {
     
     private lazy var comment: UILabel = {
         let label = UILabel()
-        label.textColor = .gray
+        label.textColor = UIColor.createColor(light: .black, dark: .white)
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -35,6 +44,7 @@ class ProfilePostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         title = authorName.text
         view.backgroundColor = .white
         layuot()
@@ -56,16 +66,21 @@ class ProfilePostViewController: UIViewController {
     }
     
     func layuot() {
-        [postImage, comment].forEach { view.addSubview($0) }
+        [background, postImage, comment].forEach { view.addSubview($0) }
         
         NSLayoutConstraint.activate([
-            postImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 20),
-            postImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            postImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            background.topAnchor.constraint(equalTo: view.topAnchor),
+            background.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            background.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            background.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            postImage.topAnchor.constraint(equalTo: background.safeAreaLayoutGuide.topAnchor,constant: 20),
+            postImage.leadingAnchor.constraint(equalTo: background.leadingAnchor),
+            postImage.trailingAnchor.constraint(equalTo: background.trailingAnchor),
             postImage.heightAnchor.constraint(equalToConstant: 550),
         
             comment.topAnchor.constraint(equalTo: postImage.bottomAnchor,constant: 10),
-            comment.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            comment.centerXAnchor.constraint(equalTo: background.centerXAnchor),
             comment.heightAnchor.constraint(equalToConstant: 50),
         ])
     }

@@ -30,7 +30,7 @@ class ArticleTableViewCell: UITableViewCell {
     
     lazy var titleName: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .createColor(light: .black, dark: .white)
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -66,7 +66,7 @@ class ArticleTableViewCell: UITableViewCell {
     
     lazy var date: UILabel = {
         let label = UILabel()
-        label.textColor = .gray
+        label.textColor = .createColor(light: .black, dark: .white)
         label.font = UIFont.systemFont(ofSize: 16, weight: .light)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
