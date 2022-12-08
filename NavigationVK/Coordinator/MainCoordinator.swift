@@ -20,13 +20,13 @@ enum TabBarPage {
 //        case .feed:
 //            return "Лента"
         case .news:
-            return "Новости"
+            return "news.title".localized
         case .profile:
-            return "Профиль"
+            return "profile.title".localized
         case .favorite:
-            return "Избранное"
+            return "favorites.title".localized
         case .player:
-            return "Music"
+            return "music.title".localized
 
         }
     }

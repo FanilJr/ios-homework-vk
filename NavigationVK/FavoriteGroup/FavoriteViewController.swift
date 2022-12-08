@@ -62,16 +62,16 @@ class FavoriteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "★ Избранное"
+        title = "favorites.title".localized
         //        tableView.dataSource = self
         //        tableView.delegate = self
         collectionView.dataSource = self
         collectionView.delegate = self
-        refreshControl.attributedTitle = NSAttributedString(string: "Update")
+        refreshControl.attributedTitle = NSAttributedString(string: "refresh.update".localized)
         refreshControl.addTarget(self, action: #selector(didTapRefresh), for: .valueChanged)
         view.backgroundColor = .white
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchAction))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(cancelFilteredSearchAction))
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchAction))
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(cancelFilteredSearchAction))
         manageObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         layout()
     }

@@ -52,7 +52,7 @@ class ProfileImageView: UIView {
     
     private let fullNameLabel: UILabel = {
         let fullNameLabel = UILabel()
-        fullNameLabel.text = "Fanil_Jr"
+        fullNameLabel.text = "profile.name".localized
     #if DEBUG
         fullNameLabel.textColor = .white
     #else
@@ -66,7 +66,7 @@ class ProfileImageView: UIView {
     private let settingsButton: UIButton = {
         let settings = UIButton()
         settings.setImage(UIImage(systemName: "gear"), for: .normal)
-        settings.setTitle("Настройки", for: .normal)
+        settings.setTitle("settings.button".localized, for: .normal)
         settings.setTitleColor(.white, for: .normal)
         settings.tintColor = .cyan
         settings.translatesAutoresizingMaskIntoConstraints = false
@@ -78,7 +78,7 @@ class ProfileImageView: UIView {
     private let creditCard: UIButton = {
         let card = UIButton()
         card.setImage(UIImage(systemName: "creditcard"), for: .normal)
-        card.setTitle("Счёт: RUB", for: .normal)
+        card.setTitle("creditcard".localized, for: .normal)
         card.setTitleColor(.white, for: .normal)
         card.tintColor = .cyan
         card.translatesAutoresizingMaskIntoConstraints = false
@@ -90,7 +90,7 @@ class ProfileImageView: UIView {
         let closed = UIButton()
 //        closed.setImage(UIImage(systemName: "clear"), for: .normal)
         closed.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-        closed.setTitle("Выход", for: .normal)
+        closed.setTitle("exit.button".localized, for: .normal)
         closed.setTitleColor(.white, for: .normal)
         closed.layer.cornerRadius = 14
         closed.tintColor = .red

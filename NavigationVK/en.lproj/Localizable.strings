@@ -1,0 +1,43 @@
+/* 
+  Localizable.strings
+  NavigationVK
+
+  Created by Fanil_Jr on 08.12.2022.
+  
+*/
+
+//MARK: NEWS
+"news.title" = "News";
+"news.header" = "News today";
+"news.post" = "Post";
+"news.update" = "Update...";
+
+//MARK: Profile HEADER
+"header.name" = "Fanil_Jr";
+"header.status" = "Write status..";
+"header.tap.status" = "Set status";
+
+//MARK: PROFILE
+"profile.title" = "Profile";
+"profile.go.post" = "Let's go to POST";
+"profile.shared" = "Share";
+"profile.photos" = "Photos";
+
+//MARK: PROFILEIMAGEVIEW
+"settings.button" = "Settings";
+"creditcard" = "Credit Card: USD";
+"exit.button" = "Exit";
+
+//MARK: FAVORITES
+"favorites.title" = "Favorites";
+"refresh.update" = "Update...";
+
+//MARK: MUSIC
+"music.title" = "Music";
+
+//MARK: PHOTOGALLERY
+"galery.title" = "Photo Gallery";
+
+
+
+

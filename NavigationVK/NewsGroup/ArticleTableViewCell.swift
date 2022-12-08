@@ -91,28 +91,10 @@ class ArticleTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    func showImage() {
-//        if let urlImageString = articles.urlToImage,
-//           let urlImage = URL(string: urlImageString) {
-//            downloadImage(urlImage: urlImage) { imageData in
-//                guard let imageData else { return }
-//
-//                DispatchQueue.main.async {
-//                    self.postImage.image = UIImage(data: imageData)
-//                }
-//            }
-//        }
-//    }
     @objc func tapURL() {
         delegate?.tapInURL()
-//        if let url = URL(string: url.text!) {
-//            UIApplication.shared.open(url)
-//            print("open url")
-//        } else {
-//            print("nihua ne open")
-//        }
-
     }
+    
     private func constraints() {
         [date, progress, postImage, titleName, descriptionName, url, buttonURL].forEach { contentView.addSubview($0) }
         

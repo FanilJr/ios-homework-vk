@@ -1,0 +1,39 @@
+/* 
+  Localizable.strings
+  NavigationVK
+
+  Created by Fanil_Jr on 08.12.2022.
+  
+*/
+
+//MARK: НОВОСТИ
+"news.title" = "Новости";
+"news.header" = "Новости сегодня";
+"news.post" = "Пост";
+"news.update" = "Обновление...";
+
+//MARK: Профайл ХЕДЕР
+"header.name" = "Фаниль Джуниор";
+"header.status" = "Введите статус";
+"header.tap.status" = "Установить статус";
+
+//MARK: ПРОФАЙЛ
+"profile.title" = "Профиль";
+"profile.go.post" = "Перейти на пост";
+"profile.shared" = "Поделиться";
+"profile.photos" = "Фотоальбом";
+
+//MARK: ПРОФАЙЛ ИМЕЙДЖ ВЬЮ
+"settings.button" = "Настройки";
+"creditcard" = "Счёт: РУБ";
+"exit.button" = "Выход";
+
+//MARK: ИЗБРАННОЕ
+"favorites.title" = "Избранное";
+"refresh.update" = "Обновление...";
+
+//MARK: МУЗЫКА
+"music.title" = "Музыка";
+
+//MARK: PHOTOGALLERY
+"galery.title" = "Фотогаллерея";

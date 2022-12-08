@@ -34,7 +34,7 @@ class PlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Music"
+        title = "music.title".localized
         setupView()
 
     }

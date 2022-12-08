@@ -34,7 +34,7 @@ final class ProfileHeaderView: UIView {
     
     private let fullNameLabel: UILabel = {
         let fullNameLabel = UILabel()
-        fullNameLabel.text = "Fanil_Jr"
+        fullNameLabel.text = "header.name".localized
     #if DEBUG
         fullNameLabel.textColor = .black
     #else
@@ -62,7 +62,7 @@ final class ProfileHeaderView: UIView {
     }()
         
     private let statusTextField: CustomTextField = {
-        let statusTextField = CustomTextField(placeholder: "Введите статус", textColor: .black, font: UIFont.systemFont(ofSize: 15, weight: .regular))
+        let statusTextField = CustomTextField(placeholder: "header.status".localized, textColor: .black, font: UIFont.systemFont(ofSize: 15, weight: .regular))
         statusTextField.layer.cornerRadius = 12
         statusTextField.layer.backgroundColor = UIColor.white.cgColor
         return statusTextField
@@ -78,7 +78,7 @@ final class ProfileHeaderView: UIView {
     }()
     
     private let setStatusButton: CustomButton = {
-        let button = CustomButton(title: "Set status", titleColor: .white, backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
+        let button = CustomButton(title: "header.tap.status".localized, titleColor: .white, backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
         return button
     }()
     
@@ -156,7 +156,7 @@ final class ProfileHeaderView: UIView {
         statusLabel.text = user.status
         
         if fullNameLabel.text == "ethic91@icloud.com" {
-            fullNameLabel.text = "Fanil_Jr"
+            fullNameLabel.text = "header.name".localized
         }
     }
         
