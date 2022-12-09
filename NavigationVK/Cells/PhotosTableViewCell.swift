@@ -24,6 +24,7 @@ class PhotosTableViewCell: UITableViewCell {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.backgroundColor = .clear
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: "CustomCollectionViewCell")
         return collectionView
@@ -32,7 +33,7 @@ class PhotosTableViewCell: UITableViewCell {
     private let label: UILabel = {
         let label = UILabel()
         label.text = "profile.photos".localized
-        label.textColor = .black
+        label.textColor = .createColor(light: .black, dark: .white)
         label.font = .systemFont(ofSize: 24, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -41,7 +42,7 @@ class PhotosTableViewCell: UITableViewCell {
     private let button: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
-        button.tintColor = .black
+        button.tintColor = .createColor(light: .black, dark: .white)
         button.layer.cornerRadius = 27 / 2
         button.layer.borderColor = UIColor.black.cgColor
         button.layer.borderWidth = 1

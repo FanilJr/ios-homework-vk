@@ -37,6 +37,7 @@ class ProfileViewController: UIViewController {
     
     let background: UIImageView = {
         let back = UIImageView()
+        back.image = UIImage(named: "tekstura")
         back.clipsToBounds = true
         back.translatesAutoresizingMaskIntoConstraints = false
         return back
@@ -76,13 +77,6 @@ class ProfileViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         loadUser(userName: userName)
-        
-    #if DEBUG
-        background.image = UIImage(named: "tekstura")
-    #else
-        background.image = UIImage(named: "background4")
-    #endif
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -192,13 +186,14 @@ extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PhotosTableViewCell", for: indexPath) as! PhotosTableViewCell
             cell.tuchNew = self
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
+            cell.backgroundColor = .createColor(light: .white, dark: .systemGray5)
             return cell
             
             
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostTableViewCell
 //            cell.setupCell(post[indexPath.row])
-            cell.backgroundColor = .white
+            cell.backgroundColor = .createColor(light: .white, dark: .systemGray5)
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
 //            return cell
             

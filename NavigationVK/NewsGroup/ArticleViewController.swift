@@ -32,15 +32,15 @@ class ArticleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let blureEffect = UIBlurEffect(style: .light)
-        let bluerView = UIVisualEffectView(effect: blureEffect)
+//        let blureEffect = UIBlurEffect(style: .light)
+//        let bluerView = UIVisualEffectView(effect: blureEffect)
 //        bluerView.frame = tabBar.bounds
 //        bluerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 //        tabBar.insertSubview(bluerView, at: 0)
         
         
         
-        title = "feed.post".localized
+        title = "news.post".localized
         layout()
         tableView.dataSource = self
         tableView.delegate = self
@@ -94,7 +94,7 @@ extension ArticleViewController: UITableViewDataSource, URLDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleTableViewCell", for: indexPath) as! ArticleTableViewCell
-        cell.backgroundColor = .white
+        cell.backgroundColor = .createColor(light: .white, dark: .systemGray5)
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         cell.titleName.text = articles.title
         cell.descriptionName.text = articles.description

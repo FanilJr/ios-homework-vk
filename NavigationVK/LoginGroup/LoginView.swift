@@ -39,7 +39,7 @@ class LoginView: UIView {
     }()
 
     private lazy var loginTextField: CustomTextField = {
-        let textField = CustomTextField(placeholder: "Login or email", textColor: .black, font: UIFont.systemFont(ofSize: 16))
+        let textField = CustomTextField(placeholder: "Login or email", textColor: .createColor(light: .black, dark: .white), font: UIFont.systemFont(ofSize: 16))
         textField.backgroundColor = .systemGray6
         textField.tintColor = UIColor(named: "#4885CC")
         textField.keyboardType = .emailAddress
@@ -50,7 +50,7 @@ class LoginView: UIView {
     }()
 
     private lazy var passwordTextField: CustomTextField = {
-        let textField = CustomTextField(placeholder: "Password", textColor: .black, font: UIFont.systemFont(ofSize: 16))
+        let textField = CustomTextField(placeholder: "Password", textColor: .createColor(light: .black, dark: .white), font: UIFont.systemFont(ofSize: 16))
         textField.isSecureTextEntry = true
         textField.tintColor = UIColor(named: "#4885CC")
         textField.layer.borderWidth = 0.5
@@ -60,12 +60,12 @@ class LoginView: UIView {
     }()
 
     let logInButton: CustomButton = {
-        let button = CustomButton(title: "Log In", titleColor: .white, backgroundColor: .blue,setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
+        let button = CustomButton(title: "Log In", titleColor: .createColor(light: .white, dark: .black), backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
         return button
     }()
     
     let signInButton: CustomButton = {
-        let button = CustomButton(title: "Registration", titleColor: .white, backgroundColor: .blue,setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
+        let button = CustomButton(title: "Registration", titleColor: .createColor(light: .white, dark: .black), backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
         return button
     }()
     

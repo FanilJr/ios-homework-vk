@@ -27,7 +27,7 @@ class NewsTableViewCell: UITableViewCell {
     
     private lazy var titleName: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .createColor(light: .black, dark: .white)
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 17.0, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false

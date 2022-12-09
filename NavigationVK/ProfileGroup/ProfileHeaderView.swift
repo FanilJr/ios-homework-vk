@@ -35,11 +35,7 @@ final class ProfileHeaderView: UIView {
     private let fullNameLabel: UILabel = {
         let fullNameLabel = UILabel()
         fullNameLabel.text = "header.name".localized
-    #if DEBUG
-        fullNameLabel.textColor = .black
-    #else
-        fullNameLabel.textColor = .white
-    #endif
+        fullNameLabel.textColor = UIColor.createColor(light: .black, dark: .white)
         fullNameLabel.font = .systemFont(ofSize: 18, weight: .bold)
         fullNameLabel.translatesAutoresizingMaskIntoConstraints = false
         return fullNameLabel
@@ -47,13 +43,8 @@ final class ProfileHeaderView: UIView {
     
     private let statusLabel: UILabel = {
         let statusLabel = UILabel()
-    #if DEBUG
-        statusLabel.textColor = .black
+        statusLabel.textColor = UIColor.createColor(light: .black, dark: .white)
         statusLabel.shadowColor = .white
-    #else
-        statusLabel.textColor = .white
-        statusLabel.shadowColor = .black
-    #endif
         statusLabel.numberOfLines = 0
         statusLabel.font = .systemFont(ofSize: 14, weight: .thin)
         statusLabel.shadowOffset = CGSize(width: 0.5, height: 0.5)
@@ -62,9 +53,9 @@ final class ProfileHeaderView: UIView {
     }()
         
     private let statusTextField: CustomTextField = {
-        let statusTextField = CustomTextField(placeholder: "header.status".localized, textColor: .black, font: UIFont.systemFont(ofSize: 15, weight: .regular))
+        let statusTextField = CustomTextField(placeholder: "header.status".localized, textColor: .createColor(light: .black, dark: .white), font: UIFont.systemFont(ofSize: 15, weight: .regular))
+        statusTextField.tintColor = UIColor(named: "#4885CC")
         statusTextField.layer.cornerRadius = 12
-        statusTextField.layer.backgroundColor = UIColor.white.cgColor
         return statusTextField
     }()
         
@@ -87,7 +78,7 @@ final class ProfileHeaderView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         let config = UIImage.SymbolConfiguration(pointSize: 20)
         button.addTarget(self, action: #selector(logout), for: .touchUpInside)
-        button.setImage(UIImage(systemName: "person.fill.xmark", withConfiguration: config), for: .normal)
+        button.setImage(UIImage(systemName: "rectangle.portrait.and.arrow.forward", withConfiguration: config), for: .normal)
         button.tintColor = .red
         return button
     }()
@@ -103,7 +94,6 @@ final class ProfileHeaderView: UIView {
         [fullNameLabel, statusLabel, statusTextField].forEach { stackView.addArrangedSubview($0) }
         
         NSLayoutConstraint.activate([
-            
             logoutButton.topAnchor.constraint(equalTo: topAnchor),
             logoutButton.trailingAnchor.constraint(equalTo: trailingAnchor),
             

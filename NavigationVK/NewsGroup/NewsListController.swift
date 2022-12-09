@@ -45,6 +45,8 @@ class NewsListController: UIViewController {
         super.viewDidLoad()
 
         title = "news.title".localized
+        view.largeContentTitle = "news.title".localized
+        
         refreshControle.attributedTitle = NSAttributedString(string: "news.update".localized)
         refreshControle.addTarget(self, action: #selector(didTapRefresh), for: .valueChanged)
         activityView.startAnimating()
@@ -110,7 +112,7 @@ extension NewsListController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsTableViewCell", for: indexPath) as! NewsTableViewCell
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
-        cell.backgroundColor = .white
+        cell.backgroundColor = .createColor(light: .white, dark: .systemGray5)
         cell.setupCell(articles[indexPath.row])
         return cell
     }
