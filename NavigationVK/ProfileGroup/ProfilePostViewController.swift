@@ -9,7 +9,6 @@ import UIKit
 
 class ProfilePostViewController: UIViewController {
     
-    
     let background: UIImageView = {
         let back = UIImageView()
         back.image = UIImage(named: "tekstura")
@@ -21,6 +20,8 @@ class ProfilePostViewController: UIViewController {
     lazy var postImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
+        imageView.layer.cornerRadius = 30
+        imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()

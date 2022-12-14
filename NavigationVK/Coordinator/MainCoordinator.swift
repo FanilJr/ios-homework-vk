@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 enum TabBarPage {
 //    case feed
@@ -70,6 +71,7 @@ final class MainCoordinatorImp: MainCoordinator {
 
     private let controllersFactory = ControllersFactory()
     private var userEmail: String?
+    let tabBarVC = MainTabBarController()
 
     // проверка авторизован ли юзер
     // показать либо экран авторизации, либо новостную ленту
@@ -80,9 +82,10 @@ final class MainCoordinatorImp: MainCoordinator {
 
     //MARK: - Metods
     private func getTabBarController() -> UIViewController {
-        let tabBarVC = MainTabBarController()
+        
         let pages: [TabBarPage] = [.news, .profile, .favorite, .player]
         tabBarVC.setViewControllers(pages.map { getNavController(page: $0) }, animated: true)
+//        tabBarVC.tabBar.isUserInteractionEnabled = false
         return tabBarVC
     }
 
@@ -91,6 +94,7 @@ final class MainCoordinatorImp: MainCoordinator {
           navigationVC.tabBarItem.image = page.image
           navigationVC.tabBarItem.selectedImage = page.selectedImage
           navigationVC.tabBarItem.title = page.pageTitle
+          
           
           switch page {
 //          case .feed:
@@ -104,17 +108,18 @@ final class MainCoordinatorImp: MainCoordinator {
               
           case .profile:
               let profileChildCoordinator = ProfileFlowCoordinator(navCon: navigationVC, controllersFactory: controllersFactory)
+              
               let logInVC = controllersFactory.makeLoginViewController(coordinator: profileChildCoordinator)
               navigationVC.pushViewController(logInVC, animated: true)
+             
               //открываем экран профиля, если пользователь авторизован
+    
               if let userEmail = userEmail {
-                  let profileVC =  controllersFactory.makeProfileViewController(
-                    userName: userEmail,
-                    coordinator: profileChildCoordinator
-                  )
+                  let profileVC = controllersFactory.makeProfileViewController(userName: userEmail, coordinator: profileChildCoordinator)
                   navigationVC.pushViewController(profileVC, animated: true)
+                  navigationVC.setViewControllers([profileVC], animated: true)
               }
-              
+
           case .favorite:
               let favoriteChildCoordinator = FavoriteFlowCoordinator(navCon: navigationVC, controllersFactory: controllersFactory)
               let favoriteVC = controllersFactory.makeFavoriteViewController(coordinator: favoriteChildCoordinator)
@@ -128,4 +133,6 @@ final class MainCoordinatorImp: MainCoordinator {
           return navigationVC
       }
 }
+
+
 

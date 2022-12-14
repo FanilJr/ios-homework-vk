@@ -60,4 +60,13 @@ final class ProfileFlowCoordinator {
     func pop() {
         navCon.popViewController(animated: true)
     }
+    
+    func showLogin() {
+        let factory = MyLoginFactory()
+        let coordinator = ProfileFlowCoordinator(navCon: navCon, controllersFactory: controllersFactory)
+        let loginModel = LoginViewModel(loginFactory: factory, coordinator: coordinator)
+        let vc = LogInViewController(viewModel: loginModel)
+        navCon.present(vc, animated: true)
+        
+    }
 }

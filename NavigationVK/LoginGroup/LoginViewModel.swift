@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 final class LoginViewModel {
     private let loginInspector: LoginInspector

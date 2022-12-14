@@ -104,6 +104,7 @@ final class ProfileHeaderView: UIView {
             
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor,constant: 30),
+            stackView.heightAnchor.constraint(equalToConstant: 120),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             
             setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor,constant: 16),

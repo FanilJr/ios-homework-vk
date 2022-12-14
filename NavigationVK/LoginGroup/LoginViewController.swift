@@ -15,6 +15,7 @@ protocol LoginViewControllerDelegate: AnyObject {
 
 class LogInViewController: UIViewController {
 
+    
     private var viewModel: LoginViewModel
     private lazy var loginView = LoginView(delegate: self)
 //MARK: REALM    var logins: Results<LoginModel>?
@@ -38,6 +39,10 @@ class LogInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if navigationController?.viewControllers.count == 2 {
+            print(navigationController?.viewControllers)
+//            navigationController?.viewControllers.removeFirst()
+        }
         
         view.backgroundColor = .white
         navigationController?.navigationBar.isHidden = true

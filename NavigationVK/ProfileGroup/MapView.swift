@@ -27,7 +27,7 @@ class MapView: UIView, UIGestureRecognizerDelegate {
     private lazy var mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
-        mapView.mapType = .standard
+        mapView.mapType = .hybridFlyover
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
         mapView.showsCompass = true
@@ -62,6 +62,8 @@ class MapView: UIView, UIGestureRecognizerDelegate {
                     self.mapView.isScrollEnabled = true
                     annotation.title = "\(placemark.streetName ?? "address not found") \(placemark.streetNumber ?? "")"
                     annotation.subtitle = "\(country) - \(city)"
+
+                    print(location)
                 }
             }
         }
@@ -128,13 +130,13 @@ class MapView: UIView, UIGestureRecognizerDelegate {
 //        if let coor = mapView.userLocation.location?.coordinate {
 //            mapView.setCenter(coor, animated: true)
 //        }
-        let eburgAnnotation = MKPointAnnotation()
+        let homeEKB = MKPointAnnotation()
         let uganskAnnotation = MKPointAnnotation()
-        eburgAnnotation.coordinate = CLLocationCoordinate2D(latitude: 56.82462, longitude: 50.54423)
-        eburgAnnotation.title = "Екатеринбург"
+        homeEKB.coordinate = CLLocationCoordinate2D(latitude: 56.82495, longitude: 60.54431)
+        homeEKB.title = "Екатеринбург"
         uganskAnnotation.coordinate = CLLocationCoordinate2D(latitude: 61.09979, longitude: 72.60349)
         uganskAnnotation.title = "Нефтеюганск"
-        mapView.addAnnotations([eburgAnnotation,uganskAnnotation])
+        mapView.addAnnotations([homeEKB,uganskAnnotation])
     }
         
     required init?(coder: NSCoder) {
@@ -144,9 +146,7 @@ class MapView: UIView, UIGestureRecognizerDelegate {
 
 //Местоположение пользователя
 extension MapView: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        
-        }
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 //        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
         
@@ -156,7 +156,7 @@ extension MapView: CLLocationManagerDelegate {
         mapView.isScrollEnabled = true
         
         //MARK: ИЗМЕНИЛ!!!!!!!!!!!
-        if let location = locations.first {
+        if let location = locations.last {
             mapView.setCenter(location.coordinate, animated: true)
         }
 

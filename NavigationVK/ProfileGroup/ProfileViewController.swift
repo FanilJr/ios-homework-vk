@@ -10,7 +10,9 @@ import FirebaseAuth
 
 class ProfileViewController: UIViewController {
 
+    var tabBarItemOne: UITabBarItem = UITabBarItem()
     private let post = PostStruct.massivePost()
+    private let controllersFactory = ControllersFactory()
     private let mapView = MapView()
     private let like = LikeView()
     private let posts = ProfileViewModel().postArray
@@ -22,6 +24,7 @@ class ProfileViewController: UIViewController {
     private let profileImageView = ProfileImageView()
     private weak var coordinator: ProfileFlowCoordinator?
     private let cell = PhotosTableViewCell()
+    private let profilePost = ProfilePostViewController()
     var lastRowDisplay = 0
     private var cellIndex = 0
     
@@ -70,6 +73,14 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(navigationController?.viewControllers)
+        if navigationController?.viewControllers.count == 2 {
+//            navigationController?.viewControllers.removeFirst()
+        }
+        print(navigationController?.viewControllers)
+        
+        
+        
         title = "profile.title".localized
 
         setupTableView()
@@ -81,12 +92,24 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
+        let tabbarControllerItems = self.tabBarController?.tabBar.items
+            if let arrayOfTabBatItems = tabbarControllerItems! as AnyObject as? NSArray {
+                tabBarItemOne = arrayOfTabBatItems[1] as! UITabBarItem
+                if tabBarController?.tabBar.selectedItem == tabBarItemOne {
+                    print("Это тап на профиль")
+                } else {
+            }
+        }
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
     }
     
     @objc private func duobleTapInPost() {
@@ -221,7 +244,11 @@ extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
         let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { _ in
             
             let pushPost = UIAction(title: "profile.go.post".localized, image: UIImage(systemName: "chevron.right.circle")) { _ in
+                //MARK: PUSH COORDINATOR
                 self.coordinator?.showPost(post: (self.viewModel?.postArray[indexPath.row])!)
+                //MARK: PUSH NavigationController
+//                self.profilePost.setupCell(self.posts[indexPath.row])
+//                self.navigationController?.pushViewController(self.profilePost, animated: true)
             }
             
             let share = UIAction(title: "profile.shared".localized, image: UIImage(systemName: "square.and.arrow.up")) { _ in
@@ -237,7 +264,11 @@ extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
     
     func tuchUp() {
         print("tuch по кнопке delegate из ProfileViewController")
+        //MARK: PUSH COORDINATOR
         coordinator?.showPhotos()
+        //MARK: PUSH NavigationController
+//        let photoVC = PhotosViewController()
+//        navigationController?.pushViewController(photoVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -277,6 +308,17 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
         do {
             try FirebaseAuth.Auth.auth().signOut()
             coordinator?.pop()
+            
+//            let navCon = UINavigationController()
+//            let profileChildCoordinator = ProfileFlowCoordinator(navCon: navCon, controllersFactory: controllersFactory)
+//            let logInVC = controllersFactory.makeLoginViewController(coordinator: profileChildCoordinator)
+//            navigationController?.pushViewController(logInVC, animated: true)
+
+//            let loginVC = LogInViewController(viewModel: LoginViewModel(loginFactory: MyLoginFactory(), coordinator: ProfileFlowCoordinator(navCon: UINavigationController(), controllersFactory: ControllersFactory())))
+//            navigationController?.pushViewController(loginVC, animated: true)
+//
+            
+            
         } catch {
             print("Error signout")
         }
@@ -311,6 +353,9 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
     }
     func openSetting() {
         coordinator?.showSettings(title: "settings.title".localized)
+        
+//        let settingsVC = SettingsViewController()
+//        navigationController?.present(settingsVC, animated: true)
     }
     
     func tapClosed() {
@@ -347,6 +392,13 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
         
         if indexPath.section == 0 {
             coordinator?.showPhotos()
+            
+//            let photoVC = PhotosViewController()
+//            navigationController?.pushViewController(photoVC, animated: true)
+            
+//            let vc = ProfilePostViewController()
+//            vc.setupCell(post[indexPath.row])
+//            navigationController?.pushViewController(vc, animated: true)
         }
         
         if indexPath.section > 0 {

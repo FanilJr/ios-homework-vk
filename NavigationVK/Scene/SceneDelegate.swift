@@ -30,13 +30,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             UITabBar.appearance().tintColor = #colorLiteral(red: 0.9294139743, green: 0.2863991261, blue: 0.3659052849, alpha: 1)
             UITabBar.appearance().unselectedItemTintColor = UIColor.createColor(light: .black, dark: .white)
         }
-        
 
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         let mainCoordinator: MainCoordinator = MainCoordinatorImp()
         let user = FirebaseAuth.Auth.auth().currentUser
         window?.rootViewController = mainCoordinator.startApplication(userEmail: user?.email)
+
+//        let navigationVC = UINavigationController()
+//        let controllersFactory = ControllersFactory()
+//        let profileChildCoordinator = ProfileFlowCoordinator(navCon: navigationVC, controllersFactory: controllersFactory)
+//        let logInVC = controllersFactory.makeLoginViewController(coordinator: profileChildCoordinator)
+//        window?.rootViewController = logInVC
         window?.makeKeyAndVisible()
     }
 

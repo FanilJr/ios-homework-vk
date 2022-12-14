@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 struct PostStruct {
     
@@ -64,5 +65,4 @@ final class ProfileViewModel {
         let post = postArray[indexPath.row]
         return PostTbaleViewCellModel(post: post)
     }
-    
 }
