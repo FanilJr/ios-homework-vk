@@ -117,7 +117,6 @@ final class MainCoordinatorImp: MainCoordinator {
               if let userEmail = userEmail {
                   let profileVC = controllersFactory.makeProfileViewController(userName: userEmail, coordinator: profileChildCoordinator)
                   navigationVC.pushViewController(profileVC, animated: true)
-                  navigationVC.setViewControllers([profileVC], animated: true)
               }
 
           case .favorite:
