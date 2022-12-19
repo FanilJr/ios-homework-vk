@@ -83,10 +83,10 @@ class PostViewController: UIViewController {
     
     @objc func tapButton() {
     
-        let infoViewController = InfoViewController()
-//        infoViewController.modalPresentationStyle = .fullScreen
-        present(infoViewController, animated: true, completion: nil)
-        
+//        let infoViewController = InfoViewController()
+////        infoViewController.modalPresentationStyle = .fullScreen
+//        present(infoViewController, animated: true, completion: nil)
+//        
     }
 
     func setup() {

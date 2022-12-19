@@ -68,34 +68,16 @@ class PostTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    weak var viewModel: PostTbaleViewCellModel? {
-        willSet(viewModel) {
-            guard let viewModel = viewModel else { return }
-            authorName.text = viewModel.author
-            descriptionLabel.text = viewModel.description
-            postImage.image = UIImage(named: viewModel.image)
-            likes.text = "Likes: \(viewModel.likes)"
-            viewsLabel.text = "Views: \(viewModel.views)"
-        }
+ 
+    public func configure(with post: Post) {
+        authorName.text = post.author
+        descriptionLabel.text = post.description
+        let formatLikesString = String(localized: "likes")
+        likes.text = String.localizedStringWithFormat(formatLikesString, post.likes)
+        viewsLabel.text = "Views: \(post.views)"
+        postImage.image = UIImage(named: post.image)
     }
     
-    
-    func setupNewCell(_ model: PostTbaleViewCellModel) {
-        postImage.image = UIImage(named: model.image)
-        authorName.text = model.author
-        descriptionLabel.text = model.description
-        likes.text = "Likes: \(String(model.likes))"
-        viewsLabel.text = "Views: \(String(model.views))"
-    }
-    
-    func setupCell(_ model: PostStruct) {
-        postImage.image = UIImage(named: model.image)
-        authorName.text = model.author
-        descriptionLabel.text = model.description
-        likes.text = "Likes: \(String(model.likes))"
-        viewsLabel.text = "Views: \(String(model.views))"
-    }
 //      MARK: вариант одного фильтра для всех фото
 //
 //        if let image = UIImage(named: model.image) {

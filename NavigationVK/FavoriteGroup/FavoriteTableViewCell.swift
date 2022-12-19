@@ -65,7 +65,7 @@ class FavoriteTableViewCell : UITableViewCell {
     
     public func myCells(_ post: PostData) {
         self.authorCells.text = post.authorCell ?? ""
-        self.imageCells.image = UIImage(data: post.imageCell!) ?? UIImage()
+//        self.imageCells.image = UIImage(named: post.imageCell!) ?? UIImage()
     }
     
     //MARK: Initial constraints

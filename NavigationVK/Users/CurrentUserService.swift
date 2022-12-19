@@ -6,19 +6,30 @@
 //
 
 import Foundation
-import UIKit
 
-final class CurrentUserService: UserService {
-    
-    let user = User(name: "ethic91@icloud.com", avatar: UIImage(named: "1")!, status: "Ты на один день ближе к своей мечте")
-    
-    func getUser(userName: String, completion: (Result<User, UserGetError>) -> Void) {
-            if user.name == userName {
-                completion(.success(user))
-            } else {
-                let debugUuser = User(name: userName, avatar: UIImage(systemName: "person.crop.circle.badge.questionmark.fill")!, status: "Проверка работы")
-                completion(.success(debugUuser))
-            }
+enum UserNotFoundError: Error {
+    case userNotFound
+}
+
+extension UserNotFoundError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .userNotFound:
+            return "Пользователь не найден"
         }
-
     }
+}
+
+class CurrentService: UserService {
+    var user: User
+    
+    init(user: User) {
+        self.user = user
+    }
+
+    func getUser(fullName: String) throws -> User {
+        guard user.fullName == fullName else { throw UserNotFoundError.userNotFound }
+        return user
+    }
+    
+}

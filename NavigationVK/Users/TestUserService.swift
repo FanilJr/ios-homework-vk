@@ -8,16 +8,11 @@
 import Foundation
 import UIKit
 
-final class TestUserService: UserService {
+class TestUserService: UserService {
+    var user: User = User(fullName: "Fanil_Jr", avatar: "1", status: "Все обязательно сбудется")
     
-    let user = User(name: "ethic91@icloud.com", avatar: UIImage(named: "error")!, status: "Пробный статус")
-    
-    func getUser(userName: String, completion: (Result<User, UserGetError>) -> Void) {
-        if user.name == userName {
-            completion(.success(user))
-        } else {
-            let debugUuser = User(name: userName, avatar: UIImage(systemName: "person.fill.questionmark")!, status: "Проверка работы Login сервиса")
-            completion(.success(debugUuser))
-        }
+    func getUser(fullName: String) throws -> User {
+        return user
     }
 }
+

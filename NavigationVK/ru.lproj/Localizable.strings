@@ -27,6 +27,7 @@
 "settings.button" = "Настройки";
 "creditcard" = "Счёт: РУБ";
 "exit.button" = "Выход";
+"logout.button" = "Выйти из аккаунта";
 
 //MARK: ИЗБРАННОЕ
 "favorites.title" = "Избранное";
@@ -37,3 +38,6 @@
 
 //MARK: ФОТОГАЛЛЕРЕЯ
 "galery.title" = "Фотогаллерея";
+
+//MARK: LOGIN
+"auth.title" = "Авторизация";

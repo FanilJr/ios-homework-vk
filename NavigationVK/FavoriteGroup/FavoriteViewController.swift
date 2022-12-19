@@ -11,8 +11,6 @@ import CoreData
 
 class FavoriteViewController: UIViewController {
     
-    private var viewModel: CoreDataManager?
-    private weak var coordinator: FavoriteFlowCoordinator?
     private var post: PostData?
     var refreshControl = UIRefreshControl()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -49,17 +47,6 @@ class FavoriteViewController: UIViewController {
     }()
     
     
-    init(model: CoreDataManager, coordinator: FavoriteFlowCoordinator) {
-        self.viewModel = model
-        self.coordinator = coordinator
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "favorites.title".localized
@@ -70,8 +57,8 @@ class FavoriteViewController: UIViewController {
         refreshControl.attributedTitle = NSAttributedString(string: "refresh.update".localized)
         refreshControl.addTarget(self, action: #selector(didTapRefresh), for: .valueChanged)
         view.backgroundColor = .white
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchAction))
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(cancelFilteredSearchAction))
+        //        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchAction))
+        //        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(cancelFilteredSearchAction))
         manageObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         layout()
     }
@@ -107,58 +94,59 @@ class FavoriteViewController: UIViewController {
         ])
     }
     //доработать поиск по автору
-        @objc func searchAction() {
-
-            let alertController = UIAlertController(title: "Search author post", message: "", preferredStyle: .alert)
-            alertController.addTextField { (textField : UITextField!) -> Void in
-                textField.placeholder = "Enter author"
+    @objc func searchAction() {
+        
+        let alertController = UIAlertController(title: "Search author post", message: "", preferredStyle: .alert)
+        alertController.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "Enter author"
+        }
+        
+        let searchAction = UIAlertAction(title: "Search", style: .default, handler: { alert -> Void in
+            if let textFileds = alertController.textFields {
+                let newTextFiled = textFileds as [UITextField]
+                let enterText = newTextFiled[0].text
+                self.fetchFilter(enterText ?? "")
+                self.collectionView.reloadData()
             }
-
-            let searchAction = UIAlertAction(title: "Search", style: .default, handler: { alert -> Void in
-                if let textFileds = alertController.textFields {
-                    let newTextFiled = textFileds as [UITextField]
-                    let enterText = newTextFiled[0].text
-                    self.fetchFilter(enterText ?? "")
-                    self.collectionView.reloadData()
-                }
-            })
-
-            let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil )
-            alertController.addAction(searchAction)
-            alertController.addAction(cancelAction)
-            self.present(alertController, animated: true, completion: nil)
-
-        }
-
-        func fetchFilter(_ author: String) {
-            let appDelegate = UIApplication.shared.delegate as? AppDelegate
-
-            let entityDescription = NSEntityDescription.entity(forEntityName: "PostData", in: appDelegate!.persistentContainer.viewContext)
-
-            let request = NSFetchRequest<NSFetchRequestResult>()
-            request.entity = entityDescription
-
-            let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
-            request.sortDescriptors = [sortDescriptor]
-
-            let predicate = NSPredicate(format: "authorCell == %@", author)
-            request.predicate = predicate
-
-            fetchResultController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: appDelegate!.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
-            fetchResultController?.delegate = self
-
-                do {
-                    try fetchResultController?.performFetch()
-
-                } catch let error as NSError {
-                    print(error.userInfo)
-                }
-            collectionView.reloadData()
-        }
-
-        @objc func cancelFilteredSearchAction() {
-            
-        }
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil )
+        alertController.addAction(searchAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
+    
+    func fetchFilter(_ author: String) {
+        //            let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        //
+        //            let entityDescription = NSEntityDescription.entity(forEntityName: "PostData", in: appDelegate!.persistentContainer.viewContext)
+        //
+        //            let request = NSFetchRequest<NSFetchRequestResult>()
+        //            request.entity = entityDescription
+        //
+        //            let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
+        //            request.sortDescriptors = [sortDescriptor]
+        //
+        //            let predicate = NSPredicate(format: "authorCell == %@", author)
+        //            request.predicate = predicate
+        //
+        //            fetchResultController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: appDelegate!.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        //            fetchResultController?.delegate = self
+        //
+        //                do {
+        //                    try fetchResultController?.performFetch()
+        //
+        //                } catch let error as NSError {
+        //                    print(error.userInfo)
+        //                }
+        //            collectionView.reloadData()
+        //        }
+        //
+        //        @objc func cancelFilteredSearchAction() {
+        //
+        //        }
+    }
 }
 
 ////MARK: ПРИМЕР С ТАБЛИЦЕЙ
@@ -242,7 +230,6 @@ extension FavoriteViewController: NSFetchedResultsControllerDelegate {
                 collectionView.deleteItems(at: [indexPath])
             }
         case .update:
-
             if let indexPath = indexPath {
                 let post = CoreDataManager.shared.favoritePost[indexPath.row]
                 guard let cell = collectionView.cellForItem(at: indexPath as IndexPath) as? FavoriteCollectionViewCell else { break }
@@ -268,7 +255,6 @@ extension FavoriteViewController: NSFetchedResultsControllerDelegate {
 }
 
 //MARK: ПРИМЕР С КОЛЛЕКЦИЕЙ
-
 extension FavoriteViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -353,6 +339,3 @@ extension FavoriteViewController: UICollectionViewDelegateFlowLayout {
 
     }
 }
-
-
-

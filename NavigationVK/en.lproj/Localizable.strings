@@ -27,6 +27,7 @@
 "settings.button" = "Settings";
 "creditcard" = "Credit Card: USD";
 "exit.button" = "Exit";
+"logout.button" = "Logout";
 
 //MARK: FAVORITES
 "favorites.title" = "Favorites";
@@ -37,6 +38,9 @@
 
 //MARK: PHOTOGALLERY
 "galery.title" = "Photo Gallery";
+
+//MARK: LOGIN
+"auth.title" = "Authorization";
 
 
 

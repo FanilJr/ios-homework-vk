@@ -6,19 +6,31 @@
 //
 
 import UIKit
-//MARK: REALM  import RealmSwift
 
-protocol LoginViewControllerDelegate: AnyObject {
-    func checkCredentials(login: String, password: String, success: @escaping (Bool) -> Void) throws
-    func signUp(login: String, password: String, success: @escaping (Error?) -> Void) throws
+typealias Handler = (Result<String, Error>) -> Void
+
+protocol LogInViewControllerDelegate: AnyObject {
+    func tappedButton(fullName: String)
+    func pushSignUp()
+}
+protocol LogInViewControllerCheckerDelegate: AnyObject {
+    func login(inputLogin: String, inputPassword: String, completion: @escaping Handler)
+    func signOut()
 }
 
 class LogInViewController: UIViewController {
 
     
-    private var viewModel: LoginViewModel
-    private lazy var loginView = LoginView(delegate: self)
-//MARK: REALM    var logins: Results<LoginModel>?
+    private let viewModel: LoginViewModel
+    var delegate: LogInViewControllerCheckerDelegate?
+    var showProfileVc: ((String) -> Void)?
+    var showRegistrationVc: (() -> Void)?
+    
+    private lazy var loginView: LoginView = {
+        let loginView = LoginView()
+        loginView.translatesAutoresizingMaskIntoConstraints = false
+        return loginView
+    }()
     
     let background: UIImageView = {
         let back = UIImageView()
@@ -39,22 +51,18 @@ class LogInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if navigationController?.viewControllers.count == 2 {
-            print(navigationController?.viewControllers)
-//            navigationController?.viewControllers.removeFirst()
-        }
-        
+        title = "Login"
+
         view.backgroundColor = .white
         navigationController?.navigationBar.isHidden = true
         layout()
+        loginView.delegate = self
+        loginView.checkerDelegate = delegate
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loginView.setPassword(password: "", isSecure: true)
-//MARK: REALM         if let newData = self.logins?[0] {
-//MARK: REALM        viewModel.signUp(login: newData.login, password: newData.password)
-//MARK: REALM    }
+        tabBarController?.tabBar.isHidden = true
     }
 
     private func layout() {
@@ -78,39 +86,16 @@ class LogInViewController: UIViewController {
 
 
 // MARK: - LoginViewDelegate
-extension LogInViewController: LoginViewDelegate {
+extension LogInViewController: LogInViewControllerDelegate {
+    func tappedButton(fullName: String) {
+        viewModel.send(.showProfileVc(fullName))
+    }
     
-    func didTapSignUpButton() {
-        let login = loginView.getLogin()
-        let password = loginView.getPassword()
-
-        viewModel.signUp(login: login, password: password)
-        DispatchQueue.main.async {
-            self.loginView.waitingSpinnerEnable(false)
-            self.loginView.logInButton.setTitle("Registration", for: .normal)
-        }
+    func pushSignUp() {
+        viewModel.send(.showRegistrationVc)
     }
-    func didTapCrackPasswordButton() {
-        print("didTapCRACK")
-    }
-
-    func didTapLogInButton() {
-        let login = loginView.getLogin()
-        let password = loginView.getPassword()
-//MARK: REALM
-//        let data = LoginModel(value: [login, password])
-//        do {
-//            let realm = try Realm()
-//            try realm.write { realm.add(data) }
-//            print("-------------Всё норм - записали-------------")
-//        } catch let error {
-//            print("-----------Зашли в ошибку---------------")
-//            print(error.localizedDescription)
-//        }
-        viewModel.login(login: login, password: password)
-        DispatchQueue.main.async {
-            self.loginView.waitingSpinnerEnable(false)
-            self.loginView.logInButton.setTitle("Log in", for: .normal)
-        }
-    }
+    
+    
 }
+
+

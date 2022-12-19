@@ -77,9 +77,9 @@ class SecondPostViewController: UIViewController {
     }
     
     @objc func tapButton() {
-    
-        let infoViewController = InfoViewController()
-        present(infoViewController, animated: true, completion: nil)
+//    
+//        let infoViewController = InfoViewController()
+//        present(infoViewController, animated: true, completion: nil)
     }
 
     func setup() {

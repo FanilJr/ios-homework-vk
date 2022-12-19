@@ -9,13 +9,18 @@ import UIKit
 import AVFoundation
 import FirebaseCore
 import FirebaseAuth
+import Firebase
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     let loginFactory = MyLoginFactory()
+    private var appCoordinator: AppCoordinator?
+    private var viewControllerFactory: ViewControllersFactoryProtocol!
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        
+        FirebaseApp.configure()
             
         if #available(iOS 15, *) {
             let appearance = UINavigationBarAppearance()
@@ -31,18 +36,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             UITabBar.appearance().unselectedItemTintColor = UIColor.createColor(light: .black, dark: .white)
         }
 
+//        guard let windowScene = (scene as? UIWindowScene) else { return }
+//        window = UIWindow(windowScene: windowScene)
+//        let mainCoordinator: MainCoordinator = MainCoordinatorImp()
+//        let user = FirebaseAuth.Auth.auth().currentUser
+//        window?.rootViewController = mainCoordinator.startApplication(userEmail: user?.email)
+        
+//        guard let element = AppConfiguration.allCases.randomElement() else { return }
+//        NetworkService.makeRequest(urlString: element.rawValue)
+
         guard let windowScene = (scene as? UIWindowScene) else { return }
+
         window = UIWindow(windowScene: windowScene)
-        let mainCoordinator: MainCoordinator = MainCoordinatorImp()
-        let user = FirebaseAuth.Auth.auth().currentUser
-        window?.rootViewController = mainCoordinator.startApplication(userEmail: user?.email)
+        viewControllerFactory = ViewControllerFactory()
+        
+        appCoordinator = AppCoordinator(scene: windowScene, viewControllerFactory: viewControllerFactory)
+        appCoordinator?.start()
 
 //        let navigationVC = UINavigationController()
 //        let controllersFactory = ControllersFactory()
 //        let profileChildCoordinator = ProfileFlowCoordinator(navCon: navigationVC, controllersFactory: controllersFactory)
 //        let logInVC = controllersFactory.makeLoginViewController(coordinator: profileChildCoordinator)
 //        window?.rootViewController = logInVC
-        window?.makeKeyAndVisible()
+//        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -71,6 +87,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+//        self.saveContext()
+        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
 
 

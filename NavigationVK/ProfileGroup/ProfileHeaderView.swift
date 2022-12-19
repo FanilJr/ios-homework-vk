@@ -68,10 +68,31 @@ final class ProfileHeaderView: UIView {
         return stackView
     }()
     
-    private let setStatusButton: CustomButton = {
-        let button = CustomButton(title: "header.tap.status".localized, titleColor: .white, backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
+    
+    private lazy var setStatusButton: CustomButton = {
+        setStatusButton = CustomButton(
+            title: "header.tap.status".localized,
+            titleColor: .white,
+            onTap: { [weak self] in
+                self?.buttonPressed()
+            }
+        )
+        setStatusButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
+        setStatusButton.translatesAutoresizingMaskIntoConstraints = false
+        setStatusButton.clipsToBounds = true
+        setStatusButton.layer.cornerRadius = 14
+        
+        return setStatusButton
+    }()
+    
+    private lazy var button: UIButton = {
+        let button = UIButton()
+        button.setTitle("header.tap.status".localized, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         return button
     }()
+
     
     private let logoutButton: UIButton = {
         let button = UIButton()
@@ -90,13 +111,10 @@ final class ProfileHeaderView: UIView {
     
     func snp() {
         
-        [avatarImageView, stackView, setStatusButton, logoutButton].forEach { addSubview($0) }
+        [avatarImageView, stackView, setStatusButton].forEach { addSubview($0) }
         [fullNameLabel, statusLabel, statusTextField].forEach { stackView.addArrangedSubview($0) }
         
         NSLayoutConstraint.activate([
-            logoutButton.topAnchor.constraint(equalTo: topAnchor),
-            logoutButton.trailingAnchor.constraint(equalTo: trailingAnchor),
-            
             avatarImageView.topAnchor.constraint(equalTo: topAnchor),
             avatarImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             avatarImageView.widthAnchor.constraint(equalToConstant: 120),
@@ -117,40 +135,26 @@ final class ProfileHeaderView: UIView {
     @objc func logout() {
         self.delegate?.didTapLogoutButton()
     }
-        
-    private func tap() {
-        
-        setStatusButton.tapAction =  { [weak self] in
-            AudioServicesPlaySystemSound(self!.systemSoundID)
-
-            let bounds = self?.setStatusButton.bounds
-            let bonds = self?.statusLabel.bounds
-
-            /// анимация кнопки setStatus и statusLabel
+    private func buttonPressed() {
+        guard !statusText.isEmpty else {
+            AudioServicesPlaySystemSound(self.systemSoundID)
+            let bounds = self.setStatusButton.bounds
+            let bonds = self.statusLabel.bounds
             UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 2, initialSpringVelocity: 1, options: .curveLinear) {
-                self?.setStatusButton.bounds = CGRect(x: (bounds?.origin.x)! - 30, y: (bounds?.origin.y)!, width: bounds!.width + 30, height: bounds!.height + 10)
-                self?.setStatusButton.titleLabel?.bounds = CGRect(x: bounds!.origin.x, y: bounds!.origin.y, width: bounds!.width + 100, height: bounds!.height)
-                self?.statusLabel.bounds = CGRect(x: bonds!.origin.x, y: bonds!.origin.y, width: bonds!.width + 50, height: bonds!.height)
+                self.setStatusButton.bounds = CGRect(x: (bounds.origin.x) - 30, y: (bounds.origin.y), width: bounds.width + 30, height: bounds.height + 10)
+                self.setStatusButton.titleLabel?.bounds = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: bounds.width + 100, height: bounds.height)
+                self.statusLabel.bounds = CGRect(x: bonds.origin.x, y: bonds.origin.y, width: bonds.width + 50, height: bonds.height)
             }
-            
-            self?.statusLabel.text = self?.statusTextField.text
-            self?.statusTextField.text = ""
+            self.statusLabel.text = self.statusTextField.text
+            self.statusTextField.text = ""
             
             print("Статус установлен")
+
+            return
         }
-    }
-    
-    func setupView(user: User?) {
-        guard let user = user else {print("Error: User nil in ProfileHeaderView." + #function); return}
-        fullNameLabel.text = user.name
-        avatarImageView.image = user.avatar
-        statusLabel.text = user.status
         
-        if fullNameLabel.text == "ethic91@icloud.com" {
-            fullNameLabel.text = "header.name".localized
-        }
+        statusLabel.text = statusText
     }
-        
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -158,7 +162,6 @@ final class ProfileHeaderView: UIView {
         statusTextField.delegate = self
         snp()
         tapScreen()
-        tap()
 
     }
         
@@ -184,5 +187,17 @@ extension ProfileHeaderView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         endEditing(true)
         return true
+    }
+}
+
+extension ProfileHeaderView {
+    public func configure(with user: User) {
+        avatarImageView.image = UIImage(named: user.avatar)
+        fullNameLabel.text = user.fullName
+        statusLabel.text = user.status
+        
+        if fullNameLabel.text == "ethic91@icloud.com" {
+            fullNameLabel.text = "header.name".localized
+        }
     }
 }

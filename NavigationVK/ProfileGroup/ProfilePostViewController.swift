@@ -60,7 +60,7 @@ class ProfilePostViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
-    func setupCell(_ model: PostStruct) {
+    func setupCell(_ model: Post) {
         postImage.image = UIImage(named: model.image)
         authorName.text = model.author
         comment.text = model.description

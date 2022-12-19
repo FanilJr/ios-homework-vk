@@ -8,15 +8,11 @@
 import Foundation
 import UIKit
 
-protocol LoginViewDelegate: AnyObject {
-    func didTapLogInButton()
-    func didTapSignUpButton()
-    func didTapCrackPasswordButton()
-}
 
 class LoginView: UIView {
 
-    weak var delegate: LoginViewDelegate?
+    weak var delegate: LogInViewControllerDelegate?
+    weak var checkerDelegate: LogInViewControllerCheckerDelegate?
     private let nc = NotificationCenter.default
 
     private let scrollView: UIScrollView = {
@@ -59,15 +55,58 @@ class LoginView: UIView {
         return textField
     }()
 
-    let logInButton: CustomButton = {
-        let button = CustomButton(title: "Log In", titleColor: .createColor(light: .white, dark: .black), backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
-        return button
+    lazy var logInButton: CustomButton = {
+        logInButton = CustomButton(
+            title: "LogIn",
+            titleColor: .white,
+            onTap: { [weak self] in
+                self?.tappedButton()
+            }
+        )
+        logInButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
+        logInButton.layer.cornerRadius = 14
+        logInButton.layer.masksToBounds = true
+                
+        logInButton.toAutoLayout()
+        
+        return logInButton
     }()
     
-    let signInButton: CustomButton = {
-        let button = CustomButton(title: "Registration", titleColor: .createColor(light: .white, dark: .black), backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
-        return button
+    private lazy var pickUpPassButton: CustomButton = {
+        pickUpPassButton = CustomButton(
+            title: "Подобрать паорль",
+            titleColor: .white,
+            onTap: { [weak self] in
+                self?.pickUpPasswordButton()
+            }
+        )
+        pickUpPassButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
+        pickUpPassButton.layer.cornerRadius = 14
+        pickUpPassButton.layer.masksToBounds = true
+        
+        pickUpPassButton.toAutoLayout()
+        
+        return pickUpPassButton
     }()
+    
+    private lazy var signUpButton: CustomButton = {
+        signUpButton = CustomButton(
+            title: "SignUp",
+            titleColor: .white,
+            onTap: { [weak self] in
+                self?.signUpTapped()
+            }
+        )
+
+        signUpButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
+        signUpButton.layer.cornerRadius = 14
+        signUpButton.layer.masksToBounds = true
+        
+        signUpButton.toAutoLayout()
+        
+        return signUpButton
+    }()
+
     
     private let spinnerView: UIActivityIndicatorView = {
         let activityView: UIActivityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
@@ -76,18 +115,15 @@ class LoginView: UIView {
         return activityView
     }()
 
-    init(delegate: LoginViewDelegate?) {
-        super.init(frame: CGRect.zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
         backgroundColor = .clear
         translatesAutoresizingMaskIntoConstraints = false
-        self.delegate = delegate
         
         addObserver()
         tapScreen()
         layout()
-        taps()
-        
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -121,30 +157,60 @@ class LoginView: UIView {
         scrollView.verticalScrollIndicatorInsets = .zero
     }
 
-    private func taps() {
-        logInButton.tapAction = { [weak self] in
-            self?.logInButton.setTitle("", for: .normal)
-            self?.delegate?.didTapLogInButton()
-            self?.waitingSpinnerEnable(true)
+    private func tappedButton() {
+        guard let vc = self.window?.rootViewController else { return }
+
+        guard let emailText = loginTextField.text, !emailText.isEmpty else {
+            CommonAlertError.present(vc: vc, with: "Input correct email")
+            return
         }
-        signInButton.tapAction = { [weak self] in
+        guard let passwordText = passwordTextField.text, !passwordText.isEmpty else {
+            CommonAlertError.present(vc: vc, with: "Input correct password")
+            return
+        }
+        
+        checkerDelegate?.login(inputLogin: emailText, inputPassword: passwordText, completion: { [weak self] result in
             guard let self = self else { return }
-            self.delegate?.didTapSignUpButton()
+            switch result {
+            case .success(_):
+                self.delegate?.tappedButton(fullName: emailText)
+            case .failure(let error):
+                CommonAlertError.present(vc: vc, with: error.localizedDescription)
+            }
+        })
+    }
+    private func pickUpPasswordButton() {
+        spinnerView.startAnimating()
+        let bruteForceOperation = BruteForceOperation()
+        bruteForceOperation.completionBlock = { [weak self] in
+            DispatchQueue.main.async {
+                self?.passwordTextField.text = bruteForceOperation.expectedPassword
+                self?.passwordTextField.isSecureTextEntry = false
+                self?.spinnerView.stopAnimating()
+                self?.layoutIfNeeded()
+            }
         }
-    }
-
-    func getLogin() -> String {
-        loginTextField.text!
-    }
-
-    func getPassword() -> String {
-        passwordTextField.text!
+        let operation = OperationQueue()
+        operation.qualityOfService = .userInitiated
+        operation.addOperation(bruteForceOperation)
     }
     
-    func setPassword(password: String, isSecure: Bool) {
-        passwordTextField.isSecureTextEntry = isSecure
-        passwordTextField.text = password
-        }
+    private func signUpTapped() {
+        delegate?.pushSignUp()
+    }
+
+//    func getLogin() -> String {
+//        loginTextField.text!
+//    }
+//
+//    func getPassword() -> String {
+//        passwordTextField.text!
+//    }
+    
+//    func setPassword(password: String, isSecure: Bool) {
+//        passwordTextField.isSecureTextEntry = isSecure
+//        passwordTextField.text = password
+//        }
     
     func waitingSpinnerEnable(_ active: Bool) {
         if active {
@@ -156,7 +222,7 @@ class LoginView: UIView {
 
     private func layout() {
         
-        [logoImage, loginTextField, passwordTextField, logInButton,signInButton, spinnerView].forEach { contentView.addSubview($0) }
+        [logoImage, loginTextField, passwordTextField, logInButton,signUpButton, spinnerView].forEach { contentView.addSubview($0) }
         scrollView.addSubview(contentView)
         addSubview(scrollView)
         
@@ -192,11 +258,11 @@ class LoginView: UIView {
             logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
             
-            signInButton.topAnchor.constraint(equalTo: logInButton.bottomAnchor,constant: 16),
-            signInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
-            signInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
-            signInButton.heightAnchor.constraint(equalToConstant: 50),
-            signInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            signUpButton.topAnchor.constraint(equalTo: logInButton.bottomAnchor,constant: 16),
+            signUpButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
+            signUpButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
+            signUpButton.heightAnchor.constraint(equalToConstant: 50),
+            signUpButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
             spinnerView.centerXAnchor.constraint(equalTo: logInButton.centerXAnchor),
             spinnerView.centerYAnchor.constraint(equalTo: logInButton.centerYAnchor),
