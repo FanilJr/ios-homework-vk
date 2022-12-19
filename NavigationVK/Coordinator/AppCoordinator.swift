@@ -94,7 +94,7 @@ final class AppCoordinator: BaseCoordinator, Coordinator {
             addDependency(logInCoordinator)
             logInCoordinator.start()
             
-            return [navLogInVc]
+            return [navLogInVc, navPostFavoritesVc, navNewsVC, navPlayerVC]
         }
         
         let profileViewModel = ProfileViewModel()
@@ -109,7 +109,7 @@ final class AppCoordinator: BaseCoordinator, Coordinator {
         
         addDependency(profileCoordinator)
         profileCoordinator.start()
-        postFavoritesCoordinator.start()
+//        postFavoritesCoordinator.start()
     
         return [navProfileInVc, navPostFavoritesVc, navNewsVC, navPlayerVC]
     }

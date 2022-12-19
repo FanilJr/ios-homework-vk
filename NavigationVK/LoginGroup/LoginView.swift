@@ -56,55 +56,37 @@ class LoginView: UIView {
     }()
 
     lazy var logInButton: CustomButton = {
-        logInButton = CustomButton(
-            title: "LogIn",
-            titleColor: .white,
-            onTap: { [weak self] in
+        logInButton = CustomButton(title: "LogIn", titleColor: .white, onTap: { [weak self] in
                 self?.tappedButton()
-            }
-        )
+            })
         logInButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         logInButton.layer.cornerRadius = 14
         logInButton.layer.masksToBounds = true
-                
-        logInButton.toAutoLayout()
+        logInButton.translatesAutoresizingMaskIntoConstraints = false
         
         return logInButton
     }()
     
-    private lazy var pickUpPassButton: CustomButton = {
-        pickUpPassButton = CustomButton(
-            title: "Подобрать паорль",
-            titleColor: .white,
-            onTap: { [weak self] in
-                self?.pickUpPasswordButton()
-            }
-        )
-        pickUpPassButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
-        pickUpPassButton.layer.cornerRadius = 14
-        pickUpPassButton.layer.masksToBounds = true
-        
-        pickUpPassButton.toAutoLayout()
-        
-        return pickUpPassButton
-    }()
-    
     private lazy var signUpButton: CustomButton = {
-        signUpButton = CustomButton(
-            title: "SignUp",
-            titleColor: .white,
-            onTap: { [weak self] in
+        signUpButton = CustomButton(title: "SignUp", titleColor: .white, onTap: { [weak self] in
                 self?.signUpTapped()
-            }
-        )
-
+            })
         signUpButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         signUpButton.layer.cornerRadius = 14
         signUpButton.layer.masksToBounds = true
-        
-        signUpButton.toAutoLayout()
-        
+        signUpButton.translatesAutoresizingMaskIntoConstraints = false
         return signUpButton
+    }()
+    
+    private lazy var biometryButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = #colorLiteral(red: 0.3322684266, green: 0.2863991261, blue: 0.3659052849, alpha: 1)
+        button.setBackgroundImage(UIImage(named: "faceid@100x"), for: .normal)
+        button.addTarget(self, action: #selector(biometryTapped), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 10
+        return button
     }()
 
     
@@ -179,38 +161,24 @@ class LoginView: UIView {
             }
         })
     }
-    private func pickUpPasswordButton() {
-        spinnerView.startAnimating()
-        let bruteForceOperation = BruteForceOperation()
-        bruteForceOperation.completionBlock = { [weak self] in
-            DispatchQueue.main.async {
-                self?.passwordTextField.text = bruteForceOperation.expectedPassword
-                self?.passwordTextField.isSecureTextEntry = false
-                self?.spinnerView.stopAnimating()
-                self?.layoutIfNeeded()
-            }
-        }
-        let operation = OperationQueue()
-        operation.qualityOfService = .userInitiated
-        operation.addOperation(bruteForceOperation)
-    }
+
     
     private func signUpTapped() {
         delegate?.pushSignUp()
     }
-
-//    func getLogin() -> String {
-//        loginTextField.text!
-//    }
-//
-//    func getPassword() -> String {
-//        passwordTextField.text!
-//    }
     
-//    func setPassword(password: String, isSecure: Bool) {
-//        passwordTextField.isSecureTextEntry = isSecure
-//        passwordTextField.text = password
-//        }
+    @objc private func biometryTapped() {
+        guard let vc = self.window?.rootViewController else { return }
+
+        let local = LocalAuthorizationService()
+        local.authorizeIfPossible { [weak self] flag in
+            if flag {
+                self?.delegate?.tappedButton(fullName: "header.name".localized)
+            } else {
+                CommonAlertError.present(vc: vc, with: "Error in biometry authorized!")
+            }
+        }
+    }
     
     func waitingSpinnerEnable(_ active: Bool) {
         if active {
@@ -222,7 +190,7 @@ class LoginView: UIView {
 
     private func layout() {
         
-        [logoImage, loginTextField, passwordTextField, logInButton,signUpButton, spinnerView].forEach { contentView.addSubview($0) }
+        [logoImage, loginTextField, passwordTextField, logInButton, biometryButton].forEach { contentView.addSubview($0) }
         scrollView.addSubview(contentView)
         addSubview(scrollView)
         
@@ -235,8 +203,8 @@ class LoginView: UIView {
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             
             logoImage.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 120),
             logoImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
@@ -257,15 +225,18 @@ class LoginView: UIView {
             logInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
             logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
+//
+//            signUpButton.topAnchor.constraint(equalTo: logInButton.bottomAnchor,constant: 16),
+//            signUpButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
+//            signUpButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
+//            signUpButton.heightAnchor.constraint(equalToConstant: 50),
+//            signUpButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
-            signUpButton.topAnchor.constraint(equalTo: logInButton.bottomAnchor,constant: 16),
-            signUpButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
-            signUpButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
-            signUpButton.heightAnchor.constraint(equalToConstant: 50),
-            signUpButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            
-            spinnerView.centerXAnchor.constraint(equalTo: logInButton.centerXAnchor),
-            spinnerView.centerYAnchor.constraint(equalTo: logInButton.centerYAnchor),
+            biometryButton.topAnchor.constraint(equalTo: logInButton.bottomAnchor,constant: 150),
+            biometryButton.widthAnchor.constraint(equalToConstant: 70),
+            biometryButton.heightAnchor.constraint(equalToConstant: 70),
+            biometryButton.centerXAnchor.constraint(equalTo: logInButton.centerXAnchor),
+            biometryButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
 }
