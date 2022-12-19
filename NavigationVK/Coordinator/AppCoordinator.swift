@@ -109,7 +109,6 @@ final class AppCoordinator: BaseCoordinator, Coordinator {
         
         addDependency(profileCoordinator)
         profileCoordinator.start()
-//        postFavoritesCoordinator.start()
     
         return [navProfileInVc, navPostFavoritesVc, navNewsVC, navPlayerVC]
     }

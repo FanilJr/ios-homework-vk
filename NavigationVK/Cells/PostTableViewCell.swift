@@ -72,8 +72,7 @@ class PostTableViewCell: UITableViewCell {
     public func configure(with post: Post) {
         authorName.text = post.author
         descriptionLabel.text = post.description
-        let formatLikesString = String(localized: "likes")
-        likes.text = String.localizedStringWithFormat(formatLikesString, post.likes)
+        likes.text = "Likes: \(post.likes)"
         viewsLabel.text = "Views: \(post.views)"
         postImage.image = UIImage(named: post.image)
     }

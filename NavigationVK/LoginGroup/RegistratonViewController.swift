@@ -24,6 +24,7 @@ class RegistratonViewController: UIViewController {
         textField.layer.borderWidth = 0.5
         textField.layer.cornerRadius = 10
         textField.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
@@ -34,6 +35,7 @@ class RegistratonViewController: UIViewController {
         textField.layer.borderWidth = 0.5
         textField.layer.cornerRadius = 10
         textField.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
@@ -49,6 +51,7 @@ class RegistratonViewController: UIViewController {
             UIImage(named: "blue_pixel"), for: .normal)
         continueButton.layer.cornerRadius = 10
         continueButton.layer.masksToBounds = true
+        continueButton.translatesAutoresizingMaskIntoConstraints = false
         return continueButton
     }()
     

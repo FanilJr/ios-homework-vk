@@ -190,7 +190,7 @@ class LoginView: UIView {
 
     private func layout() {
         
-        [logoImage, loginTextField, passwordTextField, logInButton, biometryButton].forEach { contentView.addSubview($0) }
+        [logoImage, loginTextField, passwordTextField, logInButton, signUpButton, biometryButton].forEach { contentView.addSubview($0) }
         scrollView.addSubview(contentView)
         addSubview(scrollView)
         
@@ -226,13 +226,13 @@ class LoginView: UIView {
             logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
 //
-//            signUpButton.topAnchor.constraint(equalTo: logInButton.bottomAnchor,constant: 16),
-//            signUpButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
-//            signUpButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
-//            signUpButton.heightAnchor.constraint(equalToConstant: 50),
+            signUpButton.topAnchor.constraint(equalTo: logInButton.bottomAnchor,constant: 16),
+            signUpButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
+            signUpButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
+            signUpButton.heightAnchor.constraint(equalToConstant: 50),
 //            signUpButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
-            biometryButton.topAnchor.constraint(equalTo: logInButton.bottomAnchor,constant: 150),
+            biometryButton.topAnchor.constraint(equalTo: signUpButton.bottomAnchor,constant: 150),
             biometryButton.widthAnchor.constraint(equalToConstant: 70),
             biometryButton.heightAnchor.constraint(equalToConstant: 70),
             biometryButton.centerXAnchor.constraint(equalTo: logInButton.centerXAnchor),
