@@ -14,9 +14,10 @@ final class CoreDataManager {
 
     static let shared = CoreDataManager()
     public var favoritePost = [PostData]()
+    let posts = ProfileViewModel().posts
     //сохранение поста
     
-    public func saveToCoreData(post: PostStruct) {
+    public func saveToCoreData(post: Post) {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             let context = appDelegate.persistentContainer.viewContext
             guard let entityDescription = NSEntityDescription.entity(forEntityName: "PostData", in: context) else { return }

@@ -27,6 +27,7 @@
 "settings.button" = "Настройки";
 "creditcard" = "Счёт: РУБ";
 "exit.button" = "Выход";
+"logout.button" = "Выйти из аккаунта";
 
 //MARK: ИЗБРАННОЕ
 "favorites.title" = "Избранное";
@@ -37,3 +38,13 @@
 
 //MARK: ФОТОГАЛЛЕРЕЯ
 "galery.title" = "Фотогаллерея";
+
+//MARK: LOGIN
+"auth.title" = "Авторизация";
+"auth.button.login" = "Войти";
+"auth.button.registration" = "Регистрация";
+"auth.or.label" = "или";
+"auth.enter.faceid" = "Войти через Face ID";
+
+//MARK: REGISTRATION
+"registration.continue" = "Продолжить";

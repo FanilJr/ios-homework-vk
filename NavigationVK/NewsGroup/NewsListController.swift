@@ -13,7 +13,7 @@ class NewsListController: UIViewController {
     var articles: [Article] = []
 //    var article: Article!
     var refreshControle = UIRefreshControl()
-    private weak var coordinator: NewsFlowCoordinator?
+//    private weak var coordinator: NewsFlowCoordinator?
     
     var searchController = UISearchController(searchResultsController: nil)
 

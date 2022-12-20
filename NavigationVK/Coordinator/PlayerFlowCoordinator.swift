@@ -8,13 +8,13 @@
 import Foundation
 import UIKit
 
-final class PlayerFlowCoordinator {
-    
-    private let controllersFactory: ControllersFactory
-    let navCon: UINavigationController
-    
-    init(navCon: UINavigationController, controllersFactory: ControllersFactory) {
-        self.controllersFactory = controllersFactory
-        self.navCon = navCon
-    }
-}
+//final class PlayerFlowCoordinator {
+//    
+//    private let controllersFactory: ControllersFactory
+//    let navCon: UINavigationController
+//    
+//    init(navCon: UINavigationController, controllersFactory: ControllersFactory) {
+//        self.controllersFactory = controllersFactory
+//        self.navCon = navCon
+//    }
+//}

@@ -8,16 +8,16 @@
 import Foundation
 import UIKit
 
-final class User {
-    
-    var name: String
-    var avatar: UIImage
+import Foundation
+
+class User {
+    var fullName: String
+    var avatar: String
     var status: String
     
-    init(name: String, avatar: UIImage, status: String) {
-        self.name = name
+    init(fullName: String, avatar: String, status: String) {
+        self.fullName = fullName
         self.avatar = avatar
         self.status = status
     }
-    
 }

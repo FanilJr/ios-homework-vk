@@ -14,7 +14,7 @@ protocol MyClassDelegateTwo: AnyObject {
 class PhotosTableViewCell: UITableViewCell {
             
     weak var tuchNew: MyClassDelegateTwo?
-    var profileView = ProfileViewModel().postArray
+//    var profileView = ProfileViewModel().postArray
 
     
     private lazy var collectionViews: UICollectionView = {

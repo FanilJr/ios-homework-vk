@@ -8,15 +8,11 @@
 import Foundation
 import UIKit
 
-protocol LoginViewDelegate: AnyObject {
-    func didTapLogInButton()
-    func didTapSignUpButton()
-    func didTapCrackPasswordButton()
-}
 
 class LoginView: UIView {
 
-    weak var delegate: LoginViewDelegate?
+    weak var delegate: LogInViewControllerDelegate?
+    weak var checkerDelegate: LogInViewControllerCheckerDelegate?
     private let nc = NotificationCenter.default
 
     private let scrollView: UIScrollView = {
@@ -30,12 +26,38 @@ class LoginView: UIView {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         return contentView
     }()
+    
+    private lazy var lineUp: UIView = {
+        let line = UIView()
+        line.translatesAutoresizingMaskIntoConstraints = false
+        line.backgroundColor = .darkGray
+        line.alpha = 0.5
+        line.contentMode = .scaleAspectFill
+        line.layer.cornerRadius = 3
+        line.clipsToBounds = true
+        return line
+    }()
 
     private let logoImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "vkontakte")
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
+    }()
+    
+    private let faceidImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "faceid@100x")
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
+    
+    private let labelOR: UILabel = {
+        let label = UILabel()
+        label.text = "auth.or.label".localized
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
 
     private lazy var loginTextField: CustomTextField = {
@@ -59,15 +81,42 @@ class LoginView: UIView {
         return textField
     }()
 
-    let logInButton: CustomButton = {
-        let button = CustomButton(title: "Log In", titleColor: .createColor(light: .white, dark: .black), backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
-        return button
+    lazy var logInButton: CustomButton = {
+        logInButton = CustomButton(title: "auth.button.login".localized, titleColor: .white, onTap: { [weak self] in
+                self?.tappedButton()
+            })
+        logInButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
+        logInButton.layer.cornerRadius = 14
+        logInButton.layer.masksToBounds = true
+        logInButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        return logInButton
     }()
     
-    let signInButton: CustomButton = {
-        let button = CustomButton(title: "Registration", titleColor: .createColor(light: .white, dark: .black), backgroundColor: .clear, setBackgroundImage: UIImage(named: "blue_pixel") ?? UIImage())
+    private lazy var registrationButton: CustomButton = {
+        registrationButton = CustomButton(title: "auth.button.registration".localized, titleColor: .white, onTap: { [weak self] in
+                self?.signUpTapped()
+            })
+//        signUpButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
+        registrationButton.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+        registrationButton.layer.cornerRadius = 14
+        registrationButton.layer.masksToBounds = true
+        registrationButton.translatesAutoresizingMaskIntoConstraints = false
+        return registrationButton
+    }()
+    
+    private lazy var biometryButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = #colorLiteral(red: 0.337697003, green: 0.2437653602, blue: 0.3948322499, alpha: 1)
+//        button.setBackgroundImage(UIImage(named: "faceid@100x"), for: .normal)
+        button.setTitle("auth.enter.faceid".localized, for: .normal)
+        button.addTarget(self, action: #selector(biometryTapped), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 10
         return button
     }()
+
     
     private let spinnerView: UIActivityIndicatorView = {
         let activityView: UIActivityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
@@ -76,18 +125,15 @@ class LoginView: UIView {
         return activityView
     }()
 
-    init(delegate: LoginViewDelegate?) {
-        super.init(frame: CGRect.zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
         backgroundColor = .clear
         translatesAutoresizingMaskIntoConstraints = false
-        self.delegate = delegate
         
         addObserver()
         tapScreen()
         layout()
-        taps()
-        
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -121,30 +167,46 @@ class LoginView: UIView {
         scrollView.verticalScrollIndicatorInsets = .zero
     }
 
-    private func taps() {
-        logInButton.tapAction = { [weak self] in
-            self?.logInButton.setTitle("", for: .normal)
-            self?.delegate?.didTapLogInButton()
-            self?.waitingSpinnerEnable(true)
+    private func tappedButton() {
+        guard let vc = self.window?.rootViewController else { return }
+
+        guard let emailText = loginTextField.text, !emailText.isEmpty else {
+            CommonAlertError.present(vc: vc, with: "Input correct email")
+            return
         }
-        signInButton.tapAction = { [weak self] in
+        guard let passwordText = passwordTextField.text, !passwordText.isEmpty else {
+            CommonAlertError.present(vc: vc, with: "Input correct password")
+            return
+        }
+        
+        checkerDelegate?.login(inputLogin: emailText, inputPassword: passwordText, completion: { [weak self] result in
             guard let self = self else { return }
-            self.delegate?.didTapSignUpButton()
-        }
+            switch result {
+            case .success(_):
+                self.delegate?.tappedButton(fullName: emailText)
+            case .failure(let error):
+                CommonAlertError.present(vc: vc, with: error.localizedDescription)
+            }
+        })
     }
 
-    func getLogin() -> String {
-        loginTextField.text!
-    }
-
-    func getPassword() -> String {
-        passwordTextField.text!
+    
+    private func signUpTapped() {
+        delegate?.pushSignUp()
     }
     
-    func setPassword(password: String, isSecure: Bool) {
-        passwordTextField.isSecureTextEntry = isSecure
-        passwordTextField.text = password
+    @objc private func biometryTapped() {
+        guard let vc = self.window?.rootViewController else { return }
+
+        let local = LocalAuthorizationService()
+        local.authorizeIfPossible { [weak self] flag in
+            if flag {
+                self?.delegate?.tappedButton(fullName: "header.name".localized)
+            } else {
+                CommonAlertError.present(vc: vc, with: "Error in biometry authorized!")
+            }
         }
+    }
     
     func waitingSpinnerEnable(_ active: Bool) {
         if active {
@@ -156,7 +218,8 @@ class LoginView: UIView {
 
     private func layout() {
         
-        [logoImage, loginTextField, passwordTextField, logInButton,signInButton, spinnerView].forEach { contentView.addSubview($0) }
+        [logoImage, loginTextField, passwordTextField, logInButton, labelOR, registrationButton, biometryButton].forEach { contentView.addSubview($0) }
+        biometryButton.addSubview(faceidImage)
         scrollView.addSubview(contentView)
         addSubview(scrollView)
         
@@ -169,8 +232,8 @@ class LoginView: UIView {
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             
             logoImage.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 120),
             logoImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
@@ -180,26 +243,36 @@ class LoginView: UIView {
             loginTextField.topAnchor.constraint(equalTo: logoImage.bottomAnchor,constant: 120),
             loginTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
             loginTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
-            loginTextField.heightAnchor.constraint(equalToConstant: 50),
+            loginTextField.heightAnchor.constraint(equalToConstant: 45),
             
             passwordTextField.topAnchor.constraint(equalTo: loginTextField.bottomAnchor),
             passwordTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
             passwordTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 50),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 45),
             
             logInButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor,constant: 16),
             logInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
             logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
-            logInButton.heightAnchor.constraint(equalToConstant: 50),
+            logInButton.heightAnchor.constraint(equalToConstant: 45),
             
-            signInButton.topAnchor.constraint(equalTo: logInButton.bottomAnchor,constant: 16),
-            signInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
-            signInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
-            signInButton.heightAnchor.constraint(equalToConstant: 50),
-            signInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            labelOR.topAnchor.constraint(equalTo: logInButton.bottomAnchor,constant: 16),
+            labelOR.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+
+            biometryButton.topAnchor.constraint(equalTo: labelOR.bottomAnchor,constant: 16),
+            biometryButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
+            biometryButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
+            biometryButton.heightAnchor.constraint(equalToConstant: 45),
             
-            spinnerView.centerXAnchor.constraint(equalTo: logInButton.centerXAnchor),
-            spinnerView.centerYAnchor.constraint(equalTo: logInButton.centerYAnchor),
+            faceidImage.centerYAnchor.constraint(equalTo: biometryButton.centerYAnchor),
+            faceidImage.leadingAnchor.constraint(equalTo: biometryButton.leadingAnchor,constant: 5),
+            faceidImage.heightAnchor.constraint(equalToConstant: 35),
+            faceidImage.widthAnchor.constraint(equalToConstant: 35),
+
+            registrationButton.topAnchor.constraint(equalTo: biometryButton.bottomAnchor,constant: 160),
+            registrationButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
+            registrationButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
+            registrationButton.heightAnchor.constraint(equalToConstant: 45),
+            registrationButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
 }

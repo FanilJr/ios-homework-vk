@@ -27,6 +27,7 @@
 "settings.button" = "Settings";
 "creditcard" = "Credit Card: USD";
 "exit.button" = "Exit";
+"logout.button" = "Logout";
 
 //MARK: FAVORITES
 "favorites.title" = "Favorites";
@@ -37,6 +38,17 @@
 
 //MARK: PHOTOGALLERY
 "galery.title" = "Photo Gallery";
+
+//MARK: LOGIN
+"auth.title" = "Authorization";
+"auth.button.login" = "Log In";
+"auth.button.registration" = "Registration";
+"auth.or.label" = "or";
+"auth.enter.faceid" = "Log In Face ID";
+
+//MARK: REGISTRATION
+"registration.continue" = "Continue";
+
 
 
 

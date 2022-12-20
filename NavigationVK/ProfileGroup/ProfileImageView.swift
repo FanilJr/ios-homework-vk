@@ -10,6 +10,7 @@ import UIKit
 protocol SettingsDelegate: AnyObject {
     func tapClosed()
     func openSetting()
+    func exitAcc()
 }
 
 class ProfileImageView: UIView {
@@ -86,6 +87,7 @@ class ProfileImageView: UIView {
         let closed = UIButton()
         closed.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         closed.setTitle("exit.button".localized, for: .normal)
+        closed.setImage(UIImage(systemName: "chevron.up.square"), for: .normal)
         closed.setTitleColor(.white, for: .normal)
         closed.layer.cornerRadius = 14
         closed.tintColor = .red
@@ -93,6 +95,20 @@ class ProfileImageView: UIView {
         closed.addTarget(self, action: #selector(tapClosed), for: .touchUpInside)
         closed.clipsToBounds = true
         return closed
+    }()
+    
+    private let exitAccButton: UIButton = {
+        let exit = UIButton()
+        exit.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        exit.setTitle("logout.button".localized, for: .normal)
+        exit.setImage(UIImage(systemName: "figure.wave"), for: .normal)
+        exit.setTitleColor(.white, for: .normal)
+        exit.layer.cornerRadius = 14
+        exit.tintColor = .red
+        exit.translatesAutoresizingMaskIntoConstraints = false
+        exit.addTarget(self, action: #selector(exitAcc), for: .touchUpInside)
+        exit.clipsToBounds = true
+        return exit
     }()
     
     @objc func tapClosed() {
@@ -103,10 +119,14 @@ class ProfileImageView: UIView {
         settingDelegate?.openSetting()
     }
     
+    @objc func exitAcc() {
+        settingDelegate?.exitAcc()
+    }
+    
     func layoutView() {
         
         [creditCard, settingsButton].forEach { stack.addArrangedSubview($0) }
-        [background, avatarImageView, fullNameLabel, stack, mapView,closedButton].forEach { addSubview($0) }
+        [background, avatarImageView, fullNameLabel, stack, mapView,closedButton, exitAccButton].forEach { addSubview($0) }
         
         NSLayoutConstraint.activate([
             background.topAnchor.constraint(equalTo: topAnchor),
@@ -134,7 +154,12 @@ class ProfileImageView: UIView {
             closedButton.topAnchor.constraint(equalTo: mapView.bottomAnchor,constant: 30),
             closedButton.centerXAnchor.constraint(equalTo: background.centerXAnchor),
             closedButton.leadingAnchor.constraint(equalTo: background.leadingAnchor),
-            closedButton.trailingAnchor.constraint(equalTo: background.trailingAnchor)
+            closedButton.trailingAnchor.constraint(equalTo: background.trailingAnchor),
+            
+            exitAccButton.topAnchor.constraint(equalTo: closedButton.bottomAnchor,constant: 20),
+            exitAccButton.centerXAnchor.constraint(equalTo: background.centerXAnchor),
+            exitAccButton.leadingAnchor.constraint(equalTo: background.leadingAnchor),
+            exitAccButton.trailingAnchor.constraint(equalTo: background.trailingAnchor)
         ])
     }
     
@@ -145,11 +170,6 @@ class ProfileImageView: UIView {
         gradientLayer.colors = [colorTop, colorBottom]
         gradientLayer.locations = [0.0, 1.0]
         gradientLayer.frame = self.bounds
-    }
-    
-    func setupView(user: User?) {
-        guard let user = user else {print("Error: User nil in ProfileHeaderView." + #function); return}
-        avatarImageView.image = user.avatar
     }
     
     override init(frame: CGRect) {
@@ -163,5 +183,16 @@ class ProfileImageView: UIView {
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension ProfileImageView {
+    public func configure(with user: User) {
+        avatarImageView.image = UIImage(named: user.avatar)
+        fullNameLabel.text = user.fullName
+        
+        if fullNameLabel.text == "ethic91@icloud.com" {
+            fullNameLabel.text = "header.name".localized
+        }
     }
 }

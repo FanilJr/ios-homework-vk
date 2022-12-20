@@ -6,35 +6,23 @@
 //
 
 import Foundation
-import FirebaseAuth
-import AVFoundation
 
 protocol CheckerServiceProtocol {
-    func checkCredentials(login: String, password: String, success: @escaping (Bool) -> Void)
-    func signUp(login: String, password: String, response: @escaping (Error?) -> Void)
+    func checkLoginPasswordExists(loginText: String, passwordText: String) -> Bool
 }
-class Checker: CheckerServiceProtocol {
+
+class CheckerService: CheckerServiceProtocol {
+        
+    static let shared = CheckerService()
     
-    static let shared = Checker()
-    
-    private let login = "Fanil_Jr"
+    private let login = "ethic91@icloud.com"
     private let password = "Netology"
     
     private init() {}
     
-    func authorization(login: String, password: String) -> Bool {
-        return self.login.hash == login.hash && self.password.hash == password.hash
-    }
-
-    func checkCredentials(login: String, password: String, success: @escaping (Bool) -> Void) {
-        FirebaseAuth.Auth.auth().signIn(withEmail: login, password: password) { result, error in
-            success(error == nil)
-        }
-    }
-
-    func signUp(login: String, password: String, response: @escaping (Error?) -> Void) {
-        FirebaseAuth.Auth.auth().createUser(withEmail: login, password: password) { result, error in
-            response(error)
-        }
+    func checkLoginPasswordExists(loginText: String, passwordText: String) -> Bool {
+        guard login.hash == loginText.hash, password.hash == passwordText.hash else { return false }
+        
+        return true
     }
 }
