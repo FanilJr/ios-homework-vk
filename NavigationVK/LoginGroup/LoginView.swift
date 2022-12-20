@@ -26,12 +26,38 @@ class LoginView: UIView {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         return contentView
     }()
+    
+    private lazy var lineUp: UIView = {
+        let line = UIView()
+        line.translatesAutoresizingMaskIntoConstraints = false
+        line.backgroundColor = .darkGray
+        line.alpha = 0.5
+        line.contentMode = .scaleAspectFill
+        line.layer.cornerRadius = 3
+        line.clipsToBounds = true
+        return line
+    }()
 
     private let logoImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "vkontakte")
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
+    }()
+    
+    private let faceidImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "faceid@100x")
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
+    
+    private let labelOR: UILabel = {
+        let label = UILabel()
+        label.text = "auth.or.label".localized
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
 
     private lazy var loginTextField: CustomTextField = {
@@ -56,7 +82,7 @@ class LoginView: UIView {
     }()
 
     lazy var logInButton: CustomButton = {
-        logInButton = CustomButton(title: "LogIn", titleColor: .white, onTap: { [weak self] in
+        logInButton = CustomButton(title: "auth.button.login".localized, titleColor: .white, onTap: { [weak self] in
                 self?.tappedButton()
             })
         logInButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
@@ -67,21 +93,23 @@ class LoginView: UIView {
         return logInButton
     }()
     
-    private lazy var signUpButton: CustomButton = {
-        signUpButton = CustomButton(title: "SignUp", titleColor: .white, onTap: { [weak self] in
+    private lazy var registrationButton: CustomButton = {
+        registrationButton = CustomButton(title: "auth.button.registration".localized, titleColor: .white, onTap: { [weak self] in
                 self?.signUpTapped()
             })
-        signUpButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
-        signUpButton.layer.cornerRadius = 14
-        signUpButton.layer.masksToBounds = true
-        signUpButton.translatesAutoresizingMaskIntoConstraints = false
-        return signUpButton
+//        signUpButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
+        registrationButton.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+        registrationButton.layer.cornerRadius = 14
+        registrationButton.layer.masksToBounds = true
+        registrationButton.translatesAutoresizingMaskIntoConstraints = false
+        return registrationButton
     }()
     
     private lazy var biometryButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.3322684266, green: 0.2863991261, blue: 0.3659052849, alpha: 1)
-        button.setBackgroundImage(UIImage(named: "faceid@100x"), for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0.337697003, green: 0.2437653602, blue: 0.3948322499, alpha: 1)
+//        button.setBackgroundImage(UIImage(named: "faceid@100x"), for: .normal)
+        button.setTitle("auth.enter.faceid".localized, for: .normal)
         button.addTarget(self, action: #selector(biometryTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.clipsToBounds = true
@@ -190,7 +218,8 @@ class LoginView: UIView {
 
     private func layout() {
         
-        [logoImage, loginTextField, passwordTextField, logInButton, signUpButton, biometryButton].forEach { contentView.addSubview($0) }
+        [logoImage, loginTextField, passwordTextField, logInButton, labelOR, registrationButton, biometryButton].forEach { contentView.addSubview($0) }
+        biometryButton.addSubview(faceidImage)
         scrollView.addSubview(contentView)
         addSubview(scrollView)
         
@@ -214,29 +243,36 @@ class LoginView: UIView {
             loginTextField.topAnchor.constraint(equalTo: logoImage.bottomAnchor,constant: 120),
             loginTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
             loginTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
-            loginTextField.heightAnchor.constraint(equalToConstant: 50),
+            loginTextField.heightAnchor.constraint(equalToConstant: 45),
             
             passwordTextField.topAnchor.constraint(equalTo: loginTextField.bottomAnchor),
             passwordTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
             passwordTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 50),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 45),
             
             logInButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor,constant: 16),
             logInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
             logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
-            logInButton.heightAnchor.constraint(equalToConstant: 50),
-//
-            signUpButton.topAnchor.constraint(equalTo: logInButton.bottomAnchor,constant: 16),
-            signUpButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
-            signUpButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
-            signUpButton.heightAnchor.constraint(equalToConstant: 50),
-//            signUpButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            logInButton.heightAnchor.constraint(equalToConstant: 45),
             
-            biometryButton.topAnchor.constraint(equalTo: signUpButton.bottomAnchor,constant: 150),
-            biometryButton.widthAnchor.constraint(equalToConstant: 70),
-            biometryButton.heightAnchor.constraint(equalToConstant: 70),
-            biometryButton.centerXAnchor.constraint(equalTo: logInButton.centerXAnchor),
-            biometryButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            labelOR.topAnchor.constraint(equalTo: logInButton.bottomAnchor,constant: 16),
+            labelOR.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+
+            biometryButton.topAnchor.constraint(equalTo: labelOR.bottomAnchor,constant: 16),
+            biometryButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
+            biometryButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
+            biometryButton.heightAnchor.constraint(equalToConstant: 45),
+            
+            faceidImage.centerYAnchor.constraint(equalTo: biometryButton.centerYAnchor),
+            faceidImage.leadingAnchor.constraint(equalTo: biometryButton.leadingAnchor,constant: 5),
+            faceidImage.heightAnchor.constraint(equalToConstant: 35),
+            faceidImage.widthAnchor.constraint(equalToConstant: 35),
+
+            registrationButton.topAnchor.constraint(equalTo: biometryButton.bottomAnchor,constant: 160),
+            registrationButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
+            registrationButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
+            registrationButton.heightAnchor.constraint(equalToConstant: 45),
+            registrationButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
 }

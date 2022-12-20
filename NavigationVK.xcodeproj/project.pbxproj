@@ -269,6 +269,7 @@
 		84E3FDE028E5BBC600B42B1D /* Monica Lewinsky Election Year.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Monica Lewinsky Election Year.mp3"; sourceTree = "<group>"; };
 		84E3FDEF28E697C900B42B1D /* SongListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongListViewController.swift; sourceTree = "<group>"; };
 		84E3FDF128E6981800B42B1D /* SongListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongListTableViewCell.swift; sourceTree = "<group>"; };
+		84EEB898295191BF001E29AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -800,6 +801,7 @@
 			children = (
 				84061DF528B1620600B5AB47 /* Base */,
 				84BC7B8B29413101005E6904 /* ru */,
+				84EEB898295191BF001E29AC /* en */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -948,8 +950,12 @@
 				DEVELOPMENT_TEAM = GBV3J46D65;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NavigationVK/Info.plist;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Face ID";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Please shared location";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Please shared location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please shared location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
@@ -978,8 +984,12 @@
 				DEVELOPMENT_TEAM = GBV3J46D65;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NavigationVK/Info.plist;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Face ID";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Please shared location";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Please shared location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please shared location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;

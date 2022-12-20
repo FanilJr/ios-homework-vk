@@ -41,3 +41,10 @@
 
 //MARK: LOGIN
 "auth.title" = "Авторизация";
+"auth.button.login" = "Войти";
+"auth.button.registration" = "Регистрация";
+"auth.or.label" = "или";
+"auth.enter.faceid" = "Войти через Face ID";
+
+//MARK: REGISTRATION
+"registration.continue" = "Продолжить";

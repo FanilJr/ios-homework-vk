@@ -11,7 +11,7 @@ class RegistratonViewController: UIViewController {
     
     private let logoImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "vk")
+        image.image = UIImage(named: "vkontakte")
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -40,13 +40,9 @@ class RegistratonViewController: UIViewController {
     }()
     
     private lazy var continueButton: CustomButton = {
-        continueButton = CustomButton(
-            title: "Continue",
-            titleColor: .white,
-            onTap: { [weak self] in
+        continueButton = CustomButton(title: "registration.continue".localized, titleColor: .white, onTap: { [weak self] in
                 self?.continueTapped()
-            }
-        )
+            })
         continueButton.setBackgroundImage(
             UIImage(named: "blue_pixel"), for: .normal)
         continueButton.layer.cornerRadius = 10
@@ -71,13 +67,12 @@ class RegistratonViewController: UIViewController {
         view.backgroundColor = .white
         layout()
     }
-//    private func taps() {
-//        logInButton.tapAction = { [weak self] in
-//            let email = self?.loginTextField.text
-//            let password = self?.passwordTextField.text
-//            self?.viewModel.send(.showMainVc(email, password))
-//        }
-//    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
+    
     private func continueTapped() {
         let email = self.loginTextField.text
         let password = self.passwordTextField.text
@@ -96,15 +91,15 @@ class RegistratonViewController: UIViewController {
             loginTextField.topAnchor.constraint(equalTo: logoImage.bottomAnchor,constant: 120),
             loginTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 16),
             loginTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -16),
-            loginTextField.heightAnchor.constraint(equalToConstant: 50),
+            loginTextField.heightAnchor.constraint(equalToConstant: 45),
             
             passwordTextField.topAnchor.constraint(equalTo: loginTextField.bottomAnchor),
             passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 16),
             passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -16),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 50),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 45),
             
             continueButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor,constant: 16),
-            continueButton.heightAnchor.constraint(equalToConstant: 50),
+            continueButton.heightAnchor.constraint(equalToConstant: 45),
             continueButton.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 16),
             continueButton.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -16)
         ])

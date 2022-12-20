@@ -41,6 +41,14 @@
 
 //MARK: LOGIN
 "auth.title" = "Authorization";
+"auth.button.login" = "Log In";
+"auth.button.registration" = "Registration";
+"auth.or.label" = "or";
+"auth.enter.faceid" = "Log In Face ID";
+
+//MARK: REGISTRATION
+"registration.continue" = "Continue";
+
 
 
 
