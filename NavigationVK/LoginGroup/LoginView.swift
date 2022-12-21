@@ -86,8 +86,8 @@ class LoginView: UIView {
                 self?.tappedButton()
             })
         logInButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
-        logInButton.layer.cornerRadius = 14
-        logInButton.layer.masksToBounds = true
+        logInButton.layer.cornerRadius = 10
+        logInButton.clipsToBounds = true
         logInButton.translatesAutoresizingMaskIntoConstraints = false
         
         return logInButton
@@ -99,8 +99,8 @@ class LoginView: UIView {
             })
 //        signUpButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         registrationButton.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
-        registrationButton.layer.cornerRadius = 14
-        registrationButton.layer.masksToBounds = true
+        registrationButton.layer.cornerRadius = 10
+        registrationButton.clipsToBounds = true
         registrationButton.translatesAutoresizingMaskIntoConstraints = false
         return registrationButton
     }()
