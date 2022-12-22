@@ -15,7 +15,7 @@
 //MARK: Профайл ХЕДЕР
 "header.name" = "Фаниль Джуниор";
 "header.status" = "Введите статус";
-"header.tap.status" = "Установить статус";
+"header.tap.button" = "Редактировать";
 
 //MARK: ПРОФАЙЛ
 "profile.title" = "Профиль";

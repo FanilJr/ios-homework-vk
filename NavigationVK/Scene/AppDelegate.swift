@@ -15,8 +15,8 @@ import FirebaseAuth
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let notication = LocalNotificationsService()
-        notication.registeForLatestUpdatesIfPossible()
+        let userNotification = LocalNotificationService()
+        userNotification.registeForLatestUpdatesIfPossible()
         return true
     }
 

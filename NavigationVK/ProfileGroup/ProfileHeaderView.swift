@@ -32,7 +32,7 @@ final class ProfileHeaderView: UIView {
         return avatarImageView
     }()
     
-    private let fullNameLabel: UILabel = {
+    let fullNameLabel: UILabel = {
         let fullNameLabel = UILabel()
         fullNameLabel.text = "header.name".localized
         fullNameLabel.textColor = UIColor.createColor(light: .black, dark: .white)
@@ -41,7 +41,7 @@ final class ProfileHeaderView: UIView {
         return fullNameLabel
     }()
     
-    private let statusLabel: UILabel = {
+    let statusLabel: UILabel = {
         let statusLabel = UILabel()
         statusLabel.textColor = UIColor.createColor(light: .black, dark: .white)
         statusLabel.shadowColor = .white
@@ -71,7 +71,7 @@ final class ProfileHeaderView: UIView {
     
     private lazy var setStatusButton: CustomButton = {
         setStatusButton = CustomButton(
-            title: "header.tap.status".localized,
+            title: "header.tap.button".localized,
             titleColor: .white,
             onTap: { [weak self] in
                 self?.buttonPressed()
@@ -136,25 +136,9 @@ final class ProfileHeaderView: UIView {
         self.delegate?.didTapLogoutButton()
     }
     private func buttonPressed() {
-        guard !statusText.isEmpty else {
-            AudioServicesPlaySystemSound(self.systemSoundID)
-            let bounds = self.setStatusButton.bounds
-            let bonds = self.statusLabel.bounds
-            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 2, initialSpringVelocity: 1, options: .curveLinear) {
-                self.setStatusButton.bounds = CGRect(x: (bounds.origin.x) - 30, y: (bounds.origin.y), width: bounds.width + 30, height: bounds.height + 10)
-                self.setStatusButton.titleLabel?.bounds = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: bounds.width + 100, height: bounds.height)
-                self.statusLabel.bounds = CGRect(x: bonds.origin.x, y: bonds.origin.y, width: bonds.width + 50, height: bonds.height)
-            }
-            self.statusLabel.text = self.statusTextField.text
-            self.statusTextField.text = ""
-            
-            print("Статус установлен")
-
-            return
-        }
-        
-        statusLabel.text = statusText
+        print("Сделать редактирование")
     }
+
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -185,8 +169,23 @@ extension ProfileHeaderView {
 
 extension ProfileHeaderView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        endEditing(true)
-        return true
+        guard !statusText.isEmpty else {
+            AudioServicesPlaySystemSound(self.systemSoundID)
+//            let bounds = self.setStatusButton.bounds
+            let bonds = self.statusLabel.bounds
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 2, initialSpringVelocity: 1, options: .curveLinear) {
+//                self.setStatusButton.bounds = CGRect(x: (bounds.origin.x) - 30, y: (bounds.origin.y), width: bounds.width + 30, height: bounds.height + 10)
+//                self.setStatusButton.titleLabel?.bounds = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: bounds.width + 100, height: bounds.height)
+                self.statusLabel.bounds = CGRect(x: bonds.origin.x, y: bonds.origin.y, width: bonds.width + 50, height: bonds.height)
+            }
+            self.statusLabel.text = self.statusTextField.text
+            self.statusTextField.text = ""
+            
+            print("Статус установлен")
+            return true
+        }
+            endEditing(true)
+            return true
     }
 }
 
