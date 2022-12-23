@@ -10,6 +10,51 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
     
+    
+    private lazy var lineUp: UIView = {
+        let line = UIView()
+        line.translatesAutoresizingMaskIntoConstraints = false
+        line.backgroundColor = .black
+        line.contentMode = .scaleAspectFill
+        line.layer.cornerRadius = 3
+        line.clipsToBounds = true
+        return line
+    }()
+    
+    private let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 3
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    lazy var name: UILabel = {
+        let name = UILabel()
+        name.font = UIFont.systemFont(ofSize: 15.0, weight: .semibold)
+        name.translatesAutoresizingMaskIntoConstraints = false
+        return name
+    }()
+    
+    lazy var avatarImageView: UIImageView = {
+        let avatarImageView = UIImageView()
+        avatarImageView.layer.borderWidth = 1
+        avatarImageView.layer.borderColor = UIColor.black.cgColor
+        avatarImageView.layer.cornerRadius = 60/2
+        avatarImageView.clipsToBounds = true
+        avatarImageView.isUserInteractionEnabled = true
+        avatarImageView.translatesAutoresizingMaskIntoConstraints = false
+        return avatarImageView
+    }()
+    
+    lazy var status: UILabel = {
+        let status = UILabel()
+        status.font = UIFont.systemFont(ofSize: 12.0, weight: .light)
+        status.translatesAutoresizingMaskIntoConstraints = false
+        return status
+    }()
+    
     lazy var postImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -128,11 +173,27 @@ class PostTableViewCell: UITableViewCell {
    
     private func constraints() {
         
-        [postImage, authorName, descriptionLabel, likes, viewsLabel].forEach { contentView.addSubview($0) }
+        [avatarImageView, stackView, lineUp, postImage, authorName, descriptionLabel, likes, viewsLabel].forEach { contentView.addSubview($0) }
+        [name, status].forEach { stackView.addArrangedSubview($0) }
+        
         NSLayoutConstraint.activate([
-            authorName.topAnchor.constraint(equalTo: contentView.topAnchor),
-            authorName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
-            authorName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            avatarImageView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 10),
+            avatarImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 10),
+            avatarImageView.heightAnchor.constraint(equalToConstant: 60),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 60),
+            
+            stackView.centerYAnchor.constraint(equalTo: avatarImageView.centerYAnchor),
+            stackView.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor,constant: 10),
+            
+            lineUp.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor,constant: 15),
+            lineUp.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            lineUp.widthAnchor.constraint(equalToConstant: 300),
+            lineUp.heightAnchor.constraint(equalToConstant: 1),
+            
+            authorName.topAnchor.constraint(equalTo: lineUp.bottomAnchor),
+            authorName.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+//            authorName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
+//            authorName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             authorName.heightAnchor.constraint(equalToConstant: 50),
             
             postImage.topAnchor.constraint(equalTo: authorName.bottomAnchor),

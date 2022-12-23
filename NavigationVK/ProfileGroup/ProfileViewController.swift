@@ -70,13 +70,12 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         tabBarController?.tabBar.isHidden = false
         viewModel.send(.viewIsReady)
         configureProfileHeaderView()
         configureProfileImageView()
-        print(navigationController?.viewControllers as Any)
         
-
         title = "profile.title".localized
         
         setupTableView()
@@ -87,7 +86,7 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         let tabbarControllerItems = self.tabBarController?.tabBar.items
         if let arrayOfTabBatItems = tabbarControllerItems! as AnyObject as? NSArray {
             tabBarItemOne = arrayOfTabBatItems[1] as! UITabBarItem
@@ -146,11 +145,10 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    @objc
-    func signOutTapped() {
+    @objc func signOutTapped() {
         viewModel.send(.showLoginVc)
     }
-        
+            
     func setupTableView() {
             
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -204,12 +202,14 @@ extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
             cell.backgroundColor = .createColor(light: .white, dark: .systemGray5)
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
 
-                
             let tapRecog = UITapGestureRecognizer(target: self, action: #selector(duobleTapInPost))
             tapRecog.numberOfTapsRequired = 2
             let currentPost: Post = viewModel.posts[indexPath.row]
             cell.addGestureRecognizer(tapRecog)
             cell.configure(with: currentPost)
+            cell.name.text = header.fullNameLabel.text
+            cell.avatarImageView.image = header.avatarImageView.image
+            cell.status.text = "Разработчик"
             return cell
 
             
@@ -273,6 +273,7 @@ extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
 }
     
 extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsDelegate {
+
     func exitAcc() {
         print("Выход из аккаунта")
         viewModel.send(.showLoginVc)
@@ -282,7 +283,6 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
     func didTapLogoutButton() {
         print("heooollala")
     }
-    
         
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         UITableView.automaticDimension

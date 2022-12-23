@@ -176,6 +176,7 @@ class ProfileImageView: UIView {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
         layoutView()
+        self.isUserInteractionEnabled = true
         self.layer.cornerRadius = 30
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOpacity = 1

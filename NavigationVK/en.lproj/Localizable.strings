@@ -15,7 +15,7 @@
 //MARK: Profile HEADER
 "header.name" = "Fanil_Jr";
 "header.status" = "Write status..";
-"header.tap.status" = "Set status";
+"header.tap.button" = "Edit Profile";
 
 //MARK: PROFILE
 "profile.title" = "Profile";

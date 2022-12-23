@@ -36,7 +36,7 @@ class LogInCoordinatorFlow: LogInCoordinatorFlowProtocol {
            let user = User(
             fullName: fullName,
             avatar: "1",
-            status: "Waiting for something..."
+            status: "Разработчик 👨🏽‍💻"
            )
            currentUser = CurrentService(user: user)
         
