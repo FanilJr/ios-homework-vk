@@ -14,7 +14,7 @@ class PostTableViewCell: UITableViewCell {
     private lazy var lineUp: UIView = {
         let line = UIView()
         line.translatesAutoresizingMaskIntoConstraints = false
-        line.backgroundColor = .black
+        line.backgroundColor = UIColor.createColor(light: .black, dark: .white)
         line.contentMode = .scaleAspectFill
         line.layer.cornerRadius = 3
         line.clipsToBounds = true
@@ -42,6 +42,7 @@ class PostTableViewCell: UITableViewCell {
         avatarImageView.layer.borderWidth = 1
         avatarImageView.layer.borderColor = UIColor.black.cgColor
         avatarImageView.layer.cornerRadius = 60/2
+        avatarImageView.contentMode = .scaleAspectFill
         avatarImageView.clipsToBounds = true
         avatarImageView.isUserInteractionEnabled = true
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -121,55 +122,6 @@ class PostTableViewCell: UITableViewCell {
         viewsLabel.text = "Views: \(post.views)"
         postImage.image = UIImage(named: post.image)
     }
-    
-//      MARK: вариант одного фильтра для всех фото
-//
-//        if let image = UIImage(named: model.image) {
-//
-//            let filter = ColorFilter.monochrome(color: CIColor.init(red: 0/255, green: 0/255, blue: 0/255), intensity: 0.7)
-//            ImageProcessor().processImage(sourceImage: image, filter: filter) { postImage.image = $0 }
-//
-//        }
-//      MARK: варианты фильтров
-        
-//            let filter2 = ColorFilter.tonal
-//            let filter3 = ColorFilter.noir
-//            let filter4 = ColorFilter.posterize
-//            let filter5 = ColorFilter.fade
-//            let filter6 = ColorFilter.process
-//            let filter7 = ColorFilter.transfer
-            
-//      MARK: рандомный вариант
-            
-//            if let image = UIImage(named: model.image) {
-//                let filter = ColorFilter.allCases[Int.random(in: 0..<ColorFilter.allCases.count)]
-//                ImageProcessor().processImage(sourceImage: image, filter: filter) {postImage.image = $0 }
-//            }
-            
-//      MARK: вариант применения фильтров по заданому имени
-            
-//            if image == UIImage(named: "P1") {
-//            ImageProcessor().processImage(sourceImage: image, filter: filter) { postImage.image = $0 }
-//
-//            } else if image == UIImage(named: "P2") {
-//                ImageProcessor().processImage(sourceImage: image, filter: filter2) { postImage.image = $0 }
-//
-//            } else if image == UIImage(named: "P3") {
-//                ImageProcessor().processImage(sourceImage: image, filter: filter3) { postImage.image = $0 }
-//
-//            } else if image == UIImage(named: "P4") {
-//                ImageProcessor().processImage(sourceImage: image, filter: filter4) { postImage.image = $0 }
-//
-//            } else if image == UIImage(named: "P5") {
-//                ImageProcessor().processImage(sourceImage: image, filter: filter5) { postImage.image = $0 }
-//
-//            } else if image == UIImage(named: "P6") {
-//                ImageProcessor().processImage(sourceImage: image, filter: filter6) { postImage.image = $0 }
-//
-//            } else if image == UIImage(named: "P7") {
-//                ImageProcessor().processImage(sourceImage: image, filter: filter7) { postImage.image = $0 }
-//
-//            }
    
     private func constraints() {
         

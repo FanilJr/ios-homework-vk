@@ -30,17 +30,14 @@ class LogInCoordinatorFlow: LogInCoordinatorFlowProtocol {
     func showProfileVc(fullName: String) {
         var currentUser: UserService
         
-//        #if DEBUG
-//            currentUser = TestUserService()
-//        #else
+
            let user = User(
             fullName: fullName,
-            avatar: "1",
+            avatar: "myAvatar2",
             status: "Разработчик 👨🏽‍💻"
            )
            currentUser = CurrentService(user: user)
         
-//        #endif
         let profileCoordinator = ProfileCoordinator(
             navigationController: navigationController,
             fullName: fullName,

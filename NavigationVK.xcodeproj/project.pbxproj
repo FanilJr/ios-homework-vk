@@ -37,6 +37,9 @@
 		8444AA6228B4B859005BB8FF /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444AA6128B4B859005BB8FF /* LoginFactory.swift */; };
 		8444AA6428B4B891005BB8FF /* MyLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444AA6328B4B891005BB8FF /* MyLoginFactory.swift */; };
 		8444AA6628B4B90A005BB8FF /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444AA6528B4B90A005BB8FF /* TestUserService.swift */; };
+		845C559A2958E08B00483D88 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845C55992958E08B00483D88 /* MainTableViewCell.swift */; };
+		845C559C2959F8F400483D88 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845C559B2959F8F400483D88 /* Info.swift */; };
+		845C559E2959F9AA00483D88 /* InfoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845C559D2959F9AA00483D88 /* InfoAPI.swift */; };
 		845CF25228CB955800EECCAF /* SecondPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845CF25128CB955800EECCAF /* SecondPostViewController.swift */; };
 		84623751290B973F001052B5 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84623750290B973F001052B5 /* String+Extension.swift */; };
 		84623754290F7939001052B5 /* PostData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84623752290F7938001052B5 /* PostData.xcdatamodeld */; };
@@ -78,7 +81,6 @@
 		849048F52949D33A00613B74 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849048F42949D33A00613B74 /* ProfileViewModel.swift */; };
 		849048F72949E48F00613B74 /* TimerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849048F62949E48F00613B74 /* TimerTableViewCell.swift */; };
 		849048F92949EB0600613B74 /* LocalNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849048F82949EB0600613B74 /* LocalNotificationService.swift */; };
-		849048FB294A024500613B74 /* PostFavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849048FA294A024500613B74 /* PostFavoritesViewModel.swift */; };
 		849BA4F228F8C90500D3B5D2 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849BA4F128F8C90500D3B5D2 /* InfoView.swift */; };
 		849BA4F528F9EB5800D3B5D2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 849BA4F428F9EB5700D3B5D2 /* GoogleService-Info.plist */; };
 		849BA4FC28FA2DED00D3B5D2 /* RegistratonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849BA4FB28FA2DED00D3B5D2 /* RegistratonViewController.swift */; };
@@ -170,6 +172,9 @@
 		8444AA6128B4B859005BB8FF /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		8444AA6328B4B891005BB8FF /* MyLoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLoginFactory.swift; sourceTree = "<group>"; };
 		8444AA6528B4B90A005BB8FF /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
+		845C55992958E08B00483D88 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
+		845C559B2959F8F400483D88 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
+		845C559D2959F9AA00483D88 /* InfoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAPI.swift; sourceTree = "<group>"; };
 		845CF25128CB955800EECCAF /* SecondPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondPostViewController.swift; sourceTree = "<group>"; };
 		84623750290B973F001052B5 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		84623753290F7939001052B5 /* PostData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PostData.xcdatamodel; sourceTree = "<group>"; };
@@ -212,7 +217,6 @@
 		849048F42949D33A00613B74 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		849048F62949E48F00613B74 /* TimerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTableViewCell.swift; sourceTree = "<group>"; };
 		849048F82949EB0600613B74 /* LocalNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationService.swift; sourceTree = "<group>"; };
-		849048FA294A024500613B74 /* PostFavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFavoritesViewModel.swift; sourceTree = "<group>"; };
 		849BA4F128F8C90500D3B5D2 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		849BA4F428F9EB5700D3B5D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		849BA4FB28FA2DED00D3B5D2 /* RegistratonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistratonViewController.swift; sourceTree = "<group>"; };
@@ -359,7 +363,6 @@
 				84623755290F7DBE001052B5 /* FavoriteTableViewCell.swift */,
 				846A9EEE290A560E0084796F /* FavoriteViewController.swift */,
 				8462375C290FF95F001052B5 /* FavoriteCollectionViewCell.swift */,
-				849048FA294A024500613B74 /* PostFavoritesViewModel.swift */,
 			);
 			path = FavoriteGroup;
 			sourceTree = "<group>";
@@ -401,6 +404,8 @@
 				849048DE2949B94000613B74 /* Photo.swift */,
 				849048E82949CBF400613B74 /* BruteForceOperation.swift */,
 				849048F82949EB0600613B74 /* LocalNotificationService.swift */,
+				845C559B2959F8F400483D88 /* Info.swift */,
+				845C559D2959F9AA00483D88 /* InfoAPI.swift */,
 			);
 			path = "Extensions-Struct-Other";
 			sourceTree = "<group>";
@@ -460,6 +465,7 @@
 				84061E1A28B16AEA00B5AB47 /* PostTableViewCell.swift */,
 				84623757290F8883001052B5 /* PostTableViewCellModel.swift */,
 				849048F62949E48F00613B74 /* TimerTableViewCell.swift */,
+				845C55992958E08B00483D88 /* MainTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -710,10 +716,12 @@
 				84C5FFB228B5040300C01CC9 /* CustomButton.swift in Sources */,
 				84061E1B28B16AEA00B5AB47 /* PostTableViewCell.swift in Sources */,
 				841194EB2907FA610059106A /* NewsListController.swift in Sources */,
+				845C559E2959F9AA00483D88 /* InfoAPI.swift in Sources */,
 				849048ED2949D07F00613B74 /* RegistrationCoordinator.swift in Sources */,
 				8462D816290AA3D8004EDEC1 /* WebViewController.swift in Sources */,
 				84CA387128C09F5500EECD6D /* LoginView.swift in Sources */,
 				84623756290F7DBE001052B5 /* FavoriteTableViewCell.swift in Sources */,
+				845C559C2959F8F400483D88 /* Info.swift in Sources */,
 				849048C52949A62A00613B74 /* AuthService.swift in Sources */,
 				846A9EF1290A62D90084796F /* CoreDataManager.swift in Sources */,
 				84061DEA28B161FE00B5AB47 /* AppDelegate.swift in Sources */,
@@ -759,6 +767,7 @@
 				84623754290F7939001052B5 /* PostData.xcdatamodeld in Sources */,
 				849BA4F228F8C90500D3B5D2 /* InfoView.swift in Sources */,
 				849048D12949AE1600613B74 /* ViewControllersFactory.swift in Sources */,
+				845C559A2958E08B00483D88 /* MainTableViewCell.swift in Sources */,
 				84BC755D28EFD38E00339BFE /* NetworkService.swift in Sources */,
 				84061E0D28B1692D00B5AB47 /* PostViewController.swift in Sources */,
 				8444AA5B28B495B8005BB8FF /* CurrentUserService.swift in Sources */,
@@ -766,7 +775,6 @@
 				8444AA6628B4B90A005BB8FF /* TestUserService.swift in Sources */,
 				84061E0B28B1690D00B5AB47 /* InfoViewController.swift in Sources */,
 				8462DF98294EE6D9005792ED /* SettingsCoordinator.swift in Sources */,
-				849048FB294A024500613B74 /* PostFavoritesViewModel.swift in Sources */,
 				84E3FDF228E6981800B42B1D /* SongListTableViewCell.swift in Sources */,
 				84783D2828D4D02C009E5872 /* ProfileImageView.swift in Sources */,
 				84061DFF28B1665000B5AB47 /* ProfileViewController.swift in Sources */,

@@ -7,24 +7,28 @@
 
 import UIKit
 import FirebaseAuth
+import AVFoundation
 
 class ProfileViewController: UIViewController {
     
-    var tabBarItemOne: UITabBarItem = UITabBarItem()
-//    private let post = PostStruct.massivePost()
+    
     private var posts = PostAPI.getPosts()
+    private var info = InfoAPI.getInfo()
     private let photos = PhotosAPI.getPhotos()
     private let viewModel: ProfileViewModel
     private var service: UserService
     private var fullName: String
     private let mapView = MapView()
     private let like = LikeView()
-    private let numbersSection = [PostTableViewCell(), PhotosTableViewCell()]
+    private let numbersSection = [PostTableViewCell(), PhotosTableViewCell(), MainTableViewCell()]
     private let header = ProfileHeaderView()
     private let profileImageView = ProfileImageView()
+    private let imagePicker = UIImagePickerController()
+    let systemSoundID: SystemSoundID = 1016
     
     private let cell = PhotosTableViewCell()
     private let profilePost = ProfilePostViewController()
+    private let infoCell = MainTableViewCell()
     var lastRowDisplay = 0
     private var cellIndex = 0
     
@@ -49,9 +53,10 @@ class ProfileViewController: UIViewController {
     /// ВАЖНО!!! задал .insetGroup, чтобы корнер радиус применился к всем ячейкам автоматически, но при этом нельзя применить конкретно к тейбл вью корнер радиус, если поставить .grouped, тогда можно для тейбл вью поставить cornerRadius и задать конкретно к ячейкам например "if indexPath.row == 0 maskedCorner" и не забыть вернуть констрейнты с отступами лево и право тейбл вью
     
     private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .clear
+        tableView.register(MainTableViewCell.self, forCellReuseIdentifier: "MainTableViewCell")
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostTableViewCell")
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosTableViewCell")
         return tableView
@@ -79,6 +84,8 @@ class ProfileViewController: UIViewController {
         title = "profile.title".localized
         
         setupTableView()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = false
         header.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
@@ -87,14 +94,6 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        let tabbarControllerItems = self.tabBarController?.tabBar.items
-        if let arrayOfTabBatItems = tabbarControllerItems! as AnyObject as? NSArray {
-            tabBarItemOne = arrayOfTabBatItems[1] as! UITabBarItem
-            if tabBarController?.tabBar.selectedItem == tabBarItemOne {
-                print("Это тап на профиль")
-            } else {
-            }
-        }
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
@@ -128,8 +127,6 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    
-    
     private func setupViewModel() {
         viewModel.onStateChanged = { [weak self] state in
             guard let self = self else { return }
@@ -160,15 +157,22 @@ class ProfileViewController: UIViewController {
             background.rightAnchor.constraint(equalTo: view.rightAnchor),
             background.bottomAnchor.constraint(equalTo: view.bottomAnchor),
                 
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: background.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: background.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: background.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: background.bottomAnchor),
         ])
     }
 }
 
-extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
+extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo, MainEditDelegate {
+    func tapEditingStatusLife() {
+        print("tap Status Life")
+    }
+    
+    func tapEditingInfo() {
+        print("Hello edit")
+    }
         
     func numberOfSections(in tableView: UITableView) -> Int {
         return numbersSection.count
@@ -180,6 +184,8 @@ extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
         case 0:
             return 1
         case 1:
+            return 1
+        case 2:
             return viewModel.posts.count
         default:
             return 0
@@ -187,21 +193,30 @@ extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
     }
         
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            
+        
         switch indexPath.section {
-                
+            
         case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MainTableViewCell", for: indexPath) as!
+            MainTableViewCell
+            cell.name.text = "ФИО: Фаниль Шамсуллин"
+            cell.heightUser.text = "Рост: 1.75м"
+            cell.descriptionLabel.text = "Привычки: Люблю шоколад"
+            cell.statusLife.text = "Семейное положение: Женат"
+            cell.yearsUser.text = "Возраст: 31 год"
+            cell.delegate = self
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
+            return cell
+            
+        case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "PhotosTableViewCell", for: indexPath) as! PhotosTableViewCell
             cell.tuchNew = self
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
-            cell.backgroundColor = .createColor(light: .white, dark: .systemGray5)
             return cell
-                
-        case 1:
+            
+        case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostTableViewCell
-            cell.backgroundColor = .createColor(light: .white, dark: .systemGray5)
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
-
             let tapRecog = UITapGestureRecognizer(target: self, action: #selector(duobleTapInPost))
             tapRecog.numberOfTapsRequired = 2
             let currentPost: Post = viewModel.posts[indexPath.row]
@@ -209,10 +224,9 @@ extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
             cell.configure(with: currentPost)
             cell.name.text = header.fullNameLabel.text
             cell.avatarImageView.image = header.avatarImageView.image
-            cell.status.text = "Разработчик"
+//            cell.status.text = "Разработчик"
             return cell
 
-            
         default:
             return UITableViewCell()
         }
@@ -220,36 +234,33 @@ extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
         
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
 
-        let recipe = viewModel.posts[indexPath.row]
-        let recipeAuthor = viewModel.posts[indexPath.row].author
-        let recipeImage = viewModel.posts[indexPath.row].image
-
-        let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { _ in
-
-            let pushPost = UIAction(title: "profile.go.post".localized, image: UIImage(systemName: "chevron.right.circle")) { _ in
-                //MARK: PUSH COORDINATOR
-//                   self.coordinator?.showPost(post: (self.viewModel.posts[indexPath.row])!)
-//                   self.viewModel.send(.showPost(self.posts![indexPath.row]))
-                //MARK: Работает НООООО
-//                   self.viewModel.send(.showPostVc((self.posts?[indexPath.row])!))
-                let profilePost = ProfilePostViewController()
-                profilePost.setupCell(recipe)
-                self.navigationController?.pushViewController(profilePost, animated: true)
-//                   self.viewModel.send(.showPostVc(recipe))
-                //MARK: PUSH NavigationController
-                //                self.profilePost.setupCell(self.posts[indexPath.row])
-                //                self.navigationController?.pushViewController(self.profilePost, animated: true)
-            }
-
-            let share = UIAction(title: "profile.shared".localized, image: UIImage(systemName: "square.and.arrow.up")) { _ in
-
-                let avc = UIActivityViewController(activityItems: [recipeAuthor as Any, UIImage(named: recipeImage) as Any], applicationActivities: nil)
-                self.present(avc, animated: true)
-            }
-            let menu = UIMenu(title: "", children: [pushPost, share])
-            return menu
-        })
-        return configuration
+        switch indexPath.section {
+        case 2:
+            let recipe = viewModel.posts[indexPath.row]
+            let recipeAuthor = viewModel.posts[indexPath.row].author
+            let recipeImage = viewModel.posts[indexPath.row].image
+            
+            let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { _ in
+                
+                let pushPost = UIAction(title: "profile.go.post".localized, image: UIImage(systemName: "chevron.right.circle")) { _ in
+                    let profilePost = ProfilePostViewController()
+                    profilePost.setupCell(recipe)
+                    self.navigationController?.pushViewController(profilePost, animated: true)
+                }
+                
+                let share = UIAction(title: "profile.shared".localized, image: UIImage(systemName: "square.and.arrow.up")) { _ in
+                    
+                    let avc = UIActivityViewController(activityItems: [recipeAuthor as Any, UIImage(named: recipeImage) as Any], applicationActivities: nil)
+                    self.present(avc, animated: true)
+                }
+                let menu = UIMenu(title: "", children: [pushPost, share])
+                return menu
+            })
+            return configuration
+            
+        default:
+            return nil
+        }
     }
     
     func tuchUp() {
@@ -258,10 +269,11 @@ extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
+        
+        if indexPath.section == 1 {
             viewModel.send(.showPhotosVc)
         }
-        if indexPath.section > 0 {
+        if indexPath.section == 2 {
             self.cellIndex = indexPath.row
         }
         if indexPath.section == 2 {
@@ -270,34 +282,90 @@ extension ProfileViewController: UITableViewDataSource, MyClassDelegateTwo {
             tableView.addGestureRecognizer(doubleTap)
         }
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        header.scrollViewDidScroll(scrollView: tableView)
+    }
 }
     
-extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsDelegate {
+extension ProfileViewController: UITableViewDelegate, MyClassDelegate, ProfileImageViewDelegate {
+    
+    func changeStatus() {
+        let alert = UIAlertController(title: "Введите статус", message: "", preferredStyle: .alert)
+        let alertOK = UIAlertAction(title: "Ok", style: .default)  { [self] _ in
+            let text = alert.textFields?.first?.text
+            header.statusLabel.text = text
+            AudioServicesPlaySystemSound(self.systemSoundID)
+            tableView.reloadData()
+        }
+        let alertCancel = UIAlertAction(title: "Cancel", style: .destructive)
+        alert.addTextField()
+        [alertOK,alertCancel].forEach { alert.addAction($0) }
+        present(alert, animated: true)
+    }
+    
+    func changeName() {
+        print("change name in profileViewController")
+
+        let alert = UIAlertController(title: "Введите никнейм", message: "Важно! Только латиница..", preferredStyle: .alert)
+        let alertOK = UIAlertAction(title: "Ok", style: .default)  { [self] _ in
+            let text = alert.textFields?.first?.text
+            header.fullNameLabel.text = text
+            profileImageView.fullNameLabel.text = text
+            tableView.reloadData()
+        }
+        let alertCancel = UIAlertAction(title: "Cancel", style: .destructive)
+        alert.addTextField()
+        [alertOK,alertCancel].forEach { alert.addAction($0) }
+        present(alert, animated: true)
+    }
+    
+    
+    func imagePresentPicker() {
+        print("Проверка presentImage")
+        present(imagePicker, animated: true)
+    }
+    
+    
+    func postCountsPresent() {
+        viewModel.send(.showPhotosVc)
+    }
+    
+    func presentSettings() {
+        viewModel.send(.showImageSettingsVc)
+    }
 
     func exitAcc() {
         print("Выход из аккаунта")
         viewModel.send(.showLoginVc)
         
     }
-    
-    func didTapLogoutButton() {
-        print("heooollala")
-    }
         
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        UITableView.automaticDimension
+        return UITableView.automaticDimension
     }
         
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return header
+        
+        switch section {
+        case 0:
+            return header
+        case 1:
+            return nil
+        case 2:
+            return nil
+            
+        default:
+            return nil
+        }
     }
         
     func presentMenuAvatar() {
             
         view.addSubview(blure)
         view.addSubview(profileImageView)
-        profileImageView.avatarImageView.image = UIImage(named: "1")
-        profileImageView.settingDelegate = self
+        profileImageView.avatarImageView.image = header.avatarImageView.image
+        profileImageView.profileImageViewDelegate = self
             
         NSLayoutConstraint.activate([
             blure.topAnchor.constraint(equalTo: view.topAnchor),
@@ -337,7 +405,6 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
         }
     }
     
-    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     
         switch section {
@@ -345,6 +412,9 @@ extension ProfileViewController: UITableViewDelegate, MyClassDelegate, SettingsD
             return UITableView.automaticDimension
         case 1:
             return 0
+        case 2:
+            return 0
+            
         default:
             return 0
         }
@@ -365,7 +435,6 @@ extension ProfileViewController {
 extension ProfileViewController {
     @objc private func duobleTapInPost() {
         guard let post = posts?[self.cellIndex] else { return }
-        print(post)
         var isContains = false
         self.view.addSubview(self.like)
         NSLayoutConstraint.activate([
@@ -395,7 +464,16 @@ extension ProfileViewController {
         }
     }
 }
-        
+
+extension ProfileViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+        self.header.avatarImageView.image = pickedImage
+//        AudioServicesPlaySystemSound(self.systemSoundID)
+        tableView.reloadData()
+        dismiss(animated: true, completion: nil)
+    }
+}
     
 
 

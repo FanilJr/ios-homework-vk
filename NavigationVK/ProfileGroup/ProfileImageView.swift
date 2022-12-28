@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol SettingsDelegate: AnyObject {
+protocol ProfileImageViewDelegate: AnyObject {
     func tapClosed()
     func openSetting()
     func exitAcc()
@@ -15,7 +15,7 @@ protocol SettingsDelegate: AnyObject {
 
 class ProfileImageView: UIView {
     
-    weak var settingDelegate: SettingsDelegate?
+    weak var profileImageViewDelegate: ProfileImageViewDelegate?
     var mapView = MapView()
     
     private var background: UIImageView = {
@@ -43,6 +43,7 @@ class ProfileImageView: UIView {
     lazy var avatarImageView: UIImageView = {
         let avatarImageView = UIImageView()
         avatarImageView.layer.borderWidth = 3
+        avatarImageView.contentMode = .scaleAspectFill
         avatarImageView.layer.borderColor = UIColor.white.cgColor
         avatarImageView.layer.cornerRadius = 60
         avatarImageView.clipsToBounds = true
@@ -51,7 +52,7 @@ class ProfileImageView: UIView {
         return avatarImageView
     }()
     
-    private let fullNameLabel: UILabel = {
+    let fullNameLabel: UILabel = {
         let fullNameLabel = UILabel()
         fullNameLabel.text = "header.name".localized
         fullNameLabel.textColor = .white
@@ -112,15 +113,15 @@ class ProfileImageView: UIView {
     }()
     
     @objc func tapClosed() {
-        settingDelegate?.tapClosed()
+        profileImageViewDelegate?.tapClosed()
     }
     
     @objc func tapSetting() {
-        settingDelegate?.openSetting()
+        profileImageViewDelegate?.openSetting()
     }
     
     @objc func exitAcc() {
-        settingDelegate?.exitAcc()
+        profileImageViewDelegate?.exitAcc()
     }
     
     func layoutView() {

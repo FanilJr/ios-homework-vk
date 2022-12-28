@@ -28,16 +28,13 @@ final class RegistrationCoordinator: Coordinator {
         var currentUser: UserService
         let fullName = email
         
-        #if DEBUG
-            currentUser = TestUserService()
-        #else
            let user = User(
             fullName: fullName,
-            avatar: "1",
+            avatar: "",
             status: "Waiting for something..."
            )
            currentUser = CurrentService(user: user)
-        #endif
+
         let profileCoordinator = ProfileCoordinator(
             navigationController: navigationController!,
             fullName: fullName,

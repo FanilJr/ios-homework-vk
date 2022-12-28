@@ -6,21 +6,40 @@
 //
 
 import UIKit
+protocol SettingsDelegate: AnyObject {
+    func changeAvatar()
+}
 
 class SettingsViewController: UIViewController {
+    
+    weak var settingDelegate: SettingsDelegate?
+    
+    let avatarButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .black
+        button.setTitle("Изменить аватар", for: .normal)
+        button.addTarget(self, action: #selector(changeAvatar), for: .touchUpInside)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .blue
-        navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(create))
-        navigationController?.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(cancel))
-        navigationController?.navigationBar.tintColor = UIColor(named: "Purple")
-        navigationController?.navigationBar.scrollEdgeAppearance = UINavigationBarAppearance()
+        view.backgroundColor = .white
+        view.addSubview(avatarButton)
         
+        NSLayoutConstraint.activate([
+            avatarButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            avatarButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            avatarButton.heightAnchor.constraint(equalToConstant: 45),
+            avatarButton.widthAnchor.constraint(equalToConstant: 150)
+        ])
     }
-    @objc func create() {
-        print("save")
+    
+    @objc func changeAvatar() {
+        print("change")
+        settingDelegate?.changeAvatar()
     }
     
     @objc func cancel() {

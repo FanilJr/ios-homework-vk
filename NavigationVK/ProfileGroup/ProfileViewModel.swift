@@ -23,6 +23,8 @@ final class ProfileViewModel {
     }
     
     var posts = [Post]()
+    var info = [InfoUser]()
+    private let infoApi: InfoAPI = InfoAPI()
     private let postApi: PostAPI = PostAPI()
     
     private var timer: Timer?

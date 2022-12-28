@@ -267,9 +267,7 @@ extension FavoriteViewController: UICollectionViewDataSource {
         let post = CoreDataManager.shared.favoritePost[indexPath.row]
         cell.backgroundColor = .white
         cell.myCells(post)
-
         return cell
-
     }
 
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {

@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 class TestUserService: UserService {
-    var user: User = User(fullName: "Fanil_Jr", avatar: "1", status: "Все обязательно сбудется")
-    
+    var user: User = User(fullName: "Fanil_Jr", avatar: "myAvatar2", status: "Разработчик 👨🏽‍💻")
+
     func getUser(fullName: String) throws -> User {
         return user
     }

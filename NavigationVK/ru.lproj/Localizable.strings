@@ -13,7 +13,7 @@
 "news.update" = "Обновление...";
 
 //MARK: Профайл ХЕДЕР
-"header.name" = "Фаниль Джуниор";
+"header.name" = "Fanil_Jr";
 "header.status" = "Введите статус";
 "header.tap.button" = "Редактировать";
 

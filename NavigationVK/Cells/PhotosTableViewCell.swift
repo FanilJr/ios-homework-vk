@@ -41,11 +41,8 @@ class PhotosTableViewCell: UITableViewCell {
         
     private let button: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+        button.setBackgroundImage(UIImage(systemName: "rectangle.grid.3x2"), for: .normal)
         button.tintColor = .createColor(light: .black, dark: .white)
-        button.layer.cornerRadius = 27 / 2
-        button.layer.borderColor = UIColor.black.cgColor
-        button.layer.borderWidth = 1
         button.clipsToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(tuch), for: .touchUpInside)
@@ -76,22 +73,22 @@ class PhotosTableViewCell: UITableViewCell {
     
     private func layout() {
             
-        [label, button, collectionViews].forEach { contentView.addSubview($0) }
+        [label, collectionViews].forEach { contentView.addSubview($0) }
                             
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-                
-            button.centerYAnchor.constraint(equalTo: label.centerYAnchor),
-            button.widthAnchor.constraint(equalToConstant: 27),
-            button.heightAnchor.constraint(equalToConstant: 27),
-            button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
-                
+            label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+//
+//            button.centerYAnchor.constraint(equalTo: label.centerYAnchor),
+//            button.widthAnchor.constraint(equalToConstant: 27),
+//            button.heightAnchor.constraint(equalToConstant: 27),
+//            button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
+//
             collectionViews.topAnchor.constraint(equalTo: label.bottomAnchor),
             collectionViews.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
             collectionViews.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             collectionViews.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
-            collectionViews.heightAnchor.constraint(equalToConstant: 100)
+            collectionViews.heightAnchor.constraint(equalToConstant: 200)
         ])
     }
 }

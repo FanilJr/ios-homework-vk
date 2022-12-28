@@ -100,6 +100,13 @@ final class AppCoordinator: BaseCoordinator, Coordinator {
         let profileViewModel = ProfileViewModel()
         let testService = TestUserService()
         testService.user.fullName = email
+
+//        let user = User(
+//            fullName: fullName,
+//            avatar: "myAvatar2",
+//            status: "Разработчик 👨🏽‍💻"
+//        )
+//        currentUser = CurrentService(user: user)
         let profileVc = viewControllerFactory.viewController(for: .profile(viewModel: profileViewModel, service: testService, name: email)) as! ProfileViewController
         let navProfileInVc = createNavController(
             for: profileVc,

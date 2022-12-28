@@ -67,19 +67,12 @@ class ProfileCoordinator: Coordinator {
     private let viewControllerFactory: ViewControllersFactoryProtocol
     private let profileCoordinatorFlow: ProfileCoordinatorFlow
     
-    init(
-        navigationController: UINavigationController,
-        fullName: String, service: UserService,
-        viewControllerFactory: ViewControllersFactoryProtocol
-    ) {
+    init(navigationController: UINavigationController, fullName: String, service: UserService, viewControllerFactory: ViewControllersFactoryProtocol) {
         self.navigationController = navigationController
         self.fullName = fullName
         self.service = service
         self.viewControllerFactory = viewControllerFactory
-        self.profileCoordinatorFlow = ProfileCoordinatorFlow(
-            navigationController: navigationController,
-            viewControllerFactory: viewControllerFactory
-        )
+        self.profileCoordinatorFlow = ProfileCoordinatorFlow(navigationController: navigationController, viewControllerFactory: viewControllerFactory)
     }
     
     func start() {
